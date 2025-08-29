@@ -31,7 +31,7 @@ public class Constantes {
     public static final String VIGENCIA = "vigente";
     public static final String COMPRA_TUS_PAQUETES = "\uD83D\uDECD️ Compra tus paquetes";
     public static final String HAZ_TUS_RECARGAS = "\uD83D\uDCB0 Haz tus recargas";
-    public static final String COMPRA_POR_WHATSAPP = "\uD83D\uDED2¡Compra por WhatsApp!";
+    public static final String COMPRA_POR_WHATSAPP = "¡Compra por WhatsApp!";
     public static final String TUS_EQUIPOS = "\uD83D\uDCF1 Tus equipos";
     public static final String TODO_SOBRE_TU_LINEA2 = "\uD83D\uDCF6 Todo sobre tu línea";
     public static final String OTRAS_OPCIONES = "\uD83D\uDC49 Otras opciones";
@@ -80,7 +80,7 @@ public class Constantes {
     public static final String DESINSTALAR = "Desinstalar";
     public static final String ACEPTAR_Y_CONTINUAR = "Aceptar y continuar";
     public static final String ESCUCHA_GRATIS = "Escucha gratis";
-    public static final String CLARO_MUSICA2 = "Claro música";
+    public static final String ACCEDER_CLARO_MUSICA = "Acceder a Claro música";
     public static final String INICIA_SESION = "INICIA SESIÓN";
     public static final String ENVIAR2 = "Enviar";
     public static final String OTRO_VALOR_RECARGA = "Otro valor recarga";
@@ -105,7 +105,7 @@ public class Constantes {
     public static final String INGRESAR_NUMERO_OPCION = "Por favor ingrese el número de opción";
     public static final String INGRESAR_OPCION_VALIDA = "¡Lo siento! No entendí lo que escribiste";
     public static final String BIENVENIDO = "Bienvenido";
-    public static final String ECARRIER = "ecarrier.claro.com.co/MiClaro/login/sendsms";
+    public static final String ECARRIER = "https://ecarrier.claro.com.co/MiClaro/login/sendsms";
     public static final String NUMERO_CLARO = "Número Claro:";
     public static final String INGRESAR_NUMERO = "Ingresa tu número Claro de 10 dígitos y pulsa \"Continuar\"";
     public static final String MAS = "Más";
@@ -136,5 +136,20 @@ public class Constantes {
     public static final String PAQ_COMUNIDAD_SORDA = "\uD83D\uDD07Paq. Comunidad Sorda";
     public static final String REGALA_UN_PAQUETE = "\uD83C\uDF81Regala un Paquete";
     public static final String VER_MAS_PAQUETES = "Ver más paquetes";
+    public static final String LABEL_BTN_SELECCIONA = "Recuerda tener saldo disponible";
+    public static final String DESEAS_RECARGAR_OTRO_VALOR = "¿Deseas recargar otro valor?";
+    public static final String QUIERO_ESTE_PLAN = "Quiero este plan";
+    public static final String EXPLORAR_PLANES = "Explorar planes";
+    public static final String COMPRA_PAQUETES_RECARGAS = "Compra paquetes y recargas para tu línea pulsando el botón";
+    public static final String COMPRAR_BTN = "Comprar";
 
+    // Portal de pagos
+    public static final String SELECCIONA_TU_SERVICIO = "Selecciona tu servicio";
+
+    // Agregar estas nuevas constantes al archivo Constantes.java
+
+    // Mensajes de actualización del sistema
+    public static final String MENSAJE_ACTUALIZACION_SISTEMA = "Nuestro sistema registra un proceso de actualización";
+    public static final String BTN_NO = "No";
+    public static final String PROCESO_ACTUALIZACION = "Si aún deseas continuar con tus consultas, elige el botón de acuerdo a tu necesidad";
 }

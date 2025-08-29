@@ -18,15 +18,18 @@ import java.util.List;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.*;
 import static userinterfaces.WhatsAppPage.BTN_SI2;
+import static userinterfaces.WhatsAppPostpagoPage.BTN_SI_AUTORIZO;
+import static userinterfaces.WhatsAppPostpagoPage.LINK_TRATAMIENTO_DATOS;
 import static utils.Constantes.*;
 
 public class ValidarTratamientoDatos implements Task {
 
+
     @Override
     public <T extends Actor> void performAs(T actor) {
 
-        List<WebElementFacade> lbltratamientodatos = LBL_TRATAMIENTO_DATOS.resolveAllFor(actor);
-        if (!lbltratamientodatos.isEmpty()) {
+        List<WebElementFacade> linktratamientodatos = LINK_TRATAMIENTO_DATOS.resolveAllFor(actor);
+        if (!linktratamientodatos.isEmpty()) {
 
             CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar linea de consulta y Validar politica de tratamientos de datos");
             ReportHooks.registrarPaso("Seleccionar linea de consulta y Validar politica de tratamientos de datos");
@@ -73,9 +76,16 @@ public class ValidarTratamientoDatos implements Task {
                     Atras.irAtras());
 
             List<WebElementFacade> btnsi = BTN_SI2.resolveAllFor(actor);
+            List<WebElementFacade> btnsiautorizo = BTN_SI_AUTORIZO.resolveAllFor(actor);
+
             if (!btnsi.isEmpty()) {
                 actor.attemptsTo(
                         Click.on(BTN_SI2));
+
+            } else if (!btnsiautorizo.isEmpty()) {
+                actor.attemptsTo(
+                        Click.on(BTN_SI_AUTORIZO));
+
             } else {
                 actor.attemptsTo(
                         Click.on(BTN_SI));
@@ -86,6 +96,7 @@ public class ValidarTratamientoDatos implements Task {
                             VER_MENU_PREPAGO, MENU_PRINCIPAL));
         }
     }
+
 
     public static Performable validarTratamientoDatos() {
         return instrumented(ValidarTratamientoDatos.class);

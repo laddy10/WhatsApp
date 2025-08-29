@@ -172,10 +172,29 @@ public class WhatsAppPage extends PageObject {
     public static final Target BTN_SELECCIONA_PQ_TODO_INCLUIDO =
             Target.the("Boton Selecciona")
                     .located(MobileBy.xpath("(//android.widget.TextView[@resource-id=\"com.whatsapp:id/button_content\"])[2]"));
-    public static final Target BTN_SELECCIONA_2 =
-            Target.the("Boton Selecciona")
-                    .located(MobileBy.xpath("//*[@text='Selecciona' and ./parent::*[(./preceding-sibling::* | ./following-sibling::*)[./*[@text='¡Elige y compra el paquete ideal para ti!']]]]"));
+    public static final Target BTN_VER_PAQUETES =
+            Target.the("Boton Ver paquetes")
+                    .located(By.xpath("//*[@text='Ver paquetes']"));
 
+    public static final Target BTN_CONFIRMAR =
+            Target.the("Boton Confirmar")
+                    .located(By.xpath("//*[@text='Confirmar']"));
+
+    public static final Target BTN_MEDIOS_DE_PAGO =
+            Target.the("Boton Medios de pago")
+                    .located(By.xpath("//android.widget.TextView[@resource-id=\"com.whatsapp:id/button_content\" and @text=\"Medios de pago\"]"));
+    public static final Target BTN_SELECCIONA_RECARGAS =
+            Target.the("Boton Selecciona recargas")
+                    .located(By.xpath("(//android.widget.TextView[@resource-id=\"com.whatsapp:id/button_content\"])[3]"));
+
+
+    public static final Target LBL_MENSAJE_ACTUALIZACION =
+            Target.the("Mensaje de actualización del sistema")
+                    .located(By.xpath("//*[contains(@text, 'Nuestro sistema registra un proceso de actualización')]"));
+
+    public static final Target BTN_NO_ACTUALIZACION =
+            Target.the("Botón No para rechazar actualización")
+                    .located(By.xpath("//*[@text='No']"));
     public class AppConstants {
         public static final String WHATSAPP_PACKAGE = "com.whatsapp";
     }

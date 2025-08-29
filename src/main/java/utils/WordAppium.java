@@ -41,10 +41,10 @@ public class WordAppium {
 
         try (FileInputStream fis = new FileInputStream(TEMPLATE_PATH);
              XWPFDocument document = new XWPFDocument(fis);
-            FileOutputStream fos = new FileOutputStream(rutaDestino)) {
+             FileOutputStream fos = new FileOutputStream(rutaDestino)) {
 
 
-                // Reemplazar marcadores en plantilla
+            // Reemplazar marcadores en plantilla
             reemplazarTextoEnDocumento(document, "{{ESCENARIO}}", nombreEscenario);
             reemplazarTextoEnDocumento(document, "{{FECHA}}", FORMATTER.format(LocalDateTime.now()));
             reemplazarTextoEnDocumento(document, "{{LINEA}}", linea);
@@ -52,7 +52,7 @@ public class WordAppium {
             reemplazarTextoEnDocumento(document, "{{CONCLUSION}}", generarConclusion(nombreEscenario, pasosEjecutados, linea, pasoFallido, estadoFinal));
 
 
-        //    agregarEncabezado(document, nombreEscenario, linea, pasosEjecutados);
+            //    agregarEncabezado(document, nombreEscenario, linea, pasosEjecutados);
             agregarPasosYCapturas(document, pasosEjecutados, capturasFiles);
 
 
@@ -69,6 +69,8 @@ public class WordAppium {
     private static void agregarPasosYCapturas(XWPFDocument doc, String[] pasos, File[] capturas)
             throws IOException, InvalidFormatException {
 
+        int numeroPaso = 1; // Contador para enumerar los pasos
+
         for (String paso : pasos) {
             XWPFParagraph pasoParrafo = doc.createParagraph();
             pasoParrafo.setSpacingBefore(200);
@@ -77,7 +79,7 @@ public class WordAppium {
             XWPFRun pasoRun = pasoParrafo.createRun();
             pasoRun.setBold(false);
             pasoRun.setFontSize(11);
-            pasoRun.setText(" ✅ " + paso);
+            pasoRun.setText(numeroPaso + ". " + paso); // Agregar numeración
 
             XWPFParagraph paragraph = doc.createParagraph();
             XWPFRun run = paragraph.createRun();
@@ -96,6 +98,8 @@ public class WordAppium {
                 XWPFRun noImagen = doc.createParagraph().createRun();
                 noImagen.setText("(No se encontró imagen para este paso)");
             }
+
+            numeroPaso++; // Incrementar el contador para el siguiente paso
         }
     }
 
@@ -187,8 +191,6 @@ public class WordAppium {
     }
 
 
-
-
     private static String procesarPasoEspecifico(String paso) {
         String pasoNormalizado = paso.toLowerCase().replaceAll("\\s+", "_");
 
@@ -207,7 +209,6 @@ public class WordAppium {
         // Si no se encontró, devuelve una descripción genérica
         return "";
     }
-
 
 
     private static String marcarPasoFallido() {

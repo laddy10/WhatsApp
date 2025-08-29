@@ -4,6 +4,7 @@ public class User {
     private String numero;
     private String saludo;
     private String valor;
+    private String numeroPost;
 
 
     public User() {
@@ -31,6 +32,14 @@ public class User {
 
     public void setValor(String valor) {
         this.valor = valor;
+    }
+
+    public String getNumeroPost() {
+        return numeroPost;
+    }
+
+    public void setNumeroPost(String numeroPost) {
+        this.numeroPost = numeroPost;
     }
 
 

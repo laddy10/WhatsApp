@@ -7,9 +7,13 @@ import interactions.comunes.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.actions.Click;
+import net.serenitybdd.screenplay.actions.Enter;
 import utils.CapturaDePantallaMovil;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static userinterfaces.WhatsAppPage.BTN_ENVIAR;
+import static userinterfaces.WhatsAppPage.TXT_ENVIAR_MENSAJE;
 import static utils.Constantes.*;
 
 public class MenuCompraWhatsApp implements Task {
@@ -35,7 +39,10 @@ public class MenuCompraWhatsApp implements Task {
             ReportHooks.registrarPaso(MENSAJE_CAPTURA);
 
             actor.attemptsTo(
-                    Atras.irAtras()
+                    Atras.irAtras(),
+                    Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
+                    Click.on(BTN_ENVIAR),
+                    WaitForResponse.withText(ABANDONAR_CONVERSACION)
             );
 
         } catch (Exception e) {

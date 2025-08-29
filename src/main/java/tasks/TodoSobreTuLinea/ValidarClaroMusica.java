@@ -24,6 +24,7 @@ import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.*;
 import static userinterfaces.WhatsAppPage.*;
+import static userinterfaces.WhatsAppPostpagoPage.BTN_ACCEDER_CLARO_MUSICA;
 import static utils.Constantes.*;
 import static utils.Constantes.URL_CLARO_MUSICA;
 
@@ -42,7 +43,7 @@ public class ValidarClaroMusica implements Task {
 
         actor.attemptsTo(
                 WaitForResponse.withAnyText(
-                        INSTALAR, ACEPTAR_Y_CONTINUAR, ESCUCHA_GRATIS));
+                        INSTALAR, ACEPTAR_Y_CONTINUAR, ESCUCHA_GRATIS, ACCEDER_CLARO_MUSICA));
 
         List<WebElementFacade> btninstalar = BTN_INSTALAR.resolveAllFor(actor);
 
@@ -84,6 +85,21 @@ public class ValidarClaroMusica implements Task {
                     Click.on(BTN_NO_PERMITIR));
         }
 
+
+        List<WebElementFacade> btnaccederclaromusica = BTN_ACCEDER_CLARO_MUSICA.resolveAllFor(actor);
+        if (!btnaccederclaromusica.isEmpty()) {
+            CapturaDePantallaMovil.tomarCapturaPantalla("Acceder a Claro música");
+            ReportHooks.registrarPaso("Acceder a Claro música");
+
+            actor.attemptsTo(
+                    Click.on(BTN_ACCEDER_CLARO_MUSICA),
+                    WaitForResponse.withText(ESCUCHA_GRATIS),
+                    WaitFor.aTime(3000)
+            );
+
+        }
+
+
         CapturaDePantallaMovil.tomarCapturaPantalla("Se ingresa a Escucha gratis");
         ReportHooks.registrarPaso("Se ingresa a Escucha gratis");
 
@@ -95,13 +111,21 @@ public class ValidarClaroMusica implements Task {
         CapturaDePantallaMovil.tomarCapturaPantalla("Ingresar correctamente a Claro musica");
         ReportHooks.registrarPaso("Ingresar correctamente a Claro musica");
 
+
+        if (!btnaccederclaromusica.isEmpty()) {
+            actor.attemptsTo(
+                    Atras.irAtras()
+            );
+
+        }
+
         actor.attemptsTo(
                 Atras.irAtras(),
                 Atras.irAtras(),
                 Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
                 Click.on(BTN_ENVIAR),
                 WaitForResponse.withText(ABANDONAR_CONVERSACION)
-                );
+        );
     }
 
     public static Performable validarClaroMusica() {

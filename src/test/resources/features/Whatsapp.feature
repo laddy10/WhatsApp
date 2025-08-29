@@ -1,6 +1,6 @@
 Feature: Validar los flujos de WhatsApp
 
-  @Whatsapp_01
+  @Whatsapp_01  @Whatsapp_PRE
   Scenario Outline: Validar menú principal
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -24,8 +24,7 @@ Feature: Validar los flujos de WhatsApp
    |Hola   |3558   |$ 50.000|
 
 
-
-  @Whatsapp_02
+  @Whatsapp_02  @Whatsapp_PRE
   Scenario Outline: Consultar el saldo de la linea
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -50,7 +49,7 @@ Feature: Validar los flujos de WhatsApp
    |Hola   |3558   |$ 50.000|
 
 
-  @Whatsapp_03
+  @Whatsapp_03  @Whatsapp_PRE
   Scenario Outline: Consultar los consumos
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -75,7 +74,7 @@ Feature: Validar los flujos de WhatsApp
    |Hola   |3558   |$ 50.000|
 
 
-  @Whatsapp_04
+  @Whatsapp_04  @Whatsapp_PRE
   Scenario Outline: Conoce - Mejora tu plan
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -100,7 +99,7 @@ Feature: Validar los flujos de WhatsApp
    |Hola   |3558   |$ 50.000|
 
 
-  @Whatsapp_05
+  @Whatsapp_05  @Whatsapp_PRE
   Scenario Outline: Consultar otra linea
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -125,7 +124,7 @@ Feature: Validar los flujos de WhatsApp
    |Hola   |3558   |$ 50.000|
 
 
-  @Whatsapp_06
+  @Whatsapp_06  @Whatsapp_PRE
   Scenario Outline: Tu lealtad merece mas - Claro musica
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -153,7 +152,7 @@ Feature: Validar los flujos de WhatsApp
    |Hola   |3558   |$ 50.000|
 
 
-  @Whatsapp_08
+  @Whatsapp_08  @Whatsapp_PRE
   Scenario Outline: Tu lealtad merece mas - Claro Drive
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -180,14 +179,14 @@ Feature: Validar los flujos de WhatsApp
    |Hola   |3558   |$ 50.000|
 
 
-  @Whatsapp_10
+  @Whatsapp_10  @Whatsapp_PRE
   Scenario Outline: Haz tus recargas
     Given Ingresar a WhatsAPP
     When Validar Version de la App
     And Buscar el chat de Claro Colombia
     And Iniciar el chat con Claro Colombia
-      | saludo | | numero   |
-      | <saludo> || <numero> |
+      | saludo |
+      | <saludo> |
     And Seleccionar linea de consulta
       | numero   |
       | <numero> |
@@ -207,10 +206,11 @@ Feature: Validar los flujos de WhatsApp
   ##@externalData@./src/test/resources/data/Datos.xlsx@correo@
    |Hola   |3558   |$ 50.000|
 
+
   ############################################################################################
 
 
-  @Whatsapp_11
+  @Whatsapp_11  @Whatsapp_PRE
   Scenario Outline: Otras opciones - cambiate a postpago
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -234,8 +234,8 @@ Feature: Validar los flujos de WhatsApp
   ##@externalData@./src/test/resources/data/Datos.xlsx@correo@
    |Hola   |3558   |$ 50.000|
 
-  @Whatsapp_13
 
+  @Whatsapp_13  @Whatsapp_PRE
   Scenario Outline: Otras opciones - cambiate a postpago
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -260,8 +260,8 @@ Feature: Validar los flujos de WhatsApp
   ##@externalData@./src/test/resources/data/Datos.xlsx@correo@
    |Hola   |3558   |$ 50.000|
 
-  @Whatsapp_14
 
+  @Whatsapp_14  @Whatsapp_PRE
   Scenario Outline: Otras opciones - cambiate a postpago
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -289,7 +289,7 @@ Feature: Validar los flujos de WhatsApp
 
 
 
-  @Whatsapp_16
+  @Whatsapp_16  @Whatsapp_PRE
   Scenario Outline: Otras opciones - cambiate a postpago
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -314,7 +314,7 @@ Feature: Validar los flujos de WhatsApp
 
 
 
-  @Whatsapp_17
+  @Whatsapp_17  @Whatsapp_PRE
   Scenario Outline: Validar menu Compra por WhatsApp
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -341,7 +341,7 @@ Feature: Validar los flujos de WhatsApp
    |Hola   |3558   |$ 50.000|
 
 
-  @Whatsapp_18
+  @Whatsapp_18  @Whatsapp_PRE
   Scenario Outline: Validar menu compra tus paquetes - todo incluido
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -368,10 +368,211 @@ Feature: Validar los flujos de WhatsApp
    |Hola   |3558   |$ 50.000|
 
 
+  @Whatsapp_19  @Whatsapp_PRE
+  Scenario Outline: Validar menu compra tus paquetes - de voz
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+      | saludo |
+      | <saludo> |
+    And Seleccionar linea de consulta
+      | numero   |
+      | <numero> |
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+      | numero   |
+      | <numero> |
+    And Ingresar al menu compra tus paquetes
+    And Clic boton selecciona
+    Then Validar los paquetes de voz disponibles
+    And Vaciar chat
+
+    Examples:
+      | saludo |  numero | valor |
+##@externalData@./src/test/resources/data/Datos.xlsx@correo@
+   |Hola   |3558   |$ 50.000|
+
+
+  @Whatsapp_20  @Whatsapp_PRE
+  Scenario Outline: Validar menu compra tus paquetes - de datos
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+      | saludo |
+      | <saludo> |
+    And Seleccionar linea de consulta
+      | numero   |
+      | <numero> |
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+      | numero   |
+      | <numero> |
+    And Ingresar al menu compra tus paquetes
+    And Clic boton selecciona
+    Then Validar los paquetes de datos disponibles
+    And Vaciar chat
+
+    Examples:
+      | saludo |  numero | valor |
+##@externalData@./src/test/resources/data/Datos.xlsx@correo@
+   |Hola   |3558   |$ 50.000|
 
 
 
+  @Whatsapp_21  @Whatsapp_PRE
+  Scenario Outline: Validar menu compra tus paquetes - de apps
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+      | saludo |
+      | <saludo> |
+    And Seleccionar linea de consulta
+      | numero   |
+      | <numero> |
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+      | numero   |
+      | <numero> |
+    And Ingresar al menu compra tus paquetes
+    And Clic boton selecciona
+    Then Validar los paquetes de apps disponibles
+    And Vaciar chat
+
+    Examples:
+      | saludo |  numero | valor |
+##@externalData@./src/test/resources/data/Datos.xlsx@correo@
+   |Hola   |3558   |$ 50.000|
+
+
+  @Whatsapp_22  @Whatsapp_PRE
+  Scenario Outline: Validar menu compra tus paquetes - internacionales
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+      | saludo |
+      | <saludo> |
+    And Seleccionar linea de consulta
+      | numero   |
+      | <numero> |
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+      | numero   |
+      | <numero> |
+    And Ingresar al menu compra tus paquetes
+    And Clic boton selecciona
+    Then Validar los paquetes internacionales disponibles
+    And Vaciar chat
+
+    Examples:
+      | saludo |  numero | valor |
+##@externalData@./src/test/resources/data/Datos.xlsx@correo@
+   |Hola   |3558   |$ 50.000|
 
 
 
+  @Whatsapp_23  @Whatsapp_PRE
+  Scenario Outline: Validar menu compra tus paquetes - comunidad sorda
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+      | saludo |
+      | <saludo> |
+    And Seleccionar linea de consulta
+      | numero   |
+      | <numero> |
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+      | numero   |
+      | <numero> |
+    And Ingresar al menu compra tus paquetes
+    And Clic boton selecciona
+    Then Validar los paquetes comunidad sorda disponibles
+    And Vaciar chat
 
+    Examples:
+      | saludo |  numero | valor |
+##@externalData@./src/test/resources/data/Datos.xlsx@correo@
+   |Hola   |3558   |$ 50.000|
+
+
+  @Whatsapp_24  @Whatsapp_PRE
+  Scenario Outline: Validar menu compra tus paquetes - regala un paquete
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+      | saludo |
+      | <saludo> |
+    And Seleccionar linea de consulta
+      | numero   |
+      | <numero> |
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+      | numero   |
+      | <numero> |
+    And Ingresar al menu compra tus paquetes
+    And Clic boton selecciona
+    Then Validar regala un paquete y redireccion portal pagos
+    And Vaciar chat
+
+    Examples:
+      | saludo |  numero | valor |
+##@externalData@./src/test/resources/data/Datos.xlsx@correo@
+   |Hola   |3558   |$ 50.000|
+
+
+
+  @Whatsapp_25  @Whatsapp_PRE
+  Scenario Outline: Validar flujo completo de compra de paquete
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+      | saludo |
+      | <saludo> |
+    And Seleccionar linea de consulta
+      | numero   |
+      | <numero> |
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+      | numero   |
+      | <numero> |
+    And Ingresar al menu compra tus paquetes
+    And Clic boton selecciona
+    Then Validar flujo de pago de paquete seleccionado
+    And Vaciar chat
+
+    Examples:
+      | saludo |  numero | valor |
+##@externalData@./src/test/resources/data/Datos.xlsx@correo@
+   |Hola   |3558   |$ 50.000|
+
+
+  @Whatsapp_26  @Whatsapp_PRE
+  Scenario Outline: Haz tus recargas - Validar menu de recargas
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+      | saludo |
+      | <saludo> |
+    And Seleccionar linea de consulta
+      | numero   |
+      | <numero> |
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+      | numero   |
+      | <numero> |
+    And Ingresar a haz tus recargas
+    And Validar menu de haz tus recargas
+    And Vaciar chat
+
+    Examples:
+      | saludo |  numero | valor |
+  ##@externalData@./src/test/resources/data/Datos.xlsx@correo@
+   |Hola   |3558   |$ 50.000|

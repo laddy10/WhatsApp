@@ -13,6 +13,7 @@ public class DataTableConfig {
         user.setNumero(entry.getOrDefault("numero", ""));
         user.setSaludo(entry.getOrDefault("saludo", ""));
         user.setValor(entry.getOrDefault("valor", ""));
+        user.setNumeroPost(entry.getOrDefault("numeroPost", ""));
 
 
         return user;

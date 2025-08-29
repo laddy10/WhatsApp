@@ -3,8 +3,7 @@ package stepDefinitions;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
-import static userinterfaces.WhatsAppPage.BTN_MAS_OPCIONES;
-import static userinterfaces.WhatsAppPage.LBL_WHATSAPP;
+import static userinterfaces.WhatsAppPage.*;
 import static utils.Constantes.*;
 
 import cucumber.api.Scenario;
@@ -23,12 +22,13 @@ import net.serenitybdd.screenplay.actors.OnlineCast;
 import questions.ValidarElemento;
 import hooks.ReportHooks;
 import tasks.*;
-import tasks.CompraTusPaquetes.PaqTodoIncluido;
+import tasks.CompraTusPaquetes.*;
 import tasks.CompraWhatsApp.CompraWhatsApp;
 import tasks.CompraWhatsApp.MenuCompraWhatsApp;
 import tasks.HazTusRecargas.DireccionamientoMediosPago;
 import tasks.HazTusRecargas.HazTusRecargas;
 import tasks.HazTusRecargas.SeleccionarValorRecargas;
+import tasks.HazTusRecargas.ValidarMenuRecargas;
 import tasks.OtrasOpciones.*;
 import tasks.TodoSobreTuLinea.*;
 import utils.CapturaDePantallaMovil;
@@ -187,10 +187,11 @@ public class WhatsappDefinitions {
                 ClickTextoQueContengaX.elTextoContiene(CLARO_DRIVE)
         );
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("captura_pantalla");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Claro Drive");
+        ReportHooks.registrarPaso("Seleccionar Claro Drive");
 
         theActorInTheSpotlight().attemptsTo(
-                ClickElementByText.clickElementByText(ENVIAR),
+                Click.on(BTN_ENVIAR_2),
                 WaitFor.aTime(3000)
         );
     }
@@ -333,6 +334,56 @@ public class WhatsappDefinitions {
     public void validarPaqTodoIncluido() {
         theActorInTheSpotlight().attemptsTo(
                 PaqTodoIncluido.seleccionarTipoPaquete());
+    }
+
+
+    @And("^Validar los paquetes de voz disponibles$")
+    public void validarPaqDeVoz() {
+        theActorInTheSpotlight().attemptsTo(
+                PaqDeVoz.validarPaqDeVoz());
+    }
+
+    @And("^Validar los paquetes de datos disponibles$")
+    public void validarPaqDeDatos() {
+        theActorInTheSpotlight().attemptsTo(
+                PaqDeDatos.validarPaqDeDatos());
+    }
+
+    @And("^Validar los paquetes de apps disponibles$")
+    public void validarPaqDeApps() {
+        theActorInTheSpotlight().attemptsTo(
+                PaqDeApps.validarPaqDeApps());
+    }
+
+    @And("^Validar los paquetes internacionales disponibles$")
+    public void validarPaqInternacionales() {
+        theActorInTheSpotlight().attemptsTo(
+                PaqInternacionales.validarPaqInternacionales());
+    }
+
+    @And("^Validar los paquetes comunidad sorda disponibles$")
+    public void validarPaqComunidadSorda() {
+        theActorInTheSpotlight().attemptsTo(
+                PaqComunidadSorda.validarPaqComunidadSorda());
+    }
+
+    @And("^Validar regala un paquete y redireccion portal pagos$")
+    public void validarRegalaUnPaquete() {
+        theActorInTheSpotlight().attemptsTo(
+                RegalaUnPaquete.validarRegalaUnPaquete());
+    }
+
+
+    @And("^Validar flujo de pago de paquete seleccionado$")
+    public void validarFlujoPagoPaquete() {
+        theActorInTheSpotlight().attemptsTo(
+                ValidarPagoPaquete.validarPagoPaquete());
+    }
+
+    @And("^Validar menu de haz tus recargas$")
+    public void validarMenuHazTusRecargas() {
+        theActorInTheSpotlight().attemptsTo(
+                ValidarMenuRecargas.validarMenuRecargas());
     }
 
 
