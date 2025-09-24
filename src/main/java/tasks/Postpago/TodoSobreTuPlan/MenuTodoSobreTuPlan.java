@@ -1,0 +1,70 @@
+package tasks.Postpago.TodoSobreTuPlan;
+
+import hooks.ReportHooks;
+import interactions.Click.ClickElementByText;
+import interactions.Click.ClickTextoQueContengaX;
+import interactions.Validaciones.ValidarTexto;
+import interactions.Validaciones.ValidarTextoQueContengaX;
+import interactions.comunes.Atras;
+import interactions.wait.WaitForResponse;
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Performable;
+import net.serenitybdd.screenplay.Task;
+import utils.CapturaDePantallaMovil;
+
+import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static utils.Constantes.*;
+import static utils.ConstantesPost.*;
+
+public class MenuTodoSobreTuPlan implements Task {
+
+    @Override
+    public <T extends Actor> void performAs(T actor) {
+        actor.attemptsTo(
+                ClickTextoQueContengaX.elTextoContiene(TODO_SOBRE_TU_PLAN)
+        );
+
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar el menú Todo sobre tu plan");
+        ReportHooks.registrarPaso("Seleccionar el menú Todo sobre tu plan");
+
+
+        actor.attemptsTo(
+                ClickElementByText.clickElementByText(ENVIAR),
+                WaitForResponse.withText(SELECCIONA),
+                ValidarTextoQueContengaX.elTextoContiene(HAZLO_REAL),
+                ValidarTextoQueContengaX.elTextoContiene(INGRESA_AQUI)
+        );
+
+        CapturaDePantallaMovil.tomarCapturaPantalla("Clic en Ingresa aqui");
+        ReportHooks.registrarPaso("Clic en Ingresa aqu");
+
+        actor.attemptsTo(
+                ClickElementByText.clickElementByText(INGRESA_AQUI),
+                WaitForResponse.withText(PERSONAS),
+                ValidarTextoQueContengaX.elTextoContiene(URL_CLARO),
+                ValidarTexto.validarTexto(PERSONAS),
+                ValidarTextoQueContengaX.elTextoContiene(COMPRA_POR_CATEGORIA)
+        );
+
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validar direccionamiento a pagina Claro descuento");
+        ReportHooks.registrarPaso("Validar direccionamiento a pagina Claro descuento");
+
+
+        actor.attemptsTo(
+                Atras.irAtras()
+        );
+
+
+        CapturaDePantallaMovil.tomarCapturaPantalla("Dar clic boton Selecciona");
+        ReportHooks.registrarPaso("Dar clic boton Selecciona");
+
+        actor.attemptsTo(
+                ClickTextoQueContengaX.elTextoContiene(SELECCIONA),
+                WaitForResponse.withText(CONOCE_MEJORA_TU_PLAN)
+        );
+    }
+
+    public static Performable menuTodoSobreTuPlan() {
+        return instrumented(MenuTodoSobreTuPlan.class);
+    }
+}
