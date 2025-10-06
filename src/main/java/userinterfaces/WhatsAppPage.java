@@ -17,11 +17,11 @@ public class WhatsAppPage extends PageObject {
 
     public static final Target BTN_LUPA =
             Target.the("Boton lupa")
-                    .located(By.id("menuitem_search"));
+                    .located(By.id("com.whatsapp:id/search_icon"));
 
     public static final Target TXT_BUSCAR_TEXTO =
             Target.the("Caja de texto buscar")
-                    .located(By.id("search_src_text"));
+                    .located(By.id("com.whatsapp:id/search_input"));
 
     public static final Target BTN_MENU_ITEM =
             Target.the("Boton Más opciones WhatsApp")

@@ -17,7 +17,6 @@ public class BuscarChatClaro implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-                Click.on(BTN_ENVIAR_MENSAJE),
                 Click.on(BTN_LUPA),
                 Enter.theValue(CLARO).into(TXT_BUSCAR_TEXTO),
                 ClickTextoQueContengaX.elTextoContiene(CLARO_COLOMBIA),
