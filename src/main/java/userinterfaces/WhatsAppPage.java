@@ -19,9 +19,18 @@ public class WhatsAppPage extends PageObject {
             Target.the("Boton lupa")
                     .located(By.id("menuitem_search"));
 
+    public static final Target BTN_LUPA_PRINCIPAL =
+            Target.the("Boton lupa")
+                    .located(By.id("search_icon"));
+
+
     public static final Target TXT_BUSCAR_TEXTO =
             Target.the("Caja de texto buscar")
                     .located(By.id("search_src_text"));
+
+    public static final Target TXT_BUSCAR_TEXTO_PRINCIPAL =
+            Target.the("Caja de texto buscar")
+                    .located(By.id("search_input"));
 
     public static final Target BTN_MENU_ITEM =
             Target.the("Boton Más opciones WhatsApp")
@@ -110,7 +119,7 @@ public class WhatsAppPage extends PageObject {
 
     public static final Target BTN_SELECCIONA =
             Target.the("Boton Selecciona del menu tu lealtad merece más ")
-                    .located(By.xpath("//*[@text='Selecciona' and ./parent::*[(./preceding-sibling::* | ./following-sibling::*)[./*[@text='¡Gracias por preferirnos! Por ser cliente Claro, mereces lo mejor. Descubre los beneficios que tenemos especialmente para ti \uD83C\uDF1F']]]]"));
+                    .located(By.xpath("(//android.widget.TextView[@resource-id=\"com.whatsapp:id/button_content\"])[3]"));
 
     public static final Target URL_CLARO_MUSICA2 =
             Target.the("URL Claro Musica")

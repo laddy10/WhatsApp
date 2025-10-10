@@ -3,6 +3,7 @@ package stepDefinitions;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import hooks.ReportHooks;
+import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
@@ -12,6 +13,9 @@ import models.User;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import questions.ValidarElemento;
+import tasks.OtrasOpciones.AdministarRoaming;
+import tasks.OtrasOpciones.ComprarRoaming;
+import tasks.OtrasOpciones.PaquetesYRecargasPost;
 import tasks.Postpago.SeleccionarLineaPostpago;
 import tasks.Postpago.TodoSobreTuPlan.*;
 import tasks.Postpago.TratamientoDatosPostpago;
@@ -23,6 +27,7 @@ import utils.TestDataProvider;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+import static tasks.CompraTusPaquetes.Constants_Paquetes.COMPRAR_ROAMING;
 import static userinterfaces.WhatsAppPage.*;
 import static userinterfaces.WhatsAppPostpagoPage.BTN_MENU_PRINCIPAL;
 import static utils.Constantes.*;
@@ -469,7 +474,7 @@ public class WhatsappPostpagoDefinitions {
 
         theActorInTheSpotlight().attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitForTextContains.withTextContains(PROCESO_RAPIDO)
+                WaitForTextContains.withAnyTextContains(PROCESO_RAPIDO, IMEI_REGISTRADO)
         );
     }
 
@@ -495,4 +500,56 @@ public class WhatsappPostpagoDefinitions {
 
         );
     }
+
+    @And("^Seleccionar Roaming internacional$")
+    public void roamingInternacional() {
+        final String MENSAJE_CAPTURA = "Seleccionar menu Roaming Internacional";
+
+        theActorInTheSpotlight().attemptsTo(
+                ClickTextoQueContengaX.elTextoContiene(ROAMING_INTERNACIONAL)
+        );
+
+        CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA);
+        ReportHooks.registrarPaso(MENSAJE_CAPTURA);
+
+        theActorInTheSpotlight().attemptsTo(
+                ClickElementByText.clickElementByText(ENVIAR),
+                WaitForTextContains.withTextContains(COMPRAR_ROAMING)
+        );
+    }
+
+    @Then("Ingresar a la opcion Comprar Roaming")
+    public void ingresarComprarRoaming() {
+        theActorInTheSpotlight().attemptsTo(
+                ComprarRoaming.comprarRoaming()
+        );
+    }
+
+    @And("^Seleccionar opción Administrar Roaming$")
+    public void administrarRoaming() {
+        final String MENSAJE_CAPTURA = "Dar clic Administrar Roaming";
+        CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA);
+        ReportHooks.registrarPaso(MENSAJE_CAPTURA);
+
+        theActorInTheSpotlight().attemptsTo(
+                ClickTextoQueContengaX.elTextoContiene(ADMINISTRAR_ROAMING),
+                WaitForTextContains.withTextContains(TEXTO_CODIGO_SEGURIDAD)
+        );
+    }
+
+    @Then("Validar el estado actual del servicio Roaming internacional")
+    public void estadoRomaing() {
+        theActorInTheSpotlight().attemptsTo(
+                AdministarRoaming.administarRoaming()
+        );
+    }
+
+    @Then("Validar direccionamiento de Paquetes y recargas")
+    public void direccionamientoPaquetesYRecargas() {
+        theActorInTheSpotlight().attemptsTo(
+                PaquetesYRecargasPost.paquetesYRecargasPost()
+
+        );
+    }
+
 }

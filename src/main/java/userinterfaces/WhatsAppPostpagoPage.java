@@ -114,7 +114,7 @@ public class WhatsAppPostpagoPage {
             .located(MobileBy.xpath("//*[@text='Rechazar']"));
 
     public static final Target TXT_MARCAR_COMO_LEIDO = Target.the("Texto MARCAR COMO LEÍDO")
-            .located(MobileBy.xpath("//*[translate(@text, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')='marcar como leído']"));
+            .located(MobileBy.xpath("//android.widget.Button[@content-desc=\"Marcar como leído\"]"));
 
     public static final Target LBL_MAS =
             Target.the("Texto Más")
@@ -149,6 +149,9 @@ public class WhatsAppPostpagoPage {
     public static final Target LBL_EQUIPO_REGISTRADO =
             Target.the("Texto La consulta realizada indica que tu dispositivo se encuentra registrado")
                     .located(By.xpath("//android.widget.TextView[@resource-id=\"com.whatsapp:id/bottom_message\" and @text=\"\uD83D\uDE0A La consulta realizada indica que tu dispositivo se encuentra registrado\"]"));
+    public static final Target LBL_IMEI_REGISTRADO =
+            Target.the("Texto Tu IMEI ya se encuentra registrado.")
+                    .located(By.xpath("//*[contains(@text, 'Tu IMEI ya se encuentra registrado.')]"));
 
 
 }

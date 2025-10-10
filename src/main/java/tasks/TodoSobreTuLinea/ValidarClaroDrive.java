@@ -18,6 +18,8 @@ import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.*;
 import static utils.Constantes.*;
+import static utils.ConstantesPost.MI_CLARO_DRIVE;
+import static utils.ConstantesPost.NEGOCIO;
 
 public class ValidarClaroDrive implements Task {
 
@@ -33,15 +35,15 @@ public class ValidarClaroDrive implements Task {
         UtilidadesAndroid.abrirLinkEnNavegador("https://bit.ly/3oNvleC");
 
         actor.attemptsTo(
-                WaitFor.aTime(10000));
+                WaitFor.aTime(10000),
+                ValidarTextoQueContengaX.elTextoContiene(MI_CLARO_DRIVE),
+                ValidarTextoQueContengaX.elTextoContiene(NEGOCIO)
+        );
 
-        actor.should(seeThat(
-                ValidarElemento.esVisible(IMAG_CLARO_DRIVE)));
 
         CapturaDePantallaMovil.tomarCapturaPantalla("captura_pantalla");
 
         actor.attemptsTo(
-                ValidarTexto.validarTexto(INICIA_SESION),
                 Scroll.scrollUnaVista());
 
         CapturaDePantallaMovil.tomarCapturaPantalla("captura_pantalla");
@@ -50,9 +52,8 @@ public class ValidarClaroDrive implements Task {
                 Atras.irAtras(),
                 Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
                 Click.on(BTN_ENVIAR),
-                WaitFor.aTime(2000),
-                Atras.irAtras(),
-                Atras.irAtras());
+                WaitFor.aTime(2000)
+        );
 
         //  WordAppium.main();
     }

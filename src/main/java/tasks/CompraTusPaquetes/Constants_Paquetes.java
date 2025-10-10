@@ -192,4 +192,12 @@ public class Constants_Paquetes {
     public static final String RECARGA_50000 = "$ 50.000";
     public static final String RECARGA_70000 = "$ 70.000";
     public static final String RECARGA_100000 = "$ 100.000";
+
+
+    //Paquetes Roaming internacional
+
+    public static final String PQ_1 = "850 MB y 15 Min";
+    public static final String PQ_2 = "1700 MB y 30 Min";
+    public static final String PQ_3 = "N D 750 MB Dia";
+    public static final String PQ_4 = "N D 1500 MB Dia";
 }

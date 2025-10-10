@@ -6,6 +6,7 @@ import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.scroll.Scroll;
 import interactions.wait.WaitForResponse;
+import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -30,10 +31,15 @@ public class ConsultaOtraLinea implements Task {
 
         actor.attemptsTo(
                 ClickElementByText.clickElementByText(ENVIAR),
-                WaitForResponse.withText(LINEAS_PREPAGO));
+                WaitForTextContains.withAnyTextContains(LINEAS_PREPAGO, CUENTA_PROPIA, CONSULTA_FORMA_RAPIDA),
+                ClickTextoQueContengaX.elTextoContiene(CUENTA_PROPIA),
+                WaitForTextContains.withAnyTextContains(LINEAS_POSTPAGO,LINEAS_PREPAGO)
+        );
+
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Cuenta propia");
+        ReportHooks.registrarPaso("Seleccionar Cuenta propia");
 
         actor.attemptsTo(
-                Scroll.scrollUnaVista(),
                 Scroll.scrollUnaVista(),
                 ValidarTextoQueContengaX.elTextoContiene(MAS_SERVICIOS_CLARO),
                 ValidarTextoQueContengaX.elTextoContiene(LINEAS_POSTPAGO),

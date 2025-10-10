@@ -241,7 +241,18 @@ public class ConstantesPost {
     public static final String LISTO = "Listo";
     public static final String REGISTRO_EQUIPO_PROCESO = "El registro de tu equipo se encuentra en proceso, tan pronto quede aprobado se te notificará por mensaje de texto.";
     public static final String DISPOSITIVO_REGISTRADO = "La consulta realizada indica que tu dispositivo se encuentra registrado";
-
+    public static final String IMEI_REGISTRADO = "Tu IMEI ya se encuentra registrado";
+    public static final String VOLVER_MENU_PRINCIPAL = "Si necesitas realizar otra consulta, puedes volver al Menú principal";
+    public static final String ESCRIBE_NOMBRE_PAIS = "Escribe el nombre del país que planeas visitar.";
+    public static final String ESPAÑA = "España";
+    public static final String PAIS_ELEGIDO = "El país que elegiste es:";
+    public static final String ADMINISTRAR_ROAMING = "Administrar Roaming";
+    public static final String ESTADO_ROAMING = "Tu servicio de Roaming está";
+    public static final String FECHA_DESACTIVACION = "Fecha desactivación";
+    public static final String PAQUETES_RECARGAS = "Paquetes y recargas";
+    public static final String SELECCIONAR_TIPO_PAQUETE = "Selecciona el tipo de Paquete";
+    public static final String PAQUETES_DATOS = "Paquetes de Datos";
+    public static final String SELECCIONAR = "Seleccionar";
 
 }
 

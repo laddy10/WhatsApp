@@ -17,6 +17,7 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.BTN_ENVIAR;
 import static userinterfaces.WhatsAppPage.TXT_ENVIAR_MENSAJE;
 import static userinterfaces.WhatsAppPostpagoPage.LBL_EQUIPO_REGISTRADO;
+import static userinterfaces.WhatsAppPostpagoPage.LBL_IMEI_REGISTRADO;
 import static utils.Constantes.ABANDONAR_CONVERSACION;
 import static utils.Constantes.SALIR;
 import static utils.ConstantesPost.*;
@@ -27,14 +28,12 @@ public class RealizarProcesoRegistro implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
 
-        List<WebElementFacade> equiporegistrado = LBL_EQUIPO_REGISTRADO.resolveAllFor(actor);
-        if (!equiporegistrado.isEmpty()) {
+        List<WebElementFacade> imeiregistrado = LBL_IMEI_REGISTRADO.resolveAllFor(actor);
+        if (!imeiregistrado.isEmpty()) {
             actor.attemptsTo(
-                    ValidarTextoQueContengaX.elTextoContiene(DISPOSITIVO_REGISTRADO)
+                    ValidarTextoQueContengaX.elTextoContiene(IMEI_REGISTRADO),
+                    ValidarTextoQueContengaX.elTextoContiene(VOLVER_MENU_PRINCIPAL)
             );
-
-            CapturaDePantallaMovil.tomarCapturaPantalla("El equipo ya se encuentra registrado");
-            ReportHooks.registrarPaso("El equipo ya se encuentra registrado");
 
         } else {
             actor.attemptsTo(

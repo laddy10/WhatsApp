@@ -379,3 +379,49 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
+  @Whatsapp_Post_25 @WhatsApp_Post
+  Scenario: Otras opciones - Roaming Internacional - Comprar Roaming
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Seleccionar otras opciones
+    And Clic boton selecciona
+    And Seleccionar Roaming internacional
+    Then Ingresar a la opcion Comprar Roaming
+    And Vaciar chat
+
+
+  @Whatsapp_Post_26 @WhatsApp_Post
+  Scenario: Otras opciones - Roaming Internacional - Administar Roaming
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Seleccionar otras opciones
+    And Clic boton selecciona
+    And Seleccionar Roaming internacional
+    And Seleccionar opción Administrar Roaming
+    Then Validar el estado actual del servicio Roaming internacional
+    And Vaciar chat
+
+
+  @Whatsapp_Post_27 @WhatsApp_Post
+  Scenario: Otras opciones - Paquetes y recargas
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Seleccionar otras opciones
+    And Clic boton selecciona
+    Then Validar direccionamiento de Paquetes y recargas
+    And Vaciar chat

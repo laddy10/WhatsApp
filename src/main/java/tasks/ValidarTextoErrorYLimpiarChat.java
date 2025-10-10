@@ -27,7 +27,10 @@ public class ValidarTextoErrorYLimpiarChat implements Task {
         List<String> mensajesError = Arrays.asList(
                 "Por favor ingrese el número de opción",
                 "¡Lo siento! No entendí lo que escribiste",
-                "No entendí tu mensaje."
+                "No entendí tu mensaje.",
+                "Menú principal",
+                "Para continuar debes seleccionar alguna de las opciones mostradas anteriormente"
+
         );
 
         boolean textoErrorDetectado = mensajesError.stream()

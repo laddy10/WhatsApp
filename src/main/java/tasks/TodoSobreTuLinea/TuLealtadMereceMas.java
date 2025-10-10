@@ -29,7 +29,7 @@ public class TuLealtadMereceMas implements Task {
 
         actor.attemptsTo(
                 ClickElementByText.clickElementByText(ENVIAR),
-                WaitFor.aTime(2000),
+                WaitFor.aTime(5000),
                 WaitForResponse.withText(SELECCIONA));
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar botón Selecciona de tu lealtad merece más");

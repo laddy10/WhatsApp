@@ -67,7 +67,7 @@ public class IniciarChatClaro implements Task {
                     // No hay mensaje de actualización, proceder normalmente
                     actor.attemptsTo(
                             WaitForResponse.withAnyText(
-                                    SALUDO, INGRESAR_NUMERO_OPCION, INGRESAR_OPCION_VALIDA, NO_ENTENDI_TU_MENSAJE),
+                                    SALUDO, INGRESAR_NUMERO_OPCION, INGRESAR_OPCION_VALIDA, NO_ENTENDI_TU_MENSAJE, MENU_PRINCIPAL, OPCIONES_MOSTRADAS_ANTERIORMENTE),
                             ValidarTextoErrorYLimpiarChat.validarYLimpiar(),
                             WaitForResponse.withText(SALUDO),
                             ScrollInicio.scrollUnaVista()

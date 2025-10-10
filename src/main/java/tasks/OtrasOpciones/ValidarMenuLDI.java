@@ -2,6 +2,8 @@ package tasks.OtrasOpciones;
 
 import hooks.ReportHooks;
 import interactions.Click.ClickElementByText;
+import interactions.comunes.Atras;
+import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -74,6 +76,15 @@ public class ValidarMenuLDI implements Task {
 
         CapturaDePantallaMovil.tomarCapturaPantalla("elige compra");
         ReportHooks.registrarPaso("elige compra");
+
+        actor.attemptsTo(
+                Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
+                Click.on(BTN_ENVIAR),
+                WaitFor.aTime(2000),
+                Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
+                Click.on(BTN_ENVIAR),
+                WaitForResponse.withText(ABANDONAR_CONVERSACION)
+        );
 
     }
 
