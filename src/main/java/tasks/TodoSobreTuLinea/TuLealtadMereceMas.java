@@ -6,6 +6,7 @@ import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
+import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -29,8 +30,9 @@ public class TuLealtadMereceMas implements Task {
 
         actor.attemptsTo(
                 ClickElementByText.clickElementByText(ENVIAR),
-                WaitFor.aTime(5000),
-                WaitForResponse.withText(SELECCIONA));
+                WaitFor.aTime(9000),
+                WaitForTextContains.withAnyTextContains(TEXTO_GRACIAS_POR_PREFERIRNOS)
+                );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar botón Selecciona de tu lealtad merece más");
         ReportHooks.registrarPaso("Validar botón Selecciona de tu lealtad merece más");

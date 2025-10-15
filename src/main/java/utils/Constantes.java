@@ -165,5 +165,5 @@ public class Constantes {
     public static final String CUENTA_PROPIA = "Cuenta propia";
     public static final String CONSULTA_FORMA_RAPIDA = "Consulta de forma rápida y segura las cuentas hogar o líneas móviles";
     public static final String OPCIONES_MOSTRADAS_ANTERIORMENTE = "Para continuar debes seleccionar alguna de las opciones mostradas anteriormente";
-
+    public static final String TEXTO_GRACIAS_POR_PREFERIRNOS = "Gracias por preferirnos";
 }
