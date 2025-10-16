@@ -19,7 +19,7 @@ public class WhatsAppPostpagoPage {
 
     public static final Target BTN_CLOSE =
             Target.the("Boton Close")
-                    .located(By.xpath("//android.widget.Button[@text=\"Close\"]"));
+                    .located(By.xpath("//android.widget.Button[@content-desc=\"Close\"]"));
 
     public static final Target BTN_CLOSE_2 =
             Target.the("Boton Close")
@@ -152,6 +152,9 @@ public class WhatsAppPostpagoPage {
     public static final Target LBL_IMEI_REGISTRADO =
             Target.the("Texto Tu IMEI ya se encuentra registrado.")
                     .located(By.xpath("//*[contains(@text, 'Tu IMEI ya se encuentra registrado.')]"));
+    public static final Target BTN_SELECCIONA_TU_LEALTAD =
+            Target.the("Boton Selecciona de la sesión tu lealtad merece mas")
+                    .located(By.xpath("(//android.widget.TextView[@resource-id=\"com.whatsapp:id/button_content\"])[3]"));
 
 
 }

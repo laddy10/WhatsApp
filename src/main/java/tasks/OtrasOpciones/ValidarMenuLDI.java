@@ -83,6 +83,9 @@ public class ValidarMenuLDI implements Task {
                 WaitFor.aTime(2000),
                 Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
                 Click.on(BTN_ENVIAR),
+                WaitFor.aTime(2000),
+                Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
+                Click.on(BTN_ENVIAR),
                 WaitForResponse.withText(ABANDONAR_CONVERSACION)
         );
 

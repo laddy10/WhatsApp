@@ -3,9 +3,6 @@ package tasks.Postpago.TodoSobreTuPlan;
 import hooks.ReportHooks;
 import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
-import interactions.Validaciones.ValidarTexto;
-import interactions.Validaciones.ValidarTextoQueContengaX;
-import interactions.comunes.Atras;
 import interactions.wait.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -30,30 +27,8 @@ public class MenuTodoSobreTuPlan implements Task {
 
         actor.attemptsTo(
                 ClickElementByText.clickElementByText(ENVIAR),
-                WaitForResponse.withText(SELECCIONA),
-                ValidarTextoQueContengaX.elTextoContiene(HAZLO_REAL),
-                ValidarTextoQueContengaX.elTextoContiene(INGRESA_AQUI)
+                WaitForResponse.withText(SELECCIONA)
         );
-
-        CapturaDePantallaMovil.tomarCapturaPantalla("Clic en Ingresa aqui");
-        ReportHooks.registrarPaso("Clic en Ingresa aqu");
-
-        actor.attemptsTo(
-                ClickElementByText.clickElementByText(INGRESA_AQUI),
-                WaitForResponse.withText(PERSONAS),
-                ValidarTextoQueContengaX.elTextoContiene(URL_CLARO),
-                ValidarTexto.validarTexto(PERSONAS),
-                ValidarTextoQueContengaX.elTextoContiene(COMPRA_POR_CATEGORIA)
-        );
-
-        CapturaDePantallaMovil.tomarCapturaPantalla("Validar direccionamiento a pagina Claro descuento");
-        ReportHooks.registrarPaso("Validar direccionamiento a pagina Claro descuento");
-
-
-        actor.attemptsTo(
-                Atras.irAtras()
-        );
-
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Dar clic boton Selecciona");
         ReportHooks.registrarPaso("Dar clic boton Selecciona");

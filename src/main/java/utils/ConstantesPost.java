@@ -14,13 +14,13 @@ public class ConstantesPost {
     public static final String HABLAR_CON_ASESOR = "\uD83D\uDCAC Hablar con asesor";
     public static final String OTRAS_OPCIONES_POST = "\uD83D\uDC49 Otras opciones";
     public static final String HAZLO_REAL = "Hazlo real";
-    public static final String PLAN_INCLUYE = "Tu plan incluye 160GB, Llamadas ilimitadas Nal y a USA, Canada, Mexico y Pto Rico, SMS ilimitados y las siguientes Apps con consumo ilimitado:";
+    public static final String PLAN_INCLUYE = "Tu plan incluye Datos ilimitados, Llamadas ilimitadas Nal y a USA, Canada, Mexico y Pto Rico, SMS ilimitados";
     public static final String INSTAGRAM = "Instagram";
     public static final String FACEBOOK = "Facebook";
     public static final String TWITTER = "Twitter";
     public static final String WHATSAPP = "WhatsApp";
     public static final String CLARO_VIDEO = "Claro Video";
-    public static final String CARGO_FIJO_MENSUAL = "Cargo fijo mensual: $75.900";
+    public static final String CARGO_FIJO_MENSUAL = "Cargo fijo mensual: $99.900";
     public static final String CLARO_CLUB = "Claro Club";
     public static final String ANIVERSARIO_CLARO = "Aniversario Claro";
     public static final String SORPRESA_DE_CUMPLEAÑOS = "Sorpresa de cumpleaños";

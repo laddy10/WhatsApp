@@ -212,6 +212,10 @@ public class WhatsAppPage extends PageObject {
     public static final Target BTN_REPRODUCIR_VIDEO =
             Target.the("Botón reproducir video")
                     .located(By.id("com.whatsapp:id/cancel_download"));
+    public static final Target BTN_SELECCIONA_PQ_INTERNACIONALES =
+            Target.the("Boton Selecciona sección paquetes internacionales")
+                    .located(MobileBy.xpath("(//android.widget.TextView[@resource-id=\"com.whatsapp:id/button_content\"])[2]"));
+
 
     public class AppConstants {
         public static final String WHATSAPP_PACKAGE = "com.whatsapp";

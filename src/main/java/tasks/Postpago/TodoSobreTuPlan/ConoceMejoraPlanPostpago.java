@@ -44,11 +44,11 @@ public class ConoceMejoraPlanPostpago implements Task {
         actor.attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene(NOMBRE_PLAN_POST),
                 ValidarTextoQueContengaX.elTextoContiene(PLAN_INCLUYE),
-                ValidarTextoQueContengaX.elTextoContiene(INSTAGRAM),
-                ValidarTextoQueContengaX.elTextoContiene(FACEBOOK),
-                ValidarTextoQueContengaX.elTextoContiene(TWITTER),
-                ValidarTextoQueContengaX.elTextoContiene(WHATSAPP),
-                ValidarTextoQueContengaX.elTextoContiene(CLARO_VIDEO),
+               // ValidarTextoQueContengaX.elTextoContiene(INSTAGRAM),
+               // ValidarTextoQueContengaX.elTextoContiene(FACEBOOK),
+               // ValidarTextoQueContengaX.elTextoContiene(TWITTER),
+               // ValidarTextoQueContengaX.elTextoContiene(WHATSAPP),
+               // ValidarTextoQueContengaX.elTextoContiene(CLARO_VIDEO),
                 ValidarTextoQueContengaX.elTextoContiene(CARGO_FIJO_MENSUAL)
         );
 

@@ -2,8 +2,10 @@ package tasks.CompraWhatsApp;
 
 import hooks.ReportHooks;
 import interactions.Validaciones.ValidarTexto;
+import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
 import interactions.wait.WaitForResponse;
+import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -25,13 +27,13 @@ public class MenuCompraWhatsApp implements Task {
         try {
             // Esperar y validar el elemento principal primero
             actor.attemptsTo(
-                    WaitForResponse.withText(SERVICIOS_PARA_TI),
+                    WaitForTextContains.withAnyTextContains(INTERNET_PARA_TU_HOGAR),
 
                     // Realizar todas las validaciones
-                    ValidarTexto.validarTexto(SERVICIOS_PARA_TI),
-                    ValidarTexto.validarTexto(POSTPAGO_PARA_TI),
-                    ValidarTexto.validarTexto(CAMBIA_TU_CELULAR),
-                    ValidarTexto.validarTexto(MENU_ANTERIOR)
+                    ValidarTextoQueContengaX.elTextoContiene(INTERNET_PARA_TU_HOGAR),
+                    ValidarTextoQueContengaX.elTextoContiene(PLAN_PARA_TU_CELULAR),
+                    ValidarTextoQueContengaX.elTextoContiene(CAMBIA_TU_CELULAR),
+                    ValidarTextoQueContengaX.elTextoContiene(MENU_ANTERIOR)
             );
 
             // Capturar evidencia de validación exitosa

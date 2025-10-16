@@ -80,7 +80,8 @@ public class RegalaUnPaquete implements Task {
 
 
         actor.attemptsTo(
-                WaitForResponse.withText(PERSONAS),
+                WaitFor.aTime(10000),
+                WaitForTextContains.withAnyTextContains(DIGITA_NUMERO_CLARO),
                 ValidarTextoQueContengaX.elTextoContiene(PORTAL_PAGOS_RECARGAS),
                 ValidarTextoQueContengaX.elTextoContiene(COMPRA_DE_PAQUETES),
                 ValidarTextoQueContengaX.elTextoContiene(DIGITA_NUMERO_CLARO)

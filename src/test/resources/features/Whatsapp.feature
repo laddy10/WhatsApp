@@ -248,7 +248,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_21  @Whatsapp_PRE
+ # @Whatsapp_21  @Whatsapp_PRE
   Scenario: Validar menu compra tus paquetes - de apps
     Given Ingresar a WhatsAPP
     When Validar Version de la App

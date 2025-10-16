@@ -128,7 +128,7 @@ public class Constantes {
     public static final String ELIGE_COMPRA = "¡Elige y compra el paquete ideal para ti!";
     public static final String SERVICIOS_PARA_TI = "☺️Servicios para ti";
     public static final String POSTPAGO_PARA_TI = "📲Postpago para ti";
-    public static final String CAMBIA_TU_CELULAR = "💫Cambia tu celular";
+    public static final String CAMBIA_TU_CELULAR = "Cambia tu celular";
     public static final String PAQ_TODO_INCLUIDO = "\uD83D\uDCE6Paq. todo incluido";
     public static final String PAQ_DE_VOZ = "\uD83C\uDF99️Paq. de Voz";
     public static final String PAQ_DE_DATOS = "\uD83D\uDCF1Paq. de datos";
@@ -166,4 +166,6 @@ public class Constantes {
     public static final String CONSULTA_FORMA_RAPIDA = "Consulta de forma rápida y segura las cuentas hogar o líneas móviles";
     public static final String OPCIONES_MOSTRADAS_ANTERIORMENTE = "Para continuar debes seleccionar alguna de las opciones mostradas anteriormente";
     public static final String TEXTO_GRACIAS_POR_PREFERIRNOS = "Gracias por preferirnos";
+    public static final String INTERNET_PARA_TU_HOGAR = "Internet para tu Hogar";
+    public static final String PLAN_PARA_TU_CELULAR = "Plan para tu celular";
 }

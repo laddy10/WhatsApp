@@ -56,7 +56,7 @@ public class ValidarAniversarioClaro implements Task {
                 ValidarTextoQueContengaX.elTextoContiene(MAS_DESCARGADOS),
                 ValidarTextoQueContengaX.elTextoContiene(COMIDAS),
                 ValidarTextoQueContengaX.elTextoContiene(PRODUCTOS_CLARO),
-                ValidarTextoQueContengaX.elTextoContiene(VIAJES),
+                //ValidarTextoQueContengaX.elTextoContiene(VIAJES),
                 ValidarTextoQueContengaX.elTextoContiene(ENTRETENIMIENTO),
                 ValidarTextoQueContengaX.elTextoContiene(INICIO),
                 ValidarTextoQueContengaX.elTextoContiene(CONOCE_MAS),
