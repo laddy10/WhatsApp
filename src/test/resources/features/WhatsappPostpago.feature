@@ -157,7 +157,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
 
 
 
-  @Whatsapp_Post_11 @WhatsApp_Post_PENDIENTE
+  #@Whatsapp_Post_11 @WhatsApp_Post_PENDIENTE
   Scenario: Tus pagos y facturas - validar portal de pagos y transacción
     Given Ingresar a WhatsAPP
     When Validar Version de la App
