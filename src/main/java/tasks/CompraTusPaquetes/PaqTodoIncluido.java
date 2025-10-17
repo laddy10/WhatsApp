@@ -6,6 +6,7 @@ import interactions.Validaciones.ValidarTexto;
 import interactions.comunes.Atras;
 import interactions.wait.WaitForResponse;
 import interactions.wait.WaitFor;
+import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -42,7 +43,8 @@ public class PaqTodoIncluido implements Task {
 
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitFor.aTime(10000)
+                WaitFor.aTime(10000),
+                WaitForTextContains.withAnyTextContains(AHORRA_Y_APROVECHA_MAXIMO)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_2);

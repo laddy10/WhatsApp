@@ -214,8 +214,11 @@ public class WhatsAppPage extends PageObject {
                     .located(By.id("com.whatsapp:id/cancel_download"));
     public static final Target BTN_SELECCIONA_PQ_INTERNACIONALES =
             Target.the("Boton Selecciona sección paquetes internacionales")
-                    .located(MobileBy.xpath("(//android.widget.TextView[@resource-id=\"com.whatsapp:id/button_content\"])[2]"));
+                    .located(MobileBy.xpath("(//android.widget.TextView[@resource-id=\"com.whatsapp:id/button_content\"])[1]"));
 
+    public static final Target BTN_SELECCIONA_TU_LEALTAD_2 =
+            Target.the("Boton Selecciona del menu tu lealtad merece más ")
+                    .located(By.xpath("(//android.widget.TextView[@resource-id=\"com.whatsapp:id/button_content\"])[4]"));
 
     public class AppConstants {
         public static final String WHATSAPP_PACKAGE = "com.whatsapp";

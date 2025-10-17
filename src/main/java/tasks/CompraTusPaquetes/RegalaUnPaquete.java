@@ -81,10 +81,9 @@ public class RegalaUnPaquete implements Task {
 
         actor.attemptsTo(
                 WaitFor.aTime(10000),
-                WaitForTextContains.withAnyTextContains(DIGITA_NUMERO_CLARO),
+                WaitForTextContains.withAnyTextContains(PORTAL_PAGOS_RECARGAS),
                 ValidarTextoQueContengaX.elTextoContiene(PORTAL_PAGOS_RECARGAS),
-                ValidarTextoQueContengaX.elTextoContiene(COMPRA_DE_PAQUETES),
-                ValidarTextoQueContengaX.elTextoContiene(DIGITA_NUMERO_CLARO)
+                ValidarTextoQueContengaX.elTextoContiene(COMPRA_DE_PAQUETES)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_5);
