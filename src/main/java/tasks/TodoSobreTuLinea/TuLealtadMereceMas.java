@@ -15,6 +15,7 @@ import utils.CapturaDePantallaMovil;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.BTN_SELECCIONA;
+import static userinterfaces.WhatsAppPage.BTN_SELECCIONA_TU_LEALTAD_2;
 import static utils.Constantes.*;
 
 public class TuLealtadMereceMas implements Task {
@@ -38,7 +39,7 @@ public class TuLealtadMereceMas implements Task {
         ReportHooks.registrarPaso("Validar botón Selecciona de tu lealtad merece más");
 
         actor.attemptsTo(
-                Click.on(BTN_SELECCIONA),
+                Click.on(BTN_SELECCIONA_TU_LEALTAD_2),
                 ValidarTextoQueContengaX.elTextoContiene(CLARO_MUSICA),
                 ValidarTextoQueContengaX.elTextoContiene(CLARO_DRIVE));
     }
