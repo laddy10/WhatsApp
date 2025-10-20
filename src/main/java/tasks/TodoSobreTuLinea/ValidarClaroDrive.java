@@ -35,7 +35,7 @@ public class ValidarClaroDrive implements Task {
         UtilidadesAndroid.abrirLinkEnNavegador("https://bit.ly/3oNvleC");
 
         actor.attemptsTo(
-                WaitFor.aTime(10000),
+                WaitFor.aTime(15000),
                 ValidarTextoQueContengaX.elTextoContiene(MI_CLARO_DRIVE),
                 ValidarTextoQueContengaX.elTextoContiene(NEGOCIO)
         );

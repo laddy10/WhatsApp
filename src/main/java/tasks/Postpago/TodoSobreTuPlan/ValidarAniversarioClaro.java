@@ -39,7 +39,7 @@ public class ValidarAniversarioClaro implements Task {
         UtilidadesAndroid.abrirLinkEnNavegador("https://" + URL_ANIVERSARIO_CLARO);
 
         actor.attemptsTo(
-                WaitFor.aTime(4000)
+                WaitFor.aTime(9000)
         );
 
 

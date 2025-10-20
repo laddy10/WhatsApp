@@ -89,7 +89,7 @@ public class WhatsAppPage extends PageObject {
                     .located(By.xpath("//*[contains(@text, 'Nombre del plan')]"));
     public static final Target LBL_MENU_LINEAS =
             Target.the("Texto del menú de líneas")
-                    .located(By.xpath("//*[contains(@text, '¿Cuál cuenta quieres gestionar?')]"));
+                    .located(By.xpath("//*[contains(@text, 'Líneas postpago')]"));
     public static final Target TXT_CAJA_MENSAJE =
             Target.the("Caja texto")
                     .located(By.id("entry"));
@@ -219,6 +219,9 @@ public class WhatsAppPage extends PageObject {
     public static final Target BTN_SELECCIONA_TU_LEALTAD_2 =
             Target.the("Boton Selecciona del menu tu lealtad merece más ")
                     .located(By.xpath("(//android.widget.TextView[@resource-id=\"com.whatsapp:id/button_content\"])[2]"));
+    public static final Target BTN_SELECCIONA_PQ_INTERNACIONALES_2 =
+            Target.the("Boton Selecciona sección paquetes internacionales")
+                    .located(MobileBy.xpath("(//android.widget.TextView[@resource-id=\"com.whatsapp:id/button_content\"])[2]"));
 
     public class AppConstants {
         public static final String WHATSAPP_PACKAGE = "com.whatsapp";

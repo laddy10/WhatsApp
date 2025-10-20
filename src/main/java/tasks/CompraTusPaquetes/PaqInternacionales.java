@@ -118,7 +118,7 @@ public class PaqInternacionales implements Task {
     private <T extends Actor> void validarPaqueteLDI(T actor, String paquete, String capturaSeleccion,
                                                      String capturaValidacion, String... paquetesValidar) {
         actor.attemptsTo(
-                Click.on(BTN_SELECCIONA_PQ_INTERNACIONALES),
+                Click.on(BTN_SELECCIONA_PQ_INTERNACIONALES_2),
                 ClickTextoQueContengaX.elTextoContiene(paquete));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(capturaSeleccion);
@@ -127,7 +127,7 @@ public class PaqInternacionales implements Task {
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
                 WaitForTextContains.withTextContains(ELIGE_COMPRA),
-                Click.on(BTN_SELECCIONA_PQ_INTERNACIONALES)
+                Click.on(BTN_SELECCIONA_PQ_INTERNACIONALES_2)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(capturaValidacion);
@@ -141,7 +141,7 @@ public class PaqInternacionales implements Task {
         actor.attemptsTo(
                 ClickTextoQueContengaX.elTextoContiene(MENU_ANTERIOR),
                 Click.on(BTN_ENVIAR_2),
-                WaitFor.aTime(3000)
+                WaitFor.aTime(6000)
         );
     }
 

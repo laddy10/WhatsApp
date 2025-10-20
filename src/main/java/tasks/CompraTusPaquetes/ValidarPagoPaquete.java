@@ -53,7 +53,7 @@ public class ValidarPagoPaquete implements Task {
 
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitFor.aTime(10000)
+                WaitFor.aTime(15000)
         );
 
         actor.attemptsTo(

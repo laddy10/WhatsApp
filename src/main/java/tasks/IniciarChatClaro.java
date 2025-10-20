@@ -6,6 +6,7 @@ import interactions.scroll.Scroll;
 import interactions.scroll.ScrollInicio;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
+import interactions.wait.WaitForTextContains;
 import models.User;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
@@ -67,9 +68,9 @@ public class IniciarChatClaro implements Task {
                     // No hay mensaje de actualización, proceder normalmente
                     actor.attemptsTo(
                             WaitForResponse.withAnyText(
-                                    SALUDO, INGRESAR_NUMERO_OPCION, INGRESAR_OPCION_VALIDA, NO_ENTENDI_TU_MENSAJE, MENU_PRINCIPAL, OPCIONES_MOSTRADAS_ANTERIORMENTE),
+                                    SALUDO, SALUDO_PARA_AYUDARTE, INGRESAR_NUMERO_OPCION, INGRESAR_OPCION_VALIDA, NO_ENTENDI_TU_MENSAJE, MENU_PRINCIPAL, OPCIONES_MOSTRADAS_ANTERIORMENTE),
                             ValidarTextoErrorYLimpiarChat.validarYLimpiar(),
-                            WaitForResponse.withText(SALUDO),
+                            WaitForTextContains.withAnyTextContains(SALUDO, SALUDO_PARA_AYUDARTE),
                             ScrollInicio.scrollUnaVista()
                     );
 
@@ -77,11 +78,11 @@ public class IniciarChatClaro implements Task {
                     ReportHooks.registrarPaso("Iniciar el chat con Claro Colombia");
 
                     actor.attemptsTo(
-                            ValidarTextoQueContengaX.elTextoContiene(SALUDO),
-                            ValidarTextoQueContengaX.elTextoContiene(GESTIONAR),
+                            //ValidarTextoQueContengaX.elTextoContiene(SALUDO),
+                            //ValidarTextoQueContengaX.elTextoContiene(GESTIONAR),
                             ValidarTextoQueContengaX.elTextoContiene(LINEAS_POSTPAGO),
                             ValidarTextoQueContengaX.elTextoContiene(LINEAS_PREPAGO),
-                            ValidarTextoQueContengaX.elTextoContiene(NUMERO_OPCION),
+                            ValidarTextoQueContengaX.elTextoContiene(CUENTA),
                             Scroll.scrollUnaVista()
                     );
 

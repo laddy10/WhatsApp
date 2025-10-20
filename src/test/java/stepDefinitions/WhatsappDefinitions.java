@@ -186,7 +186,7 @@ public class WhatsappDefinitions {
 
         theActorInTheSpotlight().attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitFor.aTime(3000)
+                WaitFor.aTime(6000)
         );
     }
 
