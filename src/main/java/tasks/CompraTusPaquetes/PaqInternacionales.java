@@ -4,14 +4,12 @@ import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.comunes.Atras;
-import interactions.wait.WaitForResponse;
-import interactions.wait.WaitFor;
-import interactions.wait.WaitForTextContains;
+import interactions.wait.*;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.Enter;
+import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
@@ -108,17 +106,14 @@ public class PaqInternacionales implements Task {
 
         actor.attemptsTo(
                 Atras.irAtras(),
-                Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-                Click.on(BTN_ENVIAR),
-                WaitFor.aTime(2000),
-                WaitForResponse.withText(ABANDONAR_CONVERSACION)
+                SalirConversacion.salir()
         );
     }
 
     private <T extends Actor> void validarPaqueteLDI(T actor, String paquete, String capturaSeleccion,
                                                      String capturaValidacion, String... paquetesValidar) {
         actor.attemptsTo(
-                Click.on(BTN_SELECCIONA_PQ_INTERNACIONALES_2),
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
                 ClickTextoQueContengaX.elTextoContiene(paquete));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(capturaSeleccion);
@@ -127,7 +122,7 @@ public class PaqInternacionales implements Task {
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
                 WaitForTextContains.withTextContains(ELIGE_COMPRA),
-                Click.on(BTN_SELECCIONA_PQ_INTERNACIONALES_2)
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(capturaValidacion);

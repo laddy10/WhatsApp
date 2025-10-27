@@ -169,6 +169,7 @@ public class Constantes {
     public static final String INTERNET_PARA_TU_HOGAR = "Internet para tu Hogar";
     public static final String PLAN_PARA_TU_CELULAR = "Plan para tu celular";
     public static final String AHORRA_Y_APROVECHA_MAXIMO = "Ahorra y aprovecha al máximo";
-    public static final String SALUDO_PARA_AYUDARTE = "Tus servicios con nosotros son:";
+    public static final String  SALUDO_PARA_AYUDARTE = "Tus servicios con nosotros son:";
     public static final String CUENTA = "cuenta";
+    public static final String HAZ_CLICK_ENLACE = "Haz click en el siguiente enlace para realizar";
 }

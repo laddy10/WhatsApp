@@ -5,20 +5,21 @@ import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
-import interactions.wait.WaitForResponse;
-import interactions.wait.WaitFor;
+import interactions.wait.*;
 import interactions.scroll.ScrollInicio;
-import interactions.wait.WaitForTextContains;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import org.openqa.selenium.WebElement;
 import tasks.ExtraerURL;
 import userinterfaces.WhatsAppPage;
 import utils.CapturaDePantallaMovil;
 import utils.UtilidadesAndroid;
+
+import java.util.List;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static tasks.CompraTusPaquetes.Constants_Paquetes.*;
@@ -53,11 +54,17 @@ public class ValidarPagoPaquete implements Task {
 
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitFor.aTime(15000)
+                WaitForTextContains.withAnyTextContains(AHORRA_Y_APROVECHA_MAXIMO)
         );
 
+        // Ahora: espera *hasta que exista* el botón en la última burbuja y haz clic allí
         actor.attemptsTo(
-                Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(40)
+        );
+
+
+        actor.attemptsTo(
+                // Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
                 WaitForResponse.withText(VER_MAS_PAQUETES),
                 ClickTextoQueContengaX.elTextoContiene(VER_MAS_PAQUETES));
 
@@ -129,7 +136,7 @@ public class ValidarPagoPaquete implements Task {
 
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitFor.aTime(4000)
+                WaitForTextContains.withTextContains(HAZ_CLICK_ENLACE)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_9);
@@ -167,7 +174,7 @@ public class ValidarPagoPaquete implements Task {
 
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitFor.aTime(4000)
+                WaitFor.aTime(18000)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_12);

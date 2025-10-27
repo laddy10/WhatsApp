@@ -223,6 +223,13 @@ public class WhatsAppPage extends PageObject {
             Target.the("Boton Selecciona sección paquetes internacionales")
                     .located(MobileBy.xpath("(//android.widget.TextView[@resource-id=\"com.whatsapp:id/button_content\"])[2]"));
 
+       public static final Target BTN_SELECCIONA_PQ_TODO_INCLUIDO_NUEVO = Target.the("Botón Selecciona")
+            .located(MobileBy.AndroidUIAutomator("new UiSelector().textContains(\"Selecciona\")"));
+
+    // Todos los "Selecciona"
+    public static final Target BTN_SELECCIONA_ALL = Target.the("Botones Selecciona")
+            .located(MobileBy.id("com.whatsapp:id/button_content"));
+
     public class AppConstants {
         public static final String WHATSAPP_PACKAGE = "com.whatsapp";
     }

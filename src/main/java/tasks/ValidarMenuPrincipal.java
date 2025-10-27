@@ -37,9 +37,7 @@ public class ValidarMenuPrincipal implements Task {
 
         actor.attemptsTo(
                 Atras.irAtras(),
-                Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-                Click.on(BTN_ENVIAR),
-                WaitForResponse.withText(ABANDONAR_CONVERSACION)
+                SalirConversacion.salir()
         );
 
     }

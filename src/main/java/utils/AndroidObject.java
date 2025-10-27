@@ -78,6 +78,25 @@ public class AndroidObject {
                 .isDisplayed();
     }
 
+    public boolean textoContiene(Actor actor, String text) {
+        String safe = text.replace("\\", "\\\\").replace("\"", "\\\"");
+        try {
+            // por texto
+            if (androidDriver(actor)
+                    .findElementByAndroidUIAutomator("new UiSelector().textContains(\"" + safe + "\")")
+                    .isDisplayed()) return true;
+
+            // por content-desc (por si el bot lo pone en description)
+            if (androidDriver(actor)
+                    .findElementByAndroidUIAutomator("new UiSelector().descriptionContains(\"" + safe + "\")")
+                    .isDisplayed()) return true;
+
+            return false;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
 
     //CLICK
     public void ClickByText(Actor actor, String text) {
