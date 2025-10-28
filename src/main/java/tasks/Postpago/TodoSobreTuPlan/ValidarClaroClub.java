@@ -40,7 +40,7 @@ public class ValidarClaroClub implements Task {
         UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_CLUB);
 
         actor.attemptsTo(
-                WaitFor.aTime(17000)
+                WaitFor.aTime(30000)
         );
 
 
