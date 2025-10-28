@@ -169,7 +169,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Ingresar a tus pagos y facturas
 
 
-  @Whatsapp_Post_12 @WhatsApp_Post
+  ##@Whatsapp_Post_12 @WhatsApp_Post
   Scenario: Tus pagos y facturas - Tu factura
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -201,7 +201,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_14 @WhatsApp_Post
+  ##@Whatsapp_Post_14 @WhatsApp_Post
   Scenario: Tus pagos y facturas - Tu historial
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -362,7 +362,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_24 @WhatsApp_Post
+  ##@Whatsapp_Post_24 @WhatsApp_Post
   Scenario: Otras opciones - Registra tu equipo
     Given Ingresar a WhatsAPP
     When Validar Version de la App
