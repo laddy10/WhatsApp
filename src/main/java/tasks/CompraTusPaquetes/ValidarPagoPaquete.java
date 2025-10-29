@@ -5,6 +5,7 @@ import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
+import interactions.scroll.ScrollHastaTexto;
 import interactions.wait.*;
 import interactions.scroll.ScrollInicio;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -165,7 +166,8 @@ public class ValidarPagoPaquete implements Task {
 
         actor.attemptsTo(
                 Atras.irAtras(),
-                ScrollInicio.scrollUnaVista(),
+                ScrollHastaTexto.conTexto(MEDIOS_DE_PAGO),
+               // ScrollInicio.scrollUnaVista(),
                 Click.on(BTN_MEDIOS_DE_PAGO),
                 ClickTextoQueContengaX.elTextoContiene(PSE));
 
