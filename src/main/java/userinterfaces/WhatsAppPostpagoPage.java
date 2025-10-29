@@ -4,6 +4,8 @@ import io.appium.java_client.MobileBy;
 import net.serenitybdd.screenplay.targets.Target;
 import org.openqa.selenium.By;
 
+import static utils.ConstantesPost.MIENTRAS_APP_ESTA_EN_USO;
+
 public class WhatsAppPostpagoPage {
 
     public static final Target BTN_MENU_PRINCIPAL =
@@ -156,5 +158,29 @@ public class WhatsAppPostpagoPage {
             Target.the("Boton Selecciona de la sesión tu lealtad merece mas")
                     .located(By.xpath("(//android.widget.TextView[@resource-id=\"com.whatsapp:id/button_content\"])[3]"));
 
+    public static final Target BTN_PERMISO_UBICACION =
+            Target.the("Botón mientras la app está en uso")
+                    .located(By.id(
+                                    "com.android.permissioncontroller:id/permission_message"));
+    public static final Target BTN_ACEPTAR_PERMISO =
+            Target.the("Boton Aceptar").located(By.xpath("//*[@text='Aceptar']"));
+    public static final Target SMS_PERMISO_LLAMADAS =
+            Target.the("Mensaje ¿Permitir que Mi Claro haga y administre las llamadas telefónicas?")
+                    .located(By.xpath(
+                                    "//*[@text='¿Permitir que Mi Claro haga y administre las llamadas telefónicas?']"));
+    public static final Target SMS_PERMISO_NOTIFICACIONES =
+            Target.the("Mensaje ¿Permitir que Mi Claro te envíe notificaciones? ")
+                    .located(By.xpath("//*[@text='¿Permitir que Mi Claro te envíe notificaciones?']"));
+    public static final Target BTN_OMITIR =
+            Target.the("Boton de Omitir").located(By.xpath("//*[@text='Omitir']"));
+    public static final Target LBL_BIENVENIDA =
+            Target.the("Texto ¡Te damos la bienvenida!")
+                    .located(By.xpath("//*[@text='¡Te damos la bienvenida!']"));
+    public static final Target CHECK_TC =
+            Target.the("Check Acepto los términos y condiciones, el tratamiento de mis datos")
+                    .located(By.id("com.clarocolombia.miclaro:id/iv_protocol"));
+    public static final Target TXT_AUTORIZACION_VELOCIDAD =
+            Target.the("Texto de Autorización de medición de velocidad")
+                    .located(By.xpath("//*[@text='Autorización de medición de velocidad']"));
 
 }

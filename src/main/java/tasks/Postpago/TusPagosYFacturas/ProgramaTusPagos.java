@@ -1,9 +1,11 @@
 package tasks.Postpago.TusPagosYFacturas;
 
 import hooks.ReportHooks;
+import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
+import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
@@ -11,13 +13,15 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.questions.Presence;
+import net.serenitybdd.screenplay.targets.Target;
 import utils.CapturaDePantallaMovil;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.BTN_ENVIAR;
 import static userinterfaces.WhatsAppPage.TXT_ENVIAR_MENSAJE;
-import static utils.Constantes.ABANDONAR_CONVERSACION;
-import static utils.Constantes.SALIR;
+import static userinterfaces.WhatsAppPostpagoPage.*;
+import static utils.Constantes.*;
 import static utils.ConstantesPost.*;
 
 public class ProgramaTusPagos implements Task {
@@ -44,6 +48,15 @@ public class ProgramaTusPagos implements Task {
                 ClickTextoQueContengaX.elTextoContiene(PROGRAMAR_PAGOS)
         );
 
+        clickSiExiste(actor, BTN_PERMISO_UBICACION, MIENTRAS_APP_ESTA_EN_USO);
+        clickSiExiste(actor, BTN_ACEPTAR_PERMISO, ACEPTAR_2);
+        clickSiExiste(actor, BTN_PERMISO_UBICACION, MIENTRAS_APP_ESTA_EN_USO);
+        clickSiExiste(actor, SMS_PERMISO_LLAMADAS, NO_PERMITIR);
+        clickSiExiste(actor, SMS_PERMISO_NOTIFICACIONES, NO_PERMITIR);
+        clickSiExiste(actor, BTN_OMITIR, OMITIR);
+        clickSiExisteCheckboxYContinuar(actor, LBL_BIENVENIDA, CHECK_TC, CONTINUAR);
+        clickSiExiste(actor, TXT_AUTORIZACION_VELOCIDAD, ACEPTAR_2);
+
         // Esperar redirección y validar Mi Claro
         actor.attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene(INICIAR_SESION),
@@ -64,6 +77,29 @@ public class ProgramaTusPagos implements Task {
                 Click.on(BTN_ENVIAR),
                 WaitForResponse.withText(ABANDONAR_CONVERSACION)
         );
+
+
+    }
+
+    private <T extends Actor> void clickSiExiste(T actor, Target elemento, String texto) {
+        if (isVisible(actor, elemento)) {
+            actor.attemptsTo(ClickElementByText.clickElementByText(texto));
+        } else {
+            actor.attemptsTo(WaitFor.aTime(1000));
+        }
+    }
+
+    private <T extends Actor> boolean isVisible(T actor, Target element) {
+        return !Presence.of(element).viewedBy(actor).resolveAll().isEmpty();
+    }
+
+    private <T extends Actor> void clickSiExisteCheckboxYContinuar(T actor, Target condicion, Target checkbox, String botonTexto) {
+        if (isVisible(actor, condicion)) {
+            actor.attemptsTo(
+                    Click.on(checkbox),
+                    ClickElementByText.clickElementByText(botonTexto)
+            );
+        }
     }
 
     public static Performable programaTusPagos() {

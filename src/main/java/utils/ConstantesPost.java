@@ -253,6 +253,12 @@ public class ConstantesPost {
     public static final String SELECCIONAR_TIPO_PAQUETE = "Selecciona el tipo de Paquete";
     public static final String PAQUETES_DATOS = "Paquetes de Datos";
     public static final String SELECCIONAR = "Seleccionar";
+    public static final String MIENTRAS_APP_ESTA_EN_USO = "MIENTRAS LA APP ESTÁ EN USO";
+    public static final String ACEPTAR_2 = "Aceptar";
+    public static final String NO_PERMITIR = "No permitir";
+    public static final String OMITIR = "Omitir";
+
+
 
 }
 
