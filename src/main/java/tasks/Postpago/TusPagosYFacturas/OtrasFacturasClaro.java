@@ -4,6 +4,7 @@ import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
+import interactions.scroll.ScrollHastaTexto;
 import interactions.wait.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -61,7 +62,7 @@ public class OtrasFacturasClaro implements Task {
 
         // Paso 4: Desplegar "Selecciona la opción de tu interés" y seleccionar "Pago de Facturas"
         actor.attemptsTo(
-                ClickTextoQueContengaX.elTextoContiene(SELECCIONA_LA_OPCION),
+                ClickTextoQueContengaX.elTextoContiene(PAGO_DE_FACTURAS),
                 ClickTextoQueContengaX.elTextoContiene(PAGO_DE_FACTURAS)
         );
 
@@ -71,7 +72,7 @@ public class OtrasFacturasClaro implements Task {
         // Validar selección de Postpago
         actor.attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene(SELECCIONA_TIPO_SERVICIO),
-                ValidarTextoQueContengaX.elTextoContiene(POSTPAGO_OPCION)
+                ScrollHastaTexto.conTexto(POSTPAGO_OPCION)
         );
 
         actor.attemptsTo(
