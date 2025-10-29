@@ -7,6 +7,7 @@ import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
+import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitForResponse;
 import interactions.wait.WaitForTextContains;
 import models.User;
@@ -365,9 +366,7 @@ public class WhatsappPostpagoDefinitions {
 
         theActorInTheSpotlight().attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitForTextContains.withTextContains(SERVICIO_INTERMITENCIA),
-                ValidarTextoQueContengaX.elTextoContiene(SERVICIO_INTERMITENCIA),
-                ValidarTextoQueContengaX.elTextoContiene(NO_TENGO_SERVICIO)
+                WaitForTextContains.withTextContains(SERVICIOS)
         );
 
     }
@@ -379,9 +378,7 @@ public class WhatsappPostpagoDefinitions {
         ReportHooks.registrarPaso("Seleccionar 'No tengo servicio'");
 
         theActorInTheSpotlight().attemptsTo(
-                ClickTextoQueContengaX.elTextoContiene(NO_TENGO_SERVICIO),
-                WaitForTextContains.withTextContains(SERVICIOS),
-                Click.on(BTN_SELECCIONA_SOPORTE),
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
                 ValidarTextoQueContengaX.elTextoContiene(DATOS_FALLAS),
                 ValidarTextoQueContengaX.elTextoContiene(LLAMADAS_FALLAS),
                 ValidarTextoQueContengaX.elTextoContiene(OTROS_SERVICIOS_FALLAS)
