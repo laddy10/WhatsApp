@@ -4,8 +4,10 @@ import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.comunes.Atras;
+import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitForResponse;
 import interactions.wait.WaitFor;
+import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -36,14 +38,15 @@ public class PaqDeDatos implements Task {
 
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitFor.aTime(10000)
+                WaitForTextContains.withAnyTextContains(DISFRUTA_TUS_APP),
+                WaitFor.aTime(5000)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_2);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_2);
 
         actor.attemptsTo(
-                Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
                 WaitForResponse.withText(PAQ_DATOS_1500_1D_PRECIO)
         );
 

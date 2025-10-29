@@ -172,4 +172,5 @@ public class Constantes {
     public static final String  SALUDO_PARA_AYUDARTE = "Tus servicios con nosotros son:";
     public static final String CUENTA = "cuenta";
     public static final String HAZ_CLICK_ENLACE = "Haz click en el siguiente enlace para realizar";
+    public static final String DISFRUTA_TUS_APP = "Disfruta tus aplicaciones móviles favoritas y navega";
 }
