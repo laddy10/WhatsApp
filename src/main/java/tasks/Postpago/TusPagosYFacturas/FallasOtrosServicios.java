@@ -65,6 +65,7 @@ public class FallasOtrosServicios implements Task {
         actor.attemptsTo(
                 Atras.irAtras(),
                 ScrollInicio.scrollUnaVista(),
+                ScrollHastaTexto.conTexto(CLARO_MUSICA_SOPORTE),
                 Click.on(BTN_CLARO_MUSICA),
                 WaitForTextContains.withTextContains(MENU_ANTERIOR)
         );
