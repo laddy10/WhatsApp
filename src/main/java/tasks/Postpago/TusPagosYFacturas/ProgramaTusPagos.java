@@ -45,7 +45,8 @@ public class ProgramaTusPagos implements Task {
 
         // Clic en "Programar pagos"
         actor.attemptsTo(
-                ClickTextoQueContengaX.elTextoContiene(PROGRAMAR_PAGOS)
+                ClickTextoQueContengaX.elTextoContiene(PROGRAMAR_PAGOS),
+                WaitFor.aTime(10000)
         );
 
         clickSiExiste(actor, BTN_PERMISO_UBICACION, MIENTRAS_APP_ESTA_EN_USO);
@@ -83,7 +84,9 @@ public class ProgramaTusPagos implements Task {
 
     private <T extends Actor> void clickSiExiste(T actor, Target elemento, String texto) {
         if (isVisible(actor, elemento)) {
-            actor.attemptsTo(ClickElementByText.clickElementByText(texto));
+            actor.attemptsTo(
+                    ClickElementByText.clickElementByText(texto),
+                    WaitFor.aTime(4000));
         } else {
             actor.attemptsTo(WaitFor.aTime(1000));
         }
