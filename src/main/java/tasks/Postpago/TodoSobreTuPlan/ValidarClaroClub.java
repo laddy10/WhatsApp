@@ -44,7 +44,7 @@ public class ValidarClaroClub implements Task {
         );
 
 
-        List<WebElementFacade> btnclose = BTN_CLOSE.resolveAllFor(actor);
+    /*    List<WebElementFacade> btnclose = BTN_CLOSE.resolveAllFor(actor);
         if (!btnclose.isEmpty()) {
             actor.attemptsTo(
                     Click.on(BTN_CLOSE)
@@ -80,7 +80,7 @@ public class ValidarClaroClub implements Task {
         if (!lblvistaprevia.isEmpty()) {
             actor.attemptsTo(
                     Atras.irAtras());
-        }
+        } */
 
         actor.attemptsTo(
                 Atras.irAtras(),
