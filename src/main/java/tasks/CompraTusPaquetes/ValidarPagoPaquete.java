@@ -166,8 +166,8 @@ public class ValidarPagoPaquete implements Task {
 
         actor.attemptsTo(
                 Atras.irAtras(),
+                ScrollInicio.scrollUnaVista(),
                 ScrollHastaTexto.conTexto(MEDIOS_DE_PAGO),
-               // ScrollInicio.scrollUnaVista(),
                 Click.on(BTN_MEDIOS_DE_PAGO),
                 ClickTextoQueContengaX.elTextoContiene(PSE));
 

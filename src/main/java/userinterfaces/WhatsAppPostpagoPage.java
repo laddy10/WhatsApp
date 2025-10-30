@@ -183,4 +183,8 @@ public class WhatsAppPostpagoPage {
             Target.the("Texto de Autorización de medición de velocidad")
                     .located(By.xpath("//*[@text='Autorización de medición de velocidad']"));
 
+    public static final Target LBL_PORTAL_PAGOS_RECARGAS =
+            Target.the("Texto Portal de PAGOS Y RECARGAS")
+                    .located(By.xpath("//*[@text='Portal de PAGOS Y RECARGAS']"));
+
 }
