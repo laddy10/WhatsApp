@@ -4,6 +4,7 @@ import hooks.ReportHooks;
 import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
+import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import interactions.wait.WaitForTextContains;
@@ -39,7 +40,8 @@ public class TuLealtadMereceMas implements Task {
         ReportHooks.registrarPaso("Validar botón Selecciona de tu lealtad merece más");
 
         actor.attemptsTo(
-                Click.on(BTN_SELECCIONA_TU_LEALTAD_2),
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
+             //   Click.on(BTN_SELECCIONA_TU_LEALTAD_2),
                 ValidarTextoQueContengaX.elTextoContiene(CLARO_MUSICA),
                 ValidarTextoQueContengaX.elTextoContiene(CLARO_DRIVE));
     }
