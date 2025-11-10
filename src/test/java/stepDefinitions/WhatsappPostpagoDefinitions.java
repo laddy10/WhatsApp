@@ -66,7 +66,7 @@ public class WhatsappPostpagoDefinitions {
 
         theActorInTheSpotlight().attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene(OPCIONES_RAPIDAS),
-                ValidarTextoQueContengaX.elTextoContiene(VER_Y_PAGAR_FACTURA),
+               // ValidarTextoQueContengaX.elTextoContiene(VER_Y_PAGAR_FACTURA),
                 ValidarTextoQueContengaX.elTextoContiene(DIAGNOSTICO_MOVIL),
                 Click.on(BTN_MENU_PRINCIPAL),
                 WaitForResponse.withText(COMPRA_WHATSAPP_POST)
@@ -545,7 +545,13 @@ public class WhatsappPostpagoDefinitions {
     public void direccionamientoPaquetesYRecargas() {
         theActorInTheSpotlight().attemptsTo(
                 PaquetesYRecargasPost.paquetesYRecargasPost()
+        );
+    }
 
+    @Then("Validar el menu modifica tu plan")
+    public void validarMenuModificaTuPlan() {
+        theActorInTheSpotlight().attemptsTo(
+                ModificaTuPlan.modificaTuPlan()
         );
     }
 

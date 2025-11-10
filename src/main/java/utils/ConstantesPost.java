@@ -257,6 +257,12 @@ public class ConstantesPost {
     public static final String ACEPTAR_2 = "Aceptar";
     public static final String NO_PERMITIR = "No permitir";
     public static final String OMITIR = "Omitir";
+    public static final String MODIFICA_TU_PLAN = "Modifica tu plan";
+    public static final String VER_OTROS_PLANES = "ver otros planes";
+    public static final String CAMBIAR_PLAN = "Cambiar plan";
+    public static final String PASAR_LINEA_A_PREPAGO = "Pasar línea a prepago";
+    public static final String DESACTIVAR_LINEA = "Desactivar línea";
+    public static final String SERVICIOS_ADICIONALES = "Servicios adicionales";
 
 
 

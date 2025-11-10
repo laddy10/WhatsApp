@@ -21,18 +21,21 @@ import tasks.*;
 import tasks.CompraTusPaquetes.*;
 import tasks.CompraWhatsApp.CompraWhatsApp;
 import tasks.CompraWhatsApp.MenuCompraWhatsApp;
+import tasks.ConsultarOtraCuenta.ConsultarOtraCuenta;
 import tasks.HazTusRecargas.DireccionamientoMediosPago;
 import tasks.HazTusRecargas.HazTusRecargas;
 import tasks.HazTusRecargas.SeleccionarValorRecargas;
 import tasks.HazTusRecargas.ValidarMenuRecargas;
 import tasks.OtrasOpciones.*;
 import tasks.TodoSobreTuLinea.*;
+import tasks.TusEquipos.MenuTusEquipos;
+import tasks.TusEquipos.TusEquipos;
+import tasks.TusEquipos.TusEquiposEnSoporte;
+import tasks.TusEquipos.VerPuntosFisicos;
 import utils.CapturaDePantallaMovil;
 import utils.EvidenciaUtils;
 import utils.TestDataProvider;
 import utils.WordAppium;
-
-import java.util.List;
 
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
@@ -380,5 +383,47 @@ public class WhatsappDefinitions {
                 ValidarMenuRecargas.validarMenuRecargas());
     }
 
+    @And("^Seleccionar Tus equipos$")
+    public void seleccionarTusEquipos() {
+        theActorInTheSpotlight().attemptsTo(
+                TusEquipos.tusEquipos()
+        );
+    }
+
+    @And("^Seleccionar Tus equipos en soporte$")
+    public void seleccionarTusEquiposEnSoporte() {
+        theActorInTheSpotlight().attemptsTo(
+                TusEquiposEnSoporte.tusEquiposEnSoporte()
+        );
+    }
+
+    @Then("^Ingresar a Ver puntos fisicos$")
+    public void IngresarVerPuntosFisicos() {
+        theActorInTheSpotlight().attemptsTo(
+                VerPuntosFisicos.verPuntosFisicos()
+        );
+    }
+
+    @Then("^Validar el menu de tus equipos$")
+    public void validarMenuTusEquipos() {
+        theActorInTheSpotlight().attemptsTo(
+                MenuTusEquipos.menuTusEquipos()
+        );
+    }
+
+    @Then("^Seleccionar tus PQRS radicados$")
+    public void tusPqrRadicados() {
+        theActorInTheSpotlight().attemptsTo(
+                TusPQRSRadicados.tusPQRSRadicados()
+        );
+    }
+
+
+    @Then("^Validar consultar otra cuenta$")
+    public void validarConsultarOtraCuenta() {
+        theActorInTheSpotlight().attemptsTo(
+                ConsultarOtraCuenta.consultarOtraCuenta()
+        );
+    }
 
 }

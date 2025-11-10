@@ -339,3 +339,61 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Ingresar a haz tus recargas
     And Validar menu de haz tus recargas
     And Vaciar chat
+
+
+
+  @Whatsapp_27  @Whatsapp_PRE
+  Scenario: Tus equipos - Tus equipos en soporte
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+    And Seleccionar Tus equipos
+    And Seleccionar Tus equipos en soporte
+    Then Ingresar a Ver puntos fisicos
+    And Vaciar chat
+
+
+  @Whatsapp_28  @Whatsapp_PRE
+  Scenario: Validar el menu principal de Tus equipos
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+    And Seleccionar Tus equipos
+    Then Validar el menu de tus equipos
+    And Vaciar chat
+
+
+  @Whatsapp_29  @Whatsapp_PRE
+  Scenario: Otras opciones - Tus PQRS radicados
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+    And Ingreso a otras opciones
+    Then Seleccionar tus PQRS radicados
+    And Vaciar chat
+
+
+  @Whatsapp_30  @Whatsapp_PRE
+  Scenario: Consultar otra cuenta
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+    Then Validar consultar otra cuenta
+    And Vaciar chat
+

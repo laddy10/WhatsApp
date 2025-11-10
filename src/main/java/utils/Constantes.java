@@ -62,7 +62,7 @@ public class Constantes {
     public static final String LINEAS_POSTPAGO = "Líneas postpago";
     public static final String LINEAS_PREPAGO = "Líneas prepago";
     public static final String NUMERO_OPCION = "Escribe el número de la opción";
-    public static final String MAS_SERVICIOS_CLARO = "Identificamos que actualmente cuentas con los siguientes servicios Claro, selecciona el número de la opción que deseas consultar:";
+    public static final String MAS_SERVICIOS_CLARO = "Identificamos que actualmente cuentas con los siguientes servicios Claro, selecciona el número de la opción que deseas consultar";
     public static final String SEGUNDO = "segundo";
     public static final String NAVEGACION = "Navegación";
     public static final String MENSAJES = "Mensajes";
@@ -173,4 +173,9 @@ public class Constantes {
     public static final String CUENTA = "cuenta";
     public static final String HAZ_CLICK_ENLACE = "Haz click en el siguiente enlace para realizar";
     public static final String DISFRUTA_TUS_APP = "Disfruta tus aplicaciones móviles favoritas y navega";
+    public static final String CAVS_CLARO = "Cavs Claro";
+    public static final String REPORTE_ROBO_PERDIDA_2 = "Reporte robo o perdida";
+    public static final String TUS_EQUIPOS_ASOCIADOS = "Tus equipos asociados";
+    public static final String TUS_PQR_RADICADOS_2 = "Tus PQR radicados";
+    public static final String ESTADO_PETICION = "Conoce el estado de tu petición";
 }

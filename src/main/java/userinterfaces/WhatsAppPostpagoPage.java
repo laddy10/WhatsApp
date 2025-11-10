@@ -13,7 +13,7 @@ public class WhatsAppPostpagoPage {
                     .located(By.xpath("//android.widget.TextView[@text=\"Menú principal\"]"));
     public static final Target LOGO_CLARO_VIDEO=
             Target.the("Logo clarovideo")
-                    .located(By.xpath("(//android.widget.Image[@text=\"clarovideo\"])[1]"));
+                    .located(By.xpath("//android.widget.Image[@content-desc=\"clarovideo\" and @text=\"landing_head_logoClarovideo\"]"));
 
     public static final Target BTN_ACCEDER_CLARO_MUSICA =
             Target.the("Boton Acceder a Claro música")

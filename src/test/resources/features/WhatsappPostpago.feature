@@ -425,3 +425,29 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Clic boton selecciona
     Then Validar direccionamiento de Paquetes y recargas
     And Vaciar chat
+
+
+  @Whatsapp_Post_28 @WhatsApp_Post
+  Scenario: Todo sobre tu plan - Modifica tu plan
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Ingresar al menu todo sobre tu plan postpago
+    Then Validar el menu modifica tu plan
+    And Vaciar chat
+
+  @Whatsapp_Post_29 @WhatsApp_Post
+  Scenario: Consultar otra cuenta
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    Then Validar consultar otra cuenta
+    And Vaciar chat

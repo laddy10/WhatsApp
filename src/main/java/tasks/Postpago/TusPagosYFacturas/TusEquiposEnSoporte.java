@@ -21,6 +21,7 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.*;
 import static utils.Constantes.*;
 import static utils.ConstantesPost.*;
+import static utils.ConstantesPost.TUS_EQUIPOS_EN_SOPORTE;
 
 public class TusEquiposEnSoporte implements Task {
 
