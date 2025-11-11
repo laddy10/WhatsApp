@@ -263,6 +263,7 @@ public class ConstantesPost {
     public static final String PASAR_LINEA_A_PREPAGO = "Pasar línea a prepago";
     public static final String DESACTIVAR_LINEA = "Desactivar línea";
     public static final String SERVICIOS_ADICIONALES = "Servicios adicionales";
+    public static final String OTRAS_OPCIONES_2 = "También tenemos otras opciones para ti";
 
 
 

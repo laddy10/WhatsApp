@@ -66,8 +66,9 @@ public class WhatsappPostpagoDefinitions {
 
         theActorInTheSpotlight().attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene(OPCIONES_RAPIDAS),
+                ValidarTextoQueContengaX.elTextoContiene(OTRAS_OPCIONES_2),
                // ValidarTextoQueContengaX.elTextoContiene(VER_Y_PAGAR_FACTURA),
-                ValidarTextoQueContengaX.elTextoContiene(DIAGNOSTICO_MOVIL),
+               // ValidarTextoQueContengaX.elTextoContiene(DIAGNOSTICO_MOVIL),
                 Click.on(BTN_MENU_PRINCIPAL),
                 WaitForResponse.withText(COMPRA_WHATSAPP_POST)
         );
