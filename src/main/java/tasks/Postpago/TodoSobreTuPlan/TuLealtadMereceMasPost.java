@@ -4,6 +4,7 @@ import hooks.ReportHooks;
 import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
+import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitForResponse;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForTextContains;
@@ -40,7 +41,8 @@ public class TuLealtadMereceMasPost implements Task {
 
 
         actor.attemptsTo(
-                Click.on(BTN_SELECCIONA_TU_LEALTAD),
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
+                //Click.on(BTN_SELECCIONA_TU_LEALTAD),
                 ValidarTextoQueContengaX.elTextoContiene(CLARO_MUSICA),
                 ValidarTextoQueContengaX.elTextoContiene(CLARO_VIDEO),
                 ValidarTextoQueContengaX.elTextoContiene(CLARO_DRIVE),
