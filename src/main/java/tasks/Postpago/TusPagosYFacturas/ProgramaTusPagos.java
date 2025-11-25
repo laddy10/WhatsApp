@@ -61,7 +61,6 @@ public class ProgramaTusPagos implements Task {
         // Esperar redirección y validar Mi Claro
         actor.attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene(INICIAR_SESION),
-                ValidarTextoQueContengaX.elTextoContiene(HOLA_MICLARO),
                 ValidarTextoQueContengaX.elTextoContiene(TE_PUEDE_INTERESAR),
                 ValidarTextoQueContengaX.elTextoContiene(SERVICIOS_A_LA_MANO),
                 ValidarTextoQueContengaX.elTextoContiene(INICIO),

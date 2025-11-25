@@ -4,6 +4,7 @@ import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.comunes.Atras;
+import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitForResponse;
 import interactions.wait.WaitFor;
 import net.serenitybdd.screenplay.Actor;
@@ -43,7 +44,8 @@ public class PaqDeVoz implements Task {
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_2);
 
         actor.attemptsTo(
-                Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
+               // Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
                 WaitForResponse.withText(PAQ_VOZ_2000_1D_PRECIO)
         );
 
