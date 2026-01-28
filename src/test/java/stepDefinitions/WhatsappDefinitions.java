@@ -57,14 +57,8 @@ public class WhatsappDefinitions {
 
     @Given("Ingresar a WhatsAPP")
     public void ingresarWhatsapp() {
-        theActorCalled(" ").attemptsTo
-                (WaitForResponse.withText(PREGUNTAR_META)
-                );
-        theActorInTheSpotlight().attemptsTo(
-                ValidarTexto.validarTexto(PREGUNTAR_META)
-        );
-        theActorInTheSpotlight().should(seeThat(
-                ValidarElemento.esVisible(LBL_WHATSAPP))
+        theActorCalled(" ").attemptsTo(
+                IngresarWhatsApp.ingresar()
         );
     }
 
@@ -236,7 +230,8 @@ public class WhatsappDefinitions {
                 Click.on(BTN_MAS_OPCIONES),
                 ClickTextoQueContengaX.elTextoContiene(MAS),
                 ClickTextoQueContengaX.elTextoContiene(VACIAR_CHAT),
-                ClickTextoQueContengaX.elTextoContiene(VACIAR_CHAT)
+                Click.on(BTN_VACIAR_CHAT)
+                //ClickTextoQueContengaX.elTextoContiene(VACIAR_CHAT)
         );
 
     }

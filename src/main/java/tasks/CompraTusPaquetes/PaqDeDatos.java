@@ -47,23 +47,23 @@ public class PaqDeDatos implements Task {
 
         actor.attemptsTo(
                 EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
-                WaitForResponse.withText(PAQ_DATOS_1500_1D_PRECIO)
+                WaitForResponse.withText(PAQ_DATOS_2000_1D_PRECIO)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_3);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_3);
 
         actor.attemptsTo(
-                ValidarTexto.validarTexto(PAQ_DATOS_1500_1D_PRECIO),
-                ValidarTexto.validarTexto(PAQ_DATOS_1500_1D_DESC),
-                ValidarTexto.validarTexto(PAQ_DATOS_2500_1D_PRECIO),
-                ValidarTexto.validarTexto(PAQ_DATOS_2500_1D_DESC),
-                ValidarTexto.validarTexto(PAQ_DATOS_4500_3D_PRECIO),
-                ValidarTexto.validarTexto(PAQ_DATOS_4500_3D_DESC),
-                ValidarTexto.validarTexto(PAQ_DATOS_5500_2H_PRECIO),
-                ValidarTexto.validarTexto(PAQ_DATOS_5500_2H_DESC),
-                ValidarTexto.validarTexto(PAQ_DATOS_7500_7D_PRECIO),
-                ValidarTexto.validarTexto(PAQ_DATOS_7500_7D_DESC)
+                ValidarTexto.validarTexto(PAQ_DATOS_2000_1D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_DATOS_2000_1D_DESC),
+                ValidarTexto.validarTexto(PAQ_DATOS_3000_1D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_DATOS_3000_1D_DESC),
+                ValidarTexto.validarTexto(PAQ_DATOS_5000_3D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_DATOS_5000_3D_DESC),
+                ValidarTexto.validarTexto(PAQ_DATOS_6000_2H_PRECIO),
+                ValidarTexto.validarTexto(PAQ_DATOS_6000_2H_DESC),
+                ValidarTexto.validarTexto(PAQ_DATOS_8000_7D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_DATOS_8000_7D_DESC)
         );
 
         actor.attemptsTo(

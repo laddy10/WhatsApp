@@ -4,6 +4,7 @@ import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.comunes.Atras;
+import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitForResponse;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForTextContains;
@@ -44,20 +45,21 @@ public class PaqComunidadSorda implements Task {
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_2);
 
         actor.attemptsTo(
-                Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
-                WaitForResponse.withText(PAQ_CS_7500_7D_PRECIO)
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
+                //Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
+                WaitForResponse.withText(PAQ_CS_8000_7D_PRECIO)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_3);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_3);
 
         actor.attemptsTo(
-                ValidarTexto.validarTexto(PAQ_CS_7500_7D_PRECIO),
-                ValidarTexto.validarTexto(PAQ_CS_7500_7D_DESC),
-                ValidarTexto.validarTexto(PAQ_CS_15500_15D_PRECIO),
-                ValidarTexto.validarTexto(PAQ_CS_15500_15D_DESC),
-                ValidarTexto.validarTexto(PAQ_CS_30500_30D_PRECIO),
-                ValidarTexto.validarTexto(PAQ_CS_30500_30D_DESC)
+                ValidarTexto.validarTexto(PAQ_CS_8000_7D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_CS_8000_7D_DESC),
+                ValidarTexto.validarTexto(PAQ_CS_16500_15D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_CS_16500_15D_DESC),
+                ValidarTexto.validarTexto(PAQ_CS_31500_30D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_CS_31500_30D_DESC)
         );
 
         actor.attemptsTo(

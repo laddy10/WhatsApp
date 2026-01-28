@@ -230,6 +230,11 @@ public class WhatsAppPage extends PageObject {
     public static final Target BTN_SELECCIONA_ALL = Target.the("Botones Selecciona")
             .located(MobileBy.id("com.whatsapp:id/button_content"));
 
+    public static final Target TXT_COPIA_SEGURIDAD = Target.the("Botones Selecciona")
+            .located(MobileBy.xpath("//*[@text='Copia de seguridad cifrada de extremo a extremo']"));
+
+    public static final Target BTN_VACIAR_CHAT = Target.the("Botones Selecciona")
+            .located(MobileBy.id("com.whatsapp:id/primary_button"));
     public class AppConstants {
         public static final String WHATSAPP_PACKAGE = "com.whatsapp";
     }

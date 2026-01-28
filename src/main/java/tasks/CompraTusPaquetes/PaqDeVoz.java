@@ -44,21 +44,20 @@ public class PaqDeVoz implements Task {
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_2);
 
         actor.attemptsTo(
-                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20)
                // Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
-                WaitForResponse.withText(PAQ_VOZ_2000_1D_PRECIO)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_3);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_3);
 
         actor.attemptsTo(
-                ValidarTexto.validarTexto(PAQ_VOZ_2000_1D_PRECIO),
-                ValidarTexto.validarTexto(PAQ_VOZ_2000_1D_DESC),
-                ValidarTexto.validarTexto(PAQ_VOZ_2500_2D_PRECIO),
-                ValidarTexto.validarTexto(PAQ_VOZ_2500_2D_DESC),
-                ValidarTexto.validarTexto(PAQ_VOZ_16500_20D_PRECIO),
-                ValidarTexto.validarTexto(PAQ_VOZ_16500_20D_DESC)
+                ValidarTexto.validarTexto(PAQ_VOZ_2500_1D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_VOZ_2500_1D_DESC),
+                ValidarTexto.validarTexto(PAQ_VOZ_3000_2D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_VOZ_3000_2D_DESC),
+                ValidarTexto.validarTexto(PAQ_VOZ_17500_20D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_VOZ_17500_20D_DESC)
         );
 
         actor.attemptsTo(

@@ -16,7 +16,7 @@ import java.util.List;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.*;
-import static utils.Constantes.ABANDONAR_CONVERSACION;
+import static utils.Constantes.*;
 
 public class ValidarTextoErrorYLimpiarChat implements Task {
 
@@ -29,7 +29,8 @@ public class ValidarTextoErrorYLimpiarChat implements Task {
                 "¡Lo siento! No entendí lo que escribiste",
                 "No entendí tu mensaje.",
                 "Menú principal",
-                "Para continuar debes seleccionar alguna de las opciones mostradas anteriormente"
+                "Para continuar debes seleccionar alguna de las opciones mostradas anteriormente",
+                "Lo siento, tu respuesta no es válida"
 
         );
 
@@ -38,13 +39,15 @@ public class ValidarTextoErrorYLimpiarChat implements Task {
 
         if (textoErrorDetectado) {
             actor.attemptsTo(
-                    Enter.theValue(Constantes.SALIR).into(TXT_ENVIAR_MENSAJE),
-                    Click.on(BTN_ENVIAR),
-                    WaitForResponse.withText(ABANDONAR_CONVERSACION),
+                    SalirConversacion.salir(),
+                   // Enter.theValue(Constantes.SALIR).into(TXT_ENVIAR_MENSAJE),
+                   // Click.on(BTN_ENVIAR),
+                   // WaitForResponse.withText(ABANDONAR_CONVERSACION),
                     Click.on(BTN_MAS_OPCIONES),
-                    ClickTextoQueContengaX.elTextoContiene("Más"),
-                    ClickTextoQueContengaX.elTextoContiene("Vaciar chat"),
-                    ClickTextoQueContengaX.elTextoContiene("Vaciar chat"),
+                    ClickTextoQueContengaX.elTextoContiene(MAS),
+                    ClickTextoQueContengaX.elTextoContiene(VACIAR_CHAT),
+                    Click.on(BTN_VACIAR_CHAT),
+                   // ClickTextoQueContengaX.elTextoContiene("Vaciar chat"),
                     Enter.theValue(user.getSaludo()).into(TXT_ENVIAR_MENSAJE),
                     Click.on(BTN_ENVIAR)
             );

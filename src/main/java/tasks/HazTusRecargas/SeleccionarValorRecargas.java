@@ -5,6 +5,7 @@ import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
+import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitForResponse;
 import models.User;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -87,7 +88,8 @@ public class SeleccionarValorRecargas implements Task {
                     ReportHooks.registrarPaso("Validar mensaje que contenga el botón Selecciona");
 
                     actor.attemptsTo(
-                            Click.on(BTN_SELECCIONA2));
+                            EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20)
+                    );
 
 
                 } else {

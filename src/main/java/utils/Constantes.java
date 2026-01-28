@@ -178,4 +178,6 @@ public class Constantes {
     public static final String TUS_EQUIPOS_ASOCIADOS = "Tus equipos asociados";
     public static final String TUS_PQR_RADICADOS_2 = "Tus PQR radicados";
     public static final String ESTADO_PETICION = "Conoce el estado de tu petición";
+    public static final String AHORA_NO = "Ahora no";
+    public static final String TU_RESPUESTA_NO_ES_VALIDA = "Lo siento, tu respuesta no es válida";
 }

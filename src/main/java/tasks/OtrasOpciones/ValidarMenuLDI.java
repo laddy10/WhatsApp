@@ -3,6 +3,7 @@ package tasks.OtrasOpciones;
 import hooks.ReportHooks;
 import interactions.Click.ClickElementByText;
 import interactions.comunes.Atras;
+import interactions.wait.EsperarYClickMenuAnterior;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
@@ -29,7 +30,8 @@ public class ValidarMenuLDI implements Task {
         ReportHooks.registrarPaso("descripcion y marcacion");
 
         actor.attemptsTo(
-                Click.on(LBL_MENU_ANTERIOR),
+                EsperarYClickMenuAnterior.conTimeout(20),
+               // Click.on(LBL_MENU_ANTERIOR),
                 WaitForResponse.withText(MENSAJE_LDI)
         );
         CapturaDePantallaMovil.tomarCapturaPantalla("menu opciones");
@@ -44,7 +46,8 @@ public class ValidarMenuLDI implements Task {
         ReportHooks.registrarPaso("consulta de consumos");
 
         actor.attemptsTo(
-                Click.on(LBL_MENU_ANTERIOR2),
+                EsperarYClickMenuAnterior.conTimeout(20),
+                //Click.on(LBL_MENU_ANTERIOR2), ojo Mantenimiento aqui
                 WaitForResponse.withText(MENSAJE_LDI)
         );
 
