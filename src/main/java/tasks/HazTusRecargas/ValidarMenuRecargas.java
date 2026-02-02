@@ -6,7 +6,9 @@ import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
+import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitForResponse;
+import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -59,12 +61,12 @@ public class ValidarMenuRecargas implements Task {
 
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitForResponse.withText(SELECCIONA)
+                WaitForTextContains.withAnyTextContains(RECARGATE)
         );
 
 
         actor.attemptsTo(
-                Click.on(BTN_SELECCIONA_RECARGAS)
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20)
         );
 
         // Validar valores adicionales de recarga

@@ -10,6 +10,7 @@ import hooks.ReportHooks;
 import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
+import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import models.User;
@@ -293,7 +294,7 @@ public class WhatsappDefinitions {
         ReportHooks.registrarPaso(MENSAJE_CAPTURA);
 
         theActorInTheSpotlight().attemptsTo(
-                ClickTextoQueContengaX.elTextoContiene(SELECCIONA)
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20)
         );
     }
 

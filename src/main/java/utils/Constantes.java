@@ -180,4 +180,8 @@ public class Constantes {
     public static final String ESTADO_PETICION = "Conoce el estado de tu petición";
     public static final String AHORA_NO = "Ahora no";
     public static final String TU_RESPUESTA_NO_ES_VALIDA = "Lo siento, tu respuesta no es válida";
+    public static final String RECARGATE = "Recárgate y envía saldo a los que más quieres, para que siempre estés conectado";
+    public static final String PETICIONES_QUEJAS_RECURSOS = "Peticiones, Quejas y Recursos";
+    public static final String OFICINA_VIRTUAL = "Bienvenido a tu Oficina Virtual";
+
 }

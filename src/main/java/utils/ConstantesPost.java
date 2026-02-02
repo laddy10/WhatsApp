@@ -264,7 +264,8 @@ public class ConstantesPost {
     public static final String DESACTIVAR_LINEA = "Desactivar línea";
     public static final String SERVICIOS_ADICIONALES = "Servicios adicionales";
     public static final String OTRAS_OPCIONES_2 = "También tenemos otras opciones para ti";
-
+    public static final String PAGO_FACTURA_PENDIENTE = "Es posible que tu servicio presente intermitencia o lentitud";
+    public static final String TIPO_SOLICITUD = "Tipo solicitud";
 
 
 }

@@ -13,7 +13,7 @@ import java.io.IOException;
         features = "src/test/resources/features",
         glue = {"stepDefinitions", "utils", "hooks"},
         snippets = SnippetType.CAMELCASE,
-        tags = "@Whatsapp_26"
+        tags = "@Whatsapp_Post_22"
 
 )
 

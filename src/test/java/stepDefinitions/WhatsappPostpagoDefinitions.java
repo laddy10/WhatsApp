@@ -367,7 +367,7 @@ public class WhatsappPostpagoDefinitions {
 
         theActorInTheSpotlight().attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitForTextContains.withTextContains(SERVICIOS)
+                WaitForTextContains.withAnyTextContains(SERVICIOS, PAGO_FACTURA_PENDIENTE)
         );
 
     }
@@ -379,6 +379,7 @@ public class WhatsappPostpagoDefinitions {
         ReportHooks.registrarPaso("Seleccionar 'No tengo servicio'");
 
         theActorInTheSpotlight().attemptsTo(
+                ClickTextoQueContengaX.elTextoContiene(NO_TENGO_SERVICIO),
                 EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
                 ValidarTextoQueContengaX.elTextoContiene(DATOS_FALLAS),
                 ValidarTextoQueContengaX.elTextoContiene(LLAMADAS_FALLAS),

@@ -187,4 +187,8 @@ public class WhatsAppPostpagoPage {
             Target.the("Texto Portal de PAGOS Y RECARGAS")
                     .located(By.xpath("//*[@text='Portal de PAGOS Y RECARGAS']"));
 
+    public static final Target LBL_SESION_CERRADA_POR_SEGURIDAD =
+            Target.the("Texto Tu sesión se ha cerrado por seguridad")
+                    .located(By.xpath("//*[@text='Por seguridad, hemos cerrado tu sesión en Mi Claro. Ingresa de nuevo para administrar tus servicios']"));
+
 }

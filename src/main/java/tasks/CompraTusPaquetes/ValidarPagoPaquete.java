@@ -115,7 +115,7 @@ public class ValidarPagoPaquete implements Task {
 
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitForTextContains.withTextContains(MENU_PRINCIPAL)
+                WaitForTextContains.withAnyTextContains(MENU_PRINCIPAL,SMS_NEQUI)
         );
 
 

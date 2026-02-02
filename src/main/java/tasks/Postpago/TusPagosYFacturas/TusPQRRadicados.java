@@ -61,9 +61,9 @@ public class TusPQRRadicados implements Task {
 
 
         actor.attemptsTo(
-                WaitForTextContains.withTextContains(PERSONAS),
-                ValidarTexto.validarTexto(PERSONAS),
-                ValidarTexto.validarTexto(CLARO_TE_ESCUCHA)
+                WaitForTextContains.withTextContains(PETICIONES_QUEJAS_RECURSOS),
+                ValidarTexto.validarTexto(OFICINA_VIRTUAL),
+                ValidarTexto.validarTexto(TIPO_SOLICITUD)
         );
 
 

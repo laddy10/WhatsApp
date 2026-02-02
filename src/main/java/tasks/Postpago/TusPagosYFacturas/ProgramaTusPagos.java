@@ -59,6 +59,14 @@ public class ProgramaTusPagos implements Task {
         clickSiExiste(actor, TXT_AUTORIZACION_VELOCIDAD, ACEPTAR_2);
 
         // Esperar redirección y validar Mi Claro
+
+        if (isVisible(actor, LBL_SESION_CERRADA_POR_SEGURIDAD)) {
+            actor.attemptsTo(
+                    ClickTextoQueContengaX.elTextoContiene(INICIAR_SESION)
+            );
+
+        }
+
         actor.attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene(INICIAR_SESION),
                 ValidarTextoQueContengaX.elTextoContiene(TE_PUEDE_INTERESAR),
