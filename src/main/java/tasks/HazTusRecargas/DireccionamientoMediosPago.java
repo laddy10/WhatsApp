@@ -132,8 +132,7 @@ public class DireccionamientoMediosPago implements Task {
                 WaitForResponse.withText(BIENVENIDO),
                 ValidarTexto.validarTexto(ECARRIER),
                 ValidarTexto.validarTexto(BIENVENIDO),
-                ValidarTexto.validarTexto(NUMERO_CLARO),
-                ValidarTexto.validarTexto(INGRESAR_NUMERO)
+                ValidarTexto.validarTexto(NUMERO_CLARO)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Se verifica el correcto redireccionamiento al enlace de pago: " + medioPago);

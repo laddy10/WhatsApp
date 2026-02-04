@@ -71,7 +71,7 @@ public class ProgramaTusPagos implements Task {
                 ValidarTextoQueContengaX.elTextoContiene(INICIAR_SESION),
                 ValidarTextoQueContengaX.elTextoContiene(TE_PUEDE_INTERESAR),
                 ValidarTextoQueContengaX.elTextoContiene(SERVICIOS_A_LA_MANO),
-                ValidarTextoQueContengaX.elTextoContiene(INICIO),
+                ValidarTextoQueContengaX.elTextoContiene(MUNDO_CLARO),
                 ValidarTextoQueContengaX.elTextoContiene(TIENDA),
                 ValidarTextoQueContengaX.elTextoContiene(CLARO_EMPRESAS)
         );

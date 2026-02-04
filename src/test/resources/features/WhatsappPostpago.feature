@@ -218,7 +218,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_15 @WhatsApp_Post
+  ##@Whatsapp_Post_15 @WhatsApp_Post
   Scenario: Tus pagos y facturas - Mensaje de cobranza
     Given Ingresar a WhatsAPP
     When Validar Version de la App

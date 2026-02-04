@@ -106,7 +106,7 @@ public class Constantes {
     public static final String INGRESAR_OPCION_VALIDA = "¡Lo siento! No entendí lo que escribiste";
     public static final String NO_ENTENDI_TU_MENSAJE = "No entendí tu mensaje.";
     public static final String BIENVENIDO = "Bienvenido";
-    public static final String ECARRIER = "https://ecarrier.claro.com.co/MiClaro/login/sendsms";
+    public static final String ECARRIER = "compras.claro.com.co/MiClaro/login/sendsms";
     public static final String NUMERO_CLARO = "Número Claro:";
     public static final String INGRESAR_NUMERO = "Ingresa tu número Claro de 10 dígitos y pulsa \"Continuar\"";
     public static final String MAS = "Más";

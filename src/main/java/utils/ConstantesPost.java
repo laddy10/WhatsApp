@@ -267,6 +267,6 @@ public class ConstantesPost {
     public static final String PAGO_FACTURA_PENDIENTE = "Es posible que tu servicio presente intermitencia o lentitud";
     public static final String TIPO_SOLICITUD = "Tipo solicitud";
 
-
+    public static final String MUNDO_CLARO = "Mundo Claro";
 }
 
