@@ -27,6 +27,8 @@ public class MenuPrincipal implements Task {
     private static final String MENSAJE_CAPTURA_2 = "Seleccionando botón 'Ver menú prepago";
     private static final String MENSAJE_CAPTURA_3 = "Usuario con paquetes activos validado";
     private static final String MENSAJE_CAPTURA_4 = "Usuario sin paquetes activos - saldo validado";
+    private static final String MENSAJE_CAPTURA_5 = "Detectado mensaje 'Conoce las opciones' - Ingresando a Menú principal";
+
 
 
     @Override
@@ -72,6 +74,7 @@ public class MenuPrincipal implements Task {
 
     private void validarEstadoUsuario(Actor actor) {
         List<WebElementFacade> lblPaqueteActivo = LBL_PAQUETE_ACTIVO.resolveAllFor(actor);
+        List<WebElementFacade> mensajeOpciones = LBL_CONOCE_OPCIONES.resolveAllFor(actor);
 
         if (!lblPaqueteActivo.isEmpty()) {
             // Usuario tiene paquetes activos
@@ -81,6 +84,16 @@ public class MenuPrincipal implements Task {
             );
             CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_3);
             ReportHooks.registrarPaso(MENSAJE_CAPTURA_3);
+
+        } else if (!mensajeOpciones.isEmpty()) {
+
+            actor.attemptsTo(
+                    WaitForResponse.withAnyText(MENU_PRINCIPAL)
+            );
+
+            CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_5);
+            ReportHooks.registrarPaso(MENSAJE_CAPTURA_5);
+
         } else {
             // Usuario sin paquetes activos - validar saldo
             actor.attemptsTo(

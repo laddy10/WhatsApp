@@ -7,6 +7,7 @@ import interactions.scroll.ScrollInicio;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import interactions.wait.WaitForTextContains;
+import models.EstadoConversacion;
 import models.User;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
@@ -15,6 +16,7 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import utils.CapturaDePantallaMovil;
+import utils.ClasificarRespuestaBot;
 import utils.TestDataProvider;
 
 import java.util.List;
@@ -38,78 +40,59 @@ public class IniciarChatClaro implements Task {
             intentos++;
 
             try {
-                // Enviar saludo inicial
+                // 1️⃣ Enviar saludo (OBLIGATORIO)
                 actor.attemptsTo(
                         Enter.theValue(user.getSaludo()).into(TXT_ENVIAR_MENSAJE),
                         Click.on(BTN_ENVIAR),
-                        WaitFor.aTime(3000) // Esperar respuesta del sistema
+                        WaitFor.aTime(3000)
                 );
 
-                // Verificar si aparece el mensaje de actualización del sistema
-                List<WebElementFacade> mensajeActualizacion = LBL_MENSAJE_ACTUALIZACION.resolveAllFor(actor);
+                // 2️⃣ Clasificar respuesta del bot
+                EstadoConversacion estado = ClasificarRespuestaBot.obtenerEstado(actor);
 
-                if (!mensajeActualizacion.isEmpty()) {
-                    CapturaDePantallaMovil.tomarCapturaPantalla("Mensaje de actualización del sistema detectado - Intento " + intentos);
-                    ReportHooks.registrarPaso("Sistema detectó mensaje de actualización - Haciendo clic en 'No' - Intento " + intentos);
+                switch (estado) {
 
-                    // Hacer clic en "No"
-                    actor.attemptsTo(
-                            Click.on(BTN_NO_ACTUALIZACION),
-                            WaitFor.aTime(2000)
-                    );
-
-                    // Si no es el último intento, continuar el bucle para reintentar
-                    if (intentos < MAX_REINTENTOS) {
-                        CapturaDePantallaMovil.tomarCapturaPantalla("Reintentando envío de saludo después de rechazar actualización");
-                        ReportHooks.registrarPaso("Reintentando envío de saludo - Intento " + intentos);
+                    case PANTALLA_INICIAL:
+                        actor.attemptsTo(SalirYReiniciarChat.ejecutar());
                         continue;
-                    }
-                } else {
-                    // No hay mensaje de actualización, proceder normalmente
-                    actor.attemptsTo(
-                            WaitForTextContains.withAnyTextContains(
-                                    SALUDO, SALUDO_PARA_AYUDARTE, INGRESAR_NUMERO_OPCION, INGRESAR_OPCION_VALIDA, NO_ENTENDI_TU_MENSAJE, MENU_PRINCIPAL, OPCIONES_MOSTRADAS_ANTERIORMENTE,TU_RESPUESTA_NO_ES_VALIDA),
-                            ValidarTextoErrorYLimpiarChat.validarYLimpiar(),
-                            WaitForTextContains.withAnyTextContains(SALUDO, SALUDO_PARA_AYUDARTE),
-                            ScrollInicio.scrollUnaVista()
-                    );
 
-                    CapturaDePantallaMovil.tomarCapturaPantalla("Iniciar el chat con Claro Colombia");
-                    ReportHooks.registrarPaso("Iniciar el chat con Claro Colombia");
+                    case ERROR:
+                        actor.attemptsTo(ValidarTextoErrorYLimpiarChat.validarYLimpiar());
+                        continue;
 
-                    actor.attemptsTo(
-                            //ValidarTextoQueContengaX.elTextoContiene(SALUDO),
-                            //ValidarTextoQueContengaX.elTextoContiene(GESTIONAR),
-                            ValidarTextoQueContengaX.elTextoContiene(LINEAS_POSTPAGO),
-                            ValidarTextoQueContengaX.elTextoContiene(LINEAS_PREPAGO),
-                            ValidarTextoQueContengaX.elTextoContiene(CUENTA),
-                            Scroll.scrollUnaVista()
-                    );
-
-                    CapturaDePantallaMovil.tomarCapturaPantalla("Validar saludo");
-                    ReportHooks.registrarPaso("Validar saludo");
-
-                    chatIniciadoCorrectamente = true;
+                    case FLUJO_NORMAL:
+                        break;
                 }
+
+                // 3️⃣ Flujo normal
+                actor.attemptsTo(
+                        WaitForTextContains.withAnyTextContains(
+                                SALUDO, SALUDO_PARA_AYUDARTE, LINEAS_POSTPAGO, LINEAS_PREPAGO),
+                        ScrollInicio.scrollUnaVista()
+                );
+
+                CapturaDePantallaMovil.tomarCapturaPantalla("Chat iniciado correctamente");
+                ReportHooks.registrarPaso("Chat iniciado correctamente");
+
+                actor.attemptsTo(
+                        ValidarTextoQueContengaX.elTextoContiene(LINEAS_POSTPAGO),
+                        ValidarTextoQueContengaX.elTextoContiene(LINEAS_PREPAGO),
+                        ValidarTextoQueContengaX.elTextoContiene(CUENTA)
+                );
+
+                chatIniciadoCorrectamente = true;
 
             } catch (Exception e) {
                 if (intentos == MAX_REINTENTOS) {
-                    CapturaDePantallaMovil.tomarCapturaPantalla("Error al iniciar chat después de " + MAX_REINTENTOS + " intentos");
-                    ReportHooks.registrarPaso("ERROR: Falló el inicio del chat después de " + MAX_REINTENTOS + " intentos");
-                    throw new RuntimeException("No se pudo iniciar el chat correctamente después de " + MAX_REINTENTOS + " intentos. Error: " + e.getMessage());
+                    throw new RuntimeException(
+                            "No se pudo iniciar el chat correctamente después de "
+                                    + MAX_REINTENTOS + " intentos", e);
                 }
 
-                CapturaDePantallaMovil.tomarCapturaPantalla("Error en intento " + intentos + " - Reintentando");
-                ReportHooks.registrarPaso("Error en intento " + intentos + " - Reintentando: " + e.getMessage());
-
-                // Esperar antes del siguiente intento
                 actor.attemptsTo(WaitFor.aTime(2000));
             }
         }
 
-        if (!chatIniciadoCorrectamente) {
-            throw new RuntimeException("No se pudo iniciar el chat correctamente después de " + MAX_REINTENTOS + " intentos");
-        }
     }
 
     public static Performable iniciarChatClaro() {

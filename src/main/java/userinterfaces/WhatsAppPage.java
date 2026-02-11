@@ -235,6 +235,11 @@ public class WhatsAppPage extends PageObject {
 
     public static final Target BTN_VACIAR_CHAT = Target.the("Botones Selecciona")
             .located(MobileBy.id("com.whatsapp:id/primary_button"));
+
+    public static final Target LBL_CONOCE_OPCIONES =
+            Target.the("Mensaje Conoce las opciones")
+                    .locatedBy("//*[contains(@text,'Conoce las opciones')]");
+
     public class AppConstants {
         public static final String WHATSAPP_PACKAGE = "com.whatsapp";
     }
