@@ -240,6 +240,10 @@ public class WhatsAppPage extends PageObject {
             Target.the("Mensaje Conoce las opciones")
                     .locatedBy("//*[contains(@text,'Conoce las opciones')]");
 
+    public static final Target TXT_BIENVENIDA_WHATSAPP =
+            Target.the("Texto Te damos la bienvenida a WhatsApp")
+                    .locatedBy("//*[contains(@text,'Te damos la bienvenida a WhatsApp')]");
+
     public class AppConstants {
         public static final String WHATSAPP_PACKAGE = "com.whatsapp";
     }

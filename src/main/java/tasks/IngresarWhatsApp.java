@@ -25,6 +25,12 @@ public class IngresarWhatsApp implements Task {
             );
         }
 
+        if (!Presence.of(TXT_BIENVENIDA_WHATSAPP).viewedBy(actor).resolveAll().isEmpty()) {
+            actor.attemptsTo(
+                    ClickTextoQueContengaX.elTextoContiene(ACEPTAR_Y_CONTINUAR_WH)
+            );
+        }
+
         actor.attemptsTo(
                 WaitForResponse.withText(PREGUNTAR_META)
                 );

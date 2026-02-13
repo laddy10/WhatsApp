@@ -183,5 +183,6 @@ public class Constantes {
     public static final String RECARGATE = "Recárgate y envía saldo a los que más quieres, para que siempre estés conectado";
     public static final String PETICIONES_QUEJAS_RECURSOS = "Peticiones, Quejas y Recursos";
     public static final String OFICINA_VIRTUAL = "Bienvenido a tu Oficina Virtual";
+    public static final String ACEPTAR_Y_CONTINUAR_WH = "Aceptar y continuar";
 
 }
