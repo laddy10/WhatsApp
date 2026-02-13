@@ -1,6 +1,6 @@
 Feature: Validar los flujos de WhatsApp en prepago
 
-  @Whatsapp_01 @PREPAGO
+  @Whatsapp_01 
   Scenario: Validar menú principal
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -14,7 +14,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_02 @PREPAGO
+  @Whatsapp_02 
   Scenario: Consultar el saldo de la linea
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -29,7 +29,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_03 @PREPAGO
+  @Whatsapp_03 
   Scenario: Consultar los consumos
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -44,7 +44,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_04  @Whatsapp_PRE
+  @Whatsapp_04
   Scenario: Conoce - Mejora tu plan
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -59,7 +59,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_05  @Whatsapp_PRE
+  @Whatsapp_05
   Scenario: Consultar otra linea
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -74,7 +74,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_06  @Whatsapp_PRE
+  @Whatsapp_06
   Scenario: Tu lealtad merece mas - Claro musica
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -90,7 +90,7 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Vaciar chat
 
 
-  @Whatsapp_08  @Whatsapp_PRE
+  @Whatsapp_08
   Scenario: Tu lealtad merece mas - Claro Drive
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -107,7 +107,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_10  @Whatsapp_PRE
+  @Whatsapp_10
   Scenario: Haz tus recargas
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -126,7 +126,7 @@ Feature: Validar los flujos de WhatsApp en prepago
   ############################################################################################
 
 
-  @Whatsapp_11  @Whatsapp_PRE
+  @Whatsapp_11
   Scenario: Otras opciones - cambiate a postpago
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -140,7 +140,7 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Vaciar chat
 
 
-  @Whatsapp_13  @Whatsapp_PRE
+  @Whatsapp_13
   Scenario: Otras opciones - cambiate a postpago
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -154,7 +154,7 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Vaciar chat
 
 
-  @Whatsapp_14  @Whatsapp_PRE
+  @Whatsapp_14
   Scenario: Otras opciones - cambiate a postpago
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -170,7 +170,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_16  @Whatsapp_PRE
+  @Whatsapp_16
   Scenario: Otras opciones - cambiate a postpago
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -185,7 +185,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_17  @Whatsapp_PRE
+  @Whatsapp_17
   Scenario: Validar menu Compra por WhatsApp
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -200,7 +200,7 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Vaciar chat
 
 
-  @Whatsapp_18  @Whatsapp_PRE
+  @Whatsapp_18
   Scenario: Validar menu compra tus paquetes - todo incluido
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -215,7 +215,7 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Vaciar chat
 
 
-  @Whatsapp_19  @Whatsapp_PRE
+  @Whatsapp_19
   Scenario: Validar menu compra tus paquetes - de voz
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -231,7 +231,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_20  @Whatsapp_PRE
+  @Whatsapp_20
   Scenario: Validar menu compra tus paquetes - de datos
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -248,7 +248,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
- # @Whatsapp_21  @Whatsapp_PRE
+ # @Whatsapp_21
   Scenario: Validar menu compra tus paquetes - de apps
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -264,7 +264,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_22  @Whatsapp_PRE
+  @Whatsapp_22
   Scenario: Validar menu compra tus paquetes - internacionales
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -280,7 +280,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_23  @Whatsapp_PRE
+  @Whatsapp_23
   Scenario: Validar menu compra tus paquetes - comunidad sorda
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -296,7 +296,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_24  @Whatsapp_PRE
+  @Whatsapp_24
   Scenario: Validar menu compra tus paquetes - regala un paquete
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -311,7 +311,7 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Vaciar chat
 
 
-  @Whatsapp_25  @Whatsapp_PRE
+  @Whatsapp_25
   Scenario: Validar flujo completo de compra de paquete
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -327,7 +327,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_26  @Whatsapp_PRE
+  @Whatsapp_26
   Scenario: Haz tus recargas - Validar menu de recargas
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -342,7 +342,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_27  @Whatsapp_PRE
+  @Whatsapp_27
   Scenario: Tus equipos - Tus equipos en soporte
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -357,7 +357,7 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Vaciar chat
 
 
-  @Whatsapp_28  @Whatsapp_PRE
+  @Whatsapp_28
   Scenario: Validar el menu principal de Tus equipos
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -371,7 +371,7 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Vaciar chat
 
 
-  @Whatsapp_29  @Whatsapp_PRE
+  @Whatsapp_29
   Scenario: Otras opciones - Tus PQRS radicados
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -385,7 +385,7 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Vaciar chat
 
 
-  @Whatsapp_30  @Whatsapp_PRE
+  @Whatsapp_30
   Scenario: Consultar otra cuenta
     Given Ingresar a WhatsAPP
     When Validar Version de la App

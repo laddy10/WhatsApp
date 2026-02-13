@@ -1,6 +1,6 @@
 Feature: Validar los flujos de WhatsApp para líneas Postpago
 
-  @Whatsapp_Post_01 @WhatsApp_Post
+  @Whatsapp_Post_01
   Scenario: Validar menú principal postpago
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -14,7 +14,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
 
 
 
-  @Whatsapp_Post_02 @WhatsApp_Post
+  @Whatsapp_Post_02
   Scenario: Todo sobre tu plan - Consulta tus consumos
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -28,7 +28,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_03 @WhatsApp_Post
+  @Whatsapp_Post_03
   Scenario: Todo sobre tu plan - Conoce o mejora tu plan
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -43,7 +43,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
 
 
 
-  @Whatsapp_Post_04 @WhatsApp_Post
+  @Whatsapp_Post_04
   Scenario: Todo sobre tu plan - tu lealtad merece mas - Claro Musica
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -59,7 +59,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_05 @WhatsApp_Post
+  @Whatsapp_Post_05
   Scenario: Todo sobre tu plan - tu lealtad merece mas - Claro Video
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -75,7 +75,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_06 @WhatsApp_Post
+  @Whatsapp_Post_06
   Scenario: Todo sobre tu plan - tu lealtad merece mas - Claro Drive
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -92,7 +92,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
 
 
 
-  @Whatsapp_Post_07 @WhatsApp_Post
+  @Whatsapp_Post_07
   Scenario: Todo sobre tu plan - tu lealtad merece mas - Claro Club
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -108,7 +108,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_08 @WhatsApp_Post
+  @Whatsapp_Post_08
   Scenario: Todo sobre tu plan - tu lealtad merece mas - Aniversario Claro
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -125,7 +125,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
 
 
 
-  @Whatsapp_Post_09 @WhatsApp_Post
+  @Whatsapp_Post_09
   Scenario: Todo sobre tu plan - tu lealtad merece mas - sorpresa de cumpleaños
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -141,7 +141,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_10 @WhatsApp_Post
+  @Whatsapp_Post_10
   Scenario: Validar menu Compra por WhatsApp postpago
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -157,7 +157,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
 
 
 
-  #@Whatsapp_Post_11 @WhatsApp_Post_PENDIENTE
+  #@Whatsapp_Post_11_PENDIENTE
   Scenario: Tus pagos y facturas - validar portal de pagos y transacción
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -169,7 +169,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Ingresar a tus pagos y facturas
 
 
-  ##@Whatsapp_Post_12 @WhatsApp_Post
+  ##@Whatsapp_Post_12
   Scenario: Tus pagos y facturas - Tu factura
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -186,7 +186,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_13 @WhatsApp_Post
+  @Whatsapp_Post_13
   Scenario: Tus pagos y facturas - Otras facturas Claro
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -201,7 +201,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  ##@Whatsapp_Post_14 @WhatsApp_Post
+  ##@Whatsapp_Post_14
   Scenario: Tus pagos y facturas - Tu historial
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -218,7 +218,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  ##@Whatsapp_Post_15 @WhatsApp_Post
+  ##@Whatsapp_Post_15
   Scenario: Tus pagos y facturas - Mensaje de cobranza
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -234,7 +234,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_16 @WhatsApp_Post
+  @Whatsapp_Post_16
   Scenario: Tus pagos y facturas - Productos financiados
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -249,7 +249,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_17 @WhatsApp_Post
+  @Whatsapp_Post_17
   Scenario: Tus pagos y facturas - Programa tus pagos
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -264,7 +264,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Validar direccionamiento Programar pagos
     And Vaciar chat
 
-  @Whatsapp_Post_18 @WhatsApp_Post
+  @Whatsapp_Post_18
   Scenario: Soporte y servicio - Estado servicios - Fallas en tu navegacion Datos
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -281,7 +281,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_19 @WhatsApp_Post
+  @Whatsapp_Post_19
   Scenario: Soporte y servicio - Estado servicios - Fallas llamadas
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -299,7 +299,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
 
 
 
-  @Whatsapp_Post_20 @WhatsApp_Post
+  @Whatsapp_Post_20
   Scenario: Soporte y servicio - Estado servicios - Fallas Otros servicios
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -316,7 +316,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_21 @WhatsApp_Post
+  @Whatsapp_Post_21
   Scenario: Soporte y servicio - Reporte robo o perdida
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -332,7 +332,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
 
 
 
-  @Whatsapp_Post_22 @WhatsApp_Post
+  @Whatsapp_Post_22
   Scenario: Soporte y servicio - Tus PQR Radicados
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -347,7 +347,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_23 @WhatsApp_Post
+  @Whatsapp_Post_23
   Scenario: Soporte y servicio - Tus equipos en soporte
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -362,7 +362,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  ##@Whatsapp_Post_24 @WhatsApp_Post
+  ##@Whatsapp_Post_24
   Scenario: Otras opciones - Registra tu equipo
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -379,7 +379,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_25 @WhatsApp_Post
+  @Whatsapp_Post_25
   Scenario: Otras opciones - Roaming Internacional - Comprar Roaming
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -395,7 +395,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_26 @WhatsApp_Post
+  @Whatsapp_Post_26
   Scenario: Otras opciones - Roaming Internacional - Administar Roaming
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -412,7 +412,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_27 @WhatsApp_Post
+  @Whatsapp_Post_27
   Scenario: Otras opciones - Paquetes y recargas
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -427,7 +427,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
-  @Whatsapp_Post_28 @WhatsApp_Post
+  @Whatsapp_Post_28
   Scenario: Todo sobre tu plan - Modifica tu plan
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -440,7 +440,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     Then Validar el menu modifica tu plan
     And Vaciar chat
 
-  @Whatsapp_Post_29 @WhatsApp_Post
+  @Whatsapp_Post_29
   Scenario: Consultar otra cuenta
     Given Ingresar a WhatsAPP
     When Validar Version de la App

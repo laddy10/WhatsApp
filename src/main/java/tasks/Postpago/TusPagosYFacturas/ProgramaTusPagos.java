@@ -71,9 +71,8 @@ public class ProgramaTusPagos implements Task {
                 ValidarTextoQueContengaX.elTextoContiene(INICIAR_SESION),
                 ValidarTextoQueContengaX.elTextoContiene(TE_PUEDE_INTERESAR),
                 ValidarTextoQueContengaX.elTextoContiene(SERVICIOS_A_LA_MANO),
-                ValidarTextoQueContengaX.elTextoContiene(MUNDO_CLARO),
-                ValidarTextoQueContengaX.elTextoContiene(TIENDA),
-                ValidarTextoQueContengaX.elTextoContiene(CLARO_EMPRESAS)
+                ValidarTextoQueContengaX.elTextoContiene(PAGOS),
+                ValidarTextoQueContengaX.elTextoContiene(RECARGAS_Y_PAQUETES)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_4);

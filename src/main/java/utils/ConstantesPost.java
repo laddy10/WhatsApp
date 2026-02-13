@@ -170,6 +170,8 @@ public class ConstantesPost {
     public static final String SERVICIOS_A_LA_MANO = "Servicios a la mano";
     public static final String TIENDA = "Tienda";
     public static final String CLARO_EMPRESAS = "Claro Empresas";
+    public static final String PAGOS = "Pagos";
+    public static final String RECARGAS_Y_PAQUETES = "Recargas y paquetes";
 
     // Agregar a ConstantesPost.java
 
