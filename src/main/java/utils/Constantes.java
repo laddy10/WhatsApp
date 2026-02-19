@@ -184,5 +184,6 @@ public class Constantes {
     public static final String PETICIONES_QUEJAS_RECURSOS = "Peticiones, Quejas y Recursos";
     public static final String OFICINA_VIRTUAL = "Bienvenido a tu Oficina Virtual";
     public static final String ACEPTAR_Y_CONTINUAR_WH = "Aceptar y continuar";
+    public static final String ACEPTAR = "Aceptar";
 
 }

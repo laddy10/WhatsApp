@@ -17,10 +17,13 @@ import tasks.ExtraerURL;
 import utils.CapturaDePantallaMovil;
 import utils.UtilidadesAndroid;
 
+import java.util.List;
+
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static tasks.CompraTusPaquetes.Constants_Paquetes.*;
 import static userinterfaces.WhatsAppPage.*;
 import static userinterfaces.WhatsAppPage.BTN_CONFIRMAR;
+import static userinterfaces.WhatsAppPostpagoPage.LBL_PRIVACIDAD;
 import static utils.Constantes.*;
 import static utils.Constantes.COMPRA_DE_PAQUETES;
 
@@ -71,17 +74,28 @@ public class RegalaUnPaquete implements Task {
         // Extraer URL dinámica del mensaje
         String mensaje = LBL_MENSAJES.resolveAllFor(actor).stream()
                 .map(WebElementFacade::getText)
-                .filter(text -> text.contains("https://yoiz.me/"))
+                .filter(text -> text.contains("http"))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("No se encontró mensaje con URL."));
 
         String urlExtraida = ExtraerURL.desdeTexto(mensaje);
-        UtilidadesAndroid.abrirLinkEnNavegador("https://" + urlExtraida);
 
+        UtilidadesAndroid.abrirLinkEnNavegador(urlExtraida);
 
         actor.attemptsTo(
                 WaitFor.aTime(10000),
-                WaitForTextContains.withAnyTextContains(PORTAL_PAGOS_RECARGAS),
+                WaitForTextContains.withAnyTextContains(PORTAL_PAGOS_RECARGAS)
+        );
+
+
+        List<WebElementFacade> lblprivacidad = LBL_PRIVACIDAD.resolveAllFor(actor);
+        if (!lblprivacidad.isEmpty()) {
+            actor.attemptsTo(
+                    ClickTextoQueContengaX.elTextoContiene(ACEPTAR)
+            );
+        }
+
+        actor.attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene(PORTAL_PAGOS_RECARGAS),
                 ValidarTextoQueContengaX.elTextoContiene(COMPRA_DE_PAQUETES)
         );

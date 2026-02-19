@@ -191,4 +191,7 @@ public class WhatsAppPostpagoPage {
             Target.the("Texto Tu sesión se ha cerrado por seguridad")
                     .located(By.xpath("//*[@text='Por seguridad, hemos cerrado tu sesión en Mi Claro. Ingresa de nuevo para administrar tus servicios']"));
 
+    public static final Target LBL_PRIVACIDAD =
+            Target.the("Texto Tu privacidad es importante para nosotros")
+                    .located(By.xpath("//*[@text='Tu privacidad es importante para nosotros']"));
 }
