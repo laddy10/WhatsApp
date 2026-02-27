@@ -1,11 +1,16 @@
 package tasks;
 
+import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static userinterfaces.WhatsAppPage.*;
+import static utils.Constantes.*;
+
 import hooks.ReportHooks;
 import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.WaitForResponse;
+import java.util.List;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -14,57 +19,43 @@ import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import utils.CapturaDePantallaMovil;
 
-import java.util.List;
-
-import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static userinterfaces.WhatsAppPage.*;
-import static utils.Constantes.*;
-
-
 public class ConsultarSaldoLinea implements Task {
 
+  @Override
+  public <T extends Actor> void performAs(T actor) {
 
-    @Override
-    public <T extends Actor> void performAs(T actor) {
+    actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(CONSULTA_TUS_CONSUMOS));
 
-        actor.attemptsTo(
-                ClickTextoQueContengaX.elTextoContiene(CONSULTA_TUS_CONSUMOS));
+    CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar opcion 'Consulta tus consumos'");
+    ReportHooks.registrarPaso("Seleccionar opcion 'Consulta tus consumos'");
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar opcion 'Consulta tus consumos'");
-        ReportHooks.registrarPaso("Seleccionar opcion 'Consulta tus consumos'");
+    actor.attemptsTo(
+        ClickElementByText.clickElementByText(ENVIAR),
+        WaitForResponse.withAnyText(SIN_SALDO_DISPONIBLE, RECARGA_ACTIVA));
 
-        actor.attemptsTo(
-                ClickElementByText.clickElementByText(ENVIAR),
-                WaitForResponse.withAnyText(
-                        SIN_SALDO_DISPONIBLE, RECARGA_ACTIVA));
-
-        List<WebElementFacade> lblsinsaldo = LBL_SIN_SALDO.resolveAllFor(actor);
-        if (!lblsinsaldo.isEmpty()) {
-            actor.attemptsTo(
-                    ValidarTextoQueContengaX.elTextoContiene(SIN_SALDO_DISPONIBLE),
-                    ValidarTexto.validarTexto(COMPRAR_PAQUETE),
-                    ValidarTexto.validarTexto(COMPRAR_RECARGA),
-                    ValidarTexto.validarTexto(MENU_ANTERIOR));
-        } else {
-            actor.attemptsTo(
-                    ValidarTextoQueContengaX.elTextoContiene(RECARGA_ACTIVA),
-                    ValidarTextoQueContengaX.elTextoContiene(SALDO_VENCE));
-
-        }
-
-        CapturaDePantallaMovil.tomarCapturaPantalla("Se valida el saldo de la linea");
-        ReportHooks.registrarPaso("Se valida el saldo de la linea");
-
-
-        actor.attemptsTo(
-                Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-                Click.on(BTN_ENVIAR),
-                WaitForResponse.withText(ABANDONAR_CONVERSACION)
-        );
-
+    List<WebElementFacade> lblsinsaldo = LBL_SIN_SALDO.resolveAllFor(actor);
+    if (!lblsinsaldo.isEmpty()) {
+      actor.attemptsTo(
+          ValidarTextoQueContengaX.elTextoContiene(SIN_SALDO_DISPONIBLE),
+          ValidarTexto.validarTexto(COMPRAR_PAQUETE),
+          ValidarTexto.validarTexto(COMPRAR_RECARGA),
+          ValidarTexto.validarTexto(MENU_ANTERIOR));
+    } else {
+      actor.attemptsTo(
+          ValidarTextoQueContengaX.elTextoContiene(RECARGA_ACTIVA),
+          ValidarTextoQueContengaX.elTextoContiene(SALDO_VENCE));
     }
 
-    public static Performable consultarSaldoLinea() {
-        return instrumented(ConsultarSaldoLinea.class);
-    }
+    CapturaDePantallaMovil.tomarCapturaPantalla("Se valida el saldo de la linea");
+    ReportHooks.registrarPaso("Se valida el saldo de la linea");
+
+    actor.attemptsTo(
+        Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
+        Click.on(BTN_ENVIAR),
+        WaitForResponse.withText(ABANDONAR_CONVERSACION));
+  }
+
+  public static Performable consultarSaldoLinea() {
+    return instrumented(ConsultarSaldoLinea.class);
+  }
 }

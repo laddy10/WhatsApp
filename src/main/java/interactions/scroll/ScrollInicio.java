@@ -1,11 +1,11 @@
 package interactions.scroll;
 
+import static net.serenitybdd.screenplay.Tasks.instrumented;
+
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
 import net.thucydides.core.annotations.Step;
 import utils.AndroidObject;
-
-import static net.serenitybdd.screenplay.Tasks.instrumented;
 
 public class ScrollInicio extends AndroidObject implements Interaction {
 
