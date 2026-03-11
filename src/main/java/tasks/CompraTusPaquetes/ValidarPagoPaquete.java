@@ -90,6 +90,7 @@ public class ValidarPagoPaquete implements Task {
                     WaitFor.aTime(2000));
         }
 
+
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_4);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_4);
 
@@ -125,6 +126,36 @@ public class ValidarPagoPaquete implements Task {
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_7);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_7);
 
+        actor.attemptsTo(
+                ClickTextoQueContengaX.elTextoContiene(CONTINUAR_COMPRA),
+                WaitForResponse.withText(MEDIOS_DE_PAGO),
+                ValidarTextoQueContengaX.elTextoContiene(SALDO_DISPONIBLE),
+                ValidarTextoQueContengaX.elTextoContiene(PUEDES_COMPRAR_SALDO));
+
+        CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_5);
+        ReportHooks.registrarPaso(MENSAJE_CAPTURA_5);
+
+        actor.attemptsTo(
+                Click.on(BTN_MEDIOS_DE_PAGO),
+                WaitForResponse.withText(USA_TU_SALDO),
+                ValidarTexto.validarTexto(USA_TU_SALDO),
+                ValidarTexto.validarTexto(NEQUI),
+                ValidarTexto.validarTexto(TARJETA_DEBITO_CREDITO),
+                ValidarTexto.validarTexto(PSE),
+                ClickTextoQueContengaX.elTextoContiene(NEQUI));
+
+        CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_6);
+        ReportHooks.registrarPaso(MENSAJE_CAPTURA_6);
+
+        actor.attemptsTo(
+                Click.on(BTN_ENVIAR_2), WaitForTextContains.withAnyTextContains(MENU_PRINCIPAL, SMS_NEQUI));
+
+        actor.attemptsTo(
+                ValidarTextoQueContengaX.elTextoContiene(SMS_NEQUI),
+                ValidarTextoQueContengaX.elTextoContiene(PAGAR_CON_OTRO_NEQUI));
+
+        CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_7);
+        ReportHooks.registrarPaso(MENSAJE_CAPTURA_7);
 
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
@@ -211,4 +242,3 @@ public class ValidarPagoPaquete implements Task {
         return instrumented(ValidarPagoPaquete.class);
     }
 }
-

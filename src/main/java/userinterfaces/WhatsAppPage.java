@@ -242,30 +242,11 @@ public class WhatsAppPage extends PageObject {
       Target.the("Texto Te damos la bienvenida a WhatsApp")
           .locatedBy("//*[contains(@text,'Te damos la bienvenida a WhatsApp')]");
 
-<<<<<<< HEAD
-    public static final Target BTN_VACIAR_CHAT = Target.the("Botones Selecciona")
-            .located(MobileBy.id("com.whatsapp:id/primary_button"));
-
-    public static final Target LBL_CONOCE_OPCIONES =
-            Target.the("Mensaje Conoce las opciones")
-                    .locatedBy("//*[contains(@text,'Conoce las opciones')]");
-
-    public static final Target TXT_BIENVENIDA_WHATSAPP =
-            Target.the("Texto Te damos la bienvenida a WhatsApp")
-                    .locatedBy("//*[contains(@text,'Te damos la bienvenida a WhatsApp')]");
-
     public static final Target BTN_COMPRAR_PAQ_PREPAGO=
             Target.the("Boton Comprar paq. prepago")
                     .located(MobileBy.xpath("//*[@text='Comprar paq. prepago']"));
     public class AppConstants {
         public static final String WHATSAPP_PACKAGE = "com.whatsapp";
     }
-
-
 }
-=======
-  public class AppConstants {
-    public static final String WHATSAPP_PACKAGE = "com.whatsapp";
-  }
-}
->>>>>>> e1f7b99bd4143db18a06752276910003376012e4
+

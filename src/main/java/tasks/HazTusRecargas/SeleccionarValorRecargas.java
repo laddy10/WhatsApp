@@ -11,7 +11,9 @@ import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitForResponse;
+
 import java.util.List;
+
 import models.User;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
@@ -23,95 +25,104 @@ import utils.TestDataProvider;
 
 public class SeleccionarValorRecargas implements Task {
 
-  private final User user = TestDataProvider.getRealUser();
-  private final int MAX_INTENTOS = 3;
+    private final User user = TestDataProvider.getRealUser();
+    private final int MAX_INTENTOS = 3;
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-    boolean paqueteEncontrado = false;
-    int intentos = 0;
+        boolean paqueteEncontrado = false;
+        int intentos = 0;
 
-    actor.attemptsTo(ClickElementByText.clickElementByText(SELECCIONA));
+        actor.attemptsTo(ClickElementByText.clickElementByText(SELECCIONA));
 
-    String valorBuscado = normalizarTexto(user.getValor());
+        String valorBuscado = normalizarTexto(user.getValor());
 
-    while (!paqueteEncontrado && intentos < MAX_INTENTOS) {
-      intentos++;
+        while (!paqueteEncontrado && intentos < MAX_INTENTOS) {
+            intentos++;
 
-      List<WebElementFacade> opciones = LBL_SIGNO_PRECIO.resolveAllFor(actor);
+            List<WebElementFacade> opciones = LBL_SIGNO_PRECIO.resolveAllFor(actor);
 
-      for (WebElementFacade opcion : opciones) {
-        String texto = normalizarTexto(opcion.getText());
+            for (WebElementFacade opcion : opciones) {
+                String texto = normalizarTexto(opcion.getText());
 
-        if (texto.contains(valorBuscado)) {
-          actor.attemptsTo(
-              ClickTextoQueContengaX.elTextoContiene(user.getValor()),
-              WaitForResponse.withText(ENVIAR2));
+                if (texto.contains(valorBuscado)) {
+                    actor.attemptsTo(
+                            ClickTextoQueContengaX.elTextoContiene(user.getValor()),
+                            WaitForResponse.withText(ENVIAR2));
 
-          CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar el valor de la recarga");
-          ReportHooks.registrarPaso("Seleccionar el valor de la recarga");
+                    CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar el valor de la recarga");
+                    ReportHooks.registrarPaso("Seleccionar el valor de la recarga");
 
+<<<<<<< HEAD
           actor.attemptsTo(
               ClickTextoQueContengaX.elTextoContiene(ENVIAR2),
               WaitForResponse.withAnyText(MEDIOS_DE_PAGO, CONTINUAR_RECARGA),
               ValidarTextoQueContengaX.elTextoContiene(user.getValor()));
 
 <<<<<<< HEAD
+=======
+>>>>>>> main
                     actor.attemptsTo(
                             ClickTextoQueContengaX.elTextoContiene(ENVIAR2),
                             WaitForResponse.withAnyText(MEDIOS_DE_PAGO, CONTINUAR_RECARGA)
                     );
+<<<<<<< HEAD
 =======
           CapturaDePantallaMovil.tomarCapturaPantalla(
               "Se habilita el boton 'Medios de pago o 'Continuar recarga'.");
           ReportHooks.registrarPaso("Se habilita el boton 'Medios de pago o 'Continuar recarga'.");
 >>>>>>> e1f7b99bd4143db18a06752276910003376012e4
+=======
+>>>>>>> main
 
-          paqueteEncontrado = true;
-          break;
+                    CapturaDePantallaMovil.tomarCapturaPantalla("Se habilita el boton 'Medios de pago o 'Continuar recarga'.");
+                    ReportHooks.registrarPaso("Se habilita el boton 'Medios de pago o 'Continuar recarga'.");
+
+                    paqueteEncontrado = true;
+                    break;
+                }
+            }
+
+            if (!paqueteEncontrado) {
+                List<WebElementFacade> masOpciones = LBL_MAS_OPCIONES.resolveAllFor(actor);
+
+                if (!masOpciones.isEmpty()) {
+                    actor.attemptsTo(Click.on(LBL_MAS_OPCIONES), WaitForResponse.withText(ENVIAR2));
+
+                    CapturaDePantallaMovil.tomarCapturaPantalla(
+                            "No se encontro el valor, dar clic en 'Mas opciones'");
+                    ReportHooks.registrarPaso("No se encontro el valor, dar clic en 'Mas opciones'");
+
+                    actor.attemptsTo(
+                            ClickTextoQueContengaX.elTextoContiene(ENVIAR2),
+                            WaitForResponse.withText(OTRO_VALOR_RECARGA),
+                            ValidarTexto.validarTexto(MAS_OPCIONES));
+
+                    CapturaDePantallaMovil.tomarCapturaPantalla(
+                            "Validar mensaje que contenga el botón Selecciona");
+                    ReportHooks.registrarPaso("Validar mensaje que contenga el botón Selecciona");
+
+                    actor.attemptsTo(EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20));
+
+                } else {
+                    throw new RuntimeException(
+                            "No se encontró el valor y no hay más opciones disponibles: " + user.getValor());
+                }
+            }
         }
-      }
 
-      if (!paqueteEncontrado) {
-        List<WebElementFacade> masOpciones = LBL_MAS_OPCIONES.resolveAllFor(actor);
-
-        if (!masOpciones.isEmpty()) {
-          actor.attemptsTo(Click.on(LBL_MAS_OPCIONES), WaitForResponse.withText(ENVIAR2));
-
-          CapturaDePantallaMovil.tomarCapturaPantalla(
-              "No se encontro el valor, dar clic en 'Mas opciones'");
-          ReportHooks.registrarPaso("No se encontro el valor, dar clic en 'Mas opciones'");
-
-          actor.attemptsTo(
-              ClickTextoQueContengaX.elTextoContiene(ENVIAR2),
-              WaitForResponse.withText(OTRO_VALOR_RECARGA),
-              ValidarTexto.validarTexto(MAS_OPCIONES));
-
-          CapturaDePantallaMovil.tomarCapturaPantalla(
-              "Validar mensaje que contenga el botón Selecciona");
-          ReportHooks.registrarPaso("Validar mensaje que contenga el botón Selecciona");
-
-          actor.attemptsTo(EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20));
-
-        } else {
-          throw new RuntimeException(
-              "No se encontró el valor y no hay más opciones disponibles: " + user.getValor());
+        if (!paqueteEncontrado) {
+            throw new RuntimeException(
+                    "No se encontró el valor tras " + MAX_INTENTOS + " intentos: " + user.getValor());
         }
-      }
     }
 
-    if (!paqueteEncontrado) {
-      throw new RuntimeException(
-          "No se encontró el valor tras " + MAX_INTENTOS + " intentos: " + user.getValor());
+    private String normalizarTexto(String texto) {
+        return texto.toLowerCase().replaceAll("\\s+", " ").trim();
     }
-  }
 
-  private String normalizarTexto(String texto) {
-    return texto.toLowerCase().replaceAll("\\s+", " ").trim();
-  }
-
-  public static Performable seleccionarValorRecargas() {
-    return instrumented(SeleccionarValorRecargas.class);
-  }
+    public static Performable seleccionarValorRecargas() {
+        return instrumented(SeleccionarValorRecargas.class);
+    }
 }

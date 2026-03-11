@@ -44,6 +44,7 @@ public class IniciarChatClaro implements Task {
                 EstadoConversacion estado = ClasificarRespuestaBot.obtenerEstado(actor);
 
                 switch (estado) {
+
                     case PANTALLA_INICIAL:
                         actor.attemptsTo(SalirYReiniciarChat.ejecutar());
                         continue;
