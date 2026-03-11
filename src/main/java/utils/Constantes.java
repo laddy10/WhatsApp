@@ -99,16 +99,18 @@ public class Constantes {
             "clro.co/PSE20KWA";
 
     public static final String URL_PAGO_PSE_RECARGAS = "clro.co/PSE";
-    public static final String SIN_CUENTA_NEQUI = "\uD83D\uDE25 Parece que este número no tiene una cuenta en Nequi.\n" +
-            "\n" +
-            "Puedes intentarlo de nuevo con otra cuenta Nequi o elegir otro medio de pago \uD83D\uDC47";
+    public static final String SIN_CUENTA_NEQUI =
+            "\uD83D\uDE25 Parece que este número no tiene una cuenta en Nequi.\n"
+                    + "\n"
+                    + "Puedes intentarlo de nuevo con otra cuenta Nequi o elegir otro medio de pago \uD83D\uDC47";
     public static final String INGRESAR_NUMERO_OPCION = "Por favor ingrese el número de opción";
     public static final String INGRESAR_OPCION_VALIDA = "¡Lo siento! No entendí lo que escribiste";
     public static final String NO_ENTENDI_TU_MENSAJE = "No entendí tu mensaje.";
     public static final String BIENVENIDO = "Bienvenido";
     public static final String ECARRIER = "compras.claro.com.co/MiClaro/login/sendsms";
     public static final String NUMERO_CLARO = "Número Claro:";
-    public static final String INGRESAR_NUMERO = "Ingresa tu número Claro de 10 dígitos y pulsa \"Continuar\"";
+    public static final String INGRESAR_NUMERO =
+            "Ingresa tu número Claro de 10 dígitos y pulsa \"Continuar\"";
     public static final String MAS = "Más";
     public static final String VACIAR_CHAT = "Vaciar chat";
     public static final String INGRESAR_CON_NUMERO_CLARO = "Ingresa con tu número Claro";
@@ -117,13 +119,17 @@ public class Constantes {
     public static final String ROAMING_INTERNACIONAL = "\uD83D\uDEEBRoaming Internacional";
     public static final String RENUEVA_TU_SIM = "\uD83D\uDD04Renueva tu SIM";
     public static final String TUS_PQR_RADICADOS = "\uD83D\uDDC3\uFE0FTus PQR radicados";
-    public static final String MENSAJE_ACTUALIZA_SIM = "iActualiza tu SIM! Es una iniciativa de Claro para usuarios de SIM 3G, a fin de que disfruten los beneficios de nuestra red";
+    public static final String MENSAJE_ACTUALIZA_SIM =
+            "iActualiza tu SIM! Es una iniciativa de Claro para usuarios de SIM 3G, a fin de que disfruten los beneficios de nuestra red";
     public static final String QUIERO_ACTUALIZAR = "Quiero actualizar";
-    public static final String MENSAJE_CAMBIATE_A_POST = "En un momento un asesor te ayudará en tu proceso de compra";
+    public static final String MENSAJE_CAMBIATE_A_POST =
+            "En un momento un asesor te ayudará en tu proceso de compra";
     public static final String MENSAJE_LDI = "Selecciona alguna de las siguientes opciones";
     public static final String MSJ_LDI_1 = "Comunícate las 24 horas marcando 00444 ";
-    public static final String MSJ_LDI_2 = "No cuentas con consumos de llamadas de Larga distancia Internacional.";
-    public static final String MSJ_LDI_3 = " Las mejores tarifas para conectarte con tus seres queridos";
+    public static final String MSJ_LDI_2 =
+            "No cuentas con consumos de llamadas de Larga distancia Internacional.";
+    public static final String MSJ_LDI_3 =
+            " Las mejores tarifas para conectarte con tus seres queridos";
     public static final String MSJ_LDI_COMPRA = "Paq. LDI USA,CAN,PR,MEX";
     public static final String ELIGE_COMPRA = "¡Elige y compra el paquete ideal para ti!";
     public static final String SERVICIOS_PARA_TI = "☺️Servicios para ti";
@@ -141,7 +147,8 @@ public class Constantes {
     public static final String DESEAS_RECARGAR_OTRO_VALOR = "¿Deseas recargar otro valor?";
     public static final String QUIERO_ESTE_PLAN = "Quiero este plan";
     public static final String EXPLORAR_PLANES = "Explorar planes";
-    public static final String COMPRA_PAQUETES_RECARGAS = "Compra paquetes y recargas para tu línea pulsando el botón";
+    public static final String COMPRA_PAQUETES_RECARGAS =
+            "Compra paquetes y recargas para tu línea pulsando el botón";
     public static final String COMPRAR_BTN = "Comprar";
 
     // Portal de pagos
@@ -150,9 +157,11 @@ public class Constantes {
     // Agregar estas nuevas constantes al archivo Constantes.java
 
     // Mensajes de actualización del sistema
-    public static final String MENSAJE_ACTUALIZACION_SISTEMA = "Nuestro sistema registra un proceso de actualización";
+    public static final String MENSAJE_ACTUALIZACION_SISTEMA =
+            "Nuestro sistema registra un proceso de actualización";
     public static final String BTN_NO = "No";
-    public static final String PROCESO_ACTUALIZACION = "Si aún deseas continuar con tus consultas, elige el botón de acuerdo a tu necesidad";
+    public static final String PROCESO_ACTUALIZACION =
+            "Si aún deseas continuar con tus consultas, elige el botón de acuerdo a tu necesidad";
 
     public static final String TU_FACTURA = "Tu factura";
     public static final String TEXTO_CODIGO_SEGURIDAD = "código de seguridad";
@@ -163,16 +172,19 @@ public class Constantes {
     public static final String ESTE_ARCHIVO_ESTA_PROTEGIDO = "Este archivo está protegido";
     public static final String ABRIR = "Abrir";
     public static final String CUENTA_PROPIA = "Cuenta propia";
-    public static final String CONSULTA_FORMA_RAPIDA = "Consulta de forma rápida y segura las cuentas hogar o líneas móviles";
-    public static final String OPCIONES_MOSTRADAS_ANTERIORMENTE = "Para continuar debes seleccionar alguna de las opciones mostradas anteriormente";
+    public static final String CONSULTA_FORMA_RAPIDA =
+            "Consulta de forma rápida y segura las cuentas hogar o líneas móviles";
+    public static final String OPCIONES_MOSTRADAS_ANTERIORMENTE =
+            "Para continuar debes seleccionar alguna de las opciones mostradas anteriormente";
     public static final String TEXTO_GRACIAS_POR_PREFERIRNOS = "Gracias por preferirnos";
     public static final String INTERNET_PARA_TU_HOGAR = "Internet para tu Hogar";
     public static final String PLAN_PARA_TU_CELULAR = "Plan para tu celular";
     public static final String AHORRA_Y_APROVECHA_MAXIMO = "Ahorra y aprovecha al máximo";
-    public static final String  SALUDO_PARA_AYUDARTE = "Tus servicios con nosotros son:";
+    public static final String SALUDO_PARA_AYUDARTE = "Tus servicios con nosotros son:";
     public static final String CUENTA = "cuenta";
     public static final String HAZ_CLICK_ENLACE = "Haz click en el siguiente enlace para realizar";
-    public static final String DISFRUTA_TUS_APP = "Disfruta tus aplicaciones móviles favoritas y navega";
+    public static final String DISFRUTA_TUS_APP =
+            "Disfruta tus aplicaciones móviles favoritas y navega";
     public static final String CAVS_CLARO = "Cavs Claro";
     public static final String REPORTE_ROBO_PERDIDA_2 = "Reporte robo o perdida";
     public static final String TUS_EQUIPOS_ASOCIADOS = "Tus equipos asociados";
@@ -180,10 +192,10 @@ public class Constantes {
     public static final String ESTADO_PETICION = "Conoce el estado de tu petición";
     public static final String AHORA_NO = "Ahora no";
     public static final String TU_RESPUESTA_NO_ES_VALIDA = "Lo siento, tu respuesta no es válida";
-    public static final String RECARGATE = "Recárgate y envía saldo a los que más quieres, para que siempre estés conectado";
+    public static final String RECARGATE =
+            "Recárgate y envía saldo a los que más quieres, para que siempre estés conectado";
     public static final String PETICIONES_QUEJAS_RECURSOS = "Peticiones, Quejas y Recursos";
     public static final String OFICINA_VIRTUAL = "Bienvenido a tu Oficina Virtual";
     public static final String ACEPTAR_Y_CONTINUAR_WH = "Aceptar y continuar";
     public static final String ACEPTAR = "Aceptar";
-
 }

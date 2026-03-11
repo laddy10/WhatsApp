@@ -5,4 +5,5 @@ public enum EstadoConversacion {
     PANTALLA_INICIAL,
     ERROR,
     ESPERANDO_ASESOR
+
 }

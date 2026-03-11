@@ -1,5 +1,10 @@
 package tasks.Postpago.TusPagosYFacturas;
 
+import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static userinterfaces.WhatsAppPage.*;
+import static utils.Constantes.*;
+import static utils.ConstantesPost.*;
+
 import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
@@ -17,70 +22,52 @@ import tasks.ExtraerURL;
 import utils.CapturaDePantallaMovil;
 import utils.UtilidadesAndroid;
 
-import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static userinterfaces.WhatsAppPage.*;
-import static utils.Constantes.*;
-import static utils.ConstantesPost.*;
-
 public class TusPQRRadicados implements Task {
 
+  @Override
+  public <T extends Actor> void performAs(T actor) {
 
-    @Override
-    public <T extends Actor> void performAs(T actor) {
+    actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(TUS_PQRS_RADICADOS));
 
-        actor.attemptsTo(
-                ClickTextoQueContengaX.elTextoContiene(TUS_PQRS_RADICADOS)
-        );
+    CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Tus PQR Radicados");
+    ReportHooks.registrarPaso("Seleccionar Tus PQR Radicados");
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Tus PQR Radicados");
-        ReportHooks.registrarPaso("Seleccionar Tus PQR Radicados");
+    // Enviar selección
+    actor.attemptsTo(
+        Click.on(BTN_ENVIAR_2),
+        WaitForTextContains.withTextContains(CONSULTAR_QUEJAS_RECLAMOS),
+        ValidarTextoQueContengaX.elTextoContiene(CONSULTAR_QUEJAS_RECLAMOS));
 
-        // Enviar selección
-        actor.attemptsTo(
-                Click.on(BTN_ENVIAR_2),
-                WaitForTextContains.withTextContains(CONSULTAR_QUEJAS_RECLAMOS),
-                ValidarTextoQueContengaX.elTextoContiene(CONSULTAR_QUEJAS_RECLAMOS)
-        );
+    CapturaDePantallaMovil.tomarCapturaPantalla("Abrir URL para consultar quejas y reclamos");
+    ReportHooks.registrarPaso("Abrir URL para consultar quejas y reclamos");
 
+    String mensaje =
+        LBL_MENSAJES.resolveAllFor(actor).stream()
+            .map(WebElementFacade::getText)
+            .filter(text -> text.contains("yoiz.me") || text.contains("clro.co"))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("No se encontró URL de pago."));
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Abrir URL para consultar quejas y reclamos");
-        ReportHooks.registrarPaso("Abrir URL para consultar quejas y reclamos");
+    String urlExtraida = ExtraerURL.desdeTexto(mensaje);
 
+    UtilidadesAndroid.abrirLinkEnNavegador(urlExtraida);
 
-        String mensaje = LBL_MENSAJES.resolveAllFor(actor).stream()
-                .map(WebElementFacade::getText)
-                .filter(text -> text.contains("yoiz.me") || text.contains("clro.co"))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("No se encontró URL de pago."));
+    actor.attemptsTo(
+        WaitForTextContains.withTextContains(PETICIONES_QUEJAS_RECURSOS),
+        ValidarTexto.validarTexto(OFICINA_VIRTUAL),
+        ValidarTexto.validarTexto(TIPO_SOLICITUD));
 
+    CapturaDePantallaMovil.tomarCapturaPantalla("Direccionamiento pagina Claro");
+    ReportHooks.registrarPaso("Direccionamiento pagina Claro");
 
-        String urlExtraida = ExtraerURL.desdeTexto(mensaje);
+    actor.attemptsTo(
+        Atras.irAtras(),
+        Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
+        Click.on(BTN_ENVIAR),
+        WaitForResponse.withText(ABANDONAR_CONVERSACION));
+  }
 
-
-        UtilidadesAndroid.abrirLinkEnNavegador(urlExtraida);
-
-
-        actor.attemptsTo(
-                WaitForTextContains.withTextContains(PETICIONES_QUEJAS_RECURSOS),
-                ValidarTexto.validarTexto(OFICINA_VIRTUAL),
-                ValidarTexto.validarTexto(TIPO_SOLICITUD)
-        );
-
-
-        CapturaDePantallaMovil.tomarCapturaPantalla("Direccionamiento pagina Claro");
-        ReportHooks.registrarPaso("Direccionamiento pagina Claro");
-
-
-        actor.attemptsTo(
-                Atras.irAtras(),
-                Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-                Click.on(BTN_ENVIAR),
-                WaitForResponse.withText(ABANDONAR_CONVERSACION)
-        );
-
-    }
-
-    public static Performable tusPQRRadicados() {
-        return instrumented(TusPQRRadicados.class);
-    }
+  public static Performable tusPQRRadicados() {
+    return instrumented(TusPQRRadicados.class);
+  }
 }

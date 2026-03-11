@@ -3,11 +3,10 @@ package hooks;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
-import utils.EstadoPrueba;
-import utils.WordAppium;
-
 import java.util.ArrayList;
 import java.util.List;
+import utils.EstadoPrueba;
+import utils.WordAppium;
 
 public class ReportHooks {
 
@@ -32,7 +31,7 @@ public class ReportHooks {
     EstadoPrueba.pasoFallido = "";
   }
 
-/*  @AfterStep
+  /*  @AfterStep
   public void afterEachStep(Scenario scenario) {
     if (scenario.isFailed()) {
       EstadoPrueba.fallo = true;
@@ -53,12 +52,12 @@ public class ReportHooks {
     String pasoFallido = EstadoPrueba.fallo ? EstadoPrueba.pasoFallido : null;
 
     WordAppium.generarReporte(
-            scenario.getName(),
-            pasosEjecutados.toArray(new String[0]),
-            lineaUsada,
-            duracionFormato,
-            pasoFallido,
-            estadoFinal);
+        scenario.getName(),
+        pasosEjecutados.toArray(new String[0]),
+        lineaUsada,
+        duracionFormato,
+        pasoFallido,
+        estadoFinal);
 
     // Limpiar estado para el siguiente escenario
     pasosEjecutados.clear();
