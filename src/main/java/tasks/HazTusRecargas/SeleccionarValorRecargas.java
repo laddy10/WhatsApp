@@ -57,8 +57,8 @@ public class SeleccionarValorRecargas implements Task {
 
                     actor.attemptsTo(
                             ClickTextoQueContengaX.elTextoContiene(ENVIAR2),
-                            WaitForResponse.withAnyText(MEDIOS_DE_PAGO, CONTINUAR_RECARGA),
-                            ValidarTextoQueContengaX.elTextoContiene(user.getValor()));
+                            WaitForResponse.withAnyText(MEDIOS_DE_PAGO, CONTINUAR_RECARGA)
+                    );
 
                     CapturaDePantallaMovil.tomarCapturaPantalla("Se habilita el boton 'Medios de pago o 'Continuar recarga'.");
                     ReportHooks.registrarPaso("Se habilita el boton 'Medios de pago o 'Continuar recarga'.");

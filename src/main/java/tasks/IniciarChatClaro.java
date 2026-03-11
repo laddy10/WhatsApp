@@ -60,6 +60,10 @@ public class IniciarChatClaro implements Task {
                         actor.attemptsTo(ValidarTextoErrorYLimpiarChat.validarYLimpiar());
                         continue;
 
+                    case ESPERANDO_ASESOR:
+                        actor.attemptsTo(ManejarConversacionConAsesor.ejecutar());
+                        continue;
+
                     case FLUJO_NORMAL:
                         break;
                 }

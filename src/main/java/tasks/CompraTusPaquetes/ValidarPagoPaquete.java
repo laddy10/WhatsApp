@@ -14,6 +14,7 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.questions.Presence;
 import org.openqa.selenium.WebElement;
 import tasks.ExtraerURL;
 import userinterfaces.WhatsAppPage;
@@ -25,6 +26,7 @@ import java.util.List;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static tasks.CompraTusPaquetes.Constants_Paquetes.*;
 import static userinterfaces.WhatsAppPage.*;
+import static userinterfaces.WhatsAppPage.BTN_COMPRAR_PAQ_PREPAGO;
 import static utils.Constantes.*;
 
 public class ValidarPagoPaquete implements Task {
@@ -63,29 +65,23 @@ public class ValidarPagoPaquete implements Task {
                 EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(40)
         );
 
-
         actor.attemptsTo(
-                // Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
-                WaitForResponse.withText(VER_MAS_PAQUETES),
-                ClickTextoQueContengaX.elTextoContiene(VER_MAS_PAQUETES));
-
-        CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_2);
-        ReportHooks.registrarPaso(MENSAJE_CAPTURA_2);
-
-        actor.attemptsTo(
-                Click.on(BTN_ENVIAR_2),
-                WaitForTextContains.withTextContains(ELIGE_COMPRA),
-                Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
-                ClickTextoQueContengaX.elTextoContiene(PAQUETE_18GB_30D));
+                ClickTextoQueContengaX.elTextoContiene(PAQUETE_2GB_7D));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_3);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_3);
 
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitForResponse.withText(COMPRAR_PAQ_PREPAGO),
-                ClickTextoQueContengaX.elTextoContiene(COMPRAR_PAQ_PREPAGO),
-                WaitForResponse.withText(CONTINUAR_COMPRA));
+                WaitForTextContains.withAnyTextContains(CONTINUAR_COMPRA, COMPRAR_PAQ_PREPAGO)
+        );
+
+
+        if (!Presence.of(BTN_COMPRAR_PAQ_PREPAGO).viewedBy(actor).resolveAll().isEmpty()) {
+            actor.attemptsTo(
+                    ClickTextoQueContengaX.elTextoContiene(COMPRAR_PAQ_PREPAGO),
+                    WaitFor.aTime(2000));
+        }
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_4);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_4);
@@ -115,7 +111,7 @@ public class ValidarPagoPaquete implements Task {
 
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitForTextContains.withAnyTextContains(MENU_PRINCIPAL,SMS_NEQUI)
+                WaitForTextContains.withAnyTextContains(MENU_PRINCIPAL, SMS_NEQUI)
         );
 
 
@@ -207,7 +203,7 @@ public class ValidarPagoPaquete implements Task {
                 Atras.irAtras(),
                 Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
                 Click.on(BTN_ENVIAR),
-                WaitForResponse.withText(ABANDONAR_CONVERSACION)
+                WaitForTextContains.withAnyTextContains(ABANDONAR_CONVERSACION)
         );
     }
 

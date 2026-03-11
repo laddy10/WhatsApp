@@ -21,7 +21,7 @@ public class Constantes {
     public static final String URL_TRATAMIENTO_INFORMACION = "http://bit.ly/3DtS9az";
     public static final String URL_PORTAL_CLARO = "https://www.claro.com.co/personas/autogestion/whatsapp/";
     public static final String LEY = "LEY";
-    public static final String ABANDONAR_CONVERSACION = "Tu solicitud de abandonar la conversación se cumplió. ¡Envíe #volver para regresar!";
+    public static final String ABANDONAR_CONVERSACION = "Tu solicitud de abandonar la conversación se cumplió";
     public static final String CIRCULAR_SIC = "CIRCULAR ÚNICA DE LA SUPERINTENDENCIA DE INDUSTRIA Y COMERCIO";
     public static final String PERSONAS = "Personas";
     public static final String MAS_DE_CLARO = "Más de Claro";

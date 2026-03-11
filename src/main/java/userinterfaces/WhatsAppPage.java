@@ -244,6 +244,9 @@ public class WhatsAppPage extends PageObject {
             Target.the("Texto Te damos la bienvenida a WhatsApp")
                     .locatedBy("//*[contains(@text,'Te damos la bienvenida a WhatsApp')]");
 
+    public static final Target BTN_COMPRAR_PAQ_PREPAGO=
+            Target.the("Boton Comprar paq. prepago")
+                    .located(MobileBy.xpath("//*[@text='Comprar paq. prepago']"));
     public class AppConstants {
         public static final String WHATSAPP_PACKAGE = "com.whatsapp";
     }

@@ -279,8 +279,6 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Vaciar chat
 
 
-
-  #@Whatsapp_23_INHABILITADO
   Scenario: Validar menu compra tus paquetes - comunidad sorda
     Given Ingresar a WhatsAPP
     When Validar Version de la App

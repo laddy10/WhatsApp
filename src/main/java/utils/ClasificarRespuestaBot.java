@@ -16,6 +16,14 @@ public class ClasificarRespuestaBot {
             return EstadoConversacion.PANTALLA_INICIAL;
         }
 
+        // 🧑‍💼 Escalamiento a asesor
+        if (TextoQueContengaX.verificarTexto("Voy a comunicarte con uno de nuestros asesores").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("comunicarte con uno de nuestros asesores").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("te comunicaremos con un asesor").answeredBy(actor)) {
+
+            return EstadoConversacion.ESPERANDO_ASESOR;
+        }
+
         // 🔴 Errores conversacionales
         if (TextoQueContengaX.verificarTexto("No entendí").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("respuesta no es válida").answeredBy(actor)
