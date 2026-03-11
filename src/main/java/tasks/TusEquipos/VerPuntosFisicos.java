@@ -1,5 +1,10 @@
 package tasks.TusEquipos;
 
+import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static userinterfaces.WhatsAppPage.LBL_MENSAJES;
+import static utils.Constantes.*;
+import static utils.ConstantesPost.*;
+
 import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
@@ -16,65 +21,48 @@ import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 import utils.UtilidadesAndroid;
 
-import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static userinterfaces.WhatsAppPage.LBL_MENSAJES;
-import static utils.Constantes.*;
-import static utils.ConstantesPost.*;
-
 public class VerPuntosFisicos implements Task {
 
-    @Override
-    public <T extends Actor> void performAs(T actor) {
-        actor.attemptsTo(
-                ClickTextoQueContengaX.elTextoContiene(VER_PUNTOS_FISICOS)
-        );
+  @Override
+  public <T extends Actor> void performAs(T actor) {
+    actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(VER_PUNTOS_FISICOS));
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Ver puntos fisicos");
-        ReportHooks.registrarPaso("Seleccionar Ver puntos fisicos");
+    CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Ver puntos fisicos");
+    ReportHooks.registrarPaso("Seleccionar Ver puntos fisicos");
 
+    actor.attemptsTo(WaitForTextContains.withAnyTextContains(CAV));
 
-        actor.attemptsTo(
-                WaitForTextContains.withAnyTextContains(CAV)
-        );
+    CapturaDePantallaMovil.tomarCapturaPantalla("Abrir URL");
+    ReportHooks.registrarPaso("Abrir URL");
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Abrir URL");
-        ReportHooks.registrarPaso("Abrir URL");
+    String mensaje =
+        LBL_MENSAJES.resolveAllFor(actor).stream()
+            .map(WebElementFacade::getText)
+            .filter(text -> text.contains("yoiz.me") || text.contains("clro.co"))
+            .findFirst()
+            .orElseThrow(() -> new RuntimeException("No se encontró URL de pago."));
 
-        String mensaje = LBL_MENSAJES.resolveAllFor(actor).stream()
-                .map(WebElementFacade::getText)
-                .filter(text -> text.contains("yoiz.me") || text.contains("clro.co"))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("No se encontró URL de pago."));
+    String urlExtraida = ExtraerURL.desdeTexto(mensaje);
 
+    UtilidadesAndroid.abrirLinkEnNavegador(urlExtraida);
 
-        String urlExtraida = ExtraerURL.desdeTexto(mensaje);
+    actor.attemptsTo(
+        WaitForResponse.withAnyText(PERSONAS),
+        ValidarTextoQueContengaX.elTextoContiene(CENTROS_CLARO),
+        ValidarTextoQueContengaX.elTextoContiene(CAVS_CLARO));
 
+    CapturaDePantallaMovil.tomarCapturaPantalla("Direccionamiento Cavs Claro");
+    ReportHooks.registrarPaso("Direccionamiento Cavs Claro");
 
-        UtilidadesAndroid.abrirLinkEnNavegador(urlExtraida);
+    actor.attemptsTo(ScrollHastaTexto.conTexto("Mapa"));
 
-        actor.attemptsTo(
-                WaitForResponse.withAnyText(PERSONAS),
-                ValidarTextoQueContengaX.elTextoContiene(CENTROS_CLARO),
-                ValidarTextoQueContengaX.elTextoContiene(CAVS_CLARO)
-        );
+    CapturaDePantallaMovil.tomarCapturaPantalla("Mapa Cavs Claro");
+    ReportHooks.registrarPaso("Mapa Cavs Claro");
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Direccionamiento Cavs Claro");
-        ReportHooks.registrarPaso("Direccionamiento Cavs Claro");
+    actor.attemptsTo(Atras.irAtras(), SalirConversacion.salir());
+  }
 
-        actor.attemptsTo(
-                ScrollHastaTexto.conTexto("Mapa")
-        );
-
-        CapturaDePantallaMovil.tomarCapturaPantalla("Mapa Cavs Claro");
-        ReportHooks.registrarPaso("Mapa Cavs Claro");
-
-        actor.attemptsTo(
-                Atras.irAtras(),
-                SalirConversacion.salir()
-        );
-    }
-
-    public static Performable verPuntosFisicos() {
-        return instrumented(VerPuntosFisicos.class);
-    }
+  public static Performable verPuntosFisicos() {
+    return instrumented(VerPuntosFisicos.class);
+  }
 }

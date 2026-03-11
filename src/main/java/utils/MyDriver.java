@@ -1,12 +1,11 @@
 package utils;
 
 import io.appium.java_client.android.AndroidDriver;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
 import net.thucydides.core.webdriver.DriverSource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
-
-import java.net.URL;
-import java.util.concurrent.TimeUnit;
 
 public class MyDriver implements DriverSource {
 
@@ -24,7 +23,10 @@ public class MyDriver implements DriverSource {
       // Capabilities base (alineadas a serenity.properties)
       caps.setCapability("automationName", "UiAutomator2");
       caps.setCapability("platformName", "Android");
-      caps.setCapability("app", System.getProperty("app", System.getProperty("user.dir") + "/src/test/resources/app/whatsapp.apk"));
+      caps.setCapability(
+          "app",
+          System.getProperty(
+              "app", System.getProperty("user.dir") + "/src/test/resources/app/whatsapp.apk"));
       caps.setCapability("appPackage", "com.whatsapp");
       caps.setCapability("appActivity", ".Main");
 

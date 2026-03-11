@@ -81,6 +81,10 @@ dependencies {
     // JSON
     implementation 'org.json:json:20210307'
 
+    // OkHttp & Gson for Ollama AI
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
+
     // Apache POI
     implementation 'org.apache.poi:poi-ooxml:5.2.3'
 

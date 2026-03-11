@@ -11,7 +11,8 @@ public class ClasificarRespuestaBot {
         // 🟡 Pantalla inicial NO válida
         if (TextoQueContengaX.verificarTexto("Ideas de regalo").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("¿Qué quieres hacer hoy?").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("Te damos la bienvenida al chat de Claro").answeredBy(actor)) {
+                || TextoQueContengaX.verificarTexto("Te damos la bienvenida al chat de Claro")
+                .answeredBy(actor)) {
 
             return EstadoConversacion.PANTALLA_INICIAL;
         }
