@@ -20,7 +20,7 @@ public class WhatsAppPage extends PageObject {
       Target.the("Boton lupa").located(By.id("search_icon"));
 
   public static final Target TXT_BUSCAR_TEXTO =
-      Target.the("Caja de texto buscar").located(By.id("com.whatsapp:id/search_input"));
+      Target.the("Caja de texto buscar nombre o numero").located(By.xpath("//android.widget.EditText[@text=\"Buscar nombre o número\"]"));
 
   public static final Target TXT_BUSCAR_TEXTO_PRINCIPAL =
       Target.the("Caja de texto buscar").located(By.id("search_input"));

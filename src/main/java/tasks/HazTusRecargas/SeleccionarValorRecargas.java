@@ -54,27 +54,16 @@ public class SeleccionarValorRecargas implements Task {
                     CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar el valor de la recarga");
                     ReportHooks.registrarPaso("Seleccionar el valor de la recarga");
 
-<<<<<<< HEAD
-          actor.attemptsTo(
-              ClickTextoQueContengaX.elTextoContiene(ENVIAR2),
-              WaitForResponse.withAnyText(MEDIOS_DE_PAGO, CONTINUAR_RECARGA),
-              ValidarTextoQueContengaX.elTextoContiene(user.getValor()));
 
-<<<<<<< HEAD
-=======
->>>>>>> main
                     actor.attemptsTo(
                             ClickTextoQueContengaX.elTextoContiene(ENVIAR2),
                             WaitForResponse.withAnyText(MEDIOS_DE_PAGO, CONTINUAR_RECARGA)
                     );
-<<<<<<< HEAD
-=======
-          CapturaDePantallaMovil.tomarCapturaPantalla(
-              "Se habilita el boton 'Medios de pago o 'Continuar recarga'.");
-          ReportHooks.registrarPaso("Se habilita el boton 'Medios de pago o 'Continuar recarga'.");
->>>>>>> e1f7b99bd4143db18a06752276910003376012e4
-=======
->>>>>>> main
+
+
+                    CapturaDePantallaMovil.tomarCapturaPantalla("Se habilita el boton 'Medios de pago o 'Continuar recarga'.");
+                    ReportHooks.registrarPaso("Se habilita el boton 'Medios de pago o 'Continuar recarga'.");
+
 
                     CapturaDePantallaMovil.tomarCapturaPantalla("Se habilita el boton 'Medios de pago o 'Continuar recarga'.");
                     ReportHooks.registrarPaso("Se habilita el boton 'Medios de pago o 'Continuar recarga'.");

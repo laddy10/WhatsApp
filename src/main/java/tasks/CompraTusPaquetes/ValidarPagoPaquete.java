@@ -26,13 +26,7 @@ import userinterfaces.WhatsAppPage;
 import utils.CapturaDePantallaMovil;
 import utils.UtilidadesAndroid;
 
-import java.util.List;
-
-import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static tasks.CompraTusPaquetes.Constants_Paquetes.*;
-import static userinterfaces.WhatsAppPage.*;
 import static userinterfaces.WhatsAppPage.BTN_COMPRAR_PAQ_PREPAGO;
-import static utils.Constantes.*;
 
 
 public class ValidarPagoPaquete implements Task {
@@ -148,19 +142,13 @@ public class ValidarPagoPaquete implements Task {
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_6);
 
         actor.attemptsTo(
-                Click.on(BTN_ENVIAR_2), WaitForTextContains.withAnyTextContains(MENU_PRINCIPAL, SMS_NEQUI));
-
-        actor.attemptsTo(
+                Click.on(BTN_ENVIAR_2),
+                WaitForTextContains.withAnyTextContains(MENU_PRINCIPAL, SMS_NEQUI),
                 ValidarTextoQueContengaX.elTextoContiene(SMS_NEQUI),
                 ValidarTextoQueContengaX.elTextoContiene(PAGAR_CON_OTRO_NEQUI));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_7);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_7);
-
-        actor.attemptsTo(
-                Click.on(BTN_ENVIAR_2),
-                WaitForTextContains.withAnyTextContains(MENU_PRINCIPAL, SMS_NEQUI)
-        );
 
         actor.attemptsTo(
                 Click.on(BTN_MEDIOS_DE_PAGO),
@@ -170,7 +158,8 @@ public class ValidarPagoPaquete implements Task {
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_8);
 
         actor.attemptsTo(
-                Click.on(BTN_ENVIAR_2), WaitForTextContains.withTextContains(HAZ_CLICK_ENLACE));
+                Click.on(BTN_ENVIAR_2),
+                WaitForTextContains.withTextContains(HAZ_CLICK_ENLACE));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_9);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_9);
