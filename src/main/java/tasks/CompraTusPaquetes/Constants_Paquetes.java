@@ -182,6 +182,7 @@ public class Constants_Paquetes {
       "¿Cómo protegemos tu inicio de sesión?";
   public static final String SMS_NEQUI = "Parece que este número no tiene una cuenta en Nequi.";
   public static final String PAGAR_CON_OTRO_NEQUI = "Pagar con otro Nequi";
+  public static final String PAGAR_CON_OTRO_MEDIO = "Pagar con otro medio";
 
   // Valores de recarga principales
   public static final String RECARGA_1000 = "$ 1.000";
