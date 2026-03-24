@@ -24,35 +24,35 @@ import utils.UtilidadesAndroid;
 
 public class ValidarClaroVideo implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje con URL de claro video");
-    ReportHooks.registrarPaso("Validar mensaje con URL de claro video");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje con URL de claro video");
+        ReportHooks.registrarPaso("Validar mensaje con URL de claro video");
 
-    actor.attemptsTo(ValidarTextoQueContengaX.elTextoContiene(CLARO_VIDEO));
+        actor.attemptsTo(ValidarTextoQueContengaX.elTextoContiene(CLARO_VIDEO));
 
-    UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_VIDEO);
+        UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_VIDEO);
 
-    actor.attemptsTo(
-        WaitForResponse.withAnyText(EXPLORAR),
-        WaitFor.aTime(6000),
-        ValidarTextoQueContengaX.elTextoContiene(PREMIUM),
-        ValidarTextoQueContengaX.elTextoContiene(CLARO_VIDEO_RECOMIENDA));
+        actor.attemptsTo(
+                WaitFor.aTime(20000),
+                WaitForResponse.withAnyText(EXPLORAR),
+                ValidarTextoQueContengaX.elTextoContiene(PREMIUM),
+                ValidarTextoQueContengaX.elTextoContiene(CLARO_VIDEO_RECOMIENDA));
 
-    theActorInTheSpotlight().should(seeThat(ValidarElemento.esVisible(LOGO_CLARO_VIDEO)));
+        theActorInTheSpotlight().should(seeThat(ValidarElemento.esVisible(LOGO_CLARO_VIDEO)));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Se valida el ingreso a Claro Video");
-    ReportHooks.registrarPaso("Se valida el ingreso a Claro Video");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Se valida el ingreso a Claro Video");
+        ReportHooks.registrarPaso("Se valida el ingreso a Claro Video");
 
-    actor.attemptsTo(
-        Atras.irAtras(),
-        Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-        Click.on(BTN_ENVIAR),
-        WaitForResponse.withText(ABANDONAR_CONVERSACION));
-  }
+        actor.attemptsTo(
+                Atras.irAtras(),
+                Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
+                Click.on(BTN_ENVIAR),
+                WaitForResponse.withText(ABANDONAR_CONVERSACION));
+    }
 
-  public static Performable validarClaroVideo() {
-    return instrumented(ValidarClaroVideo.class);
-  }
+    public static Performable validarClaroVideo() {
+        return instrumented(ValidarClaroVideo.class);
+    }
 }

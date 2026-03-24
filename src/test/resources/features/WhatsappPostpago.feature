@@ -264,6 +264,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Validar direccionamiento Programar pagos
     And Vaciar chat
 
+
   @Whatsapp_Post_18
   Scenario: Soporte y servicio - Estado servicios - Fallas en tu navegacion Datos
     Given Ingresar a WhatsAPP

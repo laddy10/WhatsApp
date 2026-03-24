@@ -285,4 +285,6 @@ public class ConstantesPost {
   public static final String TIPO_SOLICITUD = "Tipo solicitud";
 
   public static final String MUNDO_CLARO = "Mundo Claro";
+  public static final String SISTEMA_OPERATIVO = "sistema operativo";
+  public static final String ANDROID = "Android";
 }

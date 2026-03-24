@@ -22,39 +22,48 @@ import utils.CapturaDePantallaMovil;
 
 public class FallasDatos implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-    actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(DATOS_FALLAS));
+        actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(DATOS_FALLAS));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar 'Datos'");
-    ReportHooks.registrarPaso("Seleccionar 'Datos'");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar 'Datos'");
+        ReportHooks.registrarPaso("Seleccionar 'Datos'");
 
-    // Enviar selección
-    actor.attemptsTo(
-        Click.on(BTN_ENVIAR_2),
-        WaitForTextContains.withTextContains(REALIZAR_DIAGNOSTICO),
-        ClickTextoQueContengaX.elTextoContiene(REALIZAR_DIAGNOSTICO),
-        WaitForTextContains.withTextContains(REVISION_SERVICIO),
-        ValidarTextoQueContengaX.elTextoContiene(NECESARIO_CONFIGURACION),
-        ValidarTextoQueContengaX.elTextoContiene(CONTINUAR_PASO_VIDEO));
+        // Enviar selección
+        actor.attemptsTo(
+                Click.on(BTN_ENVIAR_2),
+                WaitForTextContains.withTextContains(REALIZAR_DIAGNOSTICO),
+                ClickTextoQueContengaX.elTextoContiene(REALIZAR_DIAGNOSTICO),
+                WaitForTextContains.withTextContains(SISTEMA_OPERATIVO)
+        );
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Validar seguir paso a paso video");
-    ReportHooks.registrarPaso("Validar seguir paso a paso video");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar 'Android'");
+        ReportHooks.registrarPaso("Seleccionar 'Android'");
 
-    actor.attemptsTo(Click.on(BTN_REPRODUCIR_VIDEO), WaitFor.aTime(6000));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Ver video");
-    ReportHooks.registrarPaso("Ver video");
+        actor.attemptsTo(
+                ClickTextoQueContengaX.elTextoContiene(ANDROID),
+                WaitForTextContains.withTextContains(REVISION_SERVICIO),
+                ValidarTextoQueContengaX.elTextoContiene(NECESARIO_CONFIGURACION),
+                ValidarTextoQueContengaX.elTextoContiene(CONTINUAR_PASO_VIDEO));
 
-    actor.attemptsTo(
-        Atras.irAtras(),
-        Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-        Click.on(BTN_ENVIAR),
-        WaitForResponse.withText(ABANDONAR_CONVERSACION));
-  }
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validar seguir paso a paso video");
+        ReportHooks.registrarPaso("Validar seguir paso a paso video");
 
-  public static Performable fallasDatos() {
-    return instrumented(FallasDatos.class);
-  }
+        actor.attemptsTo(Click.on(BTN_REPRODUCIR_VIDEO), WaitFor.aTime(6000));
+
+        CapturaDePantallaMovil.tomarCapturaPantalla("Ver video");
+        ReportHooks.registrarPaso("Ver video");
+
+        actor.attemptsTo(
+                Atras.irAtras(),
+                Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
+                Click.on(BTN_ENVIAR),
+                WaitForResponse.withText(ABANDONAR_CONVERSACION));
+    }
+
+    public static Performable fallasDatos() {
+        return instrumented(FallasDatos.class);
+    }
 }
