@@ -15,6 +15,7 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 
 public class ValidarMenuPrincipalPost implements Task {
@@ -37,9 +38,8 @@ public class ValidarMenuPrincipalPost implements Task {
 
     actor.attemptsTo(
         Atras.irAtras(),
-        Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-        Click.on(BTN_ENVIAR),
-        WaitForResponse.withText(ABANDONAR_CONVERSACION));
+            SalirConversacion.salir()
+    );
   }
 
   public static Performable validarMenuPrincipalPost() {

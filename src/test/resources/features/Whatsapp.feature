@@ -1,6 +1,6 @@
 Feature: Validar los flujos de WhatsApp en prepago
 
-  @Whatsapp_01 
+  @Whatsapp_01
   Scenario: Validar menú principal
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -14,7 +14,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_02 
+  @Whatsapp_02
   Scenario: Consultar el saldo de la linea
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -29,7 +29,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_03 
+  @Whatsapp_03
   Scenario: Consultar los consumos
     Given Ingresar a WhatsAPP
     When Validar Version de la App

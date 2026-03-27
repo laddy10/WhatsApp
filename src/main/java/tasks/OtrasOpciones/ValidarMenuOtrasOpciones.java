@@ -14,30 +14,30 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 
 public class ValidarMenuOtrasOpciones implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
-    actor.attemptsTo(
-        ValidarTexto.validarTexto(CAMBIATE_A_POSTPAGO),
-        ValidarTexto.validarTexto(TUS_SERVICIOS_LDI),
-        ValidarTexto.validarTexto(ROAMING_INTERNACIONAL),
-        ValidarTexto.validarTexto(RENUEVA_TU_SIM),
-        ValidarTexto.validarTexto(TUS_PQR_RADICADOS));
+    @Override
+    public <T extends Actor> void performAs(T actor) {
+        actor.attemptsTo(
+                ValidarTexto.validarTexto(CAMBIATE_A_POSTPAGO),
+                ValidarTexto.validarTexto(TUS_SERVICIOS_LDI),
+                ValidarTexto.validarTexto(ROAMING_INTERNACIONAL),
+                ValidarTexto.validarTexto(RENUEVA_TU_SIM),
+                ValidarTexto.validarTexto(TUS_PQR_RADICADOS));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Validacion exitosa menu otras opciones");
-    ReportHooks.registrarPaso("Validacion exitosa menu otras opciones");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validacion exitosa menu otras opciones");
+        ReportHooks.registrarPaso("Validacion exitosa menu otras opciones");
 
-    actor.attemptsTo(
-        Atras.irAtras(),
-        Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-        Click.on(BTN_ENVIAR),
-        WaitForResponse.withText(ABANDONAR_CONVERSACION));
-  }
+        actor.attemptsTo(
+                Atras.irAtras(),
+                SalirConversacion.salir()
+        );
+    }
 
-  public static Performable validarMenuOtrasOpciones() {
-    return instrumented(ValidarMenuOtrasOpciones.class);
-  }
+    public static Performable validarMenuOtrasOpciones() {
+        return instrumented(ValidarMenuOtrasOpciones.class);
+    }
 }

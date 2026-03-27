@@ -19,35 +19,35 @@ import utils.CapturaDePantallaMovil;
 
 public class ModificaTuPlan implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-    actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(MODIFICA_TU_PLAN));
+        actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(MODIFICA_TU_PLAN));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar opcion Modifica tu plan");
-    ReportHooks.registrarPaso("Seleccionar opcion Modifica tu plan");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar opcion Modifica tu plan");
+        ReportHooks.registrarPaso("Seleccionar opcion Modifica tu plan");
 
-    actor.attemptsTo(
-        ClickElementByText.clickElementByText(ENVIAR),
-        WaitForTextContains.withAnyTextContains(VER_OTROS_PLANES));
+        actor.attemptsTo(
+                ClickElementByText.clickElementByText(ENVIAR),
+                WaitForTextContains.withAnyTextContains(VER_OTROS_PLANES));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Validar botón Selecciona");
-    ReportHooks.registrarPaso("Validar botón Selecciona");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validar botón Selecciona");
+        ReportHooks.registrarPaso("Validar botón Selecciona");
 
-    actor.attemptsTo(
-        EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
-        ValidarTextoQueContengaX.elTextoContiene(CAMBIAR_PLAN),
-        ValidarTextoQueContengaX.elTextoContiene(PASAR_LINEA_A_PREPAGO),
-        ValidarTextoQueContengaX.elTextoContiene(DESACTIVAR_LINEA),
-        ValidarTextoQueContengaX.elTextoContiene(SERVICIOS_ADICIONALES));
+        actor.attemptsTo(
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
+                ValidarTextoQueContengaX.elTextoContiene(CAMBIAR_PLAN),
+                ValidarTextoQueContengaX.elTextoContiene(PASAR_LINEA_A_PREPAGO),
+                ValidarTextoQueContengaX.elTextoContiene(DESACTIVAR_LINEA),
+                ValidarTextoQueContengaX.elTextoContiene(SERVICIOS_ADICIONALES));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Validar menu Modifica tu plan");
-    ReportHooks.registrarPaso("Validar menu Modifica tu plan");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validar menu Modifica tu plan");
+        ReportHooks.registrarPaso("Validar menu Modifica tu plan");
 
-    actor.attemptsTo(Atras.irAtras(), SalirConversacion.salir());
-  }
+        actor.attemptsTo(Atras.irAtras(), SalirConversacion.salir());
+    }
 
-  public static Performable modificaTuPlan() {
-    return instrumented(ModificaTuPlan.class);
-  }
+    public static Performable modificaTuPlan() {
+        return instrumented(ModificaTuPlan.class);
+    }
 }

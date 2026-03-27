@@ -37,14 +37,10 @@ public class ValidarTextoErrorYLimpiarChat implements Task {
     if (textoErrorDetectado) {
       actor.attemptsTo(
           SalirConversacion.salir(),
-          // Enter.theValue(Constantes.SALIR).into(TXT_ENVIAR_MENSAJE),
-          // Click.on(BTN_ENVIAR),
-          // WaitForResponse.withText(ABANDONAR_CONVERSACION),
           Click.on(BTN_MAS_OPCIONES),
           ClickTextoQueContengaX.elTextoContiene(MAS),
           ClickTextoQueContengaX.elTextoContiene(VACIAR_CHAT),
           Click.on(BTN_VACIAR_CHAT),
-          // ClickTextoQueContengaX.elTextoContiene("Vaciar chat"),
           Enter.theValue(user.getSaludo()).into(TXT_ENVIAR_MENSAJE),
           Click.on(BTN_ENVIAR));
     }

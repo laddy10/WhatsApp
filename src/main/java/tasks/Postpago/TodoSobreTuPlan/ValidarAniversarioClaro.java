@@ -15,22 +15,23 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 import utils.UtilidadesAndroid;
 
 public class ValidarAniversarioClaro implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje con URL de claro Club");
-    ReportHooks.registrarPaso("Validar mensaje con URL de claro Club");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje con URL de claro Club");
+        ReportHooks.registrarPaso("Validar mensaje con URL de claro Club");
 
-    actor.attemptsTo(ValidarTextoQueContengaX.elTextoContiene(URL_ANIVERSARIO_CLARO));
+        actor.attemptsTo(ValidarTextoQueContengaX.elTextoContiene(URL_ANIVERSARIO_CLARO));
 
-    UtilidadesAndroid.abrirLinkEnNavegador("https://" + URL_ANIVERSARIO_CLARO);
+        UtilidadesAndroid.abrirLinkEnNavegador("https://" + URL_ANIVERSARIO_CLARO);
 
-    actor.attemptsTo(WaitFor.aTime(90000));
+        actor.attemptsTo(WaitFor.aTime(90000));
 
     /*    List<WebElementFacade> btnclose = BTN_CLOSE.resolveAllFor(actor);
     if (!btnclose.isEmpty()) {
@@ -71,14 +72,13 @@ public class ValidarAniversarioClaro implements Task {
                 Atras.irAtras());
     } */
 
-    actor.attemptsTo(
-        Atras.irAtras(),
-        Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-        Click.on(BTN_ENVIAR),
-        WaitForResponse.withText(ABANDONAR_CONVERSACION));
-  }
+        actor.attemptsTo(
+                Atras.irAtras(),
+                SalirConversacion.salir()
+        );
+    }
 
-  public static Performable validarAniversarioClaro() {
-    return instrumented(ValidarAniversarioClaro.class);
-  }
+    public static Performable validarAniversarioClaro() {
+        return instrumented(ValidarAniversarioClaro.class);
+    }
 }

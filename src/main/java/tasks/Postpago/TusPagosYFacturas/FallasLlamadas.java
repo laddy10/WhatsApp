@@ -18,43 +18,43 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 
 public class FallasLlamadas implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-    actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(LLAMADAS_FALLAS));
+        actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(LLAMADAS_FALLAS));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Llamadas");
-    ReportHooks.registrarPaso("Seleccionar Llamadas");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Llamadas");
+        ReportHooks.registrarPaso("Seleccionar Llamadas");
 
-    // Enviar selección
-    actor.attemptsTo(
-        Click.on(BTN_ENVIAR_2),
-        WaitForTextContains.withTextContains(REALIZAR_DIAGNOSTICO),
-        ClickTextoQueContengaX.elTextoContiene(REALIZAR_DIAGNOSTICO),
-        WaitForTextContains.withTextContains(REVISION_SERVICIO),
-        ValidarTextoQueContengaX.elTextoContiene(NECESARIO_CONFIGURACION),
-        ValidarTextoQueContengaX.elTextoContiene(CONTINUAR_PASO_VIDEO));
+        // Enviar selección
+        actor.attemptsTo(
+                Click.on(BTN_ENVIAR_2),
+                WaitForTextContains.withTextContains(REALIZAR_DIAGNOSTICO),
+                ClickTextoQueContengaX.elTextoContiene(REALIZAR_DIAGNOSTICO),
+                WaitForTextContains.withTextContains(REVISION_SERVICIO),
+                ValidarTextoQueContengaX.elTextoContiene(NECESARIO_CONFIGURACION),
+                ValidarTextoQueContengaX.elTextoContiene(CONTINUAR_PASO_VIDEO));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Validar seguir paso a paso video");
-    ReportHooks.registrarPaso("Validar seguir paso a paso video");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validar seguir paso a paso video");
+        ReportHooks.registrarPaso("Validar seguir paso a paso video");
 
-    actor.attemptsTo(Click.on(BTN_REPRODUCIR_VIDEO), WaitFor.aTime(6000));
+        actor.attemptsTo(Click.on(BTN_REPRODUCIR_VIDEO), WaitFor.aTime(6000));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Ver video");
-    ReportHooks.registrarPaso("Ver video");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Ver video");
+        ReportHooks.registrarPaso("Ver video");
 
-    actor.attemptsTo(
-        Atras.irAtras(),
-        Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-        Click.on(BTN_ENVIAR),
-        WaitForResponse.withText(ABANDONAR_CONVERSACION));
-  }
+        actor.attemptsTo(
+                Atras.irAtras(),
+                SalirConversacion.salir()
+        );
+    }
 
-  public static Performable fallasLlamadas() {
-    return instrumented(FallasLlamadas.class);
-  }
+    public static Performable fallasLlamadas() {
+        return instrumented(FallasLlamadas.class);
+    }
 }

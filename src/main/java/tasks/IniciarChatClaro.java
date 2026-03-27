@@ -28,6 +28,7 @@ public class IniciarChatClaro implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         boolean chatIniciadoCorrectamente = false;
+        boolean saludoYaEnviado = false;
         int intentos = 0;
 
         while (!chatIniciadoCorrectamente && intentos < MAX_REINTENTOS) {
@@ -35,11 +36,14 @@ public class IniciarChatClaro implements Task {
 
             try {
                 // 1️⃣ Enviar saludo (OBLIGATORIO)
-                actor.attemptsTo(
-                        Enter.theValue(user.getSaludo()).into(TXT_ENVIAR_MENSAJE),
-                        Click.on(BTN_ENVIAR),
-                        WaitFor.aTime(3000));
-
+                if (!saludoYaEnviado) {
+                    actor.attemptsTo(
+                            Enter.theValue(user.getSaludo()).into(TXT_ENVIAR_MENSAJE),
+                            Click.on(BTN_ENVIAR),
+                            WaitForTextContains.withAnyTextContains(10, obtenerTextosParaWait())
+                    );
+                    saludoYaEnviado = true;
+                }
                 // 2️⃣ Clasificar respuesta del bot
                 EstadoConversacion estado = ClasificarRespuestaBot.obtenerEstado(actor);
 
@@ -89,6 +93,21 @@ public class IniciarChatClaro implements Task {
                 actor.attemptsTo(WaitFor.aTime(2000));
             }
         }
+    }
+
+    public static String[] obtenerTextosParaWait() {
+        return new String[]{
+                "Hola",
+                "Líneas postpago",
+                "No entendí",
+                "Menú principal",
+                "Ideas de regalo",
+                "¿Qué quieres hacer hoy?",
+                "respuesta no es válida",
+                "opciones mostradas anteriormente",
+                "ingrese el número de opción"
+
+        };
     }
 
     public static Performable iniciarChatClaro() {

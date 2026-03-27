@@ -18,46 +18,46 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 
 public class ComprarRoaming implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Dar clic Comprar Roaming");
-    ReportHooks.registrarPaso("Dar clic Comprar Roaming");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Dar clic Comprar Roaming");
+        ReportHooks.registrarPaso("Dar clic Comprar Roaming");
 
-    actor.attemptsTo(
-        ClickTextoQueContengaX.elTextoContiene(COMPRAR_ROAMING),
-        WaitForTextContains.withTextContains(ESCRIBE_NOMBRE_PAIS),
-        Enter.theValue(ESPAÑA).into(TXT_ENVIAR_MENSAJE),
-        Click.on(BTN_ENVIAR),
-        WaitForTextContains.withTextContains(PAIS_ELEGIDO),
-        ValidarTextoQueContengaX.elTextoContiene(PAIS_ELEGIDO),
-        ValidarTextoQueContengaX.elTextoContiene(ESPAÑA));
+        actor.attemptsTo(
+                ClickTextoQueContengaX.elTextoContiene(COMPRAR_ROAMING),
+                WaitForTextContains.withTextContains(ESCRIBE_NOMBRE_PAIS),
+                Enter.theValue(ESPAÑA).into(TXT_ENVIAR_MENSAJE),
+                Click.on(BTN_ENVIAR),
+                WaitForTextContains.withTextContains(PAIS_ELEGIDO),
+                ValidarTextoQueContengaX.elTextoContiene(PAIS_ELEGIDO),
+                ValidarTextoQueContengaX.elTextoContiene(ESPAÑA));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Validacion del pais seleccionado");
-    ReportHooks.registrarPaso("Validacion del pais seleccionado");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validacion del pais seleccionado");
+        ReportHooks.registrarPaso("Validacion del pais seleccionado");
 
-    actor.attemptsTo(
-        ClickTextoQueContengaX.elTextoContiene(SELECCIONA),
-        ValidarTextoQueContengaX.elTextoContiene(PQ_1),
-        ValidarTextoQueContengaX.elTextoContiene(PQ_2),
-        ValidarTextoQueContengaX.elTextoContiene(PQ_3),
-        ValidarTextoQueContengaX.elTextoContiene(PQ_4));
+        actor.attemptsTo(
+                ClickTextoQueContengaX.elTextoContiene(SELECCIONA),
+                ValidarTextoQueContengaX.elTextoContiene(PQ_1),
+                ValidarTextoQueContengaX.elTextoContiene(PQ_2),
+                ValidarTextoQueContengaX.elTextoContiene(PQ_3),
+                ValidarTextoQueContengaX.elTextoContiene(PQ_4));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Validacion de los paquetes");
-    ReportHooks.registrarPaso("Validacion de los paquetes");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validacion de los paquetes");
+        ReportHooks.registrarPaso("Validacion de los paquetes");
 
-    actor.attemptsTo(
-        Atras.irAtras(),
-        Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-        Click.on(BTN_ENVIAR),
-        WaitForResponse.withText(ABANDONAR_CONVERSACION));
-  }
+        actor.attemptsTo(
+                Atras.irAtras(),
+                SalirConversacion.salir()
+        );
+    }
 
-  public static Performable comprarRoaming() {
-    return instrumented(ComprarRoaming.class);
-  }
+    public static Performable comprarRoaming() {
+        return instrumented(ComprarRoaming.class);
+    }
 }

@@ -23,42 +23,42 @@ import utils.UtilidadesAndroid;
 
 public class TusPQRSRadicados implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
-    actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(TUS_PQR_RADICADOS_2));
+    @Override
+    public <T extends Actor> void performAs(T actor) {
+        actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(TUS_PQR_RADICADOS_2));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Tus PQR radicados");
-    ReportHooks.registrarPaso("Seleccionar Tus PQR radicados");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Tus PQR radicados");
+        ReportHooks.registrarPaso("Seleccionar Tus PQR radicados");
 
-    actor.attemptsTo(
-        ClickElementByText.clickElementByText(ENVIAR),
-        WaitForTextContains.withAnyTextContains(ESTADO_PETICION));
+        actor.attemptsTo(
+                ClickElementByText.clickElementByText(ENVIAR),
+                WaitForTextContains.withAnyTextContains(ESTADO_PETICION));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Valida URL petición");
-    ReportHooks.registrarPaso("Valida URL petición");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Valida URL petición");
+        ReportHooks.registrarPaso("Valida URL petición");
 
-    String mensaje =
-        LBL_MENSAJES.resolveAllFor(actor).stream()
-            .map(WebElementFacade::getText)
-            .filter(text -> text.contains("yoiz.me") || text.contains("clro.co"))
-            .findFirst()
-            .orElseThrow(() -> new RuntimeException("No se encontró URL de pago."));
+        String mensaje =
+                LBL_MENSAJES.resolveAllFor(actor).stream()
+                        .map(WebElementFacade::getText)
+                        .filter(text -> text.contains("yoiz.me") || text.contains("clro.co"))
+                        .findFirst()
+                        .orElseThrow(() -> new RuntimeException("No se encontró URL de pago."));
 
-    String urlExtraida = ExtraerURL.desdeTexto(mensaje);
+        String urlExtraida = ExtraerURL.desdeTexto(mensaje);
 
-    UtilidadesAndroid.abrirLinkEnNavegador(urlExtraida);
+        UtilidadesAndroid.abrirLinkEnNavegador(urlExtraida);
 
-    actor.attemptsTo(
-        WaitForResponse.withAnyText(PERSONAS),
-        ValidarTextoQueContengaX.elTextoContiene(CLARO_TE_ESCUCHA));
+        actor.attemptsTo(
+                WaitForResponse.withAnyText(PERSONAS),
+                ValidarTextoQueContengaX.elTextoContiene(CLARO_TE_ESCUCHA));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Direccionamiento Claro te escucha");
-    ReportHooks.registrarPaso("Direccionamiento Claro te escucha");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Direccionamiento Claro te escucha");
+        ReportHooks.registrarPaso("Direccionamiento Claro te escucha");
 
-    actor.attemptsTo(Atras.irAtras(), SalirConversacion.salir());
-  }
+        actor.attemptsTo(Atras.irAtras(), SalirConversacion.salir());
+    }
 
-  public static Performable tusPQRSRadicados() {
-    return instrumented(TusPQRSRadicados.class);
-  }
+    public static Performable tusPQRSRadicados() {
+        return instrumented(TusPQRSRadicados.class);
+    }
 }

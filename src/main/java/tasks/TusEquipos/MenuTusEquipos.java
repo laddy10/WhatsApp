@@ -16,22 +16,22 @@ import utils.CapturaDePantallaMovil;
 
 public class MenuTusEquipos implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
-    actor.attemptsTo(
-        ClickTextoQueContengaX.elTextoContiene(SELECCIONA),
-        ValidarTextoQueContengaX.elTextoContiene(REGISTRA_TU_EQUIPO),
-        ValidarTextoQueContengaX.elTextoContiene(TUS_EQUIPOS_ASOCIADOS),
-        ValidarTextoQueContengaX.elTextoContiene(TUS_EQUIPOS_EN_SOPORTE),
-        ValidarTextoQueContengaX.elTextoContiene(REPORTE_ROBO_PERDIDA_2));
+    @Override
+    public <T extends Actor> void performAs(T actor) {
+        actor.attemptsTo(
+                ClickTextoQueContengaX.elTextoContiene(SELECCIONA),
+                ValidarTextoQueContengaX.elTextoContiene(REGISTRA_TU_EQUIPO),
+                ValidarTextoQueContengaX.elTextoContiene(TUS_EQUIPOS_ASOCIADOS),
+                ValidarTextoQueContengaX.elTextoContiene(TUS_EQUIPOS_EN_SOPORTE),
+                ValidarTextoQueContengaX.elTextoContiene(REPORTE_ROBO_PERDIDA_2));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Validar menu completo");
-    ReportHooks.registrarPaso("Validar menu completo");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validar menu completo");
+        ReportHooks.registrarPaso("Validar menu completo");
 
-    actor.attemptsTo(Atras.irAtras(), SalirConversacion.salir());
-  }
+        actor.attemptsTo(Atras.irAtras(), SalirConversacion.salir());
+    }
 
-  public static Performable menuTusEquipos() {
-    return instrumented(MenuTusEquipos.class);
-  }
+    public static Performable menuTusEquipos() {
+        return instrumented(MenuTusEquipos.class);
+    }
 }

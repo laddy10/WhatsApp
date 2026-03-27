@@ -50,9 +50,7 @@ public class ConsultarSaldoLinea implements Task {
     ReportHooks.registrarPaso("Se valida el saldo de la linea");
 
     actor.attemptsTo(
-        Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-        Click.on(BTN_ENVIAR),
-        WaitForResponse.withText(ABANDONAR_CONVERSACION));
+            SalirConversacion.salir());
   }
 
   public static Performable consultarSaldoLinea() {

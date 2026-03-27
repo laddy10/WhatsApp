@@ -19,6 +19,7 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import tasks.ExtraerURL;
+import tasks.SalirConversacion;
 import userinterfaces.WhatsAppPage;
 import utils.CapturaDePantallaMovil;
 import utils.UtilidadesAndroid;
@@ -51,9 +52,8 @@ public class DireccionamientoMediosPago implements Task {
 
         actor.attemptsTo(
                 Atras.irAtras(),
-                Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-                Click.on(BTN_ENVIAR),
-                WaitForResponse.withText(ABANDONAR_CONVERSACION));
+                SalirConversacion.salir()
+        );
 
         //    WordAppium.main();
     }

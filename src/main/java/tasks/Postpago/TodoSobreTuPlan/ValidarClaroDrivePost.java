@@ -16,42 +16,45 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 import utils.UtilidadesAndroid;
 
 public class ValidarClaroDrivePost implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje con URL de claro Drive");
-    ReportHooks.registrarPaso("Validar mensaje con URL de claro Drive");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje con URL de claro Drive");
+        ReportHooks.registrarPaso("Validar mensaje con URL de claro Drive");
 
-    actor.attemptsTo(
-        ValidarTextoQueContengaX.elTextoContiene(CLARO_DRIVE),
-        ValidarTextoQueContengaX.elTextoContiene(URL_CLARO_DRIVE));
+        actor.attemptsTo(
+                ValidarTextoQueContengaX.elTextoContiene(CLARO_DRIVE),
+                ValidarTextoQueContengaX.elTextoContiene(URL_CLARO_DRIVE));
 
-    UtilidadesAndroid.abrirLinkEnNavegador("https://bit.ly/3oNvleC");
+        UtilidadesAndroid.abrirLinkEnNavegador("https://bit.ly/3oNvleC");
 
-    actor.attemptsTo(WaitFor.aTime(10000));
+        actor.attemptsTo(WaitFor.aTime(10000));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Direccionamiento claro Drive");
-    ReportHooks.registrarPaso("Direccionamiento claro Drive");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Direccionamiento claro Drive");
+        ReportHooks.registrarPaso("Direccionamiento claro Drive");
 
-    actor.attemptsTo(
-        ValidarTexto.validarTexto(MI_CLARO_DRIVE),
-        ValidarTexto.validarTexto(NEGOCIO),
-        ValidarTextoQueContengaX.elTextoContiene(TUS_ARCHIVOS),
-        Scroll.scrollUnaVista());
+        actor.attemptsTo(
+                ValidarTexto.validarTexto(MI_CLARO_DRIVE),
+                ValidarTexto.validarTexto(NEGOCIO),
+                ValidarTextoQueContengaX.elTextoContiene(TUS_ARCHIVOS),
+                Scroll.scrollUnaVista());
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Direccionamiento pagina claro Drive");
-    ReportHooks.registrarPaso("Direccionamiento pagina claro Drive");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Direccionamiento pagina claro Drive");
+        ReportHooks.registrarPaso("Direccionamiento pagina claro Drive");
 
-    actor.attemptsTo(
-        Atras.irAtras(), Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE), Click.on(BTN_ENVIAR));
-  }
+        actor.attemptsTo(
+                Atras.irAtras(),
+                SalirConversacion.salir()
+        );
+    }
 
-  public static Performable validarClaroDrivePost() {
-    return instrumented(ValidarClaroDrivePost.class);
-  }
+    public static Performable validarClaroDrivePost() {
+        return instrumented(ValidarClaroDrivePost.class);
+    }
 }

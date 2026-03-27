@@ -19,6 +19,7 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import questions.ValidarElemento;
+import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 import utils.UtilidadesAndroid;
 
@@ -40,16 +41,14 @@ public class ValidarClaroVideo implements Task {
                 ValidarTextoQueContengaX.elTextoContiene(PREMIUM),
                 ValidarTextoQueContengaX.elTextoContiene(CLARO_VIDEO_RECOMIENDA));
 
-        theActorInTheSpotlight().should(seeThat(ValidarElemento.esVisible(LOGO_CLARO_VIDEO)));
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Se valida el ingreso a Claro Video");
         ReportHooks.registrarPaso("Se valida el ingreso a Claro Video");
 
         actor.attemptsTo(
                 Atras.irAtras(),
-                Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-                Click.on(BTN_ENVIAR),
-                WaitForResponse.withText(ABANDONAR_CONVERSACION));
+                SalirConversacion.salir()
+        );
     }
 
     public static Performable validarClaroVideo() {

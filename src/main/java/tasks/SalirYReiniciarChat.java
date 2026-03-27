@@ -17,28 +17,28 @@ import utils.TestDataProvider;
 
 public class SalirYReiniciarChat implements Task {
 
-  private final User user = TestDataProvider.getRealUser();
+    private final User user = TestDataProvider.getRealUser();
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Pantalla no válida detectada - Reiniciando chat");
-    ReportHooks.registrarPaso("Pantalla no válida detectada - Se reinicia la conversación");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Pantalla no válida detectada - Reiniciando chat");
+        ReportHooks.registrarPaso("Pantalla no válida detectada - Se reinicia la conversación");
 
-    actor.attemptsTo(
-        SalirConversacion.salir(),
-        WaitFor.aTime(1500),
-        Click.on(BTN_MAS_OPCIONES),
-        ClickTextoQueContengaX.elTextoContiene(MAS),
-        ClickTextoQueContengaX.elTextoContiene(VACIAR_CHAT),
-        Click.on(BTN_VACIAR_CHAT),
-        WaitFor.aTime(1500),
-        Enter.theValue(user.getSaludo()).into(TXT_ENVIAR_MENSAJE),
-        Click.on(BTN_ENVIAR),
-        WaitFor.aTime(2500));
-  }
+        actor.attemptsTo(
+                SalirConversacion.salir(),
+                WaitFor.aTime(1500),
+                Click.on(BTN_MAS_OPCIONES),
+                ClickTextoQueContengaX.elTextoContiene(MAS),
+                ClickTextoQueContengaX.elTextoContiene(VACIAR_CHAT),
+                Click.on(BTN_VACIAR_CHAT),
+                WaitFor.aTime(1500),
+                Enter.theValue(user.getSaludo()).into(TXT_ENVIAR_MENSAJE),
+                Click.on(BTN_ENVIAR),
+                WaitFor.aTime(2500));
+    }
 
-  public static Task ejecutar() {
-    return instrumented(SalirYReiniciarChat.class);
-  }
+    public static Task ejecutar() {
+        return instrumented(SalirYReiniciarChat.class);
+    }
 }

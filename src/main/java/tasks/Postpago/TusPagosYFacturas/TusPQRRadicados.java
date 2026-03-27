@@ -19,55 +19,55 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import tasks.ExtraerURL;
+import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 import utils.UtilidadesAndroid;
 
 public class TusPQRRadicados implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-    actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(TUS_PQRS_RADICADOS));
+        actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(TUS_PQRS_RADICADOS));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Tus PQR Radicados");
-    ReportHooks.registrarPaso("Seleccionar Tus PQR Radicados");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Tus PQR Radicados");
+        ReportHooks.registrarPaso("Seleccionar Tus PQR Radicados");
 
-    // Enviar selección
-    actor.attemptsTo(
-        Click.on(BTN_ENVIAR_2),
-        WaitForTextContains.withTextContains(CONSULTAR_QUEJAS_RECLAMOS),
-        ValidarTextoQueContengaX.elTextoContiene(CONSULTAR_QUEJAS_RECLAMOS));
+        // Enviar selección
+        actor.attemptsTo(
+                Click.on(BTN_ENVIAR_2),
+                WaitForTextContains.withTextContains(CONSULTAR_QUEJAS_RECLAMOS),
+                ValidarTextoQueContengaX.elTextoContiene(CONSULTAR_QUEJAS_RECLAMOS));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Abrir URL para consultar quejas y reclamos");
-    ReportHooks.registrarPaso("Abrir URL para consultar quejas y reclamos");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Abrir URL para consultar quejas y reclamos");
+        ReportHooks.registrarPaso("Abrir URL para consultar quejas y reclamos");
 
-    String mensaje =
-        LBL_MENSAJES.resolveAllFor(actor).stream()
-            .map(WebElementFacade::getText)
-            .filter(text -> text.contains("yoiz.me") || text.contains("clro.co"))
-            .findFirst()
-            .orElseThrow(() -> new RuntimeException("No se encontró URL de pago."));
+        String mensaje =
+                LBL_MENSAJES.resolveAllFor(actor).stream()
+                        .map(WebElementFacade::getText)
+                        .filter(text -> text.contains("yoiz.me") || text.contains("clro.co"))
+                        .findFirst()
+                        .orElseThrow(() -> new RuntimeException("No se encontró URL de pago."));
 
-    String urlExtraida = ExtraerURL.desdeTexto(mensaje);
+        String urlExtraida = ExtraerURL.desdeTexto(mensaje);
 
-    UtilidadesAndroid.abrirLinkEnNavegador(urlExtraida);
+        UtilidadesAndroid.abrirLinkEnNavegador(urlExtraida);
 
-    actor.attemptsTo(
-        WaitForTextContains.withTextContains(PETICIONES_QUEJAS_RECURSOS),
-        ValidarTexto.validarTexto(OFICINA_VIRTUAL),
-        ValidarTexto.validarTexto(TIPO_SOLICITUD));
+        actor.attemptsTo(
+                WaitForTextContains.withTextContains(PETICIONES_QUEJAS_RECURSOS),
+                ValidarTexto.validarTexto(OFICINA_VIRTUAL),
+                ValidarTexto.validarTexto(TIPO_SOLICITUD));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Direccionamiento pagina Claro");
-    ReportHooks.registrarPaso("Direccionamiento pagina Claro");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Direccionamiento pagina Claro");
+        ReportHooks.registrarPaso("Direccionamiento pagina Claro");
 
-    actor.attemptsTo(
-        Atras.irAtras(),
-        Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-        Click.on(BTN_ENVIAR),
-        WaitForResponse.withText(ABANDONAR_CONVERSACION));
-  }
+        actor.attemptsTo(
+                Atras.irAtras(),
+                SalirConversacion.salir()
+        );
+    }
 
-  public static Performable tusPQRRadicados() {
-    return instrumented(TusPQRRadicados.class);
-  }
+    public static Performable tusPQRRadicados() {
+        return instrumented(TusPQRRadicados.class);
+    }
 }

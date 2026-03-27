@@ -15,28 +15,28 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 
 public class CambiateaPost implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
-    actor.attemptsTo(
-        ClickTextoQueContengaX.elTextoContiene(CAMBIATE_A_POSTPAGO),
-        ValidarTexto.validarTexto(CAMBIATE_A_POSTPAGO));
+    @Override
+    public <T extends Actor> void performAs(T actor) {
+        actor.attemptsTo(
+                ClickTextoQueContengaX.elTextoContiene(CAMBIATE_A_POSTPAGO),
+                ValidarTexto.validarTexto(CAMBIATE_A_POSTPAGO));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla(
-        "cambiate a postpago y validar que permita seleccionar opción");
-    ReportHooks.registrarPaso("cambiate a postpago y validar que permita seleccionar opción");
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "cambiate a postpago y validar que permita seleccionar opción");
+        ReportHooks.registrarPaso("cambiate a postpago y validar que permita seleccionar opción");
 
-    actor.attemptsTo(
-        Atras.irAtras(),
-        Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-        Click.on(BTN_ENVIAR),
-        WaitForResponse.withText(ABANDONAR_CONVERSACION));
-  }
+        actor.attemptsTo(
+                Atras.irAtras(),
+                SalirConversacion.salir()
+        );
+    }
 
-  public static Performable cambiateaPost() {
-    return instrumented(CambiateaPost.class);
-  }
+    public static Performable cambiateaPost() {
+        return instrumented(CambiateaPost.class);
+    }
 }

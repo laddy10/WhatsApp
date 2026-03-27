@@ -16,6 +16,7 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 import utils.UtilidadesAndroid;
 
@@ -46,9 +47,8 @@ public class ValidarClaroDrive implements Task {
 
         actor.attemptsTo(
                 Atras.irAtras(),
-                Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-                Click.on(BTN_ENVIAR),
-                WaitFor.aTime(2000));
+                SalirConversacion.salir()
+        );
 
         //  WordAppium.main();
     }

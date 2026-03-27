@@ -2,8 +2,6 @@ package tasks;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.*;
-import static utils.Constantes.ABANDONAR_CONVERSACION;
-import static utils.Constantes.MENU_PRINCIPAL;
 
 import hooks.ReportHooks;
 import interactions.wait.WaitFor;
@@ -18,93 +16,101 @@ import utils.CapturaDePantallaMovil;
 
 public class SalirConversacion implements Task {
 
-  // Posibles respuestas del bot al intentar salir
-  private static final String RESPUESTA_NO_ENTENDI = "No entendí tu mensaje.";
-  private static final String RESPUESTA_MENU_PRINCIPAL = "Menú Principal";
-  private static final String RESPUESTA_ENCONTRARAS = "encontrarás lo que buscas en nuestro menú";
+    // 🔥 Comando actual del bot
+    private static final String COMANDO_CIERRE = "Cierrecaso";
 
-  private static final int MAX_INTENTOS = 3;
-  private static final int TIMEOUT_RESPUESTA = 6; // segundos
+    // ✅ Respuestas válidas de cierre
+    private static final String CASO_CERRADO = "Caso cerrado";
+    private static final String CIERRECASO = "Cierrecaso"; // fallback por si el bot lo refleja
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
-    boolean salidaExitosa = false;
-    int intentos = 0;
+    // ⚠️ Respuestas intermedias (ruido)
+    private static final String RESPUESTA_NO_ENTENDI = "No entendí tu mensaje.";
+    private static final String RESPUESTA_MENU_PRINCIPAL = "Menú principal";
+    private static final String RESPUESTA_CONTINUAR = "¿Deseas continuar chateando?";
+    private static final String RESPUESTA_ACTIVO = "Aún estoy contigo";
 
-    while (!salidaExitosa && intentos < MAX_INTENTOS) {
-      intentos++;
+    private static final int MAX_INTENTOS = 3;
+    private static final int TIMEOUT_RESPUESTA = 6;
 
-      // 1) Enviar SIEMPRE "Salir"
-      actor.attemptsTo(Enter.theValue("Salir").into(TXT_ENVIAR_MENSAJE), Click.on(BTN_ENVIAR));
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-      // 2) Esperar una respuesta (breve)
-      try {
-        actor.attemptsTo(
-            WaitForTextContains.withAnyTextContains(
-                TIMEOUT_RESPUESTA,
-                ABANDONAR_CONVERSACION, // la única que marca éxito
-                RESPUESTA_NO_ENTENDI,
-                RESPUESTA_ENCONTRARAS,
-                "¿Deseas continuar chateando?",
-                "Aún estoy contigo",
-                RESPUESTA_MENU_PRINCIPAL,
-                MENU_PRINCIPAL));
-      } catch (TimeoutException e) {
-        // Sin respuesta -> reintentar
-        ReportHooks.registrarPaso("⏱ Sin respuesta tras enviar 'Salir' (intento " + intentos + ")");
-        CapturaDePantallaMovil.tomarCapturaPantalla(
-            "Sin respuesta al comando Salir - intento " + intentos);
-        actor.attemptsTo(WaitFor.aTime(1000));
-        continue;
-      }
+        boolean salidaExitosa = false;
+        int intentos = 0;
 
-      // 3) ¿Éxito?
-      if (textoPresente(actor, ABANDONAR_CONVERSACION)) {
-        CapturaDePantallaMovil.tomarCapturaPantalla("Conversación finalizada correctamente");
-        ReportHooks.registrarPaso("✓ Conversación finalizada exitosamente");
-        salidaExitosa = true;
-        break;
-      }
+        while (!salidaExitosa && intentos < MAX_INTENTOS) {
+            intentos++;
 
-      // 4) No es la salida. Registrar y reintentar (NO clickeamos ningún chip)
-      CapturaDePantallaMovil.tomarCapturaPantalla("Aún sin salida - intento " + intentos);
-      ReportHooks.registrarPaso(
-          "↻ Respuesta no es salida (intento " + intentos + "), reenviando 'Salir'…");
-      actor.attemptsTo(WaitFor.aTime(1200)); // pequeño backoff
+            // 1️⃣ Enviar comando correcto
+            actor.attemptsTo(
+                    Enter.theValue(COMANDO_CIERRE).into(TXT_ENVIAR_MENSAJE),
+                    Click.on(BTN_ENVIAR)
+            );
+
+            // 2️⃣ Esperar respuesta del bot
+            try {
+                actor.attemptsTo(
+                        WaitForTextContains.withAnyTextContains(
+                                TIMEOUT_RESPUESTA,
+                                CASO_CERRADO,
+                                CIERRECASO,
+                                RESPUESTA_NO_ENTENDI,
+                                RESPUESTA_MENU_PRINCIPAL,
+                                RESPUESTA_CONTINUAR,
+                                RESPUESTA_ACTIVO
+                        )
+                );
+            } catch (TimeoutException e) {
+                ReportHooks.registrarPaso(
+                        "⏱ Sin respuesta tras '" + COMANDO_CIERRE + "' (intento " + intentos + ")");
+
+                CapturaDePantallaMovil.tomarCapturaPantalla(
+                        "Timeout al intentar cierre - intento " + intentos);
+
+                actor.attemptsTo(WaitFor.aTime(1000));
+                continue;
+            }
+
+            // 3️⃣ Validar si realmente cerró
+            if (esCierreDetectado(actor)) {
+                CapturaDePantallaMovil.tomarCapturaPantalla("Conversación cerrada correctamente");
+                ReportHooks.registrarPaso("✓ Caso cerrado detectado correctamente");
+                salidaExitosa = true;
+                break;
+            }
+
+            // 4️⃣ Reintento si no cerró
+            CapturaDePantallaMovil.tomarCapturaPantalla("Sin cierre aún - intento " + intentos);
+
+            ReportHooks.registrarPaso(
+                    "↻ No se detecta cierre (intento " + intentos + "), reenviando '" + COMANDO_CIERRE + "'");
+
+            actor.attemptsTo(WaitFor.aTime(1200));
+        }
+
+        // ⚠️ No romper el test
+        if (!salidaExitosa) {
+            ReportHooks.registrarPaso(
+                    "⚠ No se detectó cierre tras "
+                            + MAX_INTENTOS
+                            + " intentos, se continúa el flujo");
+        }
     }
 
-    if (!salidaExitosa) {
-      ReportHooks.registrarPaso(
-          "⚠ No se confirmó salida explícita tras "
-              + MAX_INTENTOS
-              + " intentos; se continúa el flujo");
-      // no lanzamos excepción para no romper el test
-    }
-  }
+    // 🔍 Validación robusta de cierre
+    private boolean esCierreDetectado(Actor actor) {
+        try {
+            AndroidObject and = new AndroidObject();
 
-  /* Helpers: exacto o contiene */
-  private boolean textoPresente(Actor actor, String texto) {
-    try {
-      AndroidObject and = new AndroidObject();
-      return and.validarTexto(actor, texto) || and.textoContiene(actor, texto);
-    } catch (Exception e) {
-      return false;
-    }
-  }
+            return and.textoContiene(actor, CASO_CERRADO)
+                    || and.textoContiene(actor, CIERRECASO);
 
-  private boolean verificarTextoPresente(Actor actor, String texto) {
-    try {
-      AndroidObject and = new AndroidObject();
-      // 1) primero intenta coincidencia exacta
-      if (and.validarTexto(actor, texto)) return true;
-      // 2) si no, intenta que esté como subcadena
-      return and.textoContiene(actor, texto);
-    } catch (Exception e) {
-      return false;
+        } catch (Exception e) {
+            return false;
+        }
     }
-  }
 
-  public static SalirConversacion salir() {
-    return instrumented(SalirConversacion.class);
-  }
+    public static SalirConversacion salir() {
+        return instrumented(SalirConversacion.class);
+    }
 }

@@ -16,22 +16,23 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 import utils.UtilidadesAndroid;
 
 public class ValidarClaroClub implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje con URL de claro Club");
-    ReportHooks.registrarPaso("Validar mensaje con URL de claro Club");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje con URL de claro Club");
+        ReportHooks.registrarPaso("Validar mensaje con URL de claro Club");
 
-    actor.attemptsTo(ValidarTextoQueContengaX.elTextoContiene(CLARO_CLUB_2));
+        actor.attemptsTo(ValidarTextoQueContengaX.elTextoContiene(CLARO_CLUB_2));
 
-    UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_CLUB);
+        UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_CLUB);
 
-    actor.attemptsTo(WaitFor.aTime(90000));
+        actor.attemptsTo(WaitFor.aTime(90000));
 
     /*    List<WebElementFacade> btnclose = BTN_CLOSE.resolveAllFor(actor);
     if (!btnclose.isEmpty()) {
@@ -71,14 +72,13 @@ public class ValidarClaroClub implements Task {
                 Atras.irAtras());
     } */
 
-    actor.attemptsTo(
-        Atras.irAtras(),
-        Enter.theValue(SALIR).into(TXT_ENVIAR_MENSAJE),
-        Click.on(BTN_ENVIAR),
-        WaitForResponse.withText(ABANDONAR_CONVERSACION));
-  }
+        actor.attemptsTo(
+                Atras.irAtras(),
+                SalirConversacion.salir()
+        );
+    }
 
-  public static Performable validarClaroClub() {
-    return instrumented(ValidarClaroClub.class);
-  }
+    public static Performable validarClaroClub() {
+        return instrumented(ValidarClaroClub.class);
+    }
 }
