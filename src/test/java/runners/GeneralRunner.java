@@ -12,7 +12,7 @@ import utils.DataToFeature;
         features = "src/test/resources/features",
         glue = {"stepDefinitions", "utils", "hooks"},
         snippets = SnippetType.CAMELCASE,
-        tags = "@Whatsapp_20"
+        tags = "@Whatsapp_Post_19"
 
 )
 

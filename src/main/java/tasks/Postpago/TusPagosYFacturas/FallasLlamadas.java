@@ -36,12 +36,21 @@ public class FallasLlamadas implements Task {
                 Click.on(BTN_ENVIAR_2),
                 WaitForTextContains.withTextContains(REALIZAR_DIAGNOSTICO),
                 ClickTextoQueContengaX.elTextoContiene(REALIZAR_DIAGNOSTICO),
+                WaitForTextContains.withTextContains(SISTEMA_OPERATIVO)
+        );
+
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar 'Android'");
+        ReportHooks.registrarPaso("Seleccionar 'Android'");
+
+        actor.attemptsTo(
+                ClickTextoQueContengaX.elTextoContiene(ANDROID),
                 WaitForTextContains.withTextContains(REVISION_SERVICIO),
                 ValidarTextoQueContengaX.elTextoContiene(NECESARIO_CONFIGURACION),
                 ValidarTextoQueContengaX.elTextoContiene(CONTINUAR_PASO_VIDEO));
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar seguir paso a paso video");
         ReportHooks.registrarPaso("Validar seguir paso a paso video");
+
 
         actor.attemptsTo(Click.on(BTN_REPRODUCIR_VIDEO), WaitFor.aTime(6000));
 
