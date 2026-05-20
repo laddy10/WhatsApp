@@ -164,9 +164,15 @@ public class Constantes {
             "Si aún deseas continuar con tus consultas, elige el botón de acuerdo a tu necesidad";
 
     public static final String TU_FACTURA = "Tu factura";
+    public static final String CONSULTA_FACTURA_PAGA_TUYA = "Consulta tu factura y paga la tuya o la de otros";
+    public static final String CONOCE_Y_DESCARGA_TU_FACTURA = "Conoce y descarga tu factura";
     public static final String TEXTO_CODIGO_SEGURIDAD = "código de seguridad";
     public static final String TEXTO_NECESITO_CONFIRMAR_IDENTIDAD = "necesito confirmar tu identidad";
+    public static final String PAGO_FACTURAS_HOGAR_MULTIPLAY = "Pago de facturas hogar - Multiplay";
+    public static final String LINK_PAGO = "https://yoiz.me/3vvk0wqkxa";
+    public static final String CONTRASENA_HOGAR = "1023872044";
     public static final String IDENTIDAD_CONFIRMADA = "¡Tu identidad se ha confirmado con éxito!";
+    public static final String VALIDACIONES_PIN = "validaciones";
     public static final String PDF_FACTURA = "pdfFactura.pdf";
     public static final String SOLO_UNA_VEZ = "Solo una vez";
     public static final String ESTE_ARCHIVO_ESTA_PROTEGIDO = "Este archivo está protegido";
@@ -198,4 +204,5 @@ public class Constantes {
     public static final String OFICINA_VIRTUAL = "Bienvenido a tu Oficina Virtual";
     public static final String ACEPTAR_Y_CONTINUAR_WH = "Aceptar y continuar";
     public static final String ACEPTAR = "Aceptar";
+    public static final String INCLUYE = "incluye";
 }

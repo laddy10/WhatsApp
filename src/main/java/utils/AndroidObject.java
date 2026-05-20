@@ -1,6 +1,7 @@
 package utils;
 
 import interactions.wait.WaitFor;
+import interactions.wait.WaitForTextContains;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
@@ -11,6 +12,8 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.thucydides.core.webdriver.WebDriverFacade;
 import org.openqa.selenium.NoSuchElementException;
+
+import static utils.Constantes.VALIDACIONES_PIN;
 
 public class AndroidObject {
 
@@ -132,6 +135,47 @@ public class AndroidObject {
     for (int i = 0; i < texto.length(); i++) {
       if (Character.isDigit(texto.charAt(i))) {
         lista.add(texto.charAt(i));
+      }
+    }
+
+    return lista;
+  }
+
+  public ArrayList<Character> LeerPINValidacion(Actor actor) {
+    androidDriver(actor).openNotifications();
+    actor.attemptsTo(WaitForTextContains.withAnyTextContains(VALIDACIONES_PIN));
+
+    String[] triggerTexts = {
+      "ingresar el siguiente código PIN de validación:", "código de seguridad", "código PIN"
+    };
+
+    texto = "";
+    for (String trigger : triggerTexts) {
+      try {
+        texto =
+            androidDriver(actor)
+                .findElementByAndroidUIAutomator("new UiSelector().textContains(\"" + trigger + "\")")
+                .getText();
+        if (!texto.isEmpty()) break;
+      } catch (Exception ignored) {
+      }
+    }
+
+    ArrayList<Character> lista = new ArrayList<>();
+    if (!texto.isEmpty()) {
+      java.util.regex.Pattern p = java.util.regex.Pattern.compile("\\d{4,}");
+      java.util.regex.Matcher m = p.matcher(texto);
+      if (m.find()) {
+        String code = m.group();
+        for (char c : code.toCharArray()) {
+          lista.add(c);
+        }
+      } else {
+        for (int i = 0; i < texto.length(); i++) {
+          if (Character.isDigit(texto.charAt(i))) {
+            lista.add(texto.charAt(i));
+          }
+        }
       }
     }
 

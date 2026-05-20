@@ -37,7 +37,6 @@ public class ValidarMensajesCobranza implements Task {
         // Validar opciones de navegación
         actor.attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene(FINALIZAR_CHAT),
-                ClickTextoQueContengaX.elTextoContiene(FINALIZAR_CHAT),
                 SalirConversacion.salir()
         );
     }

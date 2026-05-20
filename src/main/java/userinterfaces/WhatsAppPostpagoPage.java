@@ -88,6 +88,18 @@ public class WhatsAppPostpagoPage {
       Target.the("Selector número cuotas")
           .located(By.xpath("//android.view.View[@resource-id=\"CUOTAS\"]"));
 
+  public static final Target BTN_AUMENTAR_CUOTAS = 
+      Target.the("Botón aumentar cuotas").located(By.xpath("//android.widget.Button[@text=\"+\"]"));
+
+  public static final Target BTN_DISMINUIR_CUOTAS = 
+      Target.the("Botón disminuir cuotas").located(By.xpath("//android.widget.Button[@text=\"-\"]"));
+
+  public static final Target CHK_GUARDAR_TARJETA_HOGAR = 
+      Target.the("Check Guardar tarjeta Hogar").located(By.xpath("//android.widget.CheckBox[@resource-id=\"ASOCIAR_CLPAY\"]"));
+
+  public static final Target TXT_FECHA_EXPIRACION =
+      Target.the("Campo Fecha Expiración Hogar").located(By.xpath("//android.widget.EditText[@resource-id=\"FECHA_VENC\"]"));
+
   public static final Target TOGGLE_GUARDAR_TARJETA =
       Target.the("Toggle guardar tarjeta").located(By.xpath("//android.view.View[@text=\"Si\"]"));
 
@@ -96,7 +108,10 @@ public class WhatsAppPostpagoPage {
           .located(By.xpath("//android.view.View[@text=\"¿Guardar esta tarjeta? No\"]"));
 
   public static final Target BTN_CONFIRMAR_FINAL =
-      Target.the("Botón Confirmar final").located(By.xpath("//*[@text='Confirmar']"));
+      Target.the("Botón Confirmar final").located(By.xpath("//android.widget.Button[@resource-id=\"mySubmit_\"]"));
+
+  public static final Target BTN_PAGAR_FINAL =
+      Target.the("Botón Pagar final").located(By.xpath("//*[@text='Pagar']"));
 
   public static final Target BTN_CANCELAR_FINAL =
       Target.the("Botón Cancelar final").located(By.xpath("//*[@text='Cancelar']"));
@@ -104,6 +119,49 @@ public class WhatsAppPostpagoPage {
   public static final Target BTN_TARJETA_CREDITO =
       Target.the("Tarjeta crédito")
           .located(By.xpath("//android.widget.TextView[@text=\"Tarjeta crédito\"]"));
+
+  public static final Target BTN_DEBITO_BANCARIO_PSE =
+      Target.the("Débito Bancario PSE")
+          .located(By.xpath("//android.widget.TextView[@text=\"Débito Bancario PSE\"]"));
+
+  public static final Target SELECT_BANCO =
+      Target.the("Selector de Banco")
+          .located(By.xpath("//android.view.View[@resource-id='BANCO'] | //android.widget.Spinner[contains(@resource-id, 'BANCO')]"));
+
+  public static final Target TXT_NOMBRE_TITULAR_PSE =
+      Target.the("Campo nombre del titular PSE")
+          .located(By.xpath("//android.widget.EditText[@resource-id=\"TITULAR\"]"));
+
+  public static final Target SELECT_TIPO_CLIENTE =
+      Target.the("Selector tipo de cliente")
+          .located(By.xpath("//android.view.View[@resource-id=\"TIPO_CLIENTE\"]"));
+  public static final Target SELECT_PERSONA_NATURAL =
+          Target.the("Persona Natural")
+                  .located(By.xpath("//android.widget.CheckedTextView[@resource-id=\"android:id/text1\" and @text=\"Persona Natural\"]"));
+  public static final Target TXT_DIRECCION =
+      Target.the("Campo dirección")
+          .located(By.xpath("//android.widget.EditText[@resource-id=\"DIRECCION\"]"));
+
+  public static final Target BTN_BOTON_BANCOLOMBIA =
+      Target.the("Opción Botón Bancolombia")
+          .located(By.xpath("//android.widget.TextView[@text=\"Botón Bancolombia\"]"));
+
+  public static final Target BTN_DAVIPLATA =
+      Target.the("Opción Daviplata")
+          .located(By.xpath("//android.widget.TextView[contains(@text, 'Daviplata')] | //*[@text='Daviplata']"));
+
+  public static final Target BTN_CONFIRMAR_DAVIPLATA =
+      Target.the("Botón Confirmar Daviplata")
+          .located(By.xpath("//android.widget.Button[@resource-id=\"mySubmit_\"]"));
+
+  public static final Target TXT_USUARIO_BANCOLOMBIA =
+      Target.the("Campo Usuario Bancolombia")
+          .located(By.xpath("//android.view.View[@resource-id=\"root\"]/android.view.View/android.view.View/android.view.View/android.widget.EditText"));
+
+  public static final Target BTN_CONTINUAR_BANCOLOMBIA =
+      Target.the("Botón Continuar Bancolombia")
+          .located(By.xpath("//android.widget.Button[@text='Continuar'] | //android.view.View[@text='Continuar'] | //*[@text='Continuar' and contains(@class, 'Button')] | //android.widget.Button[contains(@text, 'Continuar')]"));
+
   public static final Target TXT_RECHAZAR =
       Target.the("Texto Rechazar").located(MobileBy.xpath("//*[@text='Rechazar']"));
 
@@ -193,4 +251,17 @@ public class WhatsAppPostpagoPage {
   public static final Target LBL_PRIVACIDAD =
       Target.the("Texto Tu privacidad es importante para nosotros")
           .located(By.xpath("//*[@text='Tu privacidad es importante para nosotros']"));
+
+  public static final Target CHECK_SELECCIONAR_MEDIO_PAGO =
+          Target.the("Check para seleccionar medio de pago")
+                  .located(By.xpath("//android.view.View[@resource-id=\"select\"]"));
+
+  public static final Target BTN_MIS_TARJETAS_REGISTRADAS =
+      Target.the("Opción Mis tarjetas registradas")
+          .located(By.xpath("//android.widget.TextView[@text=\"Mis tarjetas registradas\"]"));
+
+  public static final Target BTN_INICIAR_SESION_PORTAL =
+      Target.the("Botón Iniciar Sesión Portal")
+          .located(By.xpath("//android.widget.Button[@text='Iniciar Sesión'] | //android.view.View[@text='Iniciar Sesión'] | //*[@text='Iniciar Sesión']"));
+
 }

@@ -182,7 +182,6 @@ public class WhatsappDefinitions {
             ClickTextoQueContengaX.elTextoContiene(MAS),
             ClickTextoQueContengaX.elTextoContiene(VACIAR_CHAT),
             Click.on(BTN_VACIAR_CHAT)
-            // ClickTextoQueContengaX.elTextoContiene(VACIAR_CHAT)
             );
   }
 

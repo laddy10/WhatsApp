@@ -10,6 +10,7 @@ import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.WaitForResponse;
+import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -32,7 +33,10 @@ public class ProductosFinanciados implements Task {
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_1);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_1);
 
-        actor.attemptsTo(Click.on(BTN_ENVIAR_2), WaitForResponse.withText(FINALIZAR_CHAT));
+        actor.attemptsTo(
+                Click.on(BTN_ENVIAR_2),
+                WaitForTextContains.withAnyTextContains(NO_EQUIPO_FINANCIADO)
+        );
 
         // Esperar y validar respuesta
         actor.attemptsTo(

@@ -6,6 +6,7 @@ public class User {
   private String numeroPre;
   private String valor;
   private String numeroPost;
+  private String numeroHogar;
 
   public User() {}
 
@@ -24,4 +25,9 @@ public class User {
   public String getNumeroPost() {
     return numeroPost;
   }
+
+  public String getNumeroHogar() {
+    return numeroHogar;
+  }
+
 }

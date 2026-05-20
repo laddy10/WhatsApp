@@ -239,7 +239,10 @@ public class WhatsappPostpagoDefinitions {
         ReportHooks.registrarPaso("Seleccionar 'Programa tus pagos'");
 
         theActorInTheSpotlight()
-                .attemptsTo(Click.on(BTN_ENVIAR_2), WaitForResponse.withText(FINALIZAR_CHAT));
+                .attemptsTo(
+                        Click.on(BTN_ENVIAR_2),
+                        WaitForResponse.withText(FINALIZAR_CHAT)
+                );
     }
 
     @And("Validar direccionamiento Programar pagos")
@@ -255,7 +258,9 @@ public class WhatsappPostpagoDefinitions {
         ReportHooks.registrarPaso("Seleccionar 'Soporte y servicio'");
 
         theActorInTheSpotlight()
-                .attemptsTo(Click.on(BTN_ENVIAR_2), WaitForTextContains.withTextContains(SELECCIONA));
+                .attemptsTo(
+                        Click.on(BTN_ENVIAR_2),
+                        WaitForTextContains.withTextContains(SELECCIONA));
     }
 
     @And("Ingresar al boton selecciona de soporte")
