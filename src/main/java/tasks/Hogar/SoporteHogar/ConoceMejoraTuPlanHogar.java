@@ -8,6 +8,7 @@ import static utils.ConstantesPost.*;
 import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
+import interactions.comunes.Atras;
 import interactions.scroll.ScrollGradual;
 import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitForTextContains;
@@ -67,7 +68,8 @@ public class ConoceMejoraTuPlanHogar implements Task {
                 WaitForTextContains.withAnyTextContains(CAMBIA_TU_PLAN),
                 ValidarTextoQueContengaX.elTextoContiene(CAMBIA_TU_PLAN),
                 ValidarTextoQueContengaX.elTextoContiene(SERVICIOS_ADICIONALES_HOGAR),
-                ValidarTextoQueContengaX.elTextoContiene(T_RESUELVE)
+                ValidarTextoQueContengaX.elTextoContiene(T_RESUELVE),
+                Atras.irAtras()
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar opciones de Cambia tu plan");
