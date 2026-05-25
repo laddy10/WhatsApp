@@ -23,6 +23,7 @@ import tasks.Hogar.TusPagosYFacturas.TransaccionBancolombiaHogar;
 import tasks.Hogar.TusPagosYFacturas.TransaccionDaviplataHogar;
 import tasks.Hogar.TusPagosYFacturas.TransaccionMisTarjetasRegistradasHogar;
 import tasks.Hogar.TusPagosYFacturas.ValidarDireccionamientoProgramarPagosHogar;
+import tasks.SalirConversacion;
 import utils.AndroidObject;
 import utils.CapturaDePantallaMovil;
 import utils.TestDataProvider;
@@ -215,5 +216,20 @@ public class WhatsappHogarDefinitions {
     @And("^Validar opciones de Cambia tu plan hogar$")
     public void validarOpcionesCambiaTuPlanHogar() {
         theActorInTheSpotlight().attemptsTo(ConoceMejoraTuPlanHogar.conoceMejoraTuPlanHogar());
+    }
+
+    @And("^Validar opcion Servicios adicionales hogar$")
+    public void validarOpcionServiciosAdicionalesHogar() {
+        theActorInTheSpotlight().attemptsTo(ServiciosAdicionalesHogar.serviciosAdicionalesHogar());
+    }
+
+    @And("^Validar T-Resuelve soporte tecnologico hogar$")
+    public void validarTResuelveSoporteTecnologicoHogar() {
+        theActorInTheSpotlight().attemptsTo(TResuelveOpcionUnoHogar.tResuelveOpcionUnoHogar());
+    }
+
+    @And("^Salir conversacion$")
+    public void salirConversacion() {
+        theActorInTheSpotlight().attemptsTo(SalirConversacion.salir());
     }
 }

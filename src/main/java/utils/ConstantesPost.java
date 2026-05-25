@@ -349,4 +349,14 @@ public class ConstantesPost {
     public static final String SERVICIOS_ADICIONALES_HOGAR = "Servicios adicionales";
     public static final String T_RESUELVE = "T-Resuelve";
     public static final String CONOCE_OTROS_PLANES = "Conoce otros planes y servicios premium";
+    public static final String PLAN_DE_ASISTENCIA = "Plan de asistencia";
+    public static final String T_RESUELVE_SOPORTE_TECNOLOGICO = "Soporte";
+    public static final String T_RESUELVE_MULTIASISTENCIAS = "Multiasistencias";
+    public static final String T_RESUELVE_MASCOTAS = "Mascotas";
+    public static final String T_RESUELVE_REUNIONES_EN_CASA = "Reuniones en Casa";
+    public static final String ADQUIRIENDO_PLAN_T_RESUELVE = "Adquiriendo este plan de T-Resuelve";
+    public static final String PLAN_BRONCE = "Plan Bronce";
+    public static final String PLAN_PLATA = "Plan Plata";
+    public static final String PLAN_ORO = "Plan Oro";
+    public static final String SELECCIONA_PLAN_INTERES = "Selecciona el plan";
 }

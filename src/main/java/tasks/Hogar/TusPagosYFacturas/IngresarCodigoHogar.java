@@ -53,7 +53,7 @@ public class IngresarCodigoHogar extends AndroidObject implements Task {
         actor.attemptsTo(
                 Enter.theValue(codigoVerificacion.toString()).into(TXT_ENVIAR_MENSAJE),
                 Click.on(BTN_ENVIAR),
-                WaitForTextContains.withAnyTextContains(IDENTIDAD_CONFIRMADA, MENU_PRINCIPAL));
+                WaitForTextContains.withTextContains(IDENTIDAD_CONFIRMADA, 185));
 
     }
 
