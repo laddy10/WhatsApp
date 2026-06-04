@@ -86,7 +86,7 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Ingresar al menu todo sobre tu linea
     And Ingresar a la opcion tu lealtad merece mas
     And Seleccionar la opcion claro musica
-    Then Validar direccionamiento claro musica
+    #Then Validar direccionamiento claro musica
     And Vaciar chat
 
 

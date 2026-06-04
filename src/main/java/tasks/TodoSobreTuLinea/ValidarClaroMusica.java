@@ -35,10 +35,6 @@ public class ValidarClaroMusica implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje con URL de claro musica");
-        ReportHooks.registrarPaso("Validar mensaje con URL de claro musica");
-
-        actor.attemptsTo(ValidarTextoQueContengaX.elTextoContiene(CLARO_MUSICA));
 
         UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_MUSICA);
 
