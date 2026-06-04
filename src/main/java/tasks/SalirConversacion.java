@@ -28,6 +28,7 @@ public class SalirConversacion implements Task {
     private static final String RESPUESTA_MENU_PRINCIPAL = "Menú principal";
     private static final String RESPUESTA_CONTINUAR = "¿Deseas continuar chateando?";
     private static final String RESPUESTA_ACTIVO = "Aún estoy contigo";
+    private static final String RESPUESTA_CODIGO_INVALIDO = "El código ingresado no es válido";
 
     private static final int MAX_INTENTOS = 3;
     private static final int TIMEOUT_RESPUESTA = 6;
@@ -57,7 +58,8 @@ public class SalirConversacion implements Task {
                                 RESPUESTA_NO_ENTENDI,
                                 RESPUESTA_MENU_PRINCIPAL,
                                 RESPUESTA_CONTINUAR,
-                                RESPUESTA_ACTIVO
+                                RESPUESTA_ACTIVO,
+                                RESPUESTA_CODIGO_INVALIDO
                         )
                 );
             } catch (TimeoutException e) {

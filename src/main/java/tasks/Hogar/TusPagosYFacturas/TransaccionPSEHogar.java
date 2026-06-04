@@ -31,6 +31,11 @@ public class TransaccionPSEHogar extends AndroidObject implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        Boolean alDia = actor.recall("alDia");
+        if (alDia != null && alDia) {
+            System.out.println("La cuenta está al día, omitiendo transacción PSE.");
+            return;
+        }
 
         // Seleccionar Débito Bancario PSE
         actor.attemptsTo(

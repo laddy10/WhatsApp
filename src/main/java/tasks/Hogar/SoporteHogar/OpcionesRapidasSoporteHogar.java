@@ -14,6 +14,8 @@ import utils.CapturaDePantallaMovil;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.BTN_ENVIAR_2;
+import static utils.ConstantesHogar.FALLAS_CUENTA_HOGAR;
+import static utils.ConstantesHogar.REVISAR_SERVICIO;
 import static utils.ConstantesPost.*;
 
 public class OpcionesRapidasSoporteHogar implements Task {
@@ -22,11 +24,11 @@ public class OpcionesRapidasSoporteHogar implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
-                ValidarTexto.validarTexto(OPCIONES_RAPIDAS_HOGAR),
-                ClickTextoQueContengaX.elTextoContiene(SOPORTE_HOGAR));
+                ValidarTexto.validarTexto(FALLAS_CUENTA_HOGAR),
+                ClickTextoQueContengaX.elTextoContiene(REVISAR_SERVICIO));
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar" + SOPORTE_HOGAR);
-        ReportHooks.registrarPaso("Seleccionar" + SOPORTE_HOGAR);
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar" + REVISAR_SERVICIO);
+        ReportHooks.registrarPaso("Seleccionar" + REVISAR_SERVICIO);
 
         actor.attemptsTo(
                 WaitForTextContains.withAnyTextContains(ESPERA_3_MINUTOS),

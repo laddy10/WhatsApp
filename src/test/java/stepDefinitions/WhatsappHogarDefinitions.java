@@ -13,16 +13,21 @@ import models.User;
 import net.serenitybdd.screenplay.actions.Click;
 import tasks.Hogar.SoporteHogar.*;
 import tasks.Hogar.SeleccionarLineaHogar;
+import tasks.Hogar.TodoSobrePlan.ConsultaConsumosHogar;
+import tasks.Hogar.TodoSobrePlan.LealtadClaroClubHogar;
+import tasks.Hogar.TodoSobrePlan.LealtadClaroVideoHogar;
 import tasks.Hogar.TusPagosYFacturas.AbrirFacturaHogar;
 import tasks.Hogar.TusPagosYFacturas.ConsultarFacturaHogar;
 import tasks.Hogar.TusPagosYFacturas.IngresarAlLinkDePagoHogar;
 import tasks.Hogar.TusPagosYFacturas.IngresarCodigoHogar;
+import tasks.Hogar.TusPagosYFacturas.OpcionRapidaConsultaFacturaHogar;
 import tasks.Hogar.TusPagosYFacturas.TransaccionTarjetaCreditoHogar;
 import tasks.Hogar.TusPagosYFacturas.TransaccionPSEHogar;
 import tasks.Hogar.TusPagosYFacturas.TransaccionBancolombiaHogar;
 import tasks.Hogar.TusPagosYFacturas.TransaccionDaviplataHogar;
 import tasks.Hogar.TusPagosYFacturas.TransaccionMisTarjetasRegistradasHogar;
 import tasks.Hogar.TusPagosYFacturas.ValidarDireccionamientoProgramarPagosHogar;
+import tasks.Hogar.TusPagosYFacturas.ValidarInformacionFacturaHogar;
 import tasks.SalirConversacion;
 import utils.AndroidObject;
 import utils.CapturaDePantallaMovil;
@@ -46,9 +51,25 @@ public class WhatsappHogarDefinitions {
     @And("^Seleccionar menu principal hogar$")
     public void seleccionarMenuPrincipalHogar() {
         theActorInTheSpotlight().attemptsTo(
-                ValidarTextoQueContengaX.elTextoContiene(OPCIONES_RAPIDAS_HOGAR),
-                ValidarTextoQueContengaX.elTextoContiene(OTRAS_OPCIONES_2)
+                WaitForTextContains.withAnyTextContains(OPCIONES_RAPIDAS_HOGAR, CONOCE_OPCIONES_HOGAR)
         );
+
+        AndroidObject and = new AndroidObject();
+        if (and.textoContiene(theActorInTheSpotlight(), CONOCE_OPCIONES_HOGAR)) {
+            theActorInTheSpotlight().attemptsTo(
+                    ValidarTextoQueContengaX.elTextoContiene(CONOCE_OPCIONES_HOGAR)
+            );
+            if (and.textoContiene(theActorInTheSpotlight(), DESDE_EL_MENU_PRINCIPAL)) {
+                theActorInTheSpotlight().attemptsTo(
+                        ValidarTextoQueContengaX.elTextoContiene(DESDE_EL_MENU_PRINCIPAL)
+                );
+            }
+        } else {
+            theActorInTheSpotlight().attemptsTo(
+                    ValidarTextoQueContengaX.elTextoContiene(OPCIONES_RAPIDAS_HOGAR),
+                    ValidarTextoQueContengaX.elTextoContiene(OTRAS_OPCIONES_2)
+            );
+        }
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validación menú de opciones rápidas Hogar");
         ReportHooks.registrarPaso("Validación menú de opciones rápidas Hogar");
@@ -92,10 +113,21 @@ public class WhatsappHogarDefinitions {
         theActorInTheSpotlight().attemptsTo(ImagenRecomendaciones.imagenRecomendaciones());
     }
 
+    @Then("^Validar imagen de recomendaciones telefonia$")
+    public void validarImagenRecomendacionesTelefonia() {
+        theActorInTheSpotlight().attemptsTo(ImagenRecomendacionesTelefonia.imagenRecomendacionesTelefonia());
+    }
+
+    @And("^Seleccionar la opcion de Personalizar clave WIFI y finalizar$")
+    public void seleccionarPersonalizarClaveWifiYFinalizar() {
+        theActorInTheSpotlight().attemptsTo(PersonalizarClaveWifi.personalizarClaveWifi());
+    }
+
     @Then("^Seleccionar el servicio fallas al hacer o recibir llamadas$")
     public void seleccionarFallasEnTuTelefonia() {
         theActorInTheSpotlight().attemptsTo(FallasEnTuSeñalTelefonia.fallasEnTuSeñalTelefonia());
     }
+
 
     @And("^Seleccionar la opcion Consulta tu factura y paga la tuya o la de otros$")
     public void seleccionarConsultaFactura() {
@@ -113,10 +145,7 @@ public class WhatsappHogarDefinitions {
 
     @And("^Validar informacion de la factura$")
     public void validarInformacionFactura() {
-        theActorInTheSpotlight().attemptsTo(ValidarTextoQueContengaX.elTextoContiene(VALOR_A_PAGAR));
-
-        CapturaDePantallaMovil.tomarCapturaPantalla("Validar información de la factura");
-        ReportHooks.registrarPaso("Validar información de la factura");
+        theActorInTheSpotlight().attemptsTo(ValidarInformacionFacturaHogar.validarInformacionFacturaHogar());
     }
 
     @And("^Seleccionar la opcion Conoce y descarga tu factura$")
@@ -151,7 +180,10 @@ public class WhatsappHogarDefinitions {
 
     @Then("^Validar mensaje de identidad confirmada con exito$")
     public void validarIdentidadExitosa() {
-        theActorInTheSpotlight().attemptsTo(ValidarTextoQueContengaX.elTextoContiene(IDENTIDAD_CONFIRMADA));
+        theActorInTheSpotlight().attemptsTo(
+                WaitForTextContains.withAnyTextContains(IDENTIDAD_CONFIRMADA),
+                ValidarTextoQueContengaX.elTextoContiene(IDENTIDAD_CONFIRMADA)
+        );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar identidad confirmada con éxito");
         ReportHooks.registrarPaso("Validar identidad confirmada con éxito");
@@ -228,8 +260,53 @@ public class WhatsappHogarDefinitions {
         theActorInTheSpotlight().attemptsTo(TResuelveOpcionUnoHogar.tResuelveOpcionUnoHogar());
     }
 
+    @And("^Validar T-Resuelve multiasistencias hogar$")
+    public void validarTResuelveMultiasistenciasHogar() {
+        theActorInTheSpotlight().attemptsTo(TResuelveOpcionesHogar.opcionDos());
+    }
+
+    @And("^Validar T-Resuelve mascotas hogar$")
+    public void validarTResuelveMascotasHogar() {
+        theActorInTheSpotlight().attemptsTo(TResuelveOpcionesHogar.opcionTres());
+    }
+
+    @And("^Validar T-Resuelve reuniones en casa hogar$")
+    public void validarTResuelveReunionesEnCasaHogar() {
+        theActorInTheSpotlight().attemptsTo(TResuelveOpcionesHogar.opcionCuatro());
+    }
+
     @And("^Salir conversacion$")
     public void salirConversacion() {
         theActorInTheSpotlight().attemptsTo(SalirConversacion.salir());
+    }
+
+    @And("^Validar menu Gestiona tu red Wi-Fi hogar$")
+    public void validarGestionaRedWifiHogarr() {
+        theActorInTheSpotlight().attemptsTo(GestionaRedWifi.gestionarRedWifi());
+    }
+
+    @And("^Consultar los consumos del plan hogar$")
+    public void consultarConsumosDelPlanHogar() {
+        theActorInTheSpotlight().attemptsTo(ConsultaConsumosHogar.consultaConsumosHogar());
+    }
+
+    @And("^Seleccionar Tu lealtad merece mas claro video hogar$")
+    public void seleccionarLealtadClaroVideoHogar() {
+        theActorInTheSpotlight().attemptsTo(LealtadClaroVideoHogar.lealtadClaroVideoHogar());
+    }
+
+    @And("^Seleccionar Tu lealtad merece mas claro club hogar$")
+    public void seleccionarLealtadClaroClubHogar() {
+        theActorInTheSpotlight().attemptsTo(LealtadClaroClubHogar.lealtadClaroClubHogar());
+    }
+
+    @And("^Seleccionar opcion rapida consulta tu factura hogar$")
+    public void seleccionarOpcionRapidaConsultaFacturaHogar() {
+        theActorInTheSpotlight().attemptsTo(OpcionRapidaConsultaFacturaHogar.opcionRapidaConsultaFacturaHogar());
+    }
+
+    @And("^Seleccionar visitas y traslados hogar$")
+    public void seleccionarVisitasYTrasladosHogar() {
+        theActorInTheSpotlight().attemptsTo(VisitasYTrasladosHogar.visitasYTrasladosHogar());
     }
 }

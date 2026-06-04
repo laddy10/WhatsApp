@@ -21,6 +21,11 @@ public class TransaccionMisTarjetasRegistradasHogar extends AndroidObject implem
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        Boolean alDia = actor.recall("alDia");
+        if (alDia != null && alDia) {
+            System.out.println("La cuenta está al día, omitiendo transacción Mis Tarjetas Registradas.");
+            return;
+        }
 
         // Seleccionar Mis tarjetas registradas de la lista desplegable
         actor.attemptsTo(

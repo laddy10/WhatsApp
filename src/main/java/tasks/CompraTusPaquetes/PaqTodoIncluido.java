@@ -10,6 +10,9 @@ import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.comunes.Atras;
+import interactions.scroll.Scroll;
+import interactions.scroll.ScrollHastaTexto;
+import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import interactions.wait.WaitForTextContains;
@@ -53,7 +56,9 @@ public class PaqTodoIncluido implements Task {
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_2);
 
         actor.attemptsTo(
-                Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO), WaitForResponse.withText(VER_MAS_PAQUETES));
+                Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
+                WaitForResponse.withText(PAQ_TI_1D_2500_PRECIO)
+        );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_3);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_3);
@@ -71,6 +76,7 @@ public class PaqTodoIncluido implements Task {
                 ValidarTexto.validarTexto(PAQ_TI_10D_13000_DESC),
                 ValidarTexto.validarTexto(PAQ_TI_7D_13000_PRECIO),
                 ValidarTexto.validarTexto(PAQ_TI_7D_13000_DESC),
+                Scroll.scrollUnaVista(),
                 ClickTextoQueContengaX.elTextoContiene(VER_MAS_PAQUETES));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_4);
@@ -82,7 +88,8 @@ public class PaqTodoIncluido implements Task {
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_5);
 
         actor.attemptsTo(
-                Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
+                //Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
                 ValidarTexto.validarTexto(PAQ_TI_20D_23000_PRECIO),
                 ValidarTexto.validarTexto(PAQ_TI_20D_23000_DESC),
                 ValidarTexto.validarTexto(PAQ_TI_15D_23000_PRECIO),
@@ -105,6 +112,7 @@ public class PaqTodoIncluido implements Task {
 
         actor.attemptsTo(
                 Atras.irAtras(),
+                SalirConversacion.salir(),
                 SalirConversacion.salir()
         );
 

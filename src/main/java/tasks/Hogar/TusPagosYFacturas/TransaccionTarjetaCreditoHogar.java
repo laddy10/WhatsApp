@@ -25,6 +25,11 @@ public class TransaccionTarjetaCreditoHogar implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        Boolean alDia = actor.recall("alDia");
+        if (alDia != null && alDia) {
+            System.out.println("La cuenta está al día, omitiendo transacción con tarjeta de crédito.");
+            return;
+        }
 
         // Seleccionar Tarjeta de Crédito
         actor.attemptsTo(

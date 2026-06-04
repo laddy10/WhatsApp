@@ -45,11 +45,15 @@ public class ConstantesPost {
     public static final String EXPLORAR = "Explorar";
     public static final String PREMIUM = "Premium";
     public static final String CLARO_VIDEO_RECOMIENDA = "Claro video te recomienda";
+    public static final String PELIS_SERIES_TV = "Pelis, series y TV en vivo";
+    public static final String DESCARGA_LA_APP = "DESCARGA LA APP";
+    public static final String PELICULAS_TODOS_LOS_GENEROS = "Encuentra pelis de todos los géneros";
     public static final String MI_CLARO_DRIVE = "Mi Claro drive";
     public static final String NEGOCIO = "Negocio";
     public static final String TUS_ARCHIVOS = "¡Tus archivos a otro nivel!";
     public static final String URL_CLARO_CLUB = "https://bit.ly/3EO6zQ7";
     public static final String CLARO_CLUB_2 = "Claro club";
+    public static final String CUPONES_DESTACADOS = "Cupones destacados";
     public static final String CATEGORIAS = "Categorías";
     public static final String MAS_DESCARGADOS = "Más Descargados";
     public static final String COMIDAS = "Comidas";
@@ -66,6 +70,7 @@ public class ConstantesPost {
     public static final String TUS_PAGOS_FACTURAS = "✅ Tus pagos y facturas";
     public static final String FACTURA_POSTPAGO_LISTA = "¡Tu factura postpago está lista!";
     public static final String VALOR_A_PAGAR = "Valor a pagar:";
+    public static final String AL_DIA_EN_PAGOS = "se encuentra al día en pagos";
     public static final String FECHA_LIMITE_PAGO = "Fecha límite de pago: INMEDIATO";
     public static final String REFERENCIA_PAGO = "Referencia de pago:";
     public static final String PAGA_TU_FACTURA_AQUI = "Paga tu factura aquí";
@@ -205,6 +210,8 @@ public class ConstantesPost {
     public static final String TUS_EQUIPOS_SOPORTE = "Tus equipos en soporte";
     public static final String REVISA_ESTADO_EQUIPOS =
             "Revisa el estado de tus equipos en mantenimiento";
+    public static final String VISITAS_Y_TRASLADOS = "Visitas y traslados";
+    public static final String NO_TIENES_AGENDADAS_VISITAS = "No tienes agendadas visitas";
 
     // Estado de servicios
     public static final String TE_AYUDO_PROBLEMAS = "Te ayudo si tienes problemas con tus servicios";
@@ -320,8 +327,11 @@ public class ConstantesPost {
     public static final String SERVICIOS_DE_AYUDA = "en cuál de estos servicios necesitas ayuda";
     public static final String FALLAS_EN_TU_NAVEGACION = "Fallas en tu navegación";
     public static final String INTERNET = "Internet";
+    public static final String CONSULTA_TU_FACTURA = "Consulta tu factura";
     public static final String OPCIONES_RAPIDAS_HOGAR =
             "☺️ Tengo unas opciones rápidas para tu cuenta hogar que te pueden ayudar";
+    public static final String CONOCE_OPCIONES_HOGAR = "¡Conoce todas las opciones, servicios y beneficios que tengo para ti!";
+    public static final String DESDE_EL_MENU_PRINCIPAL = "Desde el Menú principal puedes hacer tus pagos";
     public static final String REINICIAR_TU_MODEM = "necesitamos reiniciar tu módem";
     public static final String COMENZAR_EL_REINICIO = "¿Quieres comenzar con el reinicio?";
     public static final String SI_REINICIAR = "Sí reiniciar";
@@ -342,6 +352,12 @@ public class ConstantesPost {
     public static final String TELEFONIA = "Telefonía";
     public static final String MEJORAR_SERVICIO_LLAMADA = "Te recomiendo seguir el paso a paso que aparece en la imagen que te presento, esto te ayudará a mejorar  tu servicio de telefonía";
 
+    // Scenario: EXUS_HOG_WSP_29 (Consulta tus consumos Hogar)
+    public static final String CONSUMOS_PLAN_HOGAR = "consumos de tu plan hogar";
+    public static final String TELEVISION_MAYUS = "TELEVISIÓN";
+    public static final String TELEFONIA_MAYUS = "TELEFONÍA";
+    public static final String INTERNET_MAYUS = "INTERNET";
+
     // Scenario: EXUS_HOG_WSP_22 (Todo sobre tu plan Hogar)
     public static final String PLAN_TRIPLE_PLAY = "Plan Triple Play";
     public static final String PLANES_PREMIUM_HOGAR = "planes y servicios premium";
@@ -359,4 +375,20 @@ public class ConstantesPost {
     public static final String PLAN_PLATA = "Plan Plata";
     public static final String PLAN_ORO = "Plan Oro";
     public static final String SELECCIONA_PLAN_INTERES = "Selecciona el plan";
+    public static final String ADQUIRIENDO_PLAN_MULTIASISTENCIAS = "Adquiriendo este plan tienes los siguientes servicios";
+    public static final String ASISTENCIA_MEDICA = "Asistencia M";
+    public static final String ASISTENCIA_BIENESTAR = "Asistencia de bienestar";
+    public static final String ASISTENCIA_HOGAR = "Asistencia para tu hogar";
+    public static final String ASISTENCIA_DESEMPLEO = "Asistencia de desempleo";
+    public static final String COMPRAR_PLAN = "Comprar plan";
+    public static final String T_RESUELVE_MASCOTAS_ACTIVO = "se encuentra activo";
+    public static final String DESCRIPCION_PLAN = "Descripci";
+    public static final String ASISTENCIA_MASCOTA = "Asistencia Mascota";
+    public static final String ASISTENCIA_EXEQUIAL_MASCOTAS = "exequial mascotas";
+    public static final String TERMINOS_CONDICIONES = "condiciones";
+    public static final String SOLICITAR_ASISTENCIA = "Solicitar asistencia";
+    public static final String ADQUIRIENDO_PLAN_REUNIONES_CASA = "Adquiriendo este plan tienes los siguientes servicios";
+    public static final String ASISTENCIA_HOGAR_TRADICIONAL = "Asistencia Hogar Tradicional";
+    public static final String ASISTENCIA_REUNIONES_CASA = "Asistencia Reuniones en casa";
+    public static final String PERSONALIZAR_CLAVE_WIFI = "Personalizar clave WIFI";
 }

@@ -123,9 +123,9 @@ public class DireccionamientoMediosPago implements Task {
         UtilidadesAndroid.abrirLinkEnNavegador("http://" + urlExtraida);
 
         actor.attemptsTo(
-                WaitForResponse.withText(BIENVENIDO),
-                ValidarTexto.validarTexto(ECARRIER),
-                ValidarTexto.validarTexto(BIENVENIDO),
+                WaitForResponse.withText(PAQUETES_Y_RECARGAS),
+                ValidarTexto.validarTexto(PAQUETES_Y_RECARGAS),
+                ValidarTexto.validarTexto(INGRESA_NUMERO_CLARO),
                 ValidarTexto.validarTexto(NUMERO_CLARO));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(

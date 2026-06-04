@@ -22,6 +22,11 @@ public class TransaccionBancolombiaHogar extends AndroidObject implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        Boolean alDia = actor.recall("alDia");
+        if (alDia != null && alDia) {
+            System.out.println("La cuenta está al día, omitiendo transacción Botón Bancolombia.");
+            return;
+        }
 
         // Seleccionar Botón Bancolombia
         actor.attemptsTo(

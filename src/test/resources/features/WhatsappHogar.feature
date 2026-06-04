@@ -1,6 +1,7 @@
 Feature: Validar los flujos de WhatsApp para líneas Hogar
 
 
+  @EXUS_HOG_WSP_01
   Scenario: Validar opciones rapidas - ver factura y pagar
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -8,13 +9,15 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Iniciar el chat con Claro Colombia
     And Seleccionar linea de consulta hogar
     And Validar politica de tratamientos de datos
-    And Seleccionar menu principal Post
-    And Ingresar al menu de tus pagos y facturas
-    And Clic boton selecciona
-    And Clic Tu factura
+    And Seleccionar opcion rapida consulta tu factura hogar
+    Then Validar mensaje de validacion de identidad
+    And Ingresar el codigo de verificacion
+    Then Validar mensaje de identidad confirmada con exito
+    And Ver factura hogar
+    And Vaciar chat
 
 
-
+  @EXUS_HOG_WSP_02
   Scenario: Validar opciones rapidas - soporte hogar-internet
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -28,7 +31,7 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Vaciar chat
 
 
-
+  @EXUS_HOG_WSP_03
   Scenario: Validar opciones rapidas - soporte hogar-television
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -42,7 +45,7 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Vaciar chat
 
 
-
+  @EXUS_HOG_WSP_04
   Scenario: Validar opciones rapidas - soporte hogar-telefonia
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -54,6 +57,20 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Seleccionar el servicio fallas al hacer o recibir llamadas
     Then Validar imagen de recomendaciones
     And Vaciar chat
+
+
+  @EXUS_HOG_WSP_06
+  Scenario: Menu principal_compra WhatsApp
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta hogar
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal hogar
+    And Ingresa al menu Compra por WhatsApp
+    And Clic boton selecciona
+    And Validar el menu Compra por WhatsApp
 
 
   @EXUS_HOG_WSP_07
@@ -251,6 +268,53 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Vaciar chat
 
 
+  @EXUS_HOG_WSP_19
+  Scenario: Menu principal - Soporte y servicio - Estado de servicios - telefonia
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta hogar
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal hogar
+    And Seleccionar Soporte y servicio
+    And Seleccionar Estado servicios y esperar revision hogar
+    And Seleccionar el servicio fallas al hacer o recibir llamadas
+    Then Validar imagen de recomendaciones telefonia
+    And Vaciar chat
+
+
+    @EXUS_HOG_WSP_20
+  Scenario: Menu principal - Soporte y servicio - Estado de servicios - internet
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta hogar
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal hogar
+    And Seleccionar Soporte y servicio
+    And Seleccionar Estado servicios y esperar revision hogar
+    And Seleccionar el servicio fallas en tu navegacion
+    Then Validar opcion reiniciar modem
+    And Vaciar chat
+
+
+  @EXUS_HOG_WSP_21
+  Scenario: Menu principal - Soporte y servicio - personaliza clave wifi
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta hogar
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal hogar
+    And Seleccionar Soporte y servicio
+    And Seleccionar Estado servicios y esperar revision hogar
+    And Seleccionar la opcion de Personalizar clave WIFI y finalizar
+    And Vaciar chat
+
+
   @EXUS_HOG_WSP_22
   Scenario: Menu principal -Todo sobre tu plan - Conoce/mejora tu plan - Cambia tu plan
     Given Ingresar a WhatsAPP
@@ -295,3 +359,134 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Ingresar al menu todo sobre tu plan postpago
     And Validar T-Resuelve soporte tecnologico hogar
     And Vaciar chat
+
+
+  @EXUS_HOG_WSP_25
+  Scenario: Menu principal - Todo sobre tu plan - Conoce/mejora tu plan - T-Resuelve_0p2
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta hogar
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal hogar
+    And Ingresar al menu todo sobre tu plan postpago
+    And Validar T-Resuelve multiasistencias hogar
+    And Vaciar chat
+
+
+  @EXUS_HOG_WSP_26
+  Scenario: Menu principal - Todo sobre tu plan - Conoce/mejora tu plan - T-Resuelve_0p3
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta hogar
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal hogar
+    And Ingresar al menu todo sobre tu plan postpago
+    And Validar T-Resuelve mascotas hogar
+    And Vaciar chat
+
+
+  @EXUS_HOG_WSP_27
+  Scenario: Menu principal - Todo sobre tu plan - Conoce/mejora tu plan - T-Resuelve_0p4
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta hogar
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal hogar
+    And Ingresar al menu todo sobre tu plan postpago
+    And Validar T-Resuelve reuniones en casa hogar
+    And Vaciar chat
+
+
+  @EXUS_HOG_WSP_28
+  Scenario: Menu principal - Todo sobre tu plan - Gestiona tu red Wi-Fi
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta hogar
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal hogar
+    And Ingresar al menu todo sobre tu plan postpago
+    And Validar menu Gestiona tu red Wi-Fi hogar
+    And Vaciar chat
+
+
+  @EXUS_HOG_WSP_29
+  Scenario: Menu principal - Todo sobre tu plan - Consulta tus consumos
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta hogar
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal hogar
+    And Ingresar al menu todo sobre tu plan postpago
+    And Consultar los consumos del plan hogar
+    And Vaciar chat
+
+
+  @EXUS_HOG_WSP_30
+  Scenario: Menu principal - Todo sobre tu plan - Tu lealtad merece más - Claro Video
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta hogar
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal hogar
+    And Ingresar al menu todo sobre tu plan postpago
+    And Seleccionar Tu lealtad merece mas claro video hogar
+    And Vaciar chat
+
+
+  @EXUS_HOG_WSP_31
+  Scenario: Menu principal - Todo sobre tu plan - Tu lealtad merece más - Claro Club
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta hogar
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal hogar
+    And Ingresar al menu todo sobre tu plan postpago
+    And Seleccionar Tu lealtad merece mas claro club hogar
+    And Vaciar chat
+
+
+  @EXUS_HOG_WSP_34
+  Scenario: Menu principal - Soporte y servicio - Visitas y traslados
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta hogar
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal hogar
+    And Seleccionar Soporte y servicio
+    And Seleccionar visitas y traslados hogar
+    And Salir conversacion
+    And Vaciar chat
+
+
+  @EXUS_HOG_WSP_35
+  Scenario: Menu principal - Soporte y servicio - Tus PQR Radicados
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta hogar
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal hogar
+    And Seleccionar Soporte y servicio
+    And Ingresar al boton selecciona de soporte
+    Then Validar PQR radicados y direccionamiento pagina Claro
+    And Vaciar chat
+
+
+

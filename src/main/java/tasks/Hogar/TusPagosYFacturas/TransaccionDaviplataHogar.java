@@ -23,6 +23,11 @@ public class TransaccionDaviplataHogar extends AndroidObject implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        Boolean alDia = actor.recall("alDia");
+        if (alDia != null && alDia) {
+            System.out.println("La cuenta está al día, omitiendo transacción Daviplata.");
+            return;
+        }
 
         // Seleccionar Daviplata
         actor.attemptsTo(

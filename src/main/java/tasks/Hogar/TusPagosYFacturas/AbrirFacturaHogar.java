@@ -12,6 +12,7 @@ import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
+import interactions.wait.WaitForTextContains;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class AbrirFacturaHogar implements Task {
     public <T extends Actor> void performAs(T actor) {
         // Buscar y hacer clic en el archivo PDF de la factura
         actor.attemptsTo(
+                WaitForTextContains.withAnyTextContains(PDF_FACTURA),
                 ClickTextoQueContengaX.elTextoContiene(PDF_FACTURA),
                 WaitFor.aTime(3000)
         );
