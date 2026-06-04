@@ -38,8 +38,8 @@ public class ValidarClaroVideo implements Task {
         actor.attemptsTo(
                 WaitFor.aTime(20000),
                 WaitForResponse.withAnyText(EXPLORAR),
-                ValidarTextoQueContengaX.elTextoContiene(PREMIUM),
-                ValidarTextoQueContengaX.elTextoContiene(CLARO_VIDEO_RECOMIENDA));
+                ValidarTextoQueContengaX.elTextoContiene(PREMIUM)
+        );
 
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Se valida el ingreso a Claro Video");

@@ -62,7 +62,11 @@ public class RegalaUnPaquete implements Task {
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_3);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_3);
 
-        actor.attemptsTo(Click.on(BTN_CONFIRMAR), WaitFor.aTime(4000));
+        actor.attemptsTo(
+                Click.on(BTN_CONFIRMAR),
+                WaitFor.aTime(4000),
+                WaitForTextContains.withTextContains("http")
+        );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_4);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_4);
@@ -80,16 +84,20 @@ public class RegalaUnPaquete implements Task {
         UtilidadesAndroid.abrirLinkEnNavegador(urlExtraida);
 
         actor.attemptsTo(
-                WaitFor.aTime(10000), WaitForTextContains.withAnyTextContains(PORTAL_PAGOS_RECARGAS));
+                WaitFor.aTime(10000),
+                WaitForTextContains.withAnyTextContains(PORTAL_PAGOS_RECARGAS)
+        );
 
         List<WebElementFacade> lblprivacidad = LBL_PRIVACIDAD.resolveAllFor(actor);
         if (!lblprivacidad.isEmpty()) {
-            actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(ACEPTAR));
+            actor.attemptsTo(
+                    ClickTextoQueContengaX.elTextoContiene(ACEPTAR)
+            );
         }
 
         actor.attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene(PORTAL_PAGOS_RECARGAS),
-                ValidarTextoQueContengaX.elTextoContiene(COMPRA_DE_PAQUETES));
+                ValidarTextoQueContengaX.elTextoContiene(COMPRA_RECARGA));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_5);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_5);

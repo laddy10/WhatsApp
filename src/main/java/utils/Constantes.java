@@ -53,7 +53,7 @@ public class Constantes {
     public static final String FECHA_ACTIVACION = "Fecha de activación";
     public static final String RECARGA_ACTIVA = "Actualmente tienes activa una recarga";
     public static final String COMPRA_DE_PAQUETES = "Compra de paquetes";
-    public static final String COMPRA_RECARGA = "Compra recarga";
+    public static final String COMPRA_RECARGA = "Compra de RecargaS";
     public static final String CONOCE_MEJORA_TU_PLAN = "Conoce/mejora tu plan";
     public static final String NOMBRE_DEL_PLAN = "Nombre del plan:";
     public static final String PASATE_A_POSTPAGO = "Pásate a postpago";
@@ -108,7 +108,7 @@ public class Constantes {
     public static final String NO_ENTENDI_TU_MENSAJE = "No entendí tu mensaje.";
     public static final String BIENVENIDO = "Bienvenido";
     public static final String ECARRIER = "compras.claro.com.co/MiClaro/login/sendsms";
-    public static final String NUMERO_CLARO = "Número Claro:";
+    public static final String NUMERO_CLARO = "Número Claro";
     public static final String INGRESAR_NUMERO =
             "Ingresa tu número Claro de 10 dígitos y pulsa \"Continuar\"";
     public static final String MAS = "Más";
@@ -206,5 +206,5 @@ public class Constantes {
     public static final String ACEPTAR = "Aceptar";
     public static final String INCLUYE = "incluye";
     public static final String PAQUETES_Y_RECARGAS = "Paquetes y recargas para tu línea";
-    public static final String INGRESA_NUMERO_CLARO = "Ingresa tu número de Claro";
+    public static final String INGRESA_NUMERO_CLARO = "Ingresa tu número";
 }

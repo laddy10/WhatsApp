@@ -148,10 +148,10 @@ public class ValidarPagoPaquete implements Task {
         UtilidadesAndroid.abrirLinkEnNavegador("http://" + urlExtraida);
 
         actor.attemptsTo(
-                WaitForResponse.withText(BIENVENIDO),
-                ValidarTextoQueContengaX.elTextoContiene(BIENVENIDO),
-                ValidarTextoQueContengaX.elTextoContiene(COMO_PROTEGEMOS_INICIO_SESION),
-                ValidarTextoQueContengaX.elTextoContiene(CONTINUAR));
+                WaitForResponse.withText(PAQUETES_Y_RECARGAS),
+                ValidarTextoQueContengaX.elTextoContiene(PAQUETES_Y_RECARGAS),
+                ValidarTextoQueContengaX.elTextoContiene(INGRESA_NUMERO_CLARO),
+                ValidarTextoQueContengaX.elTextoContiene(NUMERO_CLARO));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_10);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_10);
@@ -183,10 +183,10 @@ public class ValidarPagoPaquete implements Task {
         UtilidadesAndroid.abrirLinkEnNavegador("http://" + urlExtraidapse);
 
         actor.attemptsTo(
-                WaitForResponse.withText(BIENVENIDO),
-                ValidarTextoQueContengaX.elTextoContiene(BIENVENIDO),
-                ValidarTextoQueContengaX.elTextoContiene(COMO_PROTEGEMOS_INICIO_SESION),
-                ValidarTextoQueContengaX.elTextoContiene(CONTINUAR));
+                WaitForResponse.withText(PAQUETES_Y_RECARGAS),
+                ValidarTextoQueContengaX.elTextoContiene(PAQUETES_Y_RECARGAS),
+                ValidarTextoQueContengaX.elTextoContiene(INGRESA_NUMERO_CLARO),
+                ValidarTextoQueContengaX.elTextoContiene(NUMERO_CLARO));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_13);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_13);
