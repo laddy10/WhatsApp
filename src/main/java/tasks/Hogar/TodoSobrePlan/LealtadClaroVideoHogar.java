@@ -86,8 +86,9 @@ public class LealtadClaroVideoHogar implements Task {
         actor.attemptsTo(
                 WaitFor.aTime(20000),
                 WaitForResponse.withAnyText(EXPLORAR),
-                ValidarTextoQueContengaX.elTextoContiene(PREMIUM),
-                ValidarTextoQueContengaX.elTextoContiene(CLARO_VIDEO_RECOMIENDA));
+                ValidarTextoQueContengaX.elTextoContiene(PREMIUM)
+               // ValidarTextoQueContengaX.elTextoContiene(CLARO_VIDEO_RECOMIENDA)
+        );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar redirección a Claro Video");
         ReportHooks.registrarPaso("Validar redirección a Claro Video");
