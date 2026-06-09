@@ -22,7 +22,7 @@ public class EsperarYClickSeleccionaEnUltimoMensaje implements Interaction {
   }
 
   public static EsperarYClickSeleccionaEnUltimoMensaje conTimeout(int timeoutSegundos) {
-    return Tasks.instrumented(EsperarYClickSeleccionaEnUltimoMensaje.class, timeoutSegundos, 500);
+    return Tasks.instrumented(EsperarYClickSeleccionaEnUltimoMensaje.class, timeoutSegundos, 100);
   }
 
   @Override

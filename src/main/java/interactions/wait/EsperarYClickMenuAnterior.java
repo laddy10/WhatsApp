@@ -22,7 +22,7 @@ public class EsperarYClickMenuAnterior implements Interaction {
   }
 
   public static EsperarYClickMenuAnterior conTimeout(int timeoutSegundos) {
-    return Tasks.instrumented(EsperarYClickMenuAnterior.class, timeoutSegundos, 500);
+    return Tasks.instrumented(EsperarYClickMenuAnterior.class, timeoutSegundos, 100);
   }
 
   @Override
