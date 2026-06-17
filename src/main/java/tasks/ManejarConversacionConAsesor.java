@@ -15,7 +15,7 @@ import static userinterfaces.WhatsAppPage.*;
 
 public class ManejarConversacionConAsesor implements Task {
 
-    private static final int TIMEOUT_ASESOR = 100; // 15 minutos
+    private static final int TIMEOUT_ASESOR = 10; // 15 minutos
 
     @Override
     public <T extends Actor> void performAs(T actor) {
