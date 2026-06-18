@@ -12,6 +12,7 @@ import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
 import interactions.scroll.ScrollHastaTexto;
+import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 
 import java.util.List;
@@ -54,7 +55,7 @@ public class OtrasFacturasClaro implements Task {
                 WaitForTextContains.withAnyTextContains(PORTAL_PAGOS_Y_RECARGAS)
         );
 
-
+       actor.attemptsTo(WaitFor.aTime(2000));
         List<WebElementFacade> lblprivacidad = LBL_PRIVACIDAD.resolveAllFor(actor);
         if (!lblprivacidad.isEmpty()) {
             actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(ACEPTAR));
