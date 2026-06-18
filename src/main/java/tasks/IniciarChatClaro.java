@@ -23,7 +23,7 @@ import utils.TestDataProvider;
 public class IniciarChatClaro implements Task {
 
     private final User user = TestDataProvider.getRealUser();
-    private static final int MAX_REINTENTOS = 3;
+    private static final int MAX_REINTENTOS = 2;
 
     @Override
     public <T extends Actor> void performAs(T actor) {
