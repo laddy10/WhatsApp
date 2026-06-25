@@ -62,6 +62,12 @@ public class WhatsAppPage extends PageObject {
   public static final Target LBL_VISTA_PREVIA =
       Target.the("Texto vista previ del destino ").located(By.xpath("//*[@text='claro.com.co']"));
 
+  public static final Target BTN_CONTINUAR_AL_DESTINO =
+      Target.the("Boton continuar al destino")
+          .located(
+              By.xpath(
+                  "//*[contains(@text, 'Continuar al destino') or contains(@content-desc, 'Continuar al destino')]"));
+
   public static final Target LBL_MEJORA_TU_PLAN =
       Target.the("Texto Mejora tu plan").located(By.xpath("//*[@text='Mejora tu plan']"));
 
@@ -249,4 +255,3 @@ public class WhatsAppPage extends PageObject {
         public static final String WHATSAPP_PACKAGE = "com.whatsapp";
     }
 }
-

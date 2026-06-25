@@ -40,13 +40,15 @@ public class ValidarTratamientoDatos implements Task {
           ValidarTextoQueContengaX.elTextoContiene(URL_TRATAMIENTO_INFORMACION),
           ValidarTextoQueContengaX.elTextoContiene(URL_PORTAL_CLARO));
 
-      UtilidadesAndroid.abrirLinkEnNavegador(URL_TRATAMIENTO_INFORMACION);
-
-      actor.attemptsTo(WaitForResponse.withText(LEY));
+      UtilidadesAndroid.abrirLinkEnNavegador(URL_TRATAMIENTO_INFORMACION_DESTINO);
 
       actor.attemptsTo(
-          ValidarTextoQueContengaX.elTextoContiene(LEY),
-          ValidarTextoQueContengaX.elTextoContiene(CIRCULAR_SIC));
+          WaitForResponse.withAnyText(
+              TITULO_TRATAMIENTO_INFORMACION, URL_TRATAMIENTO_INFORMACION_PATH));
+
+      actor.attemptsTo(
+          ValidarTextoQueContengaX.elTextoContiene(TITULO_TRATAMIENTO_INFORMACION),
+          ValidarTextoQueContengaX.elTextoContiene(URL_TRATAMIENTO_INFORMACION_PATH));
 
       CapturaDePantallaMovil.tomarCapturaPantalla("Redirección URL Circular Superintendencia");
       ReportHooks.registrarPaso("Redirección URL Circular Superintendencia");

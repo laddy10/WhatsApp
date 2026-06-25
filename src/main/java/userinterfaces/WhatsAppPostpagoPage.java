@@ -179,6 +179,9 @@ public class WhatsAppPostpagoPage {
       Target.the("Campo contraseña factura")
           .located(By.id("com.google.android.apps.docs:id/password"));
 
+  public static final Target ADJUNTO_FACTURA_PDF =
+      Target.the("Adjunto PDF factura")
+          .located(By.xpath("//*[contains(@text, 'pdfFactura.pdf')]/ancestor::*[@clickable='true'][1]"));
   public static final Target URL_FACTURA_DESCARGADA =
       Target.the("URL factura descargada").located(By.id("com.android.chrome:id/url_bar"));
 

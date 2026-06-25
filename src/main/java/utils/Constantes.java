@@ -19,7 +19,11 @@ public class Constantes {
     public static final String SALIR = "Salir";
     public static final String POLITICA_TRATAMIENTO = "Política de tratamiento de la información";
     public static final String URL_TRATAMIENTO_INFORMACION = "http://bit.ly/3DtS9az";
+    public static final String URL_TRATAMIENTO_INFORMACION_DESTINO = "https://www.claro.com.co/portal/co/legal-regulatorio/lightbox/descripcion-ED-17.html";
+    public static final String URL_TRATAMIENTO_INFORMACION_PATH = "descripcion-ED-17.html";
+    public static final String TITULO_TRATAMIENTO_INFORMACION = "Políticas de tratamiento de la información";
     public static final String URL_PORTAL_CLARO = "https://www.claro.com.co/personas/autogestion/whatsapp/";
+    public static final String CONTINUAR_AL_DESTINO = "Continuar al destino";
     public static final String LEY = "LEY";
     public static final String ABANDONAR_CONVERSACION = "Tu solicitud de abandonar la conversación se cumplió";
     public static final String CIRCULAR_SIC = "CIRCULAR ÚNICA DE LA SUPERINTENDENCIA DE INDUSTRIA Y COMERCIO";
@@ -93,12 +97,12 @@ public class Constantes {
             "Descuida, puedes intentarlo de nuevo o elegir otro medio de pago para finalizar la compra de tu paquete \uD83D\uDC47";
     public static final String TARJETA_DEBIDO_O_CREDITO = "Tarjeta Débito o Crédito";
     public static final String SMS_ENLACE_PAGO = "Haz click en el siguiente enlace para realizar la compra de tu paquete:";
-    public static final String URL_PAGO_RECARGAS = "clro.co/TC";
+    public static final String URL_PAGO_RECARGAS = "clarodigital.co/TC";
     public static final String PSE = "PSE";
     public static final String SMS_ENLACE_PAGO_PSE = "Haz click en el siguiente enlace para realizar la compra de tu paquete:\n" +
             "clro.co/PSE20KWA";
 
-    public static final String URL_PAGO_PSE_RECARGAS = "clro.co/PSE";
+    public static final String URL_PAGO_PSE_RECARGAS = "clarodigital.co/PSE";
     public static final String SIN_CUENTA_NEQUI =
             "\uD83D\uDE25 Parece que este número no tiene una cuenta en Nequi.\n"
                     + "\n"

@@ -1,8 +1,10 @@
 package tasks;
 
 import static userinterfaces.WhatsAppPage.*;
+import static utils.Constantes.LINEAS_POSTPAGO;
 
 import interactions.wait.WaitFor;
+import interactions.wait.WaitForResponse;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import net.serenitybdd.screenplay.Actor;
@@ -27,7 +29,7 @@ public class SeleccionarNumero implements Task {
   @Override
   public <T extends Actor> void performAs(T actor) {
 
-    actor.attemptsTo(WaitFor.aTime(1000));
+    actor.attemptsTo(WaitFor.aTime(1000), WaitForResponse.withText(LINEAS_POSTPAGO, 10));
 
     // Obtener el texto del menú principal usando un XPath más flexible
     Target menuTexto = LBL_MENU_LINEAS;

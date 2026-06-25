@@ -23,7 +23,7 @@ public class ValidarVersionApp implements Task {
   public <T extends Actor> void performAs(T actor) {
     actor.attemptsTo(
         Click.on(BTN_MENU_ITEM),
-        ClickElementByText.clickElementByText(AJUSTES),
+        ClickTextoQueContengaX.elTextoContiene(AJUSTES),
         ScrollHastaTexto.conTexto("Meta"),
         ClickTextoQueContengaX.elTextoContiene(AYUDA),
         ClickTextoQueContengaX.elTextoContiene(INFO_APP),

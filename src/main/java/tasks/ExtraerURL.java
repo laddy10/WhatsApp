@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class ExtraerURL {
 
   public static String desdeTexto(String texto) {
-    Pattern pattern = Pattern.compile("(clro\\.co/\\S+)");
+    Pattern pattern = Pattern.compile("(clarodigital.co/\\S+)");
     Matcher matcher = pattern.matcher(texto);
     if (matcher.find()) {
       return matcher.group(1); // devuelve la primera coincidencia
