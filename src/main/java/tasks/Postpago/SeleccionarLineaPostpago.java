@@ -1,6 +1,7 @@
 package tasks.Postpago;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static utils.Constantes.AUTORIZACION_TRATAMIENTO;
 import static utils.ConstantesPost.SI_AUTORIZO;
 import static utils.ConstantesPost.VER_Y_PAGAR_FACTURA;
 
@@ -20,7 +21,7 @@ public class SeleccionarLineaPostpago implements Task {
   public <T extends Actor> void performAs(T actor) {
     actor.attemptsTo(
         SeleccionarNumero.porUltimos4(user.getNumeroPost()),
-        WaitForResponse.withAnyText(VER_Y_PAGAR_FACTURA, SI_AUTORIZO));
+        WaitForResponse.withAnyText(VER_Y_PAGAR_FACTURA, SI_AUTORIZO, AUTORIZACION_TRATAMIENTO));
   }
 
   public static Performable seleccionarLineaPostpago() {

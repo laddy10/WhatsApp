@@ -18,6 +18,7 @@ public class Constantes {
     public static final String SALDO_NUMERO = "El saldo de tu número celular";
     public static final String SALIR = "Salir";
     public static final String POLITICA_TRATAMIENTO = "Política de tratamiento de la información";
+    public static final String AUTORIZACION_TRATAMIENTO = "Autorizas el tratamiento de tus datos personales";
     public static final String URL_TRATAMIENTO_INFORMACION = "http://bit.ly/3DtS9az";
     public static final String URL_TRATAMIENTO_INFORMACION_DESTINO = "https://www.claro.com.co/portal/co/legal-regulatorio/lightbox/descripcion-ED-17.html";
     public static final String URL_TRATAMIENTO_INFORMACION_PATH = "descripcion-ED-17.html";

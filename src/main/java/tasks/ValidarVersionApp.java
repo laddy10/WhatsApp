@@ -19,29 +19,29 @@ import utils.CapturaDePantallaMovil;
 
 public class ValidarVersionApp implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
-    actor.attemptsTo(
-        Click.on(BTN_MENU_ITEM),
-        ClickTextoQueContengaX.elTextoContiene(AJUSTES),
-        ScrollHastaTexto.conTexto("Meta"),
-        ClickTextoQueContengaX.elTextoContiene(AYUDA),
-        ClickTextoQueContengaX.elTextoContiene(INFO_APP),
-        WaitForResponse.withText(WHATSAPP));
+    @Override
+    public <T extends Actor> void performAs(T actor) {
+        actor.attemptsTo(
+                Click.on(BTN_MENU_ITEM),
+                ClickTextoQueContengaX.elTextoContiene(AJUSTES),
+                ScrollHastaTexto.conTexto("Meta"),
+                ClickTextoQueContengaX.elTextoContiene(AYUDA),
+                ClickTextoQueContengaX.elTextoContiene(INFO_APP),
+                WaitForResponse.withText(WHATSAPP));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Validar Version de la App");
-    ReportHooks.registrarPaso("Validar Version de la App");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validar Version de la App");
+        ReportHooks.registrarPaso("Validar Version de la App");
 
-    actor.attemptsTo(
-        ValidarTextoQueContengaX.elTextoContiene(WHATSAPP),
-        ValidarTextoQueContengaX.elTextoContiene(VERSION),
-        ValidarTextoQueContengaX.elTextoContiene(LICENCIAS),
-        Atras.irAtras(),
-        Atras.irAtras(),
-        Atras.irAtras());
-  }
+        actor.attemptsTo(
+                ValidarTextoQueContengaX.elTextoContiene(WHATSAPP),
+                ValidarTextoQueContengaX.elTextoContiene(VERSION),
+                ValidarTextoQueContengaX.elTextoContiene(LICENCIAS),
+                Atras.irAtras(),
+                Atras.irAtras(),
+                Atras.irAtras());
+    }
 
-  public static Performable validarVersionApp() {
-    return instrumented(ValidarVersionApp.class);
-  }
+    public static Performable validarVersionApp() {
+        return instrumented(ValidarVersionApp.class);
+    }
 }

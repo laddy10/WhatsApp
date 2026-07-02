@@ -14,7 +14,7 @@ public class WaitForResponse implements Interaction {
   private final List<String> expectedTexts;
   private final List<String> failFastTexts;
   private final int timeout;
-  private static final int DEFAULT_TIMEOUT = 15;
+  private static final int DEFAULT_TIMEOUT = 20;
   private static final long POLL_MILLIS = 500;
 
   public WaitForResponse(List<String> expectedTexts, int timeout) {

@@ -50,7 +50,7 @@ public class ConstantesPost {
     public static final String PELICULAS_TODOS_LOS_GENEROS = "Encuentra pelis de todos los géneros";
     public static final String MI_CLARO_DRIVE = "Mi Claro drive";
     public static final String NEGOCIO = "Negocio";
-    public static final String TUS_ARCHIVOS = "¡Tus archivos a otro nivel!";
+    public static final String TUS_ARCHIVOS = "Tus archivos";
     public static final String URL_CLARO_CLUB = "https://bit.ly/3EO6zQ7";
     public static final String CLARO_CLUB_2 = "Claro club";
     public static final String CUPONES_DESTACADOS = "Cupones destacados";

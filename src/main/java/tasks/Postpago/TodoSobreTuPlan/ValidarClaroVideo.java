@@ -11,8 +11,6 @@ import static utils.ConstantesPost.*;
 import hooks.ReportHooks;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
-import interactions.wait.WaitFor;
-import interactions.wait.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -35,11 +33,7 @@ public class ValidarClaroVideo implements Task {
 
         UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_VIDEO);
 
-        actor.attemptsTo(
-                WaitFor.aTime(20000),
-                WaitForResponse.withAnyText(EXPLORAR),
-                ValidarTextoQueContengaX.elTextoContiene(PREMIUM)
-        );
+        UtilidadesAndroid.esperarRedireccionamientoWeb(actor, "clarovideo.com", 15);
 
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Se valida el ingreso a Claro Video");

@@ -12,7 +12,7 @@ public class WaitForTextContains implements Interaction {
 
   private final List<String> partialTexts;
   private final int timeout;
-  private static final int DEFAULT_TIMEOUT = 15;
+  private static final int DEFAULT_TIMEOUT = 20;
 
   public WaitForTextContains(List<String> partialTexts, int timeout) {
     this.partialTexts = partialTexts;

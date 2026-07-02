@@ -27,6 +27,7 @@ public class SeleccionarLineaConsulta implements Task {
                 INGRESAR_OPCION_VALIDA,
                 NO_ENTENDI_TU_MENSAJE),
             POLITICA_TRATAMIENTO,
+            AUTORIZACION_TRATAMIENTO,
             MENU_PRINCIPAL,
             VER_MENU_PREPAGO));
   }
