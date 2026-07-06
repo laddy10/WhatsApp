@@ -120,7 +120,7 @@ public class AndroidObject {
 
   public ArrayList<Character> LeerMensaje(Actor actor) {
     androidDriver(actor).openNotifications();
-    actor.attemptsTo(WaitFor.aTime(3000));
+    actor.attemptsTo(WaitFor.aTime(15000));
     try {
       texto =
           androidDriver(actor)

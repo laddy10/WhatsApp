@@ -7,6 +7,7 @@ import static utils.Constantes.*;
 import static utils.Constantes.ABANDONAR_CONVERSACION;
 
 import hooks.ReportHooks;
+import interactions.Click.ClickOpcionMenu;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.comunes.Atras;
@@ -42,21 +43,28 @@ public class PaqTodoIncluido implements Task {
 
         actor.attemptsTo(
                 WaitForResponse.withText(PAQ_TODO_INCLUIDO),
-                ClickTextoQueContengaX.elTextoContiene(PAQ_TODO_INCLUIDO));
+                // Hacemos scroll y clic explícito en el elemento para asegurar la selección del RadioButton
+                ScrollHastaTexto.conTexto(PAQ_TODO_INCLUIDO),
+                ClickOpcionMenu.conTexto(PAQ_TODO_INCLUIDO));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA);
 
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitFor.aTime(10000),
-                WaitForTextContains.withAnyTextContains(AHORRA_Y_APROVECHA_MAXIMO));
+                // Esperamos que el mensaje enviado aparezca en el chat
+                WaitForTextContains.withAnyTextContains(AHORRA_Y_APROVECHA_MAXIMO),
+                // Damos un tiempo de gracia para que el bot responda
+                WaitFor.aTime(12000),
+                // Clickeamos el botón de selecciona del nuevo mensaje
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(30)
+        );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_2);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_2);
 
         actor.attemptsTo(
-                Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
+                // Se eliminó el clic directo a BTN_SELECCIONA_PQ_TODO_INCLUIDO para evitar abrir la lista vieja
                 WaitForResponse.withText(PAQ_TI_1D_2500_PRECIO)
         );
 

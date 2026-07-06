@@ -3,7 +3,7 @@ package tasks.Hogar.TusPagosYFacturas;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static utils.Constantes.TEXTO_CODIGO_SEGURIDAD;
 import static utils.Constantes.TEXTO_NECESITO_CONFIRMAR_IDENTIDAD;
-import static utils.ConstantesPost.CONSULTA_TU_FACTURA;
+import static utils.ConstantesPost.VER_FACTURA_Y_PAGAR_HOGAR;
 import static utils.ConstantesPost.OPCIONES_RAPIDAS_HOGAR;
 
 import hooks.ReportHooks;
@@ -22,15 +22,15 @@ public class OpcionRapidaConsultaFacturaHogar implements Task {
 
         // 1. Esperar el mensaje de opciones rápidas hogar
         actor.attemptsTo(
-                WaitForTextContains.withAnyTextContains(OPCIONES_RAPIDAS_HOGAR)
+                WaitForTextContains.withAnyTextContains(60, OPCIONES_RAPIDAS_HOGAR)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar opciones rápidas hogar");
         ReportHooks.registrarPaso("Validar opciones rápidas hogar");
 
-        // 2. Clic en el botón de respuesta rápida "Consulta tu factura"
+        // 2. Clic en el botón de respuesta rápida "Ver factura y pagar"
         actor.attemptsTo(
-                ClickTextoQueContengaX.elTextoContiene(CONSULTA_TU_FACTURA),
+                ClickTextoQueContengaX.elTextoContiene(VER_FACTURA_Y_PAGAR_HOGAR),
                 WaitFor.aTime(2000)
         );
 
@@ -39,7 +39,7 @@ public class OpcionRapidaConsultaFacturaHogar implements Task {
 
         // 3. Esperar el mensaje de validación de identidad
         actor.attemptsTo(
-                WaitForTextContains.withAnyTextContains(TEXTO_NECESITO_CONFIRMAR_IDENTIDAD, TEXTO_CODIGO_SEGURIDAD)
+                WaitForTextContains.withAnyTextContains(60, TEXTO_NECESITO_CONFIRMAR_IDENTIDAD, TEXTO_CODIGO_SEGURIDAD)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje solicitud de código de seguridad");

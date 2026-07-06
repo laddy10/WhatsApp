@@ -36,6 +36,8 @@ public class EsperarYClickSeleccionaEnUltimoMensaje implements Interaction {
       }
 
       // A) Buscar GLOBALMENTE cualquier chip "Selecciona"
+      // Se comenta este bloque porque encuentra botones viejos si el bot demora en responder
+      /* 
       WebElement ultimoChip =
           ultimoChipSeleccionaVisible(BrowseTheWeb.as(actor).getDriver(), LABEL);
       if (ultimoChip != null) {
@@ -43,9 +45,9 @@ public class EsperarYClickSeleccionaEnUltimoMensaje implements Interaction {
           ultimoChip.click();
           return;
         } catch (Exception ignored) {
-          /* reintenta ciclo */
         }
       }
+      */
 
       // B) Respaldo: dentro/adyacente de la última burbuja (tu lógica)
       WebElementFacade ultimoMsg = ultimoMensaje(actor);

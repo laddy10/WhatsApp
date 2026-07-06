@@ -60,7 +60,8 @@ public class ValidarPagoPaquete implements Task {
 
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitForTextContains.withAnyTextContains(AHORRA_Y_APROVECHA_MAXIMO));
+                // El bot muestra la lista de paquetes. Esperamos a que cargue.
+                WaitFor.aTime(8000));
 
         // Ahora: espera *hasta que exista* el botón en la última burbuja y haz clic allí
         actor.attemptsTo(EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(40));
@@ -140,7 +141,7 @@ public class ValidarPagoPaquete implements Task {
         String mensaje =
                 WhatsAppPage.LBL_MENSAJES.resolveAllFor(actor).stream()
                         .map(WebElementFacade::getText)
-                        .filter(text -> text.contains("clro.co/TC"))
+                        .filter(text -> text.contains("clro.co/TC") || text.contains("clarodigital.co/TC"))
                         .findFirst()
                         .orElseThrow(() -> new RuntimeException("No se encontró mensaje con URL de pago."));
 
@@ -175,7 +176,7 @@ public class ValidarPagoPaquete implements Task {
         String mensajepse =
                 WhatsAppPage.LBL_MENSAJES.resolveAllFor(actor).stream()
                         .map(WebElementFacade::getText)
-                        .filter(text -> text.contains("clro.co/PSE"))
+                        .filter(text -> text.contains("clro.co/PSE") || text.contains("clarodigital.co/PSE"))
                         .findFirst()
                         .orElseThrow(() -> new RuntimeException("No se encontró mensaje con URL de pago."));
 

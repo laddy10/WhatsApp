@@ -9,7 +9,7 @@ import static utils.ConstantesPost.*;
 import hooks.ReportHooks;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
-import interactions.wait.WaitFor;
+import interactions.wait.WaitForPackageChange;
 import interactions.wait.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -32,7 +32,7 @@ public class ValidarClaroClub implements Task {
 
         UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_CLUB);
 
-        actor.attemptsTo(WaitFor.aTime(90000));
+        actor.attemptsTo(WaitForPackageChange.from("com.whatsapp", 20));
 
     /*    List<WebElementFacade> btnclose = BTN_CLOSE.resolveAllFor(actor);
     if (!btnclose.isEmpty()) {

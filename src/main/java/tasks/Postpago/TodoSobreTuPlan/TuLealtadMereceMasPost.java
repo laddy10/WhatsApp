@@ -9,7 +9,6 @@ import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
-import interactions.wait.WaitFor;
 import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -28,7 +27,6 @@ public class TuLealtadMereceMasPost implements Task {
 
     actor.attemptsTo(
         ClickElementByText.clickElementByText(ENVIAR),
-        WaitFor.aTime(4000),
         WaitForTextContains.withAnyTextContains(TEXTO_GRACIAS_POR_PREFERIRNOS));
 
     CapturaDePantallaMovil.tomarCapturaPantalla(

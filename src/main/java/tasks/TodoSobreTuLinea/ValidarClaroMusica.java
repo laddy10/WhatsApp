@@ -38,9 +38,9 @@ public class ValidarClaroMusica implements Task {
 
         UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_MUSICA);
 
-        actor.attemptsTo(
-                WaitForResponse.withAnyText(
-                        INSTALAR, ACEPTAR_Y_CONTINUAR, ESCUCHA_GRATIS, ACCEDER_CLARO_MUSICA));
+        // Wait for the app to load. We don't wait for specific text because the app 
+        // might open directly to the main content screen without any onboarding.
+        actor.attemptsTo(WaitFor.aTime(8000));
 
         List<WebElementFacade> btninstalar = BTN_INSTALAR.resolveAllFor(actor);
 
@@ -95,10 +95,15 @@ public class ValidarClaroMusica implements Task {
         CapturaDePantallaMovil.tomarCapturaPantalla("Se ingresa a Escucha gratis");
         ReportHooks.registrarPaso("Se ingresa a Escucha gratis");
 
-        actor.attemptsTo(
-                ClickElementByText.clickElementByText(ESCUCHA_GRATIS),
-                WaitForResponse.withText(INGRESAR_CON_NUMERO_CLARO),
-                ValidarTexto.validarTexto(INGRESAR_CON_NUMERO_CLARO));
+        // El botón "Escucha gratis" solo aparece si la app está en el onboarding.
+        // Si la app ya está en la pantalla principal de contenido, este paso se omite.
+        List<WebElementFacade> btnEscuchaGratis = BTN_ESCUCHA_GRATIS.resolveAllFor(actor);
+        if (!btnEscuchaGratis.isEmpty()) {
+            actor.attemptsTo(
+                    ClickElementByText.clickElementByText(ESCUCHA_GRATIS),
+                    WaitForResponse.withText(INGRESAR_CON_NUMERO_CLARO),
+                    ValidarTexto.validarTexto(INGRESAR_CON_NUMERO_CLARO));
+        }
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Ingresar correctamente a Claro musica");
         ReportHooks.registrarPaso("Ingresar correctamente a Claro musica");

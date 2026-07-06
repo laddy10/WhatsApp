@@ -9,6 +9,7 @@ import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
+import interactions.wait.ChannelUnavailableException;
 import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitForResponse;
 
@@ -57,16 +58,24 @@ public class SeleccionarValorRecargas implements Task {
 
                     actor.attemptsTo(
                             ClickTextoQueContengaX.elTextoContiene(ENVIAR2),
-                            WaitForResponse.withAnyText(MEDIOS_DE_PAGO, CONTINUAR_RECARGA)
+                            WaitForResponse.withAnyText(
+                                    MEDIOS_DE_PAGO,
+                                    CONTINUAR_RECARGA,
+                                    ERROR_PROCESAR_SOLICITUD)
                     );
 
+                    String source =
+                            utils.AndroidObject.androidDriver(actor).getPageSource().toLowerCase();
+                    if (source.contains(ERROR_PROCESAR_SOLICITUD)) {
+                        throw new ChannelUnavailableException(
+                                "Claro no pudo procesar la solicitud de recarga. "
+                                        + "Reintento de canal requerido.");
+                    }
 
-                    CapturaDePantallaMovil.tomarCapturaPantalla("Se habilita el boton 'Medios de pago o 'Continuar recarga'.");
-                    ReportHooks.registrarPaso("Se habilita el boton 'Medios de pago o 'Continuar recarga'.");
-
-
-                    CapturaDePantallaMovil.tomarCapturaPantalla("Se habilita el boton 'Medios de pago o 'Continuar recarga'.");
-                    ReportHooks.registrarPaso("Se habilita el boton 'Medios de pago o 'Continuar recarga'.");
+                    CapturaDePantallaMovil.tomarCapturaPantalla(
+                            "Se habilita el boton 'Medios de pago' o 'Continuar recarga'.");
+                    ReportHooks.registrarPaso(
+                            "Se habilita el boton 'Medios de pago' o 'Continuar recarga'.");
 
                     paqueteEncontrado = true;
                     break;

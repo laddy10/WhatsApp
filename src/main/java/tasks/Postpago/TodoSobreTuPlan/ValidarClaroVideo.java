@@ -33,8 +33,15 @@ public class ValidarClaroVideo implements Task {
 
         UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_VIDEO);
 
-        UtilidadesAndroid.esperarRedireccionamientoWeb(actor, "clarovideo.com", 15);
-
+        // Se amplía el timeout a 25 segundos para dar tiempo al link acortado a resolver
+        // y a Chrome a cargar el dominio de clarovideo.com
+        try {
+            UtilidadesAndroid.esperarRedireccionamientoWeb(actor, "clarovideo.com", 25);
+        } catch (RuntimeException e) {
+            CapturaDePantallaMovil.tomarCapturaPantalla("Timeout esperando clarovideo.com en Chrome");
+            ReportHooks.registrarPaso("⚠️ No se confirmó redirección a clarovideo.com: " + e.getMessage());
+            throw e;
+        }
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Se valida el ingreso a Claro Video");
         ReportHooks.registrarPaso("Se valida el ingreso a Claro Video");

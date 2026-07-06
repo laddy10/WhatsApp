@@ -14,9 +14,8 @@ public class EvidenciaUtils {
     ReportHooks.registrarPaso(pasoNumerado);
     CapturaDePantallaMovil.tomarCapturaPantalla(pasoNumerado);
 
-    // Integrar con Serenity (versión simple)
+    // La política AFTER_EACH_STEP de Serenity realiza la captura del paso.
     Serenity.recordReportData().withTitle(paso).andContents(pasoNumerado);
-    Serenity.takeScreenshot();
   }
 
   public static void reiniciarContador() {

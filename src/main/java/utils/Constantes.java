@@ -92,6 +92,8 @@ public class Constantes {
     public static final String MAS_OPCIONES = "Más opciones";
     public static final String MEDIOS_DE_PAGO = "Medios de pago";
     public static final String CONTINUAR_RECARGA = "Continuar recarga";
+  public static final String ERROR_PROCESAR_SOLICITUD =
+      "no fue posible procesar tu solicitud";
     public static final String NEQUI = "Nequi";
     public static final String SMS_NEQUI_NO_DISPONIBLE = "\uD83D\uDE25 Lo siento, Nequi no está disponible en este momento. \n" +
             "\n" +

@@ -328,6 +328,7 @@ public class ConstantesPost {
     public static final String FALLAS_EN_TU_NAVEGACION = "Fallas en tu navegación";
     public static final String INTERNET = "Internet";
     public static final String CONSULTA_TU_FACTURA = "Consulta tu factura";
+    public static final String VER_FACTURA_Y_PAGAR_HOGAR = "Ver factura y pagar";
     public static final String OPCIONES_RAPIDAS_HOGAR =
             "☺️ Tengo unas opciones rápidas para tu cuenta hogar que te pueden ayudar";
     public static final String CONOCE_OPCIONES_HOGAR = "¡Conoce todas las opciones, servicios y beneficios que tengo para ti!";

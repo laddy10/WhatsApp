@@ -101,6 +101,9 @@ public class WhatsAppPage extends PageObject {
           .located(By.xpath("//*[@text='¿Permitir que Claro música te envíe notificaciones?']"));
   public static final Target BTN_NO_PERMITIR =
       Target.the("Boton No permitir").located(By.xpath("//*[@text='No permitir']"));
+  public static final Target BTN_ESCUCHA_GRATIS =
+      Target.the("Boton Escucha gratis").located(By.xpath("//*[@text='Escucha gratis']"));
+
 
   public static final Target BTN_SELECCIONA =
       Target.the("Boton Selecciona del menu tu lealtad merece más ")

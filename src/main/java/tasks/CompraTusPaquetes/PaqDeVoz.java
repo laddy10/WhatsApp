@@ -10,7 +10,6 @@ import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.comunes.Atras;
 import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
-import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -36,7 +35,7 @@ public class PaqDeVoz implements Task {
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA);
 
-        actor.attemptsTo(Click.on(BTN_ENVIAR_2), WaitFor.aTime(10000));
+        actor.attemptsTo(Click.on(BTN_ENVIAR_2));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_2);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_2);

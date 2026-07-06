@@ -11,7 +11,6 @@ import hooks.ReportHooks;
 import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
-import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import java.util.List;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -87,8 +86,7 @@ public class ValidarTratamientoDatos implements Task {
       }
 
       actor.attemptsTo(
-              WaitFor.aTime(5000),
-              WaitForResponse.withAnyText(VER_MENU_PREPAGO, MENU_PRINCIPAL));
+          WaitForResponse.withAnyText(40, VER_MENU_PREPAGO, MENU_PRINCIPAL));
     }
   }
 

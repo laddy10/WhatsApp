@@ -10,14 +10,13 @@ import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
 import interactions.scroll.ScrollInicio;
-import interactions.wait.WaitFor;
+import interactions.wait.ChannelUnavailableException;
 import interactions.wait.WaitForResponse;
+import java.util.List;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.Enter;
 import tasks.ExtraerURL;
 import tasks.SalirConversacion;
 import userinterfaces.WhatsAppPage;
@@ -29,7 +28,7 @@ public class DireccionamientoMediosPago implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         if (!BTN_CONTINUAR_RECARGA.resolveAllFor(actor).isEmpty()) {
-            actor.attemptsTo(Click.on(BTN_CONTINUAR_RECARGA), WaitForResponse.withText(MEDIOS_DE_PAGO));
+            abrirMediosDePago(actor);
             CapturaDePantallaMovil.tomarCapturaPantalla(
                     "Dar clic en boton 'Continuar recarga' y se habilita el boton 'Medios de pago");
             ReportHooks.registrarPaso(
@@ -56,6 +55,44 @@ public class DireccionamientoMediosPago implements Task {
         );
 
         //    WordAppium.main();
+    }
+
+
+    private <T extends Actor> void abrirMediosDePago(T actor) {
+        RuntimeException primerFallo;
+        try {
+            clickUltimoBotonContinuar(actor);
+            esperarResultadoMediosPago(actor);
+            return;
+        } catch (RuntimeException e) {
+            primerFallo = e;
+        }
+
+        if (BTN_CONTINUAR_RECARGA.resolveAllFor(actor).isEmpty()) {
+            throw primerFallo;
+        }
+
+        clickUltimoBotonContinuar(actor);
+        esperarResultadoMediosPago(actor);
+    }
+
+    private <T extends Actor> void esperarResultadoMediosPago(T actor) {
+        actor.attemptsTo(
+                WaitForResponse.withAnyText(
+                        20, MEDIOS_DE_PAGO, ERROR_PROCESAR_SOLICITUD));
+
+        String source = utils.AndroidObject.androidDriver(actor).getPageSource().toLowerCase();
+        if (source.contains(ERROR_PROCESAR_SOLICITUD)) {
+            throw new ChannelUnavailableException(
+                    "Claro no pudo procesar la solicitud de recarga. Reintento de canal requerido.");
+        }
+    }
+    private <T extends Actor> void clickUltimoBotonContinuar(T actor) {
+        List<WebElementFacade> botones = BTN_CONTINUAR_RECARGA.resolveAllFor(actor);
+        if (botones.isEmpty()) {
+            throw new RuntimeException("No se encontro el boton 'Continuar recarga'.");
+        }
+        botones.get(botones.size() - 1).click();
     }
 
     private <T extends Actor> void realizarFlujoMedioPago(
@@ -106,7 +143,6 @@ public class DireccionamientoMediosPago implements Task {
         actor.attemptsTo(
                 ClickTextoQueContengaX.elTextoContiene(ENVIAR2),
                 WaitForResponse.withText(SMS_ENLACE_PAGO),
-                WaitFor.aTime(3000),
                 ValidarTextoQueContengaX.elTextoContiene(textoEnlace));
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje del medio de pago: " + medioPago);

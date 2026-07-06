@@ -37,6 +37,7 @@ import tasks.TusEquipos.MenuTusEquipos;
 import tasks.TusEquipos.TusEquipos;
 import tasks.TusEquipos.TusEquiposEnSoporte;
 import tasks.TusEquipos.VerPuntosFisicos;
+import utils.AndroidObject;
 import utils.CapturaDePantallaMovil;
 import utils.EvidenciaUtils;
 import utils.TestDataProvider;
@@ -169,6 +170,11 @@ public class WhatsappDefinitions {
 
     @And("^Vaciar chat$")
     public void vaciarChat() {
+        if (!"com.whatsapp".equals(AndroidObject.androidDriver(theActorInTheSpotlight()).getCurrentPackage())) {
+            AndroidObject.androidDriver(theActorInTheSpotlight()).activateApp("com.whatsapp");
+            theActorInTheSpotlight().attemptsTo(WaitFor.aTime(1000));
+        }
+
         theActorInTheSpotlight()
                 .attemptsTo(
                         Click.on(BTN_MAS_OPCIONES),

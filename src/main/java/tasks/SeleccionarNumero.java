@@ -3,7 +3,6 @@ package tasks;
 import static userinterfaces.WhatsAppPage.*;
 import static utils.Constantes.LINEAS_POSTPAGO;
 
-import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,7 +28,7 @@ public class SeleccionarNumero implements Task {
   @Override
   public <T extends Actor> void performAs(T actor) {
 
-    actor.attemptsTo(WaitFor.aTime(1000), WaitForResponse.withText(LINEAS_POSTPAGO, 10));
+    actor.attemptsTo(WaitForResponse.withText(LINEAS_POSTPAGO, 10));
 
     // Obtener el texto del menú principal usando un XPath más flexible
     Target menuTexto = LBL_MENU_LINEAS;
@@ -46,7 +45,6 @@ public class SeleccionarNumero implements Task {
 
     // Ingresar la opción en el campo de texto
     actor.attemptsTo(
-        WaitFor.aTime(1000),
         Enter.theValue(Integer.toString(opcionSeleccionada)).into(TXT_CAJA_MENSAJE),
         Click.on(BTN_ENVIAR));
   }

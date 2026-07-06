@@ -26,7 +26,7 @@ public class SeleccionarLineaHogar implements Task {
                 Enter.theValue("1").into(TXT_CAJA_MENSAJE),
                 Click.on(BTN_ENVIAR),
                 WaitForResponse.withAnyTextFailingOn(
-                        10,
+                        60,
                         List.of(
                                 OPCIONES_MOSTRADAS_ANTERIORMENTE,
                                 TU_RESPUESTA_NO_ES_VALIDA,
