@@ -18,6 +18,7 @@ import interactions.wait.WaitForResponse;
 
 import java.util.List;
 
+import interactions.wait.WaitForTextContains;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -103,6 +104,9 @@ public class ValidarClaroMusica implements Task {
                     ClickElementByText.clickElementByText(ESCUCHA_GRATIS),
                     WaitForResponse.withText(INGRESAR_CON_NUMERO_CLARO),
                     ValidarTexto.validarTexto(INGRESAR_CON_NUMERO_CLARO));
+        } else if (btninstalar.isEmpty() && lblbienvenido.isEmpty() && btnaccederclaromusica.isEmpty()) {
+            // Si la app ya estaba lista y saltó directo a la pantalla principal
+            actor.attemptsTo(WaitForTextContains.withAnyTextContains(15, "Novedades", "Inicio", "Mi Música"));
         }
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Ingresar correctamente a Claro musica");

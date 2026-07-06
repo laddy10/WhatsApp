@@ -104,6 +104,14 @@ public class WhatsAppPage extends PageObject {
   public static final Target BTN_ESCUCHA_GRATIS =
       Target.the("Boton Escucha gratis").located(By.xpath("//*[@text='Escucha gratis']"));
 
+  public static final Target LBL_NOVEDADES_CLARO_MUSICA =
+      Target.the("Pantalla de Novedades de Claro Musica").located(By.xpath(
+          "//*[contains(@text, 'Novedades') or contains(@content-desc, 'Novedades') or " +
+          "contains(@text, 'Inicio') or contains(@content-desc, 'Inicio') or " +
+          "contains(@text, 'Mi Música') or contains(@content-desc, 'Mi Música')]"));
+
+
+
 
   public static final Target BTN_SELECCIONA =
       Target.the("Boton Selecciona del menu tu lealtad merece más ")
