@@ -8,7 +8,6 @@ public class ClasificarRespuestaBot {
 
     public static EstadoConversacion obtenerEstado(Actor actor) {
 
-        // 🟡 Pantalla inicial NO válida
         if (TextoQueContengaX.verificarTexto("Ideas de regalo").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("¿Qué quieres hacer hoy?").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Te damos la bienvenida al chat de Claro")
@@ -17,15 +16,23 @@ public class ClasificarRespuestaBot {
             return EstadoConversacion.PANTALLA_INICIAL;
         }
 
-        // 🧑‍💼 Escalamiento a asesor
         if (TextoQueContengaX.verificarTexto("Voy a comunicarte con uno de nuestros asesores").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("comunicarte con uno de nuestros asesores").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("te comunicaremos con un asesor").answeredBy(actor)) {
+                || TextoQueContengaX.verificarTexto("te comunicaremos con un asesor").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("mi nombre es").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Mi nombre es").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("me encargare de tu solicitud").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("me encargaré de tu solicitud").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Asesor de Claro").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("asesor de Claro").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Gracias por comunicarte").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("como te encuentras").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("en que te puedo colaborar").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Es un gusto atenderte").answeredBy(actor)) {
 
             return EstadoConversacion.ESPERANDO_ASESOR;
         }
 
-        // 🔴 Errores conversacionales
         if (TextoQueContengaX.verificarTexto("No entendí").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("respuesta no es válida").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Menú principal").answeredBy(actor)
@@ -35,7 +42,6 @@ public class ClasificarRespuestaBot {
             return EstadoConversacion.ERROR;
         }
 
-        // 🟢 Flujo normal
         return EstadoConversacion.FLUJO_NORMAL;
     }
 }

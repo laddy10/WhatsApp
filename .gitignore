@@ -66,3 +66,6 @@ Capturas/
 
 #REPORTES
 reportes/
+
+# Estado runtime de recuperacion entre ejecuciones
+.runtime/
