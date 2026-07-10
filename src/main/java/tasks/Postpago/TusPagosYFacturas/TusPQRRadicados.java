@@ -45,7 +45,8 @@ public class TusPQRRadicados implements Task {
         String mensaje =
                 LBL_MENSAJES.resolveAllFor(actor).stream()
                         .map(WebElementFacade::getText)
-                        .filter(text -> text.contains("yoiz.me") || text.contains("clro.co"))
+                        .filter(text -> text.contains("yoiz.me") || text.contains("clro.co")
+                                || text.contains("oficinavirtualpqr.claro.com.co"))
                         .findFirst()
                         .orElseThrow(() -> new RuntimeException("No se encontró URL de pago."));
 
