@@ -22,7 +22,7 @@ public class Constantes {
     public static final String URL_TRATAMIENTO_INFORMACION = "http://bit.ly/3DtS9az";
     public static final String URL_TRATAMIENTO_INFORMACION_DESTINO = "https://www.claro.com.co/portal/co/legal-regulatorio/lightbox/descripcion-ED-17.html";
     public static final String URL_TRATAMIENTO_INFORMACION_PATH = "descripcion-ED-17.html";
-    public static final String TITULO_TRATAMIENTO_INFORMACION = "Políticas de tratamiento de la información";
+    public static final String TITULO_TRATAMIENTO_INFORMACION = "Política de tratamiento de la información";
     public static final String URL_PORTAL_CLARO = "https://www.claro.com.co/personas/autogestion/whatsapp/";
     public static final String CONTINUAR_AL_DESTINO = "Continuar al destino";
     public static final String LEY = "LEY";
