@@ -17,6 +17,7 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import questions.TextoQueContengaX;
 import utils.CapturaDePantallaMovil;
 import utils.ClasificarRespuestaBot;
 import utils.EstadoAtencionHumana;
@@ -35,9 +36,20 @@ public class IniciarChatClaro implements Task {
         boolean saludoYaEnviado = false;
         int intentos = 0;
 
-        // Un escenario anterior puede haber dejado el caso en cola sin mensajes visibles.
-        if (EstadoAtencionHumana.requiereRecuperacion()
-                || ClasificarRespuestaBot.obtenerEstado(actor) == EstadoConversacion.ESPERANDO_ASESOR) {
+        // La marca persistente no es suficiente para asumir asesor en una pantalla vacía.
+        // Solo se recupera el manejo de asesor si hay evidencia visible en el chat actual.
+        if (EstadoAtencionHumana.requiereRecuperacion()) {
+            if (asesorVisible(actor)) {
+                EstadoAtencionHumana.marcarEnCola();
+                actor.attemptsTo(ManejarConversacionConAsesor.ejecutar());
+            } else {
+                EstadoAtencionHumana.marcarCerrado();
+                ReportHooks.registrarPaso(
+                        "Marca de asesor pendiente descartada: no hay evidencia visible de asesor en el chat actual");
+            }
+        }
+
+        if (asesorVisible(actor) && !flujoNormalVisible(actor)) {
             EstadoAtencionHumana.marcarEnCola();
             actor.attemptsTo(ManejarConversacionConAsesor.ejecutar());
         }
@@ -124,9 +136,22 @@ public class IniciarChatClaro implements Task {
         }
     }
 
+    private boolean asesorVisible(Actor actor) {
+        return ClasificarRespuestaBot.obtenerEstado(actor) == EstadoConversacion.ESPERANDO_ASESOR;
+    }
+    private boolean flujoNormalVisible(Actor actor) {
+        return TextoQueContengaX.verificarTexto(SALUDO).answeredBy(actor)
+                || TextoQueContengaX.verificarTexto(SALUDO_PARA_AYUDARTE).answeredBy(actor)
+                || TextoQueContengaX.verificarTexto(LINEAS_POSTPAGO).answeredBy(actor)
+                || TextoQueContengaX.verificarTexto(LINEAS_PREPAGO).answeredBy(actor)
+                || TextoQueContengaX.verificarTexto(CUENTA).answeredBy(actor);
+    }
     public static String[] obtenerTextosParaWait() {
         return new String[]{
-                "Líneas postpago",
+                SALUDO,
+                SALUDO_PARA_AYUDARTE,
+                LINEAS_POSTPAGO,
+                LINEAS_PREPAGO,
                 "No entendí",
                 "Menú principal",
                 "Ideas de regalo",
