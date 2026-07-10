@@ -15,6 +15,7 @@ import interactions.wait.WaitForResponse;
 
 import java.util.List;
 
+import interactions.wait.WaitForTextContains;
 import models.User;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
@@ -96,13 +97,12 @@ public class SeleccionarValorRecargas implements Task {
                             ClickTextoQueContengaX.elTextoContiene(ENVIAR2),
                             WaitForResponse.withText(OTRO_VALOR_RECARGA),
                             ValidarTexto.validarTexto(MAS_OPCIONES));
-
+                    actor.attemptsTo(WaitForTextContains.withAnyTextContains(RECARGATE));
                     CapturaDePantallaMovil.tomarCapturaPantalla(
                             "Validar mensaje que contenga el botón Selecciona");
                     ReportHooks.registrarPaso("Validar mensaje que contenga el botón Selecciona");
 
                     actor.attemptsTo(EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20));
-
                 } else {
                     throw new RuntimeException(
                             "No se encontró el valor y no hay más opciones disponibles: " + user.getValor());

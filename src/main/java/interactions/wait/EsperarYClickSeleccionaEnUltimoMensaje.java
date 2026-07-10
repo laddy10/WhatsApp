@@ -3,12 +3,15 @@ package interactions.wait;
 import static userinterfaces.WhatsAppPage.LBL_MENSAJES;
 
 import java.util.List;
+import java.util.stream.Collectors;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
 import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class EsperarYClickSeleccionaEnUltimoMensaje implements Interaction {
@@ -28,103 +31,138 @@ public class EsperarYClickSeleccionaEnUltimoMensaje implements Interaction {
   @Override
   public <T extends Actor> void performAs(T actor) {
     long fin = System.currentTimeMillis() + (timeoutSeg * 1000L);
-    final String LABEL = "Selecciona";
-
+    final String label = "Selecciona";
+    WebDriver driver = BrowseTheWeb.as(actor).getDriver();
     while (true) {
       if (System.currentTimeMillis() > fin) {
-        throw new RuntimeException("No apareció el botón 'Selecciona' dentro del tiempo.");
+        throw new RuntimeException("No aparecio el boton 'Selecciona' dentro del tiempo.");
       }
 
-      // A) Buscar GLOBALMENTE cualquier chip "Selecciona"
-      // Se comenta este bloque porque encuentra botones viejos si el bot demora en responder
-      /* 
-      WebElement ultimoChip =
-          ultimoChipSeleccionaVisible(BrowseTheWeb.as(actor).getDriver(), LABEL);
-      if (ultimoChip != null) {
-        try {
-          ultimoChip.click();
-          return;
-        } catch (Exception ignored) {
-        }
-      }
-      */
+      try {
+        WebElementFacade ultimoMsg = ultimoMensaje(actor);
+        if (ultimoMsg != null) {
+          List<WebElement> dentro =
+              ultimoMsg.findElements(
+                  By.xpath(
+                      ".//*[@resource-id='com.whatsapp:id/button' and .//*[@text='"
+                          + label
+                          + "' or @content-desc='"
+                          + label
+                          + "']] | .//*[@resource-id='com.whatsapp:id/button_content' and (@text='"
+                          + label
+                          + "' or @content-desc='"
+                          + label
+                          + "')] | .//*[@text='"
+                          + label
+                          + "' or @content-desc='"
+                          + label
+                          + "']"));
+          if (!dentro.isEmpty()) {
+            dentro.get(dentro.size() - 1).click();
+            return;
+          }
 
-      // B) Respaldo: dentro/adyacente de la última burbuja (tu lógica)
-      WebElementFacade ultimoMsg = ultimoMensaje(actor);
-      if (ultimoMsg != null) {
-        // dentro
-        List<org.openqa.selenium.WebElement> dentro =
-            ultimoMsg.findElements(
-                By.xpath(
-                    ".//*[@resource-id='com.whatsapp:id/button_content' or @text='"
-                        + LABEL
-                        + "' or @content-desc='"
-                        + LABEL
-                        + "']"));
-        if (!dentro.isEmpty()) {
-          dentro.get(dentro.size() - 1).click();
+          List<WebElement> hermanos =
+              ultimoMsg.findElements(
+                  By.xpath(
+                      "../following-sibling::*//*[(@resource-id='com.whatsapp:id/button' and .//*[@text='"
+                          + label
+                          + "' or @content-desc='"
+                          + label
+                          + "']) or (@resource-id='com.whatsapp:id/button_content' and (@text='"
+                          + label
+                          + "' or @content-desc='"
+                          + label
+                          + "')) or @text='"
+                          + label
+                          + "' or @content-desc='"
+                          + label
+                          + "']"));
+          if (!hermanos.isEmpty()) {
+            hermanos.get(hermanos.size() - 1).click();
+            return;
+          }
+        }
+
+        WebElement chipGlobal = ultimoChipSeleccionaVisibleDespuesDeMasOpciones(driver, label);
+        if (chipGlobal != null) {
+          chipGlobal.click();
           return;
         }
-        // hermano/adyacente
-        List<org.openqa.selenium.WebElement> hermanos =
-            ultimoMsg.findElements(
-                By.xpath(
-                    "../following-sibling::*//*[(@resource-id='com.whatsapp:id/button_content' or @text='"
-                        + LABEL
-                        + "' or @content-desc='"
-                        + LABEL
-                        + "')]"));
-        if (!hermanos.isEmpty()) {
-          hermanos.get(hermanos.size() - 1).click();
-          return;
-        }
+      } catch (StaleElementReferenceException e) {
+        dormir(pollMs);
+        continue;
       }
 
       dormir(pollMs);
     }
   }
 
-  private static org.openqa.selenium.WebElement ultimoChipSeleccionaVisible(
-      org.openqa.selenium.WebDriver driver, String label) {
-    // candidatos: texto o content-desc "Selecciona", preferible clickable/focusable
-    List<org.openqa.selenium.WebElement> cand =
+  private static WebElement ultimoChipSeleccionaVisibleDespuesDeMasOpciones(WebDriver driver, String label) {
+    List<WebElement> visibles = chipsSeleccionaVisibles(driver, label);
+    if (visibles.isEmpty()) {
+      return null;
+    }
+
+    int yMasOpciones = yUltimoTexto(driver, "Más opciones");
+    WebElement debajoDeMasOpciones = visibles.stream()
+        .filter(el -> yMasOpciones == Integer.MIN_VALUE || yElemento(el) > yMasOpciones)
+        .max(java.util.Comparator.comparingInt(EsperarYClickSeleccionaEnUltimoMensaje::yElemento))
+        .orElse(null);
+
+    if (debajoDeMasOpciones != null) {
+      return debajoDeMasOpciones;
+    }
+
+    return visibles.stream()
+        .max(java.util.Comparator.comparingInt(EsperarYClickSeleccionaEnUltimoMensaje::yElemento))
+        .orElse(null);
+  }
+  private static List<WebElement> chipsSeleccionaVisibles(WebDriver driver, String label) {
+    List<WebElement> cand =
         driver.findElements(
             By.xpath(
-                "//*[(@text='"
+                "//*[@resource-id='com.whatsapp:id/button' and .//*[@text='"
                     + label
                     + "' or @content-desc='"
                     + label
-                    + "') and (@clickable='true' or @focusable='true')]"));
+                    + "']]"));
     if (cand.isEmpty()) {
-      cand =
-          driver.findElements(
-              By.xpath("//*[(@text='" + label + "' or @content-desc='" + label + "')]"));
+      cand = driver.findElements(By.xpath("//*[@text='" + label + "' or @content-desc='" + label + "']"));
     }
 
-    // visibles y tomar el MÁS ABAJO en pantalla (mayor Y)
-    java.util.List<org.openqa.selenium.WebElement> visibles =
-        cand.stream()
-            .filter(
-                el -> {
-                  try {
-                    return el.isDisplayed() && el.isEnabled();
-                  } catch (Exception e) {
-                    return false;
-                  }
-                })
-            .collect(java.util.stream.Collectors.toList());
+    return cand.stream()
+        .filter(
+            el -> {
+              try {
+                return el.isDisplayed() && el.isEnabled();
+              } catch (Exception e) {
+                return false;
+              }
+            })
+        .collect(Collectors.toList());
+  }
 
-    return visibles.stream()
-        .max(
-            java.util.Comparator.comparingInt(
-                el -> {
-                  try {
-                    return el.getRect().y;
-                  } catch (Exception e) {
-                    return Integer.MIN_VALUE;
-                  }
-                }))
-        .orElse(null);
+  private static int yUltimoTexto(WebDriver driver, String texto) {
+    return driver.findElements(By.xpath("//*[@text='" + texto + "' or @content-desc='" + texto + "']")).stream()
+        .filter(
+            el -> {
+              try {
+                return el.isDisplayed();
+              } catch (Exception e) {
+                return false;
+              }
+            })
+        .mapToInt(EsperarYClickSeleccionaEnUltimoMensaje::yElemento)
+        .max()
+        .orElse(Integer.MIN_VALUE);
+  }
+  private static int yElemento(WebElement elemento) {
+    try {
+      return elemento.getRect().y;
+    } catch (Exception e) {
+      return Integer.MIN_VALUE;
+    }
   }
 
   private static WebElementFacade ultimoMensaje(Actor actor) {

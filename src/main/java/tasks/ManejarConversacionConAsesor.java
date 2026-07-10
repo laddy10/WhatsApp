@@ -23,7 +23,7 @@ public class ManejarConversacionConAsesor implements Task {
             Integer.getInteger("whatsapp.asesor.asignacion.timeout.seconds", 1800);
     private static final int TIMEOUT_CIERRE_ASESOR =
             Integer.getInteger("whatsapp.asesor.cierre.timeout.seconds", 1800);
-    private static final String MENSAJE_FINALIZACION = "Finalizar interacción";
+    private static final String MENSAJE_FINALIZACION = "Por favor finalizar interacción, es una prueba";
 
     @Override
     public <T extends Actor> void performAs(T actor) {
