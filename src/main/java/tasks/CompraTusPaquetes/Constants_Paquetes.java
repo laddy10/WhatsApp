@@ -56,17 +56,17 @@ public class Constants_Paquetes {
   public static final String PAQ_VOZ_17500_20D_DESC = "1000 minutos a todo operador nacional";
 
   // Paq. de datos
-  public static final String PAQ_DATOS_2000_1D_PRECIO = "$2.000 x 1 Día 200MB";
+  public static final String PAQ_DATOS_2000_1D_PRECIO = "$3.000 x 1 Día 200MB";
   public static final String PAQ_DATOS_2000_1D_DESC = "Paquete de datos de 200MB + WhatsApp";
-  public static final String PAQ_DATOS_3000_1D_PRECIO = "$3.000 x 1 Día 400MB";
+  public static final String PAQ_DATOS_3000_1D_PRECIO = "$3.500 x 1 Día 400MB";
   public static final String PAQ_DATOS_3000_1D_DESC =
       "Paquete de datos 400MB navegación + WhatsApp, Facebook, Twitter";
-  public static final String PAQ_DATOS_5000_3D_PRECIO = "$5.000 x 3 Días 800MB";
+  public static final String PAQ_DATOS_5000_3D_PRECIO = "$6.000 x 3 Días 800MB";
   public static final String PAQ_DATOS_5000_3D_DESC =
       "Paquete de datos 800MB navegación + WhatsApp, Facebook, Twitter";
-  public static final String PAQ_DATOS_6000_2H_PRECIO = "$6.000 x 2 Horas";
+  public static final String PAQ_DATOS_6000_2H_PRECIO = "$7.000 x 2 Horas";
   public static final String PAQ_DATOS_6000_2H_DESC = "Datos ilimitados";
-  public static final String PAQ_DATOS_8000_7D_PRECIO = "$8.000 x 7 Días 2GB";
+  public static final String PAQ_DATOS_8000_7D_PRECIO = "$9.000 x 7 Días 2GB";
   public static final String PAQ_DATOS_8000_7D_DESC =
       "Paquete de datos 2 GB navegación + WhatsApp, Facebook, Twitter";
 
@@ -165,7 +165,7 @@ public class Constants_Paquetes {
 
   // Paquete seleccionado
   public static final String PAQUETE_18GB_30D = "$43.000 x 30 Días";
-  public static final String PAQUETE_2GB_7D = "$9.000 x 7 Días";
+  public static final String PAQUETE_2GB_7D = "$10.000 x 7 Días";
   public static final String CONTINUAR_COMPRA = "Continuar compra";
   public static final String COMPRAR_PAQ_PREPAGO = "Comprar paq. prepago";
   public static final String SALDO_DISPONIBLE =
