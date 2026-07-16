@@ -94,7 +94,7 @@ public class ValidarPagoPaquete implements Task {
 
         actor.attemptsTo(
                 ClickTextoQueContengaX.elTextoContiene(CONTINUAR_COMPRA),
-                WaitForResponse.withText(MEDIOS_DE_PAGO),
+                WaitForTextContains.withAnyTextContains(MEDIOS_DE_PAGO),
                 ValidarTextoQueContengaX.elTextoContiene(SALDO_DISPONIBLE),
                 ValidarTextoQueContengaX.elTextoContiene(PUEDES_COMPRAR_SALDO));
 

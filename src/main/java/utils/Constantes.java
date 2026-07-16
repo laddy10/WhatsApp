@@ -214,4 +214,5 @@ public class Constantes {
     public static final String INCLUYE = "incluye";
     public static final String PAQUETES_Y_RECARGAS = "Paquetes y recargas para tu línea";
     public static final String INGRESA_NUMERO_CLARO = "Ingresa tu número";
+    public static final String SALDO_DISPONIBLE_NO_ALCANZA = "Tu saldo disponible no alcanza";
 }

@@ -168,10 +168,8 @@ public class Constants_Paquetes {
   public static final String PAQUETE_2GB_7D = "$10.000 x 7 Días";
   public static final String CONTINUAR_COMPRA = "Continuar compra";
   public static final String COMPRAR_PAQ_PREPAGO = "Comprar paq. prepago";
-  public static final String SALDO_DISPONIBLE =
-      "El saldo de tu línea móvil disponible para esta transacción es:";
-  public static final String PUEDES_COMPRAR_SALDO =
-      "Puedes comprar con tu saldo disponible o paga de forma rápida y segura con otros medios de pago";
+  public static final String SALDO_DISPONIBLE = "saldo";
+  public static final String PUEDES_COMPRAR_SALDO = "forma rápida y segura";
 
   // Medios de pago
   public static final String USA_TU_SALDO = "Usa tu saldo";
