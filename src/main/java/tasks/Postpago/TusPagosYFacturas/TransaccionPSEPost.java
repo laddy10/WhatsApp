@@ -1,22 +1,12 @@
-package tasks.Hogar.TusPagosYFacturas;
-
-import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static userinterfaces.WhatsAppHogarPage.*;
-import static userinterfaces.WhatsAppPage.LBL_VISTA_PREVIA;
-import static userinterfaces.WhatsAppPostpagoPage.*;
-import static utils.Constantes.URL_PORTAL_CLARO;
-import static utils.ConstantesPost.*;
+package tasks.Postpago.TusPagosYFacturas;
 
 import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
-import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
-import interactions.comunes.Atras;
 import interactions.scroll.ScrollGradual;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import interactions.wait.WaitForTextContains;
-import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -25,9 +15,11 @@ import net.serenitybdd.screenplay.actions.Enter;
 import utils.AndroidObject;
 import utils.CapturaDePantallaMovil;
 
-import java.util.List;
+import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static userinterfaces.WhatsAppPostpagoPage.*;
+import static utils.ConstantesPost.*;
 
-public class TransaccionPSEHogar extends AndroidObject implements Task {
+public class TransaccionPSEPost extends AndroidObject implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
@@ -55,10 +47,9 @@ public class TransaccionPSEHogar extends AndroidObject implements Task {
 
         // Esperar a que cargue el formulario PSE
         actor.attemptsTo(
-                WaitForTextContains.withAnyTextContains(PAGO_DE_FACTURAS, PAGA_TU_FACTURA_POSTPAGO),
-                ValidarTextoQueContengaX.elTextoContiene(PORTAL_PAGOS_Y_RECARGAS),
-                ValidarTextoQueContengaX.elTextoContiene(REFERENCIA),
-                ValidarTextoQueContengaX.elTextoContiene(DESCRIPCION_COMPRA_HOGAR)
+                WaitForTextContains.withAnyTextContains(PAGA_TU_FACTURA_POSTPAGO),
+                ValidarTextoQueContengaX.elTextoContiene(PORTAL_PAGOS_Y_RECARGAS)
+
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Formulario PSE cargado Hogar");
@@ -86,7 +77,7 @@ public class TransaccionPSEHogar extends AndroidObject implements Task {
                 Enter.theValue(NOMBRE_FICTICIO).into(TXT_NOMBRE_TITULAR_PSE),
                 WaitFor.aTime(1000),
                 Click.on(SELECT_TIPO_CLIENTE),
-                interactions.wait.WaitFor.aTime(1000),
+                WaitFor.aTime(1000),
                 Click.on(SELECT_PERSONA_NATURAL),
                 WaitFor.aTime(1000)
         );
@@ -109,8 +100,8 @@ public class TransaccionPSEHogar extends AndroidObject implements Task {
                 ScrollGradual.bajar(0.25),
                 Enter.theValue(CELULAR_FICTICIO).into(TXT_NUMERO_CELULAR),
                 WaitFor.aTime(1000),
-               // Enter.theValue("Calle 100 # 15-20").into(TXT_DIRECCION),
-               // WaitFor.aTime(1000),
+                Enter.theValue("Calle 100 # 15-20").into(TXT_DIRECCION),
+                WaitFor.aTime(1000),
                 Enter.theValue(CORREO_FICTICIO).into(TXT_CORREO_ELECTRONICO),
                 WaitFor.aTime(1000)
         );
@@ -139,7 +130,7 @@ public class TransaccionPSEHogar extends AndroidObject implements Task {
 
     }
 
-    public static Performable transaccionPSEHogar() {
-        return instrumented(TransaccionPSEHogar.class);
+    public static Performable transaccionPSEPost() {
+        return instrumented(TransaccionPSEPost.class);
     }
 }

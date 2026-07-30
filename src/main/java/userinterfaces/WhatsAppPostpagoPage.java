@@ -267,4 +267,39 @@ public class WhatsAppPostpagoPage {
       Target.the("Botón Iniciar Sesión Portal")
           .located(By.xpath("//android.widget.Button[@text='Iniciar Sesión'] | //android.view.View[@text='Iniciar Sesión'] | //*[@text='Iniciar Sesión']"));
 
+  public static final Target TXT_NOMBRE_TARJETA = Target.the("Campo nombre tarjeta")
+          .located(By.xpath("//android.widget.EditText[@resource-id=\"NOMBRE_TARJETA\"]"));
+  public static final Target TXT_CVV =
+          Target.the("Campo CVV")
+                  .located(By.xpath("//android.widget.EditText[@resource-id=\"CODIGO_SEGURIDAD\"]"));
+  public static final Target TXT_EMAIL = Target.the("Campo email")
+          .located(By.xpath("//android.widget.EditText[@resource-id=\"EMAIL\"]"));
+  public static final Target TXT_TELEFONO = Target.the("Campo teléfono")
+          .located(By.xpath("//android.widget.EditText[@resource-id=\"TELEFONO\"]"));
+  public static final Target BTN_MAS_CUOTAS = Target.the("Botón más cuotas")
+          .located(By.xpath("//android.widget.Button[@text='+']"));
+  public static final Target BTN_MENOS_CUOTAS = Target.the("Botón menos cuotas")
+          .located(By.xpath("//android.widget.Button[@text='-']"));
+  public static final Target DROPDOWN_TIPO_DOCUMENTO = Target.the("Dropdown tipo documento")
+          .located(By.xpath("//android.view.View[@resource-id=\"TIPO_DOCUMENTO\"]"));
+  public static final Target DROPDOWN_BANCO =
+          Target.the("Dropdown banco").located(By.xpath("//android.view.View[@resource-id=\"BANCO\"]"));
+  public static final Target DROPDOWN_TIPO_CLIENTE =
+          Target.the("Dropdown tipo cliente")
+                  .located(By.xpath("//android.view.View[@resource-id=\"TIPO_CLIENTE\"]"));
+
+  public static final Target ICON_HOME =
+          Target.the("Icono Home").located(By.id("h5_tv_nav_back_to_home"));
+  public static final Target BTN_TRES_PUNTOS_MAS =
+          Target.the("Boton de los 3 puntos para validar la mini versión")
+                  .located(By.xpath("//android.widget.TextView[@content-desc=\"Más\"]"));
+
+  public static final Target BTN_PSE =
+          Target.the("Boton PSE de recargas y paquetes")
+                  .located(
+                          By.xpath(
+                                  "//android.widget.TextView[@text=\"Débito Bancario PSE\"]"));
+
+  public static final Target URL_BANCO =
+          Target.the("URL del banco").located(By.id("com.android.chrome:id/url_bar"));
 }

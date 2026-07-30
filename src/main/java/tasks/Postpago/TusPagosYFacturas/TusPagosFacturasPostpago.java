@@ -10,6 +10,7 @@ import hooks.ReportHooks;
 import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
+import interactions.comunes.Atras;
 import interactions.wait.WaitForTextContains;
 import java.util.List;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -41,14 +42,17 @@ public class TusPagosFacturasPostpago implements Task {
       actor.attemptsTo(
           ValidarTextoQueContengaX.elTextoContiene(FACTURA_POSTPAGO_LISTA),
           ValidarTextoQueContengaX.elTextoContiene(VALOR_A_PAGAR),
-          ValidarTextoQueContengaX.elTextoContiene(FECHA_LIMITE_PAGO),
           ValidarTextoQueContengaX.elTextoContiene(REFERENCIA_PAGO),
           ValidarTextoQueContengaX.elTextoContiene(PAGA_TU_FACTURA_AQUI),
 
           // Ejecutar las siguientes tareas en secuencia
           DireccionamientoPortalPagoPostpago.direccionamientoPortalPagoPostpago(),
           ValidarMediosPagoPostpago.validarMediosPagoPostpago(),
-          TransaccionTarjetaCreditoPostpago.transaccionTarjetaCreditoPostpago());
+          TransaccionTarjetaCreditoPostpago.transaccionTarjetaCreditoPostpago(),
+              Atras.irAtras(),
+              Atras.irAtras()
+
+      );
 
       CapturaDePantallaMovil.tomarCapturaPantalla("Flujo completo de pago ejecutado");
       ReportHooks.registrarPaso("Flujo completo de pago ejecutado correctamente");

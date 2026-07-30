@@ -18,6 +18,7 @@ import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
+import interactions.wait.WaitForTextContains;
 import models.User;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actors.OnStage;
@@ -32,6 +33,7 @@ import tasks.HazTusRecargas.HazTusRecargas;
 import tasks.HazTusRecargas.SeleccionarValorRecargas;
 import tasks.HazTusRecargas.ValidarMenuRecargas;
 import tasks.OtrasOpciones.*;
+import tasks.Postpago.TusPagosYFacturas.TransaccionTarjetaCreditoPostpago;
 import tasks.TodoSobreTuLinea.*;
 import tasks.TusEquipos.MenuTusEquipos;
 import tasks.TusEquipos.TusEquipos;
@@ -66,7 +68,9 @@ public class WhatsappDefinitions {
 
     @And("^Buscar el chat de Claro Colombia$")
     public void buscarChatClaro() {
-        theActorInTheSpotlight().attemptsTo(BuscarChatClaro.buscarChatClaro());
+        theActorInTheSpotlight().attemptsTo(
+                BuscarChatClaro.buscarChatClaro()
+        );
     }
 
     @And("^Iniciar el chat con Claro Colombia$")

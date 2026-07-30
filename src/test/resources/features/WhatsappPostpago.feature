@@ -157,8 +157,8 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
 
 
 
-
-  Scenario: Tus pagos y facturas - validar portal de pagos y transacción
+  @Whatsapp_Post_11
+  Scenario: Tus pagos y facturas - validar pagar factura TC
     Given Ingresar a WhatsAPP
     When Validar Version de la App
     And Buscar el chat de Claro Colombia
@@ -166,7 +166,11 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Seleccionar linea de consulta postpago
     And Validar politica de tratamientos de datos
     And Seleccionar menu principal Post
-    And Ingresar a tus pagos y facturas
+    And Ingresar al menu de tus pagos y facturas
+    And Validar informacion de la factura
+    And Ingresar al link de pago Postpago
+    And Realizar transaccion de pago con tarjeta de credito Post
+    And Vaciar chat
 
 
   @Whatsapp_Post_12
@@ -441,6 +445,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     Then Validar el menu modifica tu plan
     And Vaciar chat
 
+
   @Whatsapp_Post_29
   Scenario: Consultar otra cuenta
     Given Ingresar a WhatsAPP
@@ -452,3 +457,68 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Seleccionar menu principal Post
     Then Validar consultar otra cuenta
     And Vaciar chat
+
+
+  @Whatsapp_Post_30
+  Scenario: Tus pagos y facturas - validar pagar factura Boton Bancolombia
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Ingresar al menu de tus pagos y facturas
+    And Validar informacion de la factura
+    And Ingresar al link de pago Postpago
+    And Realizar transaccion de pago con Boton Bancolombia hogar
+    And Vaciar chat
+
+
+  @Whatsapp_Post_31
+  Scenario: Tus pagos y facturas - validar pagar factura Daviplata
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Ingresar al menu de tus pagos y facturas
+    And Validar informacion de la factura
+    And Ingresar al link de pago Postpago
+    And Realizar transaccion de pago con Daviplata hogar
+    And Vaciar chat
+
+
+  @Whatsapp_Post_32
+  Scenario: Tus pagos y facturas - validar pagar factura Mis tarjetas registradas
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Ingresar al menu de tus pagos y facturas
+    And Validar informacion de la factura
+    And Ingresar al link de pago Postpago
+    And Realizar transaccion de pago con Mis tarjetas registradas hogar
+    And Vaciar chat
+
+
+  @Whatsapp_Post_33
+  Scenario: Tus pagos y facturas - validar pagar factura PSE
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Ingresar al menu de tus pagos y facturas
+    And Validar informacion de la factura
+    And Ingresar al link de pago Postpago
+    And Realizar transaccion de pago con PSE post
+    And Vaciar chat
+

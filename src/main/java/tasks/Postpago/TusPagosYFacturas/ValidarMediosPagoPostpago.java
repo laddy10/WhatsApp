@@ -30,7 +30,7 @@ public class ValidarMediosPagoPostpago implements Task {
         ValidarTexto.validarTexto(TARJETA_CREDITO),
         ValidarTextoQueContengaX.elTextoContiene(DEBITO_BANCARIO_PSE),
         ValidarTexto.validarTexto(BOTON_BANCOLOMBIA),
-        ValidarTexto.validarTexto(TARJETA_CODENSA),
+        ValidarTexto.validarTexto(DAVIPLATA),
         ValidarTexto.validarTexto(MIS_TARJETAS_REGISTRADAS));
   }
 
