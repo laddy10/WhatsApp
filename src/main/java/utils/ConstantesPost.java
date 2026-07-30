@@ -68,7 +68,7 @@ public class ConstantesPost {
 
     // Facturas Postpago
     public static final String TUS_PAGOS_FACTURAS = "✅ Tus pagos y facturas";
-    public static final String FACTURA_POSTPAGO_LISTA = "¡Tu factura postpago está lista!";
+    public static final String FACTURA_POSTPAGO_LISTA = "Tu factura";
     public static final String VALOR_A_PAGAR = "Valor a pagar:";
     public static final String AL_DIA_EN_PAGOS = "se encuentra al día en pagos";
     public static final String FECHA_LIMITE_PAGO = "Fecha límite de pago: INMEDIATO";
@@ -105,6 +105,11 @@ public class ConstantesPost {
 
     // Formulario Tarjeta
     public static final String NUMERO_TARJETA = "Número de la tarjeta";
+    public static final String TARJETAS_NACIONALES = "Solo se permite el pago con tarjetas de credito nacionales";
+    public static final String PAGAR = "Pagar";
+    public static final String GUARDAR_DATOS_TARJETA = "Guardar los datos de mi tarjeta";
+
+
     public static final String NOMBRE_APELLIDO = "Nombre y apellido";
     public static final String TIPO_DOCUMENTO = "Tipo de documento";
     public static final String NUMERO_DOCUMENTO = "Número de documento";
@@ -156,6 +161,30 @@ public class ConstantesPost {
     public static final String PAGO_DE_FACTURAS = "Pago de Facturas";
     public static final String SELECCIONA_TIPO_SERVICIO = "Selecciona el tipo de servicio";
     public static final String POSTPAGO_OPCION = "Postpago";
+    public static final String NUMERO_IDENTIFICACION_TRIBUTARIA = "Número de Identificación Tributaria";
+    public static final String PASAPORTE_2 = "Pasaporte";
+    public static final String CEDULA_CIUDADANIA_3 = "Cédula de Ciudadanía";
+    public static final String CEDULA_EXTRANJERIA_2 = "Cédula de Extranjería";
+
+    public static final String REALIZA_EL_PAGO_EN_LINEA = "Realiza el pago en línea";
+    public static final String COMPRA_DE_PAQUETES = "Compra de paquetes";
+    public static final String DESCRIPCION_DE_LA_COMPRA = "Descripción de la compra:";
+    public static final String PAGO_TOTAL = "Pago total:";
+
+    public static final String BANCO = "Banco:";
+    public static final String TIPO_DE_CLIENTE = "Tipo de cliente:";
+    public static final String SELECCIONA_TU_BANCO = "Selecciona tu Banco:";
+    public static final String ALIANZA_FIDUCIARIA = "ALIANZA FIDUCIARIA";
+    public static final String BAN100 = "BAN100";
+    public static final String BANCAMIA_SA = "BANCAMIA S.A.";
+    public static final String BANCO_AGRARIO = "BANCO AGRARIO";
+    public static final String BANCO_AV_VILLAS = "BANCO AV VILLAS";
+    public static final String BANCO_BBVA_COLOMBIA = "BANCO BBVA COLOMBIA S.A.";
+    public static final String BANCO_DE_BOGOTA = "BANCO DE BOGOTA";
+    public static final String PERSONA_JURIDICA = "Persona Jurídica";
+    public static final String PERSONA_NATURAL = "Persona Natural";
+
+
 
     // Tu historial
     public static final String TU_HISTORIAL = "Tu historial";
@@ -392,4 +421,5 @@ public class ConstantesPost {
     public static final String ASISTENCIA_HOGAR_TRADICIONAL = "Asistencia Hogar Tradicional";
     public static final String ASISTENCIA_REUNIONES_CASA = "Asistencia Reuniones en casa";
     public static final String PERSONALIZAR_CLAVE_WIFI = "Personalizar clave WIFI";
+    public static final String MENSAJE_CONFIRMACION_DAVIPLATA = "Daviplata ha enviado un mensaje de texto a tu móvil";
 }

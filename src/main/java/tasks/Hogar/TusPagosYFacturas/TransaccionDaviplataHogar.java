@@ -50,8 +50,7 @@ public class TransaccionDaviplataHogar extends AndroidObject implements Task {
 
         // Validar ingreso al portal de Daviplata
         actor.attemptsTo(
-                WaitForTextContains.withAnyTextContains(PAGO_FACTURAS_HOGAR),
-                ValidarTextoQueContengaX.elTextoContiene(PAGO_FACTURAS_HOGAR)
+                WaitForTextContains.withAnyTextContains(PAGO_FACTURAS_HOGAR, PAGA_TU_FACTURA_POSTPAGO)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Formulario Daviplata cargado");
@@ -78,7 +77,8 @@ public class TransaccionDaviplataHogar extends AndroidObject implements Task {
         // Clic en Confirmar
         actor.attemptsTo(
                 Click.on(BTN_CONFIRMAR_DAVIPLATA),
-                WaitFor.aTime(5000)
+                WaitFor.aTime(6000),
+                ValidarTextoQueContengaX.elTextoContiene(MENSAJE_CONFIRMACION_DAVIPLATA)
         );
 
         // Validar que se ha enviado el mensaje de texto / código

@@ -8,8 +8,8 @@ import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
+import interactions.scroll.Scroll;
 import interactions.scroll.ScrollHastaTexto;
-import interactions.scroll.ScrollInicio;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
@@ -21,76 +21,116 @@ import utils.CapturaDePantallaMovil;
 
 public class TransaccionTarjetaCreditoPostpago implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-    // Seleccionar Tarjeta de Crédito
-    actor.attemptsTo(Click.on(BTN_TARJETA_CREDITO), WaitForResponse.withText(CONTINUAR_BUTTON));
+        // Seleccionar Tarjeta de Crédito
+        actor.attemptsTo(
+                Click.on(BTN_TARJETA_CREDITO),
+                WaitForResponse.withText(CONTINUAR_BUTTON));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Tarjeta de Crédito y continuar");
-    ReportHooks.registrarPaso("Seleccionar Tarjeta de Crédito y continuar");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Tarjeta de Crédito y continuar");
+        ReportHooks.registrarPaso("Seleccionar Tarjeta de Crédito y continuar");
 
-    actor.attemptsTo(Click.on(BTN_CONTINUAR_PAGO));
+        actor.attemptsTo(
+                Click.on(BTN_CONTINUAR_PAGO));
 
-    // Esperar a que cargue el formulario
-    actor.attemptsTo(
-        WaitForResponse.withText(PORTAL_PAGOS_Y_RECARGAS),
-        ValidarTextoQueContengaX.elTextoContiene(VALOR_TOTAL),
-        ValidarTextoQueContengaX.elTextoContiene(NUMERO_FACTURA),
-        ValidarTextoQueContengaX.elTextoContiene(DESCRIPCION_COMPRA));
+        // VALIDAR FORMULARIO INICIAL
+        actor.attemptsTo(
+                WaitForResponse.withText(TARJETAS_NACIONALES),
+                ValidarTextoQueContengaX.elTextoContiene(TARJETAS_NACIONALES),
+                ValidarTextoQueContengaX.elTextoContiene(NUMERO_TARJETA)
+        );
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Formulario de tarjeta de crédito cargado");
-    ReportHooks.registrarPaso("Formulario de tarjeta de crédito cargado");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Formulario de tarjeta de crédito cargado");
+        ReportHooks.registrarPaso("Formulario de tarjeta de crédito cargado");
 
-    // Llenar datos ficticios de la tarjeta
-    actor.attemptsTo(
-        WaitFor.aTime(2000),
-        ScrollHastaTexto.conTexto(NUMERO_CELULAR),
-        Enter.theValue(NUMERO_TARJETA_FICTICIO).into(TXT_NUMERO_TARJETA),
-        WaitFor.aTime(1000),
-        Enter.theValue(NOMBRE_FICTICIO).into(TXT_NOMBRE_APELLIDO),
-        WaitFor.aTime(1000),
-        ValidarTiposDocumento.validarTiposDocumento(),
-        WaitFor.aTime(1000),
-        Enter.theValue(NUMERO_CEDULA_FICTICIO).into(TXT_NUMERO_DOCUMENTO),
-        WaitFor.aTime(1000),
-        Click.on(SELECT_MES_EXPIRACION),
-        ClickTextoQueContengaX.elTextoContiene("05"),
-        WaitFor.aTime(1000),
-        Click.on(SELECT_ANIO_EXPIRACION),
-        ClickTextoQueContengaX.elTextoContiene("2028"),
-        WaitFor.aTime(1000),
-        Enter.theValue(CVC_FICTICIO).into(TXT_CVC));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Datos básicos de tarjeta ingresados");
-    ReportHooks.registrarPaso("Datos básicos de tarjeta ingresados");
+        // LLENAR DATOS DE LA TARJETA
+        actor.attemptsTo(
+                Enter.theValue("5306 9156 7890 1234").into(TXT_NUMERO_TARJETA),
+                Enter.theValue("Pepito Perez").into(TXT_NOMBRE_TARJETA),
+                WaitFor.aTime(1000)
+        );
 
-    // Continuar con datos adicionales
-    actor.attemptsTo(
-        WaitFor.aTime(2000),
-        ScrollInicio.scrollUnaVista(),
-        ScrollHastaTexto.conTexto(CANCELAR_BUTTON),
-        Enter.theValue(CORREO_FICTICIO).into(TXT_CORREO_ELECTRONICO),
-        WaitFor.aTime(1000),
-        Enter.theValue(CELULAR_FICTICIO).into(TXT_NUMERO_CELULAR),
-        WaitFor.aTime(1000),
-        Click.on(SELECT_NUMERO_CUOTAS),
-        ClickTextoQueContengaX.elTextoContiene("9"),
-        WaitFor.aTime(1000),
-        Click.on(TOGGLE_GUARDAR_TARJETA));
+        // VALIDAR TIPOS DE DOCUMENTO (los 4 disponibles)
+        validarTiposDocumento(actor);
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Datos adicionales completados");
-    ReportHooks.registrarPaso("Datos adicionales completados");
+        // COMPLETAR RESTO DEL FORMULARIO
+        actor.attemptsTo(
+                Enter.theValue("12345674").into(TXT_NUMERO_DOCUMENTO),
+                Enter.theValue("12/30").into(TXT_FECHA_EXPIRACION),
+                WaitFor.aTime(3000),
+                Enter.theValue("123").into(TXT_CVV),
+                Enter.theValue("pepitoperez@gmail.com").into(TXT_EMAIL));
 
-    // Validar botones de acción
-    actor.attemptsTo(
-        ValidarTexto.validarTexto(CONFIRMAR_BUTTON), ValidarTexto.validarTexto(CANCELAR_BUTTON));
+        CapturaDePantallaMovil.tomarCapturaPantalla("Datos básicos de tarjeta ingresados");
+        ReportHooks.registrarPaso("Datos básicos de tarjeta ingresados");
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Botones Confirmar y Cancelar validados");
-    ReportHooks.registrarPaso("Botones Confirmar y Cancelar validados correctamente");
-  }
 
-  public static Performable transaccionTarjetaCreditoPostpago() {
-    return instrumented(TransaccionTarjetaCreditoPostpago.class);
-  }
+        actor.attemptsTo(
+                Scroll.scrollUnaVista(),
+                Enter.theValue("3109871234").into(TXT_TELEFONO),
+                WaitFor.aTime(1000)
+        );
+
+        // AJUSTAR NÚMERO DE CUOTAS
+        actor.attemptsTo(
+                Click.on(BTN_MAS_CUOTAS),
+                Click.on(BTN_MAS_CUOTAS),
+                WaitFor.aTime(500)
+        );
+
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validar numero de cuotas +");
+        ReportHooks.registrarPaso("Validar numero de cuotas +");
+
+        actor.attemptsTo(
+                Click.on(BTN_MENOS_CUOTAS),
+                WaitFor.aTime(500)
+        );
+
+        CapturaDePantallaMovil.tomarCapturaPantalla("Validar numero de cuotas -");
+        ReportHooks.registrarPaso("Validar numero de cuotas -");
+
+        // VALIDAR QUE EL BOTÓN PAGAR ESTÉ HABILITADO
+        actor.attemptsTo(
+                ValidarTexto.validarTexto(GUARDAR_DATOS_TARJETA),
+                ValidarTexto.validarTexto(PAGAR)
+        );
+
+        CapturaDePantallaMovil.tomarCapturaPantalla("Formulario completado");
+        ReportHooks.registrarPaso("Formulario completado");
+
+    }
+
+    private <T extends Actor> void validarTiposDocumento(T actor) {
+        String[] tiposDocumento = {
+                CEDULA_CIUDADANIA_3,
+                CEDULA_EXTRANJERIA_2,
+                PASAPORTE_2,
+                CEDULA_CIUDADANIA_3,
+        };
+
+        for (String tipoDoc : tiposDocumento) {
+            actor.attemptsTo(
+                    Click.on(DROPDOWN_TIPO_DOCUMENTO),
+                    WaitFor.aTime(1000),
+                    ValidarTexto.validarTexto(CEDULA_CIUDADANIA),
+                    ValidarTexto.validarTexto(CEDULA_EXTRANJERIA),
+                    ValidarTexto.validarTexto(PASAPORTE),
+                    ValidarTexto.validarTexto(CEDULA_CIUDADANIA),
+                    ClickTextoQueContengaX.elTextoContiene(tipoDoc),
+                    WaitFor.aTime(1000)
+            );
+
+            CapturaDePantallaMovil.tomarCapturaPantalla("Tipo documento seleccionado: " + tipoDoc);
+            ReportHooks.registrarPaso("Tipo documento seleccionado: " + tipoDoc);
+
+        }
+
+    }
+
+    public static Performable transaccionTarjetaCreditoPostpago() {
+        return instrumented(TransaccionTarjetaCreditoPostpago.class);
+    }
 }

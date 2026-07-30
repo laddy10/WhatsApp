@@ -432,9 +432,30 @@ public class WhatsappPostpagoDefinitions {
     public void direccionamientoPaquetesYRecargas() {
         theActorInTheSpotlight().attemptsTo(PaquetesYRecargasPost.paquetesYRecargasPost());
     }
-
     @Then("Validar el menu modifica tu plan")
     public void validarMenuModificaTuPlan() {
         theActorInTheSpotlight().attemptsTo(ModificaTuPlan.modificaTuPlan());
     }
+
+    @And("^Ingresar al link de pago Postpago$")
+    public void ingresarLinkPagoPost() {
+        theActorInTheSpotlight().attemptsTo(
+                IngresarAlLinkDePagoPost.ingresarAlLinkDePagoPost()
+        );
+    }
+
+    @And("^Realizar transaccion de pago con tarjeta de credito Post$")
+    public void transaccionTarjetaCreditoPost() {
+        theActorInTheSpotlight().attemptsTo(
+                TransaccionTarjetaCreditoPost.transaccionTarjetaCreditoPost()
+        );
+    }
+
+    @And("^Realizar transaccion de pago con PSE post$")
+    public void transaccionPSEPost() {
+        theActorInTheSpotlight().attemptsTo(
+                TransaccionPSEPost.transaccionPSEPost()
+        );
+    }
+
 }
