@@ -32,6 +32,7 @@ import tasks.Postpago.TratamientoDatosPostpago;
 import tasks.Postpago.TusPagosYFacturas.*;
 import tasks.Postpago.ValidarMenuPrincipalPost;
 import tasks.SalirConversacion;
+import tasks.SeleccionarNumero;
 import utils.CapturaDePantallaMovil;
 import utils.TestDataProvider;
 
@@ -45,6 +46,41 @@ public class WhatsappPostpagoDefinitions {
     public void seleccionarLineaConsultaPostpago() {
         theActorInTheSpotlight().attemptsTo(SeleccionarLineaPostpago.seleccionarLineaPostpago());
         ReportHooks.setLinea(user.getNumeroPost());
+    }
+    @And("^Seleccionar linea de de pago Post 30$")
+    public void seleccionarLineaPost30() {
+        theActorInTheSpotlight().attemptsTo(
+                SeleccionarNumero.porUltimos4(user.getNumeroWhatsAppPost30()),
+                WaitForResponse.withAnyText(VER_Y_PAGAR_FACTURA, SI_AUTORIZO, AUTORIZACION_TRATAMIENTO)
+        );
+        ReportHooks.setLinea(user.getNumeroWhatsAppPost30());
+    }
+
+    @And("^Seleccionar linea de de pago Post 31$")
+    public void seleccionarLineaPost31() {
+        theActorInTheSpotlight().attemptsTo(
+                SeleccionarNumero.porUltimos4(user.getNumeroWhatsAppPost31()),
+                WaitForResponse.withAnyText(VER_Y_PAGAR_FACTURA, SI_AUTORIZO, AUTORIZACION_TRATAMIENTO)
+        );
+        ReportHooks.setLinea(user.getNumeroWhatsAppPost31());
+    }
+
+    @And("^Seleccionar linea de de pago Post 32$")
+    public void seleccionarLineaPost32() {
+        theActorInTheSpotlight().attemptsTo(
+                SeleccionarNumero.porUltimos4(user.getNumeroWhatsAppPost32()),
+                WaitForResponse.withAnyText(VER_Y_PAGAR_FACTURA, SI_AUTORIZO, AUTORIZACION_TRATAMIENTO)
+        );
+        ReportHooks.setLinea(user.getNumeroWhatsAppPost32());
+    }
+
+    @And("^Seleccionar linea de de pago Post 33$")
+    public void seleccionarLineaPost33() {
+        theActorInTheSpotlight().attemptsTo(
+                SeleccionarNumero.porUltimos4(user.getNumeroWhatsAppPost33()),
+                WaitForResponse.withAnyText(VER_Y_PAGAR_FACTURA, SI_AUTORIZO, AUTORIZACION_TRATAMIENTO)
+        );
+        ReportHooks.setLinea(user.getNumeroWhatsAppPost33());
     }
 
     @And("^Validar politica de tratamientos de datos postpago$")

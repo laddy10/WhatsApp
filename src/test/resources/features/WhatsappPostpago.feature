@@ -465,7 +465,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     When Validar Version de la App
     And Buscar el chat de Claro Colombia
     And Iniciar el chat con Claro Colombia
-    And Seleccionar linea de consulta postpago
+    And Seleccionar linea de de pago Post 30
     And Validar politica de tratamientos de datos
     And Seleccionar menu principal Post
     And Ingresar al menu de tus pagos y facturas
@@ -481,7 +481,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     When Validar Version de la App
     And Buscar el chat de Claro Colombia
     And Iniciar el chat con Claro Colombia
-    And Seleccionar linea de consulta postpago
+    And Seleccionar linea de de pago Post 31
     And Validar politica de tratamientos de datos
     And Seleccionar menu principal Post
     And Ingresar al menu de tus pagos y facturas
@@ -497,7 +497,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     When Validar Version de la App
     And Buscar el chat de Claro Colombia
     And Iniciar el chat con Claro Colombia
-    And Seleccionar linea de consulta postpago
+    And Seleccionar linea de de pago Post 32
     And Validar politica de tratamientos de datos
     And Seleccionar menu principal Post
     And Ingresar al menu de tus pagos y facturas
@@ -513,7 +513,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     When Validar Version de la App
     And Buscar el chat de Claro Colombia
     And Iniciar el chat con Claro Colombia
-    And Seleccionar linea de consulta postpago
+    And Seleccionar linea de de pago Post 33
     And Validar politica de tratamientos de datos
     And Seleccionar menu principal Post
     And Ingresar al menu de tus pagos y facturas
@@ -522,3 +522,18 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Realizar transaccion de pago con PSE post
     And Vaciar chat
 
+
+
+  Scenario: Tus pagos y facturas - validar pagar factura TC
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Ingresar al menu de tus pagos y facturas
+    And Validar informacion de la factura
+    And Ingresar al link de pago Postpago
+    And Realizar transaccion de pago con tarjeta de credito Post
+    And Vaciar chat
