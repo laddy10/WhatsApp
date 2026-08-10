@@ -49,6 +49,7 @@ public class TransaccionTarjetaCreditoPost implements Task {
 
         // Esperar a que cargue el formulario
         actor.attemptsTo(
+                WaitForTextContains.withAnyTextContains("Agregar tarjeta"),
                 WaitFor.aTime(5000),
                 ValidarTextoQueContengaX.elTextoContiene("Agregar tarjeta")
         );

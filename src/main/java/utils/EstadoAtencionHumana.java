@@ -1,58 +1,72 @@
 package utils;
 
+import models.EstadoAsesor;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 /** Estado compartido y persistente para no iniciar nuevos saludos si hay asesor pendiente. */
 public final class EstadoAtencionHumana {
 
-  private static volatile boolean casoEnColaOConAsesor;
-  private static volatile boolean bloqueadoPorTimeout;
   private static final Path ARCHIVO_ESTADO = Paths.get(
       System.getProperty("whatsapp.asesor.estado.path", ".runtime/asesor-pendiente.flag"));
 
   private EstadoAtencionHumana() {}
 
-  public static boolean requiereRecuperacion() {
-    return casoEnColaOConAsesor || existeMarcaPersistente();
+  public static EstadoAsesor leerEstado() {
+    if (!Files.exists(ARCHIVO_ESTADO)) {
+      return EstadoAsesor.SIN_CONVERSACION_PENDIENTE;
+    }
+    try {
+      List<String> lines = Files.readAllLines(ARCHIVO_ESTADO, StandardCharsets.UTF_8);
+      if (!lines.isEmpty()) {
+        String estadoStr = lines.get(0).trim();
+        try {
+          return EstadoAsesor.valueOf(estadoStr);
+        } catch (IllegalArgumentException e) {
+          return EstadoAsesor.SIN_CONVERSACION_PENDIENTE;
+        }
+      }
+    } catch (IOException e) {
+      System.err.println("No se pudo leer el estado: " + e.getMessage());
+    }
+    return EstadoAsesor.SIN_CONVERSACION_PENDIENTE;
   }
 
-  public static boolean estaBloqueadoPorTimeout() {
-    return bloqueadoPorTimeout || existeMarcaPersistente();
+  public static void guardarEstado(EstadoAsesor estado) {
+    if (estado == EstadoAsesor.SIN_CONVERSACION_PENDIENTE || estado == EstadoAsesor.CERRADO) {
+      eliminarMarca();
+      return;
+    }
+    escribirMarca(estado.name());
+  }
+
+  public static boolean requiereRecuperacion() {
+    return leerEstado() != EstadoAsesor.SIN_CONVERSACION_PENDIENTE;
   }
 
   public static void marcarEnCola() {
-    casoEnColaOConAsesor = true;
-    escribirMarca("EN_COLA_O_ASESOR");
+    guardarEstado(EstadoAsesor.EN_COLA);
+  }
+  
+  public static void marcarAsesorActivo() {
+    guardarEstado(EstadoAsesor.ASESOR_ACTIVO);
   }
 
-  public static void marcarTimeoutSinAsignacion() {
-    casoEnColaOConAsesor = true;
-    bloqueadoPorTimeout = true;
-    escribirMarca("TIMEOUT_SIN_ASIGNACION");
-  }
-
-  public static void marcarTimeoutSinCierre() {
-    casoEnColaOConAsesor = true;
-    bloqueadoPorTimeout = true;
-    escribirMarca("TIMEOUT_SIN_CIERRE");
+  public static void marcarCierrePendiente() {
+    guardarEstado(EstadoAsesor.CIERRE_PENDIENTE);
   }
 
   public static void marcarCerrado() {
-    casoEnColaOConAsesor = false;
-    bloqueadoPorTimeout = false;
-    eliminarMarca();
+    guardarEstado(EstadoAsesor.CERRADO);
   }
 
   public static String rutaMarcaPersistente() {
     return ARCHIVO_ESTADO.toAbsolutePath().toString();
-  }
-
-  private static boolean existeMarcaPersistente() {
-    return Files.exists(ARCHIVO_ESTADO);
   }
 
   private static void escribirMarca(String estado) {

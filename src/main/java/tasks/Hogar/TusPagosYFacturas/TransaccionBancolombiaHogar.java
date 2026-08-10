@@ -43,7 +43,8 @@ public class TransaccionBancolombiaHogar extends AndroidObject implements Task {
         actor.attemptsTo(
                 ScrollGradual.bajar(0.20),
                 ClickTextoQueContengaX.elTextoContiene(CONTINUAR_BUTTON),
-                WaitForTextContains.withAnyTextContains(BANCOLOMBIA_BIENVENIDA)
+                WaitForTextContains.withAnyTextContains(BANCOLOMBIA_BIENVENIDA),
+                WaitFor.aTime(5000)
         );
 
 
@@ -58,7 +59,7 @@ public class TransaccionBancolombiaHogar extends AndroidObject implements Task {
         // Diligenciar campo Usuario
         actor.attemptsTo(
                 Enter.theValue("Pruebas15").into(TXT_USUARIO_BANCOLOMBIA),
-                interactions.wait.WaitFor.aTime(1500)
+                interactions.wait.WaitFor.aTime(5000)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Usuario ingresado en Bancolombia");

@@ -68,7 +68,7 @@ public class TransaccionDaviplataHogar extends AndroidObject implements Task {
         actor.attemptsTo(
                 ScrollGradual.bajar(0.20),
                 Enter.theValue("99321987").into(TXT_NUMERO_DOCUMENTO),
-                interactions.wait.WaitFor.aTime(1500)
+                interactions.wait.WaitFor.aTime(2000)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Número de documento Daviplata ingresado");
@@ -76,7 +76,8 @@ public class TransaccionDaviplataHogar extends AndroidObject implements Task {
 
         // Clic en Confirmar
         actor.attemptsTo(
-                Click.on(BTN_CONFIRMAR_DAVIPLATA),
+                ClickTextoQueContengaX.elTextoContiene(CONFIRMAR),
+                //Click.on(BTN_CONFIRMAR_DAVIPLATA),
                 WaitFor.aTime(6000),
                 ValidarTextoQueContengaX.elTextoContiene(MENSAJE_CONFIRMACION_DAVIPLATA)
         );

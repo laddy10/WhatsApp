@@ -28,7 +28,7 @@ public class IniciarChatClaro implements Task {
     private final User user = TestDataProvider.getRealUser();
     private static final int MAX_REINTENTOS = 2;
     private static final int TIMEOUT_RESPUESTA_SALUDO =
-            Integer.getInteger("whatsapp.saludo.timeout.seconds", 30);
+            Integer.getInteger("whatsapp.saludo.timeout.seconds", 40);
 
     @Override
     public <T extends Actor> void performAs(T actor) {
@@ -36,17 +36,11 @@ public class IniciarChatClaro implements Task {
         boolean saludoYaEnviado = false;
         int intentos = 0;
 
-        // La marca persistente no es suficiente para asumir asesor en una pantalla vacía.
-        // Solo se recupera el manejo de asesor si hay evidencia visible en el chat actual.
+        // Si hay una marca persistente de atención humana, recuperar inmediatamente
+        // el flujo sin enviar un nuevo saludo "Hola".
         if (EstadoAtencionHumana.requiereRecuperacion()) {
-            if (asesorVisible(actor)) {
-                EstadoAtencionHumana.marcarEnCola();
-                actor.attemptsTo(ManejarConversacionConAsesor.ejecutar());
-            } else {
-                EstadoAtencionHumana.marcarCerrado();
-                ReportHooks.registrarPaso(
-                        "Marca de asesor pendiente descartada: no hay evidencia visible de asesor en el chat actual");
-            }
+            ReportHooks.registrarPaso("Recuperando conversacion con asesor en estado: " + EstadoAtencionHumana.leerEstado());
+            actor.attemptsTo(ManejarConversacionConAsesor.ejecutar());
         }
 
         if (asesorVisible(actor) && !flujoNormalVisible(actor)) {
@@ -144,7 +138,9 @@ public class IniciarChatClaro implements Task {
                 || TextoQueContengaX.verificarTexto(SALUDO_PARA_AYUDARTE).answeredBy(actor)
                 || TextoQueContengaX.verificarTexto(LINEAS_POSTPAGO).answeredBy(actor)
                 || TextoQueContengaX.verificarTexto(LINEAS_PREPAGO).answeredBy(actor)
-                || TextoQueContengaX.verificarTexto(CUENTA).answeredBy(actor);
+                || TextoQueContengaX.verificarTexto(CUENTA).answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("asistente virtual").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Escribe el número de la opción").answeredBy(actor);
     }
     public static String[] obtenerTextosParaWait() {
         return new String[]{
@@ -159,6 +155,8 @@ public class IniciarChatClaro implements Task {
                 "respuesta no es válida",
                 "opciones mostradas anteriormente",
                 "ingrese el número de opción",
+                "Escribe el número de la opción",
+                "asistente virtual",
                 "comunicarte con uno de nuestros asesores",
                 "mi nombre es",
                 "Mi nombre es",
