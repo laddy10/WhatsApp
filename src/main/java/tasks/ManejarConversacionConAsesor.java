@@ -71,7 +71,9 @@ public class ManejarConversacionConAsesor implements Task {
                     "Buenos dias",
                     "Buenos días",
                     "Buenas tardes",
-                    "Buenas noches"
+                    "Buenas noches",
+                    "Nombre completo",
+                    "nombre completo"
                 ).answeredBy(actor);
             }
 

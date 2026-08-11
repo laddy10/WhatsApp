@@ -16,6 +16,8 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.questions.Presence;
+import net.serenitybdd.screenplay.targets.Target;
 import utils.AndroidObject;
 import utils.CapturaDePantallaMovil;
 
@@ -68,28 +70,46 @@ public class TransaccionDaviplataHogar extends AndroidObject implements Task {
         actor.attemptsTo(
                 ScrollGradual.bajar(0.20),
                 Enter.theValue("99321987").into(TXT_NUMERO_DOCUMENTO),
-                interactions.wait.WaitFor.aTime(2000)
+                interactions.wait.WaitFor.aTime(4000)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Número de documento Daviplata ingresado");
         ReportHooks.registrarPaso("Número de documento Daviplata ingresado");
 
-        // Clic en Confirmar
-        actor.attemptsTo(
-                ClickTextoQueContengaX.elTextoContiene(CONFIRMAR),
-                //Click.on(BTN_CONFIRMAR_DAVIPLATA),
-                WaitFor.aTime(6000),
-                ValidarTextoQueContengaX.elTextoContiene(MENSAJE_CONFIRMACION_DAVIPLATA)
-        );
+        if (isVisibleFast(actor, BTN_PAGAR_DAVIPLATA)) {
+            actor.attemptsTo(
+                    Click.on(BTN_PAGAR_DAVIPLATA),
+                    WaitFor.aTime(5000)
+            );
+
+        } else {
+            actor.attemptsTo(
+                    ClickTextoQueContengaX.elTextoContiene(CONFIRMAR),
+                    WaitFor.aTime(6000)
+            );
+        }
+
 
         // Validar que se ha enviado el mensaje de texto / código
         actor.attemptsTo(
+                ValidarTextoQueContengaX.elTextoContiene(MENSAJE_CONFIRMACION_DAVIPLATA),
                 WaitForResponse.withAnyText("Daviplata ha enviado", "mensaje de texto", "código", "codigo")
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Redirección a verificación Daviplata validada correctamente");
         ReportHooks.registrarPaso("Redirección a verificación Daviplata validada correctamente");
+
+
     }
+
+    private <T extends Actor> boolean isVisibleFast(T actor, Target element) {
+        try {
+            return !Presence.of(element).viewedBy(actor).resolveAll().isEmpty();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 
     public static Performable transaccionDaviplataHogar() {
         return instrumented(TransaccionDaviplataHogar.class);

@@ -150,9 +150,9 @@ public class WhatsAppPostpagoPage {
       Target.the("Opción Daviplata")
           .located(By.xpath("//android.widget.TextView[contains(@text, 'Daviplata')] | //*[@text='Daviplata']"));
 
-  public static final Target BTN_CONFIRMAR_DAVIPLATA =
-      Target.the("Botón Confirmar Daviplata")
-          .located(By.xpath("//android.widget.Button[@resource-id=\"mySubmit_\"]"));
+  public static final Target BTN_PAGAR_DAVIPLATA =
+      Target.the("Botón Pagar Daviplata")
+          .located(By.xpath("//android.widget.TextView[@text=\"Pagar\"]"));
 
   public static final Target TXT_USUARIO_BANCOLOMBIA =
       Target.the("Campo Usuario Bancolombia")

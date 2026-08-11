@@ -65,25 +65,29 @@ public class PaqTodoIncluido implements Task {
 
         actor.attemptsTo(
                 // Se eliminó el clic directo a BTN_SELECCIONA_PQ_TODO_INCLUIDO para evitar abrir la lista vieja
-                WaitForResponse.withText(PAQ_TI_1D_2500_PRECIO)
+                WaitForResponse.withText(PAQ_TI_150MB_1D_PRECIO)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_3);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_3);
 
         actor.attemptsTo(
-                ValidarTexto.validarTexto(PAQ_TI_1D_2500_PRECIO),
-                ValidarTexto.validarTexto(PAQ_TI_1D_2500_DESC),
-                ValidarTexto.validarTexto(PAQ_TI_3D_5000_PRECIO),
-                ValidarTexto.validarTexto(PAQ_TI_3D_5000_DESC),
-                ValidarTexto.validarTexto(PAQ_TI_6D_8000_PRECIO),
-                ValidarTexto.validarTexto(PAQ_TI_6D_8000_DESC),
-                ValidarTexto.validarTexto(PAQ_TI_7D_9000_PRECIO),
-                ValidarTexto.validarTexto(PAQ_TI_7D_9000_DESC),
-                ValidarTexto.validarTexto(PAQ_TI_10D_13000_PRECIO),
-                ValidarTexto.validarTexto(PAQ_TI_10D_13000_DESC),
-                ValidarTexto.validarTexto(PAQ_TI_7D_13000_PRECIO),
-                ValidarTexto.validarTexto(PAQ_TI_7D_13000_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_150MB_1D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_150MB_1D_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_400MB_3D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_400MB_3D_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_1_4GB_6D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_1_4GB_6D_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_2GB_7D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_2GB_7D_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_WIN_2GB_7D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_WIN_2GB_7D_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_10GB_7D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_10GB_7D_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_WIN_10GB_7D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_WIN_10GB_7D_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_WIN_3_5GB_10D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_WIN_3_5GB_10D_DESC),
                 Scroll.scrollUnaVista(),
                 ClickTextoQueContengaX.elTextoContiene(VER_MAS_PAQUETES));
 
@@ -98,22 +102,22 @@ public class PaqTodoIncluido implements Task {
         actor.attemptsTo(
                 EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
                 //Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
-                ValidarTexto.validarTexto(PAQ_TI_20D_23000_PRECIO),
-                ValidarTexto.validarTexto(PAQ_TI_20D_23000_DESC),
-                ValidarTexto.validarTexto(PAQ_TI_15D_23000_PRECIO),
-                ValidarTexto.validarTexto(PAQ_TI_15D_23000_DESC),
-                ValidarTexto.validarTexto(PAQ_TI_30D_33000_PRECIO_1),
-                ValidarTexto.validarTexto(PAQ_TI_30D_33000_DESC_1),
-                ValidarTexto.validarTexto(PAQ_TI_30D_33000_PRECIO_2),
-                ValidarTexto.validarTexto(PAQ_TI_30D_33000_DESC_2),
-                ValidarTexto.validarTexto(PAQ_TI_30D_43000_PRECIO),
-                ValidarTexto.validarTexto(PAQ_TI_30D_43000_DESC),
-                ValidarTexto.validarTexto(PAQ_TI_30D_100000_PRECIO),
-                ValidarTexto.validarTexto(PAQ_TI_30D_100000_DESC),
-                ValidarTexto.validarTexto(PAQ_TI_3D_6000_PRECIO),
-                ValidarTexto.validarTexto(PAQ_TI_3D_6000_DESC),
-                ValidarTexto.validarTexto(PAQ_TI_6D_9000_PRECIO),
-                ValidarTexto.validarTexto(PAQ_TI_6D_9000_DESC));
+                ValidarTexto.validarTexto(PAQ_TI_20GB_15D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_20GB_15D_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_WIN_7_5GB_20D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_WIN_7_5GB_20D_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_12GB_30D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_12GB_30D_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_30GB_30D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_30GB_30D_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_18GB_30D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_18GB_30D_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_80GB_30D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_80GB_30D_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_SALUD_400MB_3D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_SALUD_400MB_3D_DESC),
+                ValidarTexto.validarTexto(PAQ_TI_SALUD_1_4GB_6D_PRECIO),
+                ValidarTexto.validarTexto(PAQ_TI_SALUD_1_4GB_6D_DESC));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_6);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_6);
