@@ -459,7 +459,7 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Vaciar chat
 
 
-  @EXUS_HOG_WSP_34
+  @EXUS_HOG_WSP_32
   Scenario: Menu principal - Soporte y servicio - Visitas y traslados
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -474,7 +474,7 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Vaciar chat
 
 
-  @EXUS_HOG_WSP_35
+  @EXUS_HOG_WSP_33
   Scenario: Menu principal - Soporte y servicio - Tus PQR Radicados
     Given Ingresar a WhatsAPP
     When Validar Version de la App
