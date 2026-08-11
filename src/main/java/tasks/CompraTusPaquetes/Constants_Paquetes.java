@@ -4,48 +4,132 @@ public class Constants_Paquetes {
 
   // Paq. todo incluido
 
-  public static final String PAQ_TI_1D_2500_PRECIO = "$2.500 x 1 Día";
-  public static final String PAQ_TI_1D_2500_DESC =
-      "50MB + WhatsApp + 50 minutos a destinos nacionales";
-  public static final String PAQ_TI_3D_5000_PRECIO = "$5.000 x 3 Días";
-  public static final String PAQ_TI_3D_5000_DESC =
-      "400 MB + WhatsApp, Facebook, Twitter + Voz ilimitada nacional";
-  public static final String PAQ_TI_6D_8000_PRECIO = "$8.000 x 6 Días";
-  public static final String PAQ_TI_6D_8000_DESC =
-      "1.4 GB + WhatsApp, Facebook, Twitter + Voz ilimitada nacional";
-  public static final String PAQ_TI_7D_9000_PRECIO = "$9.000 x 7 Días ";
-  public static final String PAQ_TI_7D_9000_DESC =
-      "2 GB + WhatsApp, Facebook, Twitter + Voz ilimitada nacional + SMS";
-  public static final String PAQ_TI_10D_13000_PRECIO = "$13.000 x 10 Días";
-  public static final String PAQ_TI_10D_13000_DESC =
-      "3.5 GB + WhatsApp, Facebook, Twitter + Voz ilimitada nacional";
-  public static final String PAQ_TI_7D_13000_PRECIO = "$13.000 x 7 días";
-  public static final String PAQ_TI_7D_13000_DESC =
-      "10GB + Voz y SMS Ilimitados a todo destino nacional";
-  public static final String PAQ_TI_20D_23000_PRECIO = "$23.000 x 20 Días";
-  public static final String PAQ_TI_20D_23000_DESC =
-      "7.5 GB + WhatsApp, Facebook, Twitter + Voz ilimitada nacional + SMS";
-  public static final String PAQ_TI_15D_23000_PRECIO = "$23.000 x 15 Días";
-  public static final String PAQ_TI_15D_23000_DESC =
-      "20GB de Navegacion + Voz y SMS Ilimitados a todo destino nacional";
-  public static final String PAQ_TI_30D_33000_PRECIO_1 = "$33.000 x 30 Días";
-  public static final String PAQ_TI_30D_33000_DESC_1 =
-      "12 GB + WhatsApp, Facebook, Twitter + Voz ilimitada nacional";
-  public static final String PAQ_TI_30D_33000_PRECIO_2 = "$33.000 x  30 Días";
-  public static final String PAQ_TI_30D_33000_DESC_2 =
-      "30GB de Navegacion + Voz y SMS Ilimitados a todo destino nacional";
-  public static final String PAQ_TI_30D_43000_PRECIO = "$43.000 x 30 Días";
-  public static final String PAQ_TI_30D_43000_DESC =
-      "18 GB + WhatsApp, Facebook, Twitter + Voz ilimitada nacional";
-  public static final String PAQ_TI_30D_100000_PRECIO = "$100.000 x 30 Días";
-  public static final String PAQ_TI_30D_100000_DESC =
-      "80 GB + WhatsApp, Facebook, Twitter + Voz ilimitada nacional";
-  public static final String PAQ_TI_3D_6000_PRECIO = "$6.000 X 3 días";
-  public static final String PAQ_TI_3D_6000_DESC =
-      "400 MB + WhatsApp, Facebook, Twitter + Salud en línea 4 beneficiarios";
-  public static final String PAQ_TI_6D_9000_PRECIO = "$9.000 X 6 días";
-  public static final String PAQ_TI_6D_9000_DESC =
-      "1.4 GB + WhatsApp, Facebook, Twitter + Salud en línea 4 beneficiarios";
+  // TODO INCLUIDO - 1 DÍA - 150 MB
+  public static final String PAQ_TI_150MB_1D_PRECIO =
+          "$3.000 x 1 Día";
+
+  public static final String PAQ_TI_150MB_1D_DESC =
+          "Todo Incluido 50 minutos + SMS Ilimitados + W + 150 MB 1 Dia";
+
+
+  // TODO INCLUIDO - 3 DÍAS - 400 MB
+  public static final String PAQ_TI_400MB_3D_PRECIO =
+          "$5.500 x 3 Días";
+
+  public static final String PAQ_TI_400MB_3D_DESC =
+          "400 MB + WhatsApp, Facebook, Twitter + Voz ilimitada nacional";
+
+
+  // TODO INCLUIDO - 6 DÍAS - 1.4 GB
+  public static final String PAQ_TI_1_4GB_6D_PRECIO =
+          "$9.000 x 6 Días";
+
+  public static final String PAQ_TI_1_4GB_6D_DESC =
+          "1.4 GB + WhatsApp, Facebook, Twitter + Voz ilimitada nacional";
+
+
+  // TODO INCLUIDO - 7 DÍAS - 2 GB
+  public static final String PAQ_TI_2GB_7D_PRECIO =
+          "$10.000 x 7 Días";
+
+  public static final String PAQ_TI_2GB_7D_DESC =
+          "2GB + WhatsApp, Twitter, Facebook + Voz ilimitado destinos nacionales";
+
+
+  // TODO INCLUIDO - WIN SPORTS - 7 DÍAS - 2 GB
+  public static final String PAQ_TI_WIN_2GB_7D_PRECIO =
+          "$11.000 x 7 Días";
+
+  public static final String PAQ_TI_WIN_2GB_7D_DESC =
+          "Minutos ilimitados + WFX + Win Sports + 2GB";
+
+
+  // TODO INCLUIDO - 7 DÍAS - 10 GB
+  public static final String PAQ_TI_10GB_7D_PRECIO =
+          "$14.000 x 7 días";
+
+  public static final String PAQ_TI_10GB_7D_DESC =
+          "10GB + Voz y SMS Ilimitados a todo destino nacional";
+
+
+  // TODO INCLUIDO - WIN SPORTS - 7 DÍAS - 10 GB
+  public static final String PAQ_TI_WIN_10GB_7D_PRECIO =
+          "$15.000 x 7 días";
+
+  public static final String PAQ_TI_WIN_10GB_7D_DESC =
+          "Minutos ilimitados + Win Sports + 10GB";
+
+
+  // TODO INCLUIDO - WIN SPORTS - 10 DÍAS - 3.5 GB
+  public static final String PAQ_TI_WIN_3_5GB_10D_PRECIO =
+          "$15.000 x 10 días";
+
+  public static final String PAQ_TI_WIN_3_5GB_10D_DESC =
+          "Minutos ilimitados + WFX + Win Sports + 3.5GB";
+
+
+  // TODO INCLUIDO - 15 DÍAS - 20 GB
+  public static final String PAQ_TI_20GB_15D_PRECIO =
+          "$25.000 x 15 días";
+
+  public static final String PAQ_TI_20GB_15D_DESC =
+          "Todo incluido 15 días Minutos ilimitados + Win Sports + 20GB";
+
+
+  // TODO INCLUIDO - WIN SPORTS - 20 DÍAS - 7.5 GB
+  public static final String PAQ_TI_WIN_7_5GB_20D_PRECIO =
+          "$25.000 x 20 días";
+
+  public static final String PAQ_TI_WIN_7_5GB_20D_DESC =
+          "Todo incluido 20 días Minutos ilimitados + WFX + Win Sports + 7.5GB";
+
+
+  // TODO INCLUIDO - 30 DÍAS - 12 GB
+  public static final String PAQ_TI_12GB_30D_PRECIO =
+          "$35.000 x 30 días";
+
+  public static final String PAQ_TI_12GB_30D_DESC =
+          "Todo incluido 30 días Minutos ilimitados + WFX + Win Sports + 12GB";
+
+
+  // TODO INCLUIDO - 30 DÍAS - 30 GB
+  public static final String PAQ_TI_30GB_30D_PRECIO =
+          "$35.000 x 30 días";
+
+  public static final String PAQ_TI_30GB_30D_DESC =
+          "Todo incluido 30 días Minutos ilimitados + Win Sports + 30GB";
+
+
+  // TODO INCLUIDO - 30 DÍAS - 18 GB
+  public static final String PAQ_TI_18GB_30D_PRECIO =
+          "$45.000 x 30 días";
+
+  public static final String PAQ_TI_18GB_30D_DESC =
+          "Todo incluido 30 días Minutos ilimitados + WFX + Win Sports + 18GB";
+
+
+  // TODO INCLUIDO - 30 DÍAS - 80 GB
+  public static final String PAQ_TI_80GB_30D_PRECIO =
+          "$100.000 x 30 Días";
+
+  public static final String PAQ_TI_80GB_30D_DESC =
+          "80 GB + WhatsApp, Facebook, Twitter + Voz ilimitada nacional";
+
+
+  // TODO INCLUIDO + SALUD - 3 DÍAS - 400 MB
+  public static final String PAQ_TI_SALUD_400MB_3D_PRECIO =
+          "$7.000 X 3 días";
+
+  public static final String PAQ_TI_SALUD_400MB_3D_DESC =
+          "400 MB + WhatsApp, Facebook, Twitter + Salud en línea 4 beneficiarios";
+
+
+  // TODO INCLUIDO + SALUD - 6 DÍAS - 1.4 GB
+  public static final String PAQ_TI_SALUD_1_4GB_6D_PRECIO =
+          "$10.000 X 6 días";
+
+  public static final String PAQ_TI_SALUD_1_4GB_6D_DESC =
+          "1.4 GB + WhatsApp, Facebook, Twitter + Salud en línea 4 beneficiarios";
 
   // Paq. de Voz
   public static final String PAQ_VOZ_2500_1D_PRECIO = "$2.500 x 1 Día";
