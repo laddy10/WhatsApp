@@ -91,6 +91,7 @@ public class Constantes {
     public static final String OTRO_VALOR_RECARGA = "Otro valor recarga";
     public static final String MAS_OPCIONES = "Más opciones";
     public static final String MEDIOS_DE_PAGO = "Medios de pago";
+    public static final String PAGAR_TU_RECARGA = "pagar tu recarga";
     public static final String CONTINUAR_RECARGA = "Continuar recarga";
   public static final String ERROR_PROCESAR_SOLICITUD =
       "no fue posible procesar tu solicitud";

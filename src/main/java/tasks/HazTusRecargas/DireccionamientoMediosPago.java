@@ -79,7 +79,7 @@ public class DireccionamientoMediosPago implements Task {
     private <T extends Actor> void esperarResultadoMediosPago(T actor) {
         actor.attemptsTo(
                 WaitForResponse.withAnyText(
-                        20, MEDIOS_DE_PAGO, ERROR_PROCESAR_SOLICITUD));
+                        20, MEDIOS_DE_PAGO, ERROR_PROCESAR_SOLICITUD, PAGAR_TU_RECARGA));
 
         String source = utils.AndroidObject.androidDriver(actor).getPageSource().toLowerCase();
         if (source.contains(ERROR_PROCESAR_SOLICITUD)) {
