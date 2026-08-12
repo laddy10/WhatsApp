@@ -10,19 +10,24 @@ import interactions.scroll.ScrollHastaTexto;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import interactions.wait.WaitForTextContains;
+import models.User;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import tasks.SalirConversacion;
+import utils.AndroidObject;
 import utils.CapturaDePantallaMovil;
+import utils.TestDataProvider;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPostpagoPage.*;
 import static utils.ConstantesPost.*;
 
-public class TransaccionTarjetaCreditoPost implements Task {
+public class TransaccionTarjetaCreditoPost extends AndroidObject implements Task {
+
+    private final User user = TestDataProvider.getRealUser();
 
     @Override
     public <T extends Actor> void performAs(T actor) {
@@ -60,7 +65,13 @@ public class TransaccionTarjetaCreditoPost implements Task {
         // Llenar datos ficticios de la tarjeta
         actor.attemptsTo(
                 WaitFor.aTime(2000),
-                Enter.theValue(NUMERO_TARJETA_FICTICIO).into(TXT_NUMERO_TARJETA),
+                Click.on(TXT_NUMERO_TARJETA)
+        );
+
+        // Digitar el número de tarjeta
+        digitarSoloNumeros(actor, NUMERO_TARJETA_FICTICIO);
+
+        actor.attemptsTo(
                 WaitFor.aTime(1000),
                 Enter.theValue(NOMBRE_FICTICIO).into(TXT_NOMBRE_APELLIDO),
                 WaitFor.aTime(1000),
@@ -68,16 +79,32 @@ public class TransaccionTarjetaCreditoPost implements Task {
                 WaitFor.aTime(1000),
                 ClickTextoQueContengaX.elTextoContiene("C.C. (Cédula de Ciudadanía)"),
                 WaitFor.aTime(1000),
-                Enter.theValue(NUMERO_CEDULA_FICTICIO).into(TXT_NUMERO_DOCUMENTO),
-                WaitFor.aTime(1000)
+                Click.on(TXT_NUMERO_DOCUMENTO)
         );
 
-        // Llenar fecha de expiración y CVC
+        // Digitar la cédula
+        digitarSoloNumeros(actor, NUMERO_CEDULA_FICTICIO);
+
         actor.attemptsTo(
-                Enter.theValue("12/28").into(TXT_FECHA_EXPIRACION),
                 WaitFor.aTime(1000),
-                Enter.theValue(CVC_FICTICIO).into(TXT_CVC)
+
+                // Dar foco al campo de fecha
+                Click.on(TXT_FECHA_EXPIRACION)
         );
+
+        // Digitar la fecha de expiración
+        digitarSoloNumeros(actor, "12/28");
+
+        actor.attemptsTo(
+                WaitFor.aTime(1000),
+
+                // Dar foco al campo CVC
+                Click.on(TXT_CVC)
+        );
+
+        // Digitar el CVC
+        digitarSoloNumeros(actor, CVC_FICTICIO);
+
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Datos básicos de tarjeta ingresados Hogar");
         ReportHooks.registrarPaso("Datos básicos de tarjeta ingresados Hogar");
@@ -88,9 +115,9 @@ public class TransaccionTarjetaCreditoPost implements Task {
                 ScrollGradual.bajar(0.25),
                 Enter.theValue(CORREO_FICTICIO).into(TXT_CORREO_ELECTRONICO),
                 WaitFor.aTime(1000),
-                Enter.theValue(CELULAR_FICTICIO).into(TXT_NUMERO_CELULAR),
-                WaitFor.aTime(1000)
+                ValidarTextoQueContengaX.elTextoContiene(user.getNumeroPost())
         );
+
 
         // Modificar número de cuotas (Aumentar a 2 o 3, luego volver a 1)
         actor.attemptsTo(
@@ -126,6 +153,20 @@ public class TransaccionTarjetaCreditoPost implements Task {
                 Atras.irAtras(),
                 SalirConversacion.salir()
         );
+    }
+
+    private <T extends Actor> void digitarSoloNumeros(
+            T actor,
+            String valor
+    ) {
+        for (char caracter : valor.toCharArray()) {
+            if (Character.isDigit(caracter)) {
+                DigitarNumeros(
+                        actor,
+                        String.valueOf(caracter)
+                );
+            }
+        }
     }
 
     public static Performable transaccionTarjetaCreditoPost() {

@@ -119,10 +119,10 @@ public class ConstantesPost {
     public static final String NUMERO_CUOTAS = "Número de cuotas";
 
     // Datos Ficticios
-    public static final String NUMERO_TARJETA_FICTICIO = "4111111111111111";
+    public static final String NUMERO_TARJETA_FICTICIO = "5306917794022098";
     public static final String NOMBRE_FICTICIO = "Juan Perez";
     public static final String NUMERO_CEDULA_FICTICIO = "1234567890";
-    public static final String CVC_FICTICIO = "123";
+    public static final String CVC_FICTICIO = "905";
     public static final String CORREO_FICTICIO = "pruebasexperienciaclaro@gmail.com";
     public static final String CELULAR_FICTICIO = "3102632840";
 
