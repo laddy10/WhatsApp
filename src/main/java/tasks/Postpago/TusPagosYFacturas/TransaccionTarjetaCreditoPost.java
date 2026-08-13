@@ -106,8 +106,8 @@ public class TransaccionTarjetaCreditoPost extends AndroidObject implements Task
         digitarSoloNumeros(actor, CVC_FICTICIO);
 
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Datos básicos de tarjeta ingresados Hogar");
-        ReportHooks.registrarPaso("Datos básicos de tarjeta ingresados Hogar");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Datos básicos de tarjeta ingresados");
+        ReportHooks.registrarPaso("Datos básicos de tarjeta ingresados");
 
         // Continuar con datos adicionales
         actor.attemptsTo(
