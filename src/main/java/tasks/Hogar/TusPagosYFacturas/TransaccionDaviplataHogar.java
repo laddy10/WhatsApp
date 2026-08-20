@@ -76,30 +76,23 @@ public class TransaccionDaviplataHogar extends AndroidObject implements Task {
         CapturaDePantallaMovil.tomarCapturaPantalla("Número de documento Daviplata ingresado");
         ReportHooks.registrarPaso("Número de documento Daviplata ingresado");
 
-        if (isVisibleFast(actor, BTN_PAGAR_DAVIPLATA)) {
-            actor.attemptsTo(
-                    Click.on(BTN_PAGAR_DAVIPLATA),
-                    WaitFor.aTime(5000)
-            );
-
-        } else {
+        if (isVisibleFast(actor, BTN_CONFIRMAR_DAVIPLATA)) {
             actor.attemptsTo(
                     ClickTextoQueContengaX.elTextoContiene(CONFIRMAR),
                     WaitFor.aTime(6000)
             );
+
+
+            // Validar que se ha enviado el mensaje de texto / código
+            actor.attemptsTo(
+                    ValidarTextoQueContengaX.elTextoContiene(MENSAJE_CONFIRMACION_DAVIPLATA),
+                    WaitForResponse.withAnyText("Daviplata ha enviado", "mensaje de texto", "código", "codigo")
+            );
+
+            CapturaDePantallaMovil.tomarCapturaPantalla("Redirección a verificación Daviplata validada correctamente");
+            ReportHooks.registrarPaso("Redirección a verificación Daviplata validada correctamente");
+
         }
-
-
-        // Validar que se ha enviado el mensaje de texto / código
-        actor.attemptsTo(
-                ValidarTextoQueContengaX.elTextoContiene(MENSAJE_CONFIRMACION_DAVIPLATA),
-                WaitForResponse.withAnyText("Daviplata ha enviado", "mensaje de texto", "código", "codigo")
-        );
-
-        CapturaDePantallaMovil.tomarCapturaPantalla("Redirección a verificación Daviplata validada correctamente");
-        ReportHooks.registrarPaso("Redirección a verificación Daviplata validada correctamente");
-
-
     }
 
     private <T extends Actor> boolean isVisibleFast(T actor, Target element) {

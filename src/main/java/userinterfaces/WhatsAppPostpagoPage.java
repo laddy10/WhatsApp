@@ -302,4 +302,9 @@ public class WhatsAppPostpagoPage {
 
   public static final Target URL_BANCO =
           Target.the("URL del banco").located(By.id("com.android.chrome:id/url_bar"));
+
+  public static final Target BTN_CONFIRMAR_DAVIPLATA =
+          Target.the("Botón Confirmar Daviplata")
+                  .located(By.xpath("//android.widget.TextView[@text=\"Confirmar\"]"));
+
 }

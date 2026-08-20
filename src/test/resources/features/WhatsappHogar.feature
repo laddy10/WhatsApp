@@ -73,7 +73,7 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Validar el menu Compra por WhatsApp
 
 
-  @EXUS_HOG_WSP_07
+
   Scenario: Validar menu principal -Tus pagos y factura-tu factura
     Given Ingresar a WhatsAPP
     When Validar Version de la App
