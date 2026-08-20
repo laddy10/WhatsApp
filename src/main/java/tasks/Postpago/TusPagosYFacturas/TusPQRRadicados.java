@@ -54,6 +54,22 @@ public class TusPQRRadicados implements Task {
 
         UtilidadesAndroid.abrirLinkEnNavegador(urlExtraida);
 
+        try {
+            actor.attemptsTo(
+                    WaitForTextContains.withAnyTextContains(PETICIONES_QUEJAS_RECURSOS, "Volver a cargar")
+            );
+
+            utils.AndroidObject and = new utils.AndroidObject();
+            if (and.textoContiene(actor, "Volver a cargar")) {
+                actor.attemptsTo(
+                        ClickTextoQueContengaX.elTextoContiene("Volver a cargar"),
+                        interactions.wait.WaitFor.aTime(3000)
+                );
+            }
+        } catch (Exception e) {
+            // Si falla la espera, se ignora para que lo atrape la validación principal de abajo
+        }
+
         actor.attemptsTo(
                 WaitForTextContains.withTextContains(PETICIONES_QUEJAS_RECURSOS),
                 ValidarTexto.validarTexto(OFICINA_VIRTUAL),

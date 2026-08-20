@@ -31,7 +31,7 @@ public class SalirConversacion implements Task {
     private static final String RESPUESTA_CODIGO_INVALIDO = "El código ingresado no es válido";
 
     private static final int MAX_INTENTOS = 1;
-    private static final int TIMEOUT_RESPUESTA = 6;
+    private static final int TIMEOUT_RESPUESTA = 20;
 
     @Override
     public <T extends Actor> void performAs(T actor) {

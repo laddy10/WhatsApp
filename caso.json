@@ -1,0 +1,308 @@
+{
+  "schema_version": "1.0",
+  "generated_at": "2026-08-20T03:08:27.577592+00:00",
+  "tag": "@Whatsapp_24",
+  "project": "D:\\Automatización Whatsapp\\Auto_WhatsApp",
+  "local_execution": {
+    "found_outcome": true,
+    "scenario": "Validar menu compra tus paquetes - regala un paquete",
+    "tags": [
+      "Whatsapp_24",
+      "Validar los flujos de WhatsApp en prepago"
+    ],
+    "result": "ERROR",
+    "duration_ms": 136676,
+    "device": "appium: ",
+    "session_id": "f0fc3dd1-eda3-4901-b026-3089fd01013f",
+    "steps": [
+      {
+        "index": 1,
+        "description": "Given Ingresar a WhatsAPP",
+        "result": "SUCCESS",
+        "duration_ms": 30007
+      },
+      {
+        "index": 2,
+        "description": "ingresar whats app",
+        "result": "SUCCESS",
+        "duration_ms": 7976
+      },
+      {
+        "index": 3,
+        "description": "Valida que el texto 'Preguntar a Meta AI o buscar' este presente en pantalla",
+        "result": "SUCCESS",
+        "duration_ms": 885
+      },
+      {
+        "index": 4,
+        "description": "When Validar Version de la App",
+        "result": "SUCCESS",
+        "duration_ms": 17684
+      },
+      {
+        "index": 5,
+        "description": "validar version app",
+        "result": "SUCCESS",
+        "duration_ms": 17668
+      },
+      {
+        "index": 6,
+        "description": "clicks on Boton Más opciones WhatsApp",
+        "result": "SUCCESS",
+        "duration_ms": 1101
+      },
+      {
+        "index": 7,
+        "description": "Valida que el texto 'Ajustes' este contenido en otro texto visible.",
+        "result": "SUCCESS",
+        "duration_ms": 2274
+      },
+      {
+        "index": 8,
+        "description": "scroll hasta texto",
+        "result": "SUCCESS",
+        "duration_ms": 5308
+      },
+      {
+        "index": 9,
+        "description": "Valida que el texto 'Ayuda' este contenido en otro texto visible.",
+        "result": "SUCCESS",
+        "duration_ms": 577
+      },
+      {
+        "index": 10,
+        "description": "Valida que el texto 'Info. de la aplicación' este contenido en otro texto visible.",
+        "result": "SUCCESS",
+        "duration_ms": 1105
+      },
+      {
+        "index": 11,
+        "description": "Valida que el texto 'WhatsApp' este contenido en otro texto visible.",
+        "result": "SUCCESS",
+        "duration_ms": 807
+      },
+      {
+        "index": 12,
+        "description": "Valida que el texto 'Versión' este contenido en otro texto visible.",
+        "result": "SUCCESS",
+        "duration_ms": 821
+      },
+      {
+        "index": 13,
+        "description": "Valida que el texto 'LICENCIAS' este contenido en otro texto visible.",
+        "result": "SUCCESS",
+        "duration_ms": 862
+      },
+      {
+        "index": 14,
+        "description": "Regresa atrás en la aplicacion.",
+        "result": "SUCCESS",
+        "duration_ms": 981
+      },
+      {
+        "index": 15,
+        "description": "Regresa atrás en la aplicacion.",
+        "result": "SUCCESS",
+        "duration_ms": 1208
+      },
+      {
+        "index": 16,
+        "description": "Regresa atrás en la aplicacion.",
+        "result": "SUCCESS",
+        "duration_ms": 1248
+      },
+      {
+        "index": 17,
+        "description": "And Buscar el chat de Claro Colombia",
+        "result": "SUCCESS",
+        "duration_ms": 7110
+      },
+      {
+        "index": 18,
+        "description": "buscar chat claro",
+        "result": "SUCCESS",
+        "duration_ms": 7095
+      },
+      {
+        "index": 19,
+        "description": "And Iniciar el chat con Claro Colombia",
+        "result": "SUCCESS",
+        "duration_ms": 54364
+      },
+      {
+        "index": 20,
+        "description": "iniciar chat claro",
+        "result": "SUCCESS",
+        "duration_ms": 54348
+      },
+      {
+        "index": 21,
+        "description": "enters 'Hola' into Caja de texto enviar mensaje",
+        "result": "SUCCESS",
+        "duration_ms": 2216
+      },
+      {
+        "index": 22,
+        "description": "clicks on Boton enviar mensaje",
+        "result": "SUCCESS",
+        "duration_ms": 1130
+      },
+      {
+        "index": 23,
+        "description": "Realiza Scroll una vez hacia abajo en el inicio de la App",
+        "result": "SUCCESS",
+        "duration_ms": 2498
+      },
+      {
+        "index": 24,
+        "description": "Valida que el texto 'Líneas postpago' este contenido en otro texto visible.",
+        "result": "SUCCESS",
+        "duration_ms": 710
+      },
+      {
+        "index": 25,
+        "description": "Valida que el texto 'Líneas prepago' este contenido en otro texto visible.",
+        "result": "SUCCESS",
+        "duration_ms": 680
+      },
+      {
+        "index": 26,
+        "description": "Valida que el texto 'cuenta' este contenido en otro texto visible.",
+        "result": "SUCCESS",
+        "duration_ms": 994
+      },
+      {
+        "index": 27,
+        "description": "And Seleccionar linea de consulta",
+        "result": "SUCCESS",
+        "duration_ms": 9930
+      },
+      {
+        "index": 28,
+        "description": "seleccionar linea consulta",
+        "result": "SUCCESS",
+        "duration_ms": 9914
+      },
+      {
+        "index": 29,
+        "description": "enters '20' into Caja texto",
+        "result": "SUCCESS",
+        "duration_ms": 2934
+      },
+      {
+        "index": 30,
+        "description": "clicks on Boton enviar mensaje",
+        "result": "SUCCESS",
+        "duration_ms": 1186
+      },
+      {
+        "index": 31,
+        "description": "And Validar politica de tratamientos de datos",
+        "result": "ERROR",
+        "duration_ms": 15068
+      },
+      {
+        "index": 32,
+        "description": "validar tratamiento datos",
+        "result": "ERROR",
+        "duration_ms": 15053
+      },
+      {
+        "index": 33,
+        "description": "Valida que el texto 'Política de tratamiento de la información' este contenido en otro texto visible.",
+        "result": "SUCCESS",
+        "duration_ms": 615
+      },
+      {
+        "index": 34,
+        "description": "Valida que el texto 'http://bit.ly/3DtS9az' este contenido en otro texto visible.",
+        "result": "SUCCESS",
+        "duration_ms": 595
+      },
+      {
+        "index": 35,
+        "description": "Valida que el texto 'https://www.claro.com.co/personas/autogestion/whatsapp/' este contenido en otro texto visible.",
+        "result": "SUCCESS",
+        "duration_ms": 613
+      },
+      {
+        "index": 36,
+        "description": "Valida que el texto 'Política de tratamiento de la información' este contenido en otro texto visible.",
+        "result": "ERROR",
+        "duration_ms": 2615
+      },
+      {
+        "index": 37,
+        "description": "And Seleccionar menu principal",
+        "result": "SKIPPED",
+        "duration_ms": 3
+      },
+      {
+        "index": 38,
+        "description": "And Ingresar al menu compra tus paquetes",
+        "result": "SKIPPED",
+        "duration_ms": 2
+      },
+      {
+        "index": 39,
+        "description": "And Clic boton selecciona",
+        "result": "SKIPPED",
+        "duration_ms": 3
+      },
+      {
+        "index": 40,
+        "description": "Then Validar regala un paquete y redireccion portal pagos",
+        "result": "SKIPPED",
+        "duration_ms": 3
+      },
+      {
+        "index": 41,
+        "description": "And Vaciar chat",
+        "result": "SKIPPED",
+        "duration_ms": 2
+      }
+    ],
+    "failing_step": {
+      "index": 31,
+      "description": "And Validar politica de tratamientos de datos",
+      "result": "ERROR",
+      "duration_ms": 15068
+    },
+    "exception": {
+      "type": "org.openqa.selenium.StaleElementReferenceException",
+      "message": "The referenced element is no longer attached to the DOM\nFor documentation on this error, please visit: https://www.seleniumhq.org/exceptions/stale_element_reference.html\nBuild info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'\nSystem info: host: 'AU3PH5CG141BG50', ip: '10.111.240.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.14'\nDriver info: io.appium.java_client.android.AndroidDriver\nCapabilities {app: , appActivity: .Main, appPackage: com.whatsapp, autoDismissAlerts: true, autoGrantPermissions: true, automationName: UiAutomator2, captureScreenshots: true, databaseEnabled: false, desired: {app: , appActivity: .Main, appPackage: com.whatsapp, autoDismissAlerts: true, autoGrantPermissions: true, automationName: UiAutomator2, captureScreenshots: true, deviceName: Redmi Note 12 Pro+ 5G, fullReset: false, hub: http://127.0.0.1:4723/wd/hub, loggingPrefs: {}, nativeWebScreenshot: true, newCommandTimeout: 3000, noReset: true, orientation: PORTRAIT, platformName: android, platformVersion: 12.0, resetKeyboard: true, unicodeKeyboard: true}, deviceApiLevel: 31, deviceManufacturer: Xiaomi, deviceModel: 22101316UG, deviceName: f6funnqsordqonau, deviceScreenDensity: 440, deviceScreenSize: 1080x2400, deviceUDID: f6funnqsordqonau, fullReset: false, hub: http://127.0.0.1:4723/wd/hub, javascriptEnabled: true, locationContextEnabled: false, loggingPrefs: org.openqa.selenium.logging..., nativeWebScreenshot: true, networkConnectionEnabled: true, newCommandTimeout: 3000, noReset: true, orientation: PORTRAIT, pixelRatio: 2.75, platform: LINUX, platformName: Android, platformVersion: 12, resetKeyboard: true, statBarHeight: 94, takesScreenshot: true, unicodeKeyboard: true, viewportRect: {height: 2082, left: 0, top: 94, width: 1080}, warnings: {}, webStorageEnabled: false}\nSession ID: f0fc3dd1-eda3-4901-b026-3089fd01013f",
+      "summary": "ERROR;org.openqa.selenium.StaleElementReferenceException;The referenced element is no longer attached to the DOM\nFor documentation on this error, please visit: https://www.seleniumhq.org/exceptions/stale_element_reference.html\nBuild info: version: '3.141.59', revision: 'e82be7d358', time: '2018-11-14T08:17:03'\nSystem info: host: 'AU3PH5CG141BG50', ip: '10.111.240.1', os.name: 'Windows 10', os.arch: 'amd64', os.version: '10.0', java.version: '11.0.14'\nDriver info: io.appium.java_client.android.AndroidDriver\nCapabilities {app: , appActivity: .Main, appPackage: com.whatsapp, autoDismissAlerts: true, autoGrantPermissions: true, automationName: UiAutomator2, captureScreenshots: true, databaseEnabled: false, desired: {app: , appActivity: .Main, appPackage: com.whatsapp, autoDismissAlerts: true, autoGrantPermissions: true, automationName: UiAutomator2, captureScreenshots: true, deviceName: Redmi Note 12 Pro+ 5G, fullReset: false, hub: http://127.0.0.1:4723/wd/hub, loggingPrefs: {}, nativeWebScreenshot: true, newCommandTimeout: 3000, noReset: true, orientation: PORTRAIT, platformName: android, platformVersion: 12.0, resetKeyboard: true, unicodeKeyboard: true}, deviceApiLevel: 31, deviceManufacturer: Xiaomi, deviceModel: 22101316UG, deviceName: f6funnqsordqonau, deviceScreenDensity: 440, deviceScreenSize: 1080x2400, deviceUDID: f6funnqsordqonau, fullReset: false, hub: http://127.0.0.1:4723/wd/hub, javascriptEnabled: true, locationContextEnabled: false, loggingPrefs: org.openqa.selenium.logging..., nativeWebScreenshot: true, networkConnectionEnabled: true, newCommandTimeout: 3000, noReset: true, orientation: PORTRAIT, pixelRatio: 2.75, platform: LINUX, platformName: Android, platformVersion: 12, resetKeyboard: true, statBarHeight: 94, takesScreenshot: true, unicodeKeyboard: true, viewportRect: {height: 2082, left: 0, top: 94, width: 1080}, warnings: {}, webStorageEnabled: false}\nSession ID: f0fc3dd1-eda3-4901-b026-3089fd01013f;AppiumCommandExecutor.java",
+      "stack_head": [
+        "{'classLoaderName': 'app', 'declaringClass': 'io.appium.java_client.remote.AppiumCommandExecutor', 'methodName': 'execute', 'fileName': 'AppiumCommandExecutor.java', 'lineNumber': 239, 'format': 1}",
+        "{'classLoaderName': 'app', 'declaringClass': 'io.appium.java_client.DefaultGenericMobileDriver', 'methodName': 'execute', 'fileName': 'DefaultGenericMobileDriver.java', 'lineNumber': 41, 'format': 1}",
+        "{'classLoaderName': 'app', 'declaringClass': 'io.appium.java_client.AppiumDriver', 'methodName': 'execute', 'fileName': 'AppiumDriver.java', 'lineNumber': 1, 'format': 1}",
+        "{'classLoaderName': 'app', 'declaringClass': 'io.appium.java_client.android.AndroidDriver', 'methodName': 'execute', 'fileName': 'AndroidDriver.java', 'lineNumber': 1, 'format': 1}",
+        "{'classLoaderName': 'app', 'declaringClass': 'io.appium.java_client.DefaultGenericMobileElement', 'methodName': 'execute', 'fileName': 'DefaultGenericMobileElement.java', 'lineNumber': 45, 'format': 1}",
+        "{'classLoaderName': 'app', 'declaringClass': 'io.appium.java_client.MobileElement', 'methodName': 'execute', 'fileName': 'MobileElement.java', 'lineNumber': 1, 'format': 1}",
+        "{'classLoaderName': 'app', 'declaringClass': 'io.appium.java_client.android.AndroidElement', 'methodName': 'execute', 'fileName': 'AndroidElement.java', 'lineNumber': 1, 'format': 1}",
+        "{'classLoaderName': 'app', 'declaringClass': 'utils.AndroidObject', 'methodName': 'ElTextoContiene', 'fileName': 'AndroidObject.java', 'lineNumber': 83, 'format': 1}",
+        "{'classLoaderName': 'app', 'declaringClass': 'interactions.Validaciones.ValidarTextoQueContengaX', 'methodName': 'performAs', 'fileName': 'ValidarTextoQueContengaX.java', 'lineNumber': 21, 'format': 1}",
+        "{'classLoaderName': 'app', 'declaringClass': 'tasks.ValidarTratamientoDatos', 'methodName': 'performAs', 'fileName': 'ValidarTratamientoDatos.java', 'lineNumber': 48, 'format': 1}",
+        "{'classLoaderName': 'app', 'declaringClass': 'stepDefinitions.WhatsappDefinitions', 'methodName': 'validarPoliticaTratamiendoDatos', 'fileName': 'WhatsappDefinitions.java', 'lineNumber': 90, 'format': 1}",
+        "{'classLoaderName': 'app', 'declaringClass': 'cucumber.runner.Runner', 'methodName': 'runPickle', 'fileName': 'Runner.java', 'lineNumber': 80, 'format': 1}"
+      ]
+    },
+    "evidence": {
+      "screenshots": [
+        "D:\\Automatización Whatsapp\\Auto_WhatsApp\\target\\site\\serenity\\207d57213341052f7eb3e76f840bbdd8c9869e1f07f458f587f0a78c0fe6bd3c.png",
+        "D:\\Automatización Whatsapp\\Auto_WhatsApp\\target\\site\\serenity\\0b29c52f002a3ce8709ec398401b08ae9313caf4a7909066b953ccb2a6af5a98.png",
+        "D:\\Automatización Whatsapp\\Auto_WhatsApp\\target\\site\\serenity\\207d57213341052f7eb3e76f840bbdd8c9869e1f07f458f587f0a78c0fe6bd3c.png",
+        "D:\\Automatización Whatsapp\\Auto_WhatsApp\\target\\site\\serenity\\7fcb314429ca21194db2672807d523664dba53e9c468cdef918ed499d1286299.png"
+      ],
+      "page_source_files": [],
+      "serenity_html_report": "D:\\Automatización Whatsapp\\Auto_WhatsApp\\target\\site\\serenity\\index.html"
+    },
+    "raw_outcome_file": "D:\\Automatización Whatsapp\\Auto_WhatsApp\\target\\site\\serenity\\02501016c569bb33303405e049d514b86ef80f35ebff948f588acc9f74c9268a.json",
+    "feature_file": "src\\test\\resources\\features\\Whatsapp.feature"
+  },
+  "run": {
+    "skipped": true
+  },
+  "smart_tester": null,
+  "classification": null
+}
