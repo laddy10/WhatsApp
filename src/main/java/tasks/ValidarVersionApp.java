@@ -24,7 +24,7 @@ public class ValidarVersionApp implements Task {
         actor.attemptsTo(
                 Click.on(BTN_MENU_ITEM),
                 ClickTextoQueContengaX.elTextoContiene(AJUSTES),
-                ScrollHastaTexto.conTexto("Meta"),
+                ScrollHastaTexto.conTexto("Centro de cuentas"),
                 ClickTextoQueContengaX.elTextoContiene(AYUDA),
                 ClickTextoQueContengaX.elTextoContiene(INFO_APP),
                 WaitForResponse.withText(WHATSAPP));

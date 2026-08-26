@@ -20,6 +20,7 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import tasks.SalirConversacion;
 import utils.AndroidObject;
 import utils.CapturaDePantallaMovil;
 import utils.TestDataProvider;
@@ -152,7 +153,8 @@ public class TransaccionTarjetaCreditoHogar extends AndroidObject implements Tas
 
         actor.attemptsTo(
                 Atras.irAtras(),
-                Atras.irAtras()
+                Atras.irAtras(),
+                SalirConversacion.salir()
         );
     }
 
