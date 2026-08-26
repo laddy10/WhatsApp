@@ -136,13 +136,13 @@ public class TResuelveOpcionesHogar implements Task {
                 TResuelveOpcionesHogar.class,
                 "3",
                 "mascotas",
-                T_RESUELVE_MASCOTAS_ACTIVO,
+                T_RESUELVE_SERVICIOS,
                 new String[] {
-                        DESCRIPCION_PLAN,
+                        COBERTURA_MEDICA,
                         ASISTENCIA_MASCOTA,
                         ASISTENCIA_EXEQUIAL_MASCOTAS,
-                        TERMINOS_CONDICIONES,
-                        SOLICITAR_ASISTENCIA
+                        HOGAR_EXPRESS,
+
                 });
     }
 

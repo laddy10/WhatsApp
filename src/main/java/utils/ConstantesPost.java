@@ -412,6 +412,7 @@ public class ConstantesPost {
     public static final String ASISTENCIA_DESEMPLEO = "Asistencia de desempleo";
     public static final String COMPRAR_PLAN = "Comprar plan";
     public static final String T_RESUELVE_MASCOTAS_ACTIVO = "se encuentra activo";
+    public static final String T_RESUELVE_SERVICIOS = "los siguientes servicios";
     public static final String DESCRIPCION_PLAN = "Descripci";
     public static final String ASISTENCIA_MASCOTA = "Asistencia Mascota";
     public static final String ASISTENCIA_EXEQUIAL_MASCOTAS = "exequial mascotas";
@@ -422,4 +423,8 @@ public class ConstantesPost {
     public static final String ASISTENCIA_REUNIONES_CASA = "Asistencia Reuniones en casa";
     public static final String PERSONALIZAR_CLAVE_WIFI = "Personalizar clave WIFI";
     public static final String MENSAJE_CONFIRMACION_DAVIPLATA = "Daviplata ha enviado un mensaje de texto a tu móvil";
+    public static final String COBERTURA_MEDICA = "Coberturas Médicas";
+    public static final String HOGAR_EXPRESS = "Hogar Express";
+
+
 }
