@@ -36,7 +36,7 @@ public class Constantes {
     public static final String VIGENCIA = "vigente";
     public static final String COMPRA_TUS_PAQUETES = "\uD83D\uDECD️ Compra tus paquetes";
     public static final String HAZ_TUS_RECARGAS = "\uD83D\uDCB0 Haz tus recargas";
-    public static final String COMPRA_POR_WHATSAPP = "¡Compra por WhatsApp!";
+    public static final String COMPRA_POR_WHATSAPP = "Compra por WhatsApp";
     public static final String TUS_EQUIPOS = "\uD83D\uDCF1 Tus equipos";
     public static final String TODO_SOBRE_TU_LINEA2 = "\uD83D\uDCF6 Todo sobre tu línea";
     public static final String OTRAS_OPCIONES = "\uD83D\uDC49 Otras opciones";

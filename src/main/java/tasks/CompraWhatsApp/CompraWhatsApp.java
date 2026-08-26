@@ -19,7 +19,8 @@ public class CompraWhatsApp implements Task {
   @Override
   public <T extends Actor> void performAs(T actor) {
     // Seleccionar opción de compra por WhatsApp
-    actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(COMPRA_POR_WHATSAPP));
+    actor.attemptsTo(
+            ClickTextoQueContengaX.elTextoContiene(COMPRA_POR_WHATSAPP));
 
     // Capturar evidencia del paso realizado
     CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA);

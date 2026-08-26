@@ -71,7 +71,7 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Ingresa al menu Compra por WhatsApp
     And Clic boton selecciona
     And Validar el menu Compra por WhatsApp
-
+    And Vaciar chat
 
 
   Scenario: Validar menu principal -Tus pagos y factura-tu factura

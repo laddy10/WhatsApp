@@ -6,6 +6,7 @@ import static utils.Constantes.*;
 
 import hooks.ReportHooks;
 import interactions.Validaciones.ValidarTexto;
+import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -21,7 +22,7 @@ public class ValidarMenuPrincipal implements Task {
         ValidarTexto.validarTexto(MENU_PRINCIPAL),
         ValidarTexto.validarTexto(COMPRA_TUS_PAQUETES),
         ValidarTexto.validarTexto(HAZ_TUS_RECARGAS),
-        ValidarTexto.validarTexto(COMPRA_POR_WHATSAPP),
+        ValidarTextoQueContengaX.elTextoContiene(COMPRA_POR_WHATSAPP),
         ValidarTexto.validarTexto(TUS_EQUIPOS),
         ValidarTexto.validarTexto(TODO_SOBRE_TU_LINEA2),
         ValidarTexto.validarTexto(OTRAS_OPCIONES),

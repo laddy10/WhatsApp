@@ -9,6 +9,7 @@ import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
+import interactions.scroll.Scroll;
 import interactions.scroll.ScrollHastaTexto;
 import interactions.wait.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
@@ -24,7 +25,9 @@ public class ValidarVersionApp implements Task {
         actor.attemptsTo(
                 Click.on(BTN_MENU_ITEM),
                 ClickTextoQueContengaX.elTextoContiene(AJUSTES),
-                ScrollHastaTexto.conTexto("Centro de cuentas"),
+                Scroll.scrollUnaVista(),
+                Scroll.scrollUnaVista(),
+                //ScrollHastaTexto.conTexto("Centro de cuentas"),
                 ClickTextoQueContengaX.elTextoContiene(AYUDA),
                 ClickTextoQueContengaX.elTextoContiene(INFO_APP),
                 WaitForResponse.withText(WHATSAPP));
