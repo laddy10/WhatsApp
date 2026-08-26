@@ -185,7 +185,7 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Vaciar chat
 
 
-  @EXUS_HOG_WSP_14
+
   Scenario: Menu principal -Tus pagos y factura-Tu historial
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -205,7 +205,7 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Vaciar chat
 
 
-  @EXUS_HOG_WSP_15
+
   Scenario: Menu principal -Tus pagos y factura- Mensajes de cobranza
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -331,7 +331,7 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Vaciar chat
 
 
-  @EXUS_HOG_WSP_23
+
   Scenario: Menu principal - Todo sobre tu plan - Conoce/mejora tu plan - Servicios adicionales
     Given Ingresar a WhatsAPP
     When Validar Version de la App

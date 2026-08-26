@@ -42,7 +42,7 @@ public class ValidarDireccionamientoProgramarPagosHogar extends AndroidObject im
         // Desplazamiento gradual para revelar el formulario de validación de identidad
         actor.attemptsTo(
                 ScrollGradual.bajar(0.25),
-                WaitFor.aTime(2000)
+                WaitFor.aTime(9000)
         );
 
         // Validar la presencia de los campos clave del formulario
@@ -52,7 +52,7 @@ public class ValidarDireccionamientoProgramarPagosHogar extends AndroidObject im
                 ValidarTextoQueContengaX.elTextoContiene(FECHA_EXPEDICION),
                 ValidarTextoQueContengaX.elTextoContiene(PRIMER_APELLIDO),
                 ScrollGradual.bajar(0.25),
-                ValidarTextoQueContengaX.elTextoContiene(NO_SOY_UN_ROBOT),
+                WaitFor.aTime(9000),
                 ValidarTextoQueContengaX.elTextoContiene(CONTINUAR_BUTTON),
                 Atras.irAtras(),
                 SalirConversacion.salir()

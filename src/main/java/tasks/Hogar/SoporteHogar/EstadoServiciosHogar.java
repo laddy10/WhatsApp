@@ -8,6 +8,7 @@ import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
+import interactions.wait.WaitFor;
 import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -60,6 +61,7 @@ public class EstadoServiciosHogar implements Task {
 
         // 6. Esperar a que se complete la revisión
         actor.attemptsTo(
+                WaitFor.aTime(180000),
                 WaitForTextContains.withAnyTextContains(GRACIAS_POR_LA_ESPERA),
                 ValidarTextoQueContengaX.elTextoContiene(GRACIAS_POR_LA_ESPERA),
                 ValidarTextoQueContengaX.elTextoContiene(SERVICIOS_DE_AYUDA)
