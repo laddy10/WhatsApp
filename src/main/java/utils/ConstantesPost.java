@@ -380,7 +380,7 @@ public class ConstantesPost {
 
     public static final String MENSAJE_AYUDA_SOPORTE_TV = "¡Excelente, me alegra haberte podido ayudar!";
     public static final String TELEFONIA = "Telefonía";
-    public static final String MEJORAR_SERVICIO_LLAMADA = "Te recomiendo seguir el paso a paso que aparece en la imagen que te presento, esto te ayudará a mejorar  tu servicio de telefonía";
+    public static final String MEJORAR_SERVICIO_LLAMADA = "Te recomiendo seguir el paso a paso que aparece en la imagen que te presento, esto te ayudará a mejorar tu servicio de telefonía";
 
     // Scenario: EXUS_HOG_WSP_29 (Consulta tus consumos Hogar)
     public static final String CONSUMOS_PLAN_HOGAR = "consumos de tu plan hogar";
