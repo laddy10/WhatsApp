@@ -131,7 +131,9 @@ public class ManejarConversacionConAsesor implements Task {
                     "La conversación ha finalizado",
                     "chat con agente ha finalizado",
                     "Caso cerrado",
-                    "sencilla encuesta para conocer como fue tu experiencia"
+                    "Ha sido un placer ayudarte hoy",
+                    "por elegirnos",
+                    "encuesta"
                 ).answeredBy(actor);
             }
 
@@ -177,7 +179,9 @@ public class ManejarConversacionConAsesor implements Task {
                 || TextoQueContengaX.verificarTexto("finalizo").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Fue un gusto ayudarte").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Caso cerrado").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("sencilla encuesta para conocer como fue tu experiencia").answeredBy(actor);
+                || TextoQueContengaX.verificarTexto("Ha sido un placer ayudarte hoy").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("por elegirnos").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("encuesta").answeredBy(actor);
     }
 
     private boolean mensajeFinalizacionYaEnviado(Actor actor) {

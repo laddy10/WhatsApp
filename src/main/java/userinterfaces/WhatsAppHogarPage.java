@@ -22,4 +22,7 @@ public class WhatsAppHogarPage {
             Target.the("Texto términos y condiciones").
                     located(By.xpath("//android.widget.CheckBox[@resource-id=\"termsConditions\"]"));
 
+    public static final Target LBL_SI =
+            Target.the("Texto Si").
+                    located(By.xpath("//android.widget.FrameLayout[@content-desc=\"Si\"]"));
 }
