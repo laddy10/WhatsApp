@@ -108,6 +108,7 @@ public class IniciarChatClaro implements Task {
                 ReportHooks.registrarPaso("Chat iniciado correctamente");
 
                 actor.attemptsTo(
+                        WaitFor.aTime(5000),
                         ValidarTextoQueContengaX.elTextoContiene(LINEAS_POSTPAGO),
                         ValidarTextoQueContengaX.elTextoContiene(LINEAS_PREPAGO),
                         ValidarTextoQueContengaX.elTextoContiene(CUENTA)

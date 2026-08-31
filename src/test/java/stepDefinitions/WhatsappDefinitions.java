@@ -183,6 +183,7 @@ public class WhatsappDefinitions {
                 .attemptsTo(
                         Click.on(BTN_MAS_OPCIONES),
                         ClickTextoQueContengaX.elTextoContiene(MAS),
+                        WaitFor.aTime(2000),
                         ClickTextoQueContengaX.elTextoContiene(VACIAR_CHAT),
                         Click.on(BTN_VACIAR_CHAT)
                 );

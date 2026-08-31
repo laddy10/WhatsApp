@@ -38,21 +38,13 @@ public class ImagenRecomendacionesTelefonia implements Task {
         ReportHooks.registrarPaso("Validar mensaje ¿Se resolvió la falla de tu servicio? telefonia");
 
         actor.attemptsTo(
-                Click.on(LBL_NO),
-                WaitForTextContains.withAnyTextContains(CONTACTAR_ASESOR)
-        );
-
-        CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje " + CONTACTAR_ASESOR);
-        ReportHooks.registrarPaso("Validar mensaje " + CONTACTAR_ASESOR);
-
-        actor.attemptsTo(
-                ValidarTextoQueContengaX.elTextoContiene(COMUNICAR_ASESOR),
-                Click.on(LBL_NO_2),
-                ValidarTextoQueContengaX.elTextoContiene(MENSAJE_AYUDA_SOPORTE_TV)
+                Click.on(LBL_SI),
+                WaitForTextContains.withAnyTextContains(MENSAJE_AYUDA_SOPORTE_TV)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje " + MENSAJE_AYUDA_SOPORTE_TV);
         ReportHooks.registrarPaso("Validar mensaje " + MENSAJE_AYUDA_SOPORTE_TV);
+
 
         actor.attemptsTo(
                 SalirConversacion.salir()
