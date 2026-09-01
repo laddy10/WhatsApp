@@ -82,8 +82,10 @@ public class ReportHooks {
     EstadoPrueba.pasoFallido = pasoFallido;
     String motivoFallo = fallo ? CausaFallo.descripcionCorta() : "";
 
-    // La línea (o la cuenta, en hogar) desde el registro que se llena donde se elige.
-    String identificacion = ContextoST.identificacionUsada();
+    // Las dos líneas, que son cosas distintas: la que el escenario consultó en el menú
+    // del bot y la del chip desde el que se está chateando (fija por celular, la manda
+    // el orquestador desde devices.json).
+    String identificacion = ContextoST.lineaParaInforme();
 
     WordAppium.generarReporte(
         scenario.getName(),
