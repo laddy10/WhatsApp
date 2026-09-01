@@ -61,7 +61,7 @@ public class EstadoServiciosHogar implements Task {
 
         // 6. Esperar a que se complete la revisión
         actor.attemptsTo(
-                WaitFor.aTime(180000),
+                WaitFor.aTime(185000),
                 WaitForTextContains.withAnyTextContains(GRACIAS_POR_LA_ESPERA),
                 ValidarTextoQueContengaX.elTextoContiene(GRACIAS_POR_LA_ESPERA),
                 ValidarTextoQueContengaX.elTextoContiene(SERVICIOS_DE_AYUDA)
