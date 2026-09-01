@@ -20,7 +20,7 @@ public class SeleccionarLineaConsulta implements Task {
     actor.attemptsTo(
         SeleccionarNumero.porUltimos4(user.getNumeroPre()),
         WaitForResponse.withAnyTextFailingOn(
-            10,
+            30,
             List.of(
                 OPCIONES_MOSTRADAS_ANTERIORMENTE,
                 TU_RESPUESTA_NO_ES_VALIDA,

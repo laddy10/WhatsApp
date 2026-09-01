@@ -105,7 +105,8 @@ public class PaqInternacionales implements Task {
 
         // Validar Roaming
         actor.attemptsTo(
-                Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
+                //Click.on(BTN_SELECCIONA_PQ_TODO_INCLUIDO),
                 ClickTextoQueContengaX.elTextoContiene(PAQ_ROAMING));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_13);
