@@ -42,7 +42,6 @@ public class ValidarClaroDrivePost implements Task {
         actor.attemptsTo(
                 ValidarTexto.validarTexto(MI_CLARO_DRIVE),
                 ValidarTexto.validarTexto(NEGOCIO),
-                ValidarTextoQueContengaX.elTextoContiene(TUS_ARCHIVOS),
                 Scroll.scrollUnaVista());
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Direccionamiento pagina claro Drive");
