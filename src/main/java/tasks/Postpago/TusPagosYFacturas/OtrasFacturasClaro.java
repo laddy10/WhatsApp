@@ -55,7 +55,7 @@ public class OtrasFacturasClaro implements Task {
                 WaitForTextContains.withAnyTextContains(PORTAL_PAGOS_Y_RECARGAS)
         );
 
-       actor.attemptsTo(WaitFor.aTime(2000));
+        actor.attemptsTo(WaitFor.aTime(2000));
         List<WebElementFacade> lblprivacidad = LBL_PRIVACIDAD.resolveAllFor(actor);
         if (!lblprivacidad.isEmpty()) {
             actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(ACEPTAR));
@@ -77,8 +77,9 @@ public class OtrasFacturasClaro implements Task {
 
         // Validar selección de Postpago
         actor.attemptsTo(
-                ValidarTextoQueContengaX.elTextoContiene(SELECCIONA_TIPO_SERVICIO),
-                ScrollHastaTexto.conTexto(POSTPAGO_OPCION));
+                ScrollHastaTexto.conTexto(POSTPAGO_OPCION),
+                ValidarTextoQueContengaX.elTextoContiene(SELECCIONA_TIPO_SERVICIO)
+        );
 
         actor.attemptsTo(Atras.irAtras());
 
