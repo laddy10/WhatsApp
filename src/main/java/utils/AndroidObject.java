@@ -122,11 +122,13 @@ public class AndroidObject {
     androidDriver(actor).openNotifications();
     actor.attemptsTo(WaitFor.aTime(15000));
     try {
-      texto =
+      java.util.List<?> elementos =
           androidDriver(actor)
-              .findElementByAndroidUIAutomator(
-                  "new UiSelector().textContains(\"digite el siguiente codigo:\")")
-              .getText();
+              .findElementsByAndroidUIAutomator(
+                  "new UiSelector().textContains(\"digite el siguiente codigo:\")");
+      if (elementos != null && !elementos.isEmpty()) {
+        texto = ((org.openqa.selenium.WebElement) elementos.get(elementos.size() - 1)).getText();
+      }
     } catch (Exception e) {
       System.out.println(e);
     }
