@@ -2,6 +2,7 @@ package tasks.Hogar.TusPagosYFacturas;
 
 import hooks.ReportHooks;
 import interactions.Validaciones.ValidarTextoQueContengaX;
+import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -47,6 +48,22 @@ public class IngresarAlLinkDePagoHogar extends AndroidObject implements Task {
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Clic en el link de pago");
         ReportHooks.registrarPaso("Clic en el link de pago");
+
+        actor.attemptsTo(WaitFor.aTime(1500));
+
+        // Intentar cerrar modal de cookies si aparece
+        try {
+            androidDriver(actor)
+                    .findElementByAndroidUIAutomator(
+                            "new UiSelector().text(\"Aceptar\")"
+                    )
+                    .click();
+
+            ReportHooks.registrarPaso("Modal de cookies aceptado");
+
+        } catch (Exception e) {
+            System.out.println("Modal de cookies no presente, se continúa normalmente.");
+        }
 
         // Esperar a que cargue la página de pagos
         actor.attemptsTo(

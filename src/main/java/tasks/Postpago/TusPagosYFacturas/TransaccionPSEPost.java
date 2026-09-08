@@ -97,7 +97,7 @@ public class TransaccionPSEPost extends AndroidObject implements Task {
 
         // Scroll para llenar campos restantes
         actor.attemptsTo(
-                ScrollGradual.bajar(0.25),
+                ScrollGradual.bajar(0.30),
                 Enter.theValue(CELULAR_FICTICIO).into(TXT_NUMERO_CELULAR),
                 WaitFor.aTime(1000),
                 Enter.theValue("Calle 100 # 15-20").into(TXT_DIRECCION),

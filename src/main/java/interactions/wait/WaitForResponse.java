@@ -8,13 +8,14 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import org.openqa.selenium.WebElement;
+import utils.diag.WaitProbe;
 
 public class WaitForResponse implements Interaction {
 
   private final List<String> expectedTexts;
   private final List<String> failFastTexts;
   private final int timeout;
-  private static final int DEFAULT_TIMEOUT = 50;
+  private static final int DEFAULT_TIMEOUT = 58;
   private static final long POLL_MILLIS = 500;
 
   public WaitForResponse(List<String> expectedTexts, int timeout) {
@@ -29,40 +30,58 @@ public class WaitForResponse implements Interaction {
 
   @Override
   public <T extends Actor> void performAs(T actor) {
-    boolean found = false;
-    long startTime = System.currentTimeMillis();
+    WaitProbe.begin(
+        "WaitForResponse",
+        "performAs",
+        timeout,
+        failFastTexts.isEmpty()
+            ? expectedTexts
+            : expectedTexts + " | failFast=" + failFastTexts);
+    try {
+      boolean found = false;
+      long startTime = System.currentTimeMillis();
 
-    while ((System.currentTimeMillis() - startTime) < timeout * 1000L && !found) {
-      for (String text : expectedTexts) {
-        if (isVisibleInText(actor, text) || isVisibleInDescription(actor, text)) {
-          found = true;
-          break;
+      while ((System.currentTimeMillis() - startTime) < timeout * 1000L && !found) {
+        WaitProbe.iter();
+        for (String text : expectedTexts) {
+          if (isVisibleInText(actor, text) || isVisibleInDescription(actor, text)) {
+            found = true;
+            WaitProbe.foundNow(text);
+            break;
+          }
+        }
+
+        if (!found) {
+          String blockingText = visibleFailFastText(actor);
+          if (blockingText != null) {
+            WaitProbe.outcome("FAILFAST");
+            throw new RuntimeException(
+                String.format(
+                    "Se encontro una respuesta de bloqueo antes de los textos esperados. Bloqueo: '%s'. Esperados: %s",
+                    blockingText, expectedTexts));
+          }
+
+          WaitProbe.sleepStart();
+          try {
+            Thread.sleep(POLL_MILLIS);
+          } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            break;
+          } finally {
+            WaitProbe.sleepEnd();
+          }
         }
       }
 
       if (!found) {
-        String blockingText = visibleFailFastText(actor);
-        if (blockingText != null) {
-          throw new RuntimeException(
-              String.format(
-                  "Se encontro una respuesta de bloqueo antes de los textos esperados. Bloqueo: '%s'. Esperados: %s",
-                  blockingText, expectedTexts));
-        }
-
-        try {
-          Thread.sleep(POLL_MILLIS);
-        } catch (InterruptedException e) {
-          Thread.currentThread().interrupt();
-          break;
-        }
+        WaitProbe.outcome("TIMEOUT");
+        throw new RuntimeException(
+            String.format(
+                "Ninguno de los textos esperados fue encontrado en el tiempo dado (%d segundos): %s",
+                timeout, expectedTexts));
       }
-    }
-
-    if (!found) {
-      throw new RuntimeException(
-          String.format(
-              "Ninguno de los textos esperados fue encontrado en el tiempo dado (%d segundos): %s",
-              timeout, expectedTexts));
+    } finally {
+      WaitProbe.end();
     }
   }
 
@@ -88,10 +107,13 @@ public class WaitForResponse implements Interaction {
       String query =
           String.format(
               "new UiSelector().%s(\"%s\")", selectorMethod, escapeUiAutomatorText(text));
+      WaitProbe.searchStart();
       List<WebElement> elements =
           BrowseTheWeb.as(actor).getDriver().findElements(MobileBy.AndroidUIAutomator(query));
+      WaitProbe.searchEnd(elements.size());
       return !elements.isEmpty();
     } catch (Exception ignored) {
+      WaitProbe.searchEnd(-1);
       return false;
     }
   }

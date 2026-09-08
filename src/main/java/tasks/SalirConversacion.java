@@ -21,7 +21,6 @@ public class SalirConversacion implements Task {
 
     // ✅ Respuestas válidas de cierre
     private static final String CASO_CERRADO = "Caso cerrado";
-    private static final String CIERRECASO = "Cierrecaso"; // fallback por si el bot lo refleja
 
     // ⚠️ Respuestas intermedias (ruido)
     private static final String RESPUESTA_NO_ENTENDI = "No entendí tu mensaje.";
@@ -54,7 +53,6 @@ public class SalirConversacion implements Task {
                         WaitForTextContains.withAnyTextContains(
                                 TIMEOUT_RESPUESTA,
                                 CASO_CERRADO,
-                                CIERRECASO,
                                 RESPUESTA_NO_ENTENDI,
                                 RESPUESTA_MENU_PRINCIPAL,
                                 RESPUESTA_CONTINUAR,
@@ -104,8 +102,7 @@ public class SalirConversacion implements Task {
         try {
             AndroidObject and = new AndroidObject();
 
-            return and.textoContiene(actor, CASO_CERRADO)
-                    || and.textoContiene(actor, CIERRECASO);
+            return and.textoContiene(actor, CASO_CERRADO);
 
         } catch (Exception e) {
             return false;
