@@ -26,21 +26,58 @@ public class IngresarAlLinkDePagoPost extends AndroidObject implements Task {
 
         String textoMensaje = "";
         try {
+
             textoMensaje = androidDriver(actor)
-                    .findElementByAndroidUIAutomator("new UiSelector().textContains(\"https://yoiz.me/\")")
+                    .findElementByAndroidUIAutomator(
+                            "new UiSelector().textContains(\"https://portalpagos.claro.com.co\")"
+                    )
                     .getText();
-        } catch (Exception e) {
-            System.out.println("No se pudo obtener el elemento con el link de pago: " + e.getMessage());
+
+        } catch (Exception ePortalPagos) {
+
+            try {
+
+                textoMensaje = androidDriver(actor)
+                        .findElementByAndroidUIAutomator(
+                                "new UiSelector().textContains(\"https://yoiz.me/\")"
+                        )
+                        .getText();
+
+            } catch (Exception eYoiz) {
+
+                throw new IllegalStateException(
+                        "No se encontro un link de pago valido en el mensaje de WhatsApp"
+                );
+            }
         }
 
-        String urlExtraida = "https://yoiz.me/"; // fallback en caso de error
+        String urlExtraida = "";
+
         if (textoMensaje != null && !textoMensaje.isEmpty()) {
-            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("https://yoiz\\.me/\\S+");
-            java.util.regex.Matcher matcher = pattern.matcher(textoMensaje);
+
+            java.util.regex.Pattern pattern =
+                    java.util.regex.Pattern.compile(
+                            "https://(?:yoiz\\.me|portalpagos\\.claro\\.com\\.co)/\\S+"
+                    );
+
+            java.util.regex.Matcher matcher =
+                    pattern.matcher(textoMensaje);
+
             if (matcher.find()) {
+
                 urlExtraida = matcher.group();
-                System.out.println("URL de pago extraída exitosamente: " + urlExtraida);
+
+                System.out.println(
+                        "URL de pago extraida exitosamente: " + urlExtraida
+                );
             }
+        }
+
+        if (urlExtraida.isEmpty()) {
+
+            throw new IllegalStateException(
+                    "Se encontro el mensaje de pago, pero no fue posible extraer una URL valida"
+            );
         }
 
         // Abrir la URL dinámica extraída

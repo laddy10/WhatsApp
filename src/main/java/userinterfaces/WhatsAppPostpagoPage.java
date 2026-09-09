@@ -307,4 +307,10 @@ public class WhatsAppPostpagoPage {
           Target.the("Botón Confirmar Daviplata")
                   .located(By.xpath("//android.widget.TextView[@text=\"Confirmar\"]"));
 
+  public static final Target BTN_NO_AUTORIZO =
+          Target.the("Boton No autorizo")
+                  .located(By.xpath(
+                          "//android.widget.TextView[@resource-id='com.whatsapp:id/button_content' and @text='No autorizo']"
+                  ));
+
 }

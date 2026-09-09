@@ -36,6 +36,12 @@ public class IniciarChatClaro implements Task {
         boolean saludoYaEnviado = false;
         int intentos = 0;
 
+
+        // 1. Primero revisar y limpiar cualquier chat pendiente
+        actor.attemptsTo(
+                ValidarYLimpiarChatPendiente.ejecutar()
+        );
+
         // Si hay una marca persistente de atención humana, recuperar inmediatamente
         // el flujo sin enviar un nuevo saludo "Hola".
         if (EstadoAtencionHumana.requiereRecuperacion()) {

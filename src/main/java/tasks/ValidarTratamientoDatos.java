@@ -12,7 +12,9 @@ import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
 import interactions.wait.WaitForResponse;
+
 import java.util.List;
+
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -23,74 +25,74 @@ import utils.UtilidadesAndroid;
 
 public class ValidarTratamientoDatos implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-    List<WebElementFacade> linktratamientodatos = LINK_TRATAMIENTO_DATOS.resolveAllFor(actor);
-    if (!linktratamientodatos.isEmpty()) {
+        List<WebElementFacade> linktratamientodatos = LINK_TRATAMIENTO_DATOS.resolveAllFor(actor);
+        if (!linktratamientodatos.isEmpty()) {
 
-      CapturaDePantallaMovil.tomarCapturaPantalla(
-          "Seleccionar linea de consulta y Validar politica de tratamientos de datos");
-      ReportHooks.registrarPaso(
-          "Seleccionar linea de consulta y Validar politica de tratamientos de datos");
+            CapturaDePantallaMovil.tomarCapturaPantalla(
+                    "Seleccionar linea de consulta y Validar politica de tratamientos de datos");
+            ReportHooks.registrarPaso(
+                    "Seleccionar linea de consulta y Validar politica de tratamientos de datos");
 
-      actor.attemptsTo(
-          ValidarTextoQueContengaX.elTextoContiene(POLITICA_TRATAMIENTO),
-          ValidarTextoQueContengaX.elTextoContiene(URL_TRATAMIENTO_INFORMACION),
-          ValidarTextoQueContengaX.elTextoContiene(URL_PORTAL_CLARO));
+            actor.attemptsTo(
+                    ValidarTextoQueContengaX.elTextoContiene(POLITICA_TRATAMIENTO),
+                    ValidarTextoQueContengaX.elTextoContiene(URL_TRATAMIENTO_INFORMACION),
+                    ValidarTextoQueContengaX.elTextoContiene(URL_PORTAL_CLARO));
 
-      UtilidadesAndroid.abrirLinkEnNavegador(URL_TRATAMIENTO_INFORMACION_DESTINO);
+            UtilidadesAndroid.abrirLinkEnNavegador(URL_TRATAMIENTO_INFORMACION_DESTINO);
 
-      actor.attemptsTo(
-          WaitForResponse.withAnyText(
-              TITULO_TRATAMIENTO_INFORMACION, URL_TRATAMIENTO_INFORMACION_PATH));
+            actor.attemptsTo(
+                    WaitForResponse.withAnyText(
+                            TITULO_TRATAMIENTO_INFORMACION));
 
-      actor.attemptsTo(
-          ValidarTextoQueContengaX.elTextoContiene(TITULO_TRATAMIENTO_INFORMACION),
-          ValidarTextoQueContengaX.elTextoContiene(URL_TRATAMIENTO_INFORMACION_PATH));
+            actor.attemptsTo(
+                    ValidarTextoQueContengaX.elTextoContiene(TITULO_TRATAMIENTO_INFORMACION),
+                    ValidarTextoQueContengaX.elTextoContiene(URL_TRATAMIENTO_INFORMACION_PATH));
 
-      CapturaDePantallaMovil.tomarCapturaPantalla("Redirección URL Circular Superintendencia");
-      ReportHooks.registrarPaso("Redirección URL Circular Superintendencia");
+            CapturaDePantallaMovil.tomarCapturaPantalla("Redirección URL Circular Superintendencia");
+            ReportHooks.registrarPaso("Redirección URL Circular Superintendencia");
 
-      actor.attemptsTo(Atras.irAtras());
+            actor.attemptsTo(Atras.irAtras());
 
-      List<WebElementFacade> lblvistaprevia = LBL_VISTA_PREVIA.resolveAllFor(actor);
-      if (!lblvistaprevia.isEmpty()) {
-        actor.attemptsTo(Atras.irAtras(), WaitForResponse.withText(URL_PORTAL_CLARO));
-      }
+            List<WebElementFacade> lblvistaprevia = LBL_VISTA_PREVIA.resolveAllFor(actor);
+            if (!lblvistaprevia.isEmpty()) {
+                actor.attemptsTo(Atras.irAtras(), WaitForResponse.withText(URL_PORTAL_CLARO));
+            }
 
-      UtilidadesAndroid.abrirLinkEnNavegador(URL_PORTAL_CLARO);
+            UtilidadesAndroid.abrirLinkEnNavegador(URL_PORTAL_CLARO);
 
-      actor.attemptsTo(
-          WaitForResponse.withText(PERSONAS),
-          ValidarTexto.validarTexto(PERSONAS),
-          ValidarTexto.validarTexto(MAS_DE_CLARO),
-          ValidarTexto.validarTexto(AUTOGESTION_WHATSAPP));
+            actor.attemptsTo(
+                    WaitForResponse.withText(PERSONAS),
+                    ValidarTexto.validarTexto(PERSONAS),
+                    ValidarTexto.validarTexto(MAS_DE_CLARO),
+                    ValidarTexto.validarTexto(AUTOGESTION_WHATSAPP));
 
-      CapturaDePantallaMovil.tomarCapturaPantalla("Redirección URL Autogestión Claro WhatsApp");
-      ReportHooks.registrarPaso("Redirección URL Autogestión Claro WhatsApp");
+            CapturaDePantallaMovil.tomarCapturaPantalla("Redirección URL Autogestión Claro WhatsApp");
+            ReportHooks.registrarPaso("Redirección URL Autogestión Claro WhatsApp");
 
-      actor.attemptsTo(Atras.irAtras());
+            actor.attemptsTo(Atras.irAtras());
 
-      List<WebElementFacade> btnsi = BTN_SI2.resolveAllFor(actor);
-      List<WebElementFacade> btnsiautorizo = BTN_SI_AUTORIZO.resolveAllFor(actor);
+            List<WebElementFacade> btnsi = BTN_SI2.resolveAllFor(actor);
+            List<WebElementFacade> btnsiautorizo = BTN_SI_AUTORIZO.resolveAllFor(actor);
 
-      if (!btnsi.isEmpty()) {
-        actor.attemptsTo(Click.on(BTN_SI2));
+            if (!btnsi.isEmpty()) {
+                actor.attemptsTo(Click.on(BTN_SI2));
 
-      } else if (!btnsiautorizo.isEmpty()) {
-        actor.attemptsTo(Click.on(BTN_SI_AUTORIZO));
+            } else if (!btnsiautorizo.isEmpty()) {
+                actor.attemptsTo(Click.on(BTN_SI_AUTORIZO));
 
-      } else {
-        actor.attemptsTo(Click.on(BTN_SI));
-      }
+            } else {
+                actor.attemptsTo(Click.on(BTN_SI));
+            }
 
-      actor.attemptsTo(
-          WaitForResponse.withAnyText(40, VER_MENU_PREPAGO, MENU_PRINCIPAL));
+            actor.attemptsTo(
+                    WaitForResponse.withAnyText(40, VER_MENU_PREPAGO, MENU_PRINCIPAL));
+        }
     }
-  }
 
-  public static Performable validarTratamientoDatos() {
-    return instrumented(ValidarTratamientoDatos.class);
-  }
+    public static Performable validarTratamientoDatos() {
+        return instrumented(ValidarTratamientoDatos.class);
+    }
 }
