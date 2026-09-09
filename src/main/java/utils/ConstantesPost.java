@@ -273,7 +273,7 @@ public class ConstantesPost {
     public static final String CLARO_MUSICA_SOPORTE = "Claro música";
     public static final String TUS_PQRS_RADICADOS = "Tus PQR Radicados";
     public static final String CONSULTAR_QUEJAS_RECLAMOS =
-            "Consulta todo sobre tus quejas y reclamos radicados en el siguiente enlace:";
+            "Consulta todo sobre tus quejas";
     public static final String CLARO_TE_ESCUCHA = "Claro te escucha";
     public static final String TUS_EQUIPOS_EN_SOPORTE = "Tus equipos en soporte";
     public static final String NO_TIENES_EQUIPOS_MANTENIMIENTO =

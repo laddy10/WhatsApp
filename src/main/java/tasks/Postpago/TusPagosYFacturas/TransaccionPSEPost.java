@@ -97,9 +97,22 @@ public class TransaccionPSEPost extends AndroidObject implements Task {
 
         // Scroll para llenar campos restantes
         actor.attemptsTo(
-                ScrollGradual.bajar(0.25),
-                Enter.theValue(CELULAR_FICTICIO).into(TXT_NUMERO_CELULAR),
-                WaitFor.aTime(1000),
+                ScrollGradual.bajar(0.30)
+        );
+
+        String celularActual = TXT_NUMERO_CELULAR.resolveFor(actor).getText();
+
+        if (celularActual == null || celularActual.trim().isEmpty()) {
+            actor.attemptsTo(
+                    Enter.theValue(CELULAR_FICTICIO).into(TXT_NUMERO_CELULAR),
+                    WaitFor.aTime(1000)
+            );
+        } else {
+            System.out.println("El campo celular ya contiene un valor: " + celularActual);
+        }
+
+
+        actor.attemptsTo(
                 Enter.theValue("Calle 100 # 15-20").into(TXT_DIRECCION),
                 WaitFor.aTime(1000),
                 Enter.theValue(CORREO_FICTICIO).into(TXT_CORREO_ELECTRONICO),

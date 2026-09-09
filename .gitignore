@@ -69,3 +69,8 @@ reportes/
 
 # Estado runtime de recuperacion entre ejecuciones
 .runtime/
+
+# Archivos locales de agentes/documentación
+AGENTS.md
+CLAUDE.md
+docs/

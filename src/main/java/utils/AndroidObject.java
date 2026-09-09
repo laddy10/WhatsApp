@@ -12,6 +12,7 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.thucydides.core.webdriver.WebDriverFacade;
 import org.openqa.selenium.NoSuchElementException;
+import utils.diag.WaitProbe;
 
 import static utils.Constantes.VALIDACIONES_PIN;
 
@@ -67,38 +68,81 @@ public class AndroidObject {
 
   // VALIDACIONES
   public boolean validarTexto(Actor actor, String text) {
+    WaitProbe.begin("AndroidObject", "validarTexto", 0, text);
     try {
-      return androidDriver(actor)
-          .findElementByAndroidUIAutomator("new UiSelector().text(\"" + text + "\")")
-          .isDisplayed();
+      WaitProbe.searchStart();
+      boolean visible =
+          androidDriver(actor)
+              .findElementByAndroidUIAutomator("new UiSelector().text(\"" + text + "\")")
+              .isDisplayed();
+      WaitProbe.searchEnd(1);
+      WaitProbe.outcome(visible ? "FOUND" : "PRESENT_NOT_DISPLAYED");
+      if (visible) {
+        WaitProbe.foundNow(text);
+      }
+      return visible;
     } catch (NoSuchElementException e) {
+      WaitProbe.outcome("NOT_FOUND");
       System.out.println("Texto no encontrado: " + text);
       return false;
+    } finally {
+      WaitProbe.end();
     }
   }
 
   public void ElTextoContiene(Actor actor, String text) {
-    androidDriver(actor)
-        .findElementByAndroidUIAutomator("new UiSelector().textContains(\"" + text + "\")")
-        .isDisplayed();
+    WaitProbe.begin("AndroidObject", "ElTextoContiene", 0, text);
+    try {
+      WaitProbe.searchStart();
+      androidDriver(actor)
+          .findElementByAndroidUIAutomator("new UiSelector().textContains(\"" + text + "\")")
+          .isDisplayed();
+      WaitProbe.searchEnd(1);
+      WaitProbe.outcome("FOUND");
+      WaitProbe.foundNow(text);
+    } finally {
+      WaitProbe.end();
+    }
   }
 
   public boolean textoContiene(Actor actor, String text) {
     String safe = text.replace("\\", "\\\\").replace("\"", "\\\"");
+    WaitProbe.begin("AndroidObject", "textoContiene", 0, text);
     try {
       // por texto
-      if (androidDriver(actor)
-          .findElementByAndroidUIAutomator("new UiSelector().textContains(\"" + safe + "\")")
-          .isDisplayed()) return true;
+      WaitProbe.searchStart();
+      boolean porTexto =
+          androidDriver(actor)
+              .findElementByAndroidUIAutomator("new UiSelector().textContains(\"" + safe + "\")")
+              .isDisplayed();
+      WaitProbe.searchEnd(1);
+      if (porTexto) {
+        WaitProbe.outcome("FOUND_TEXT");
+        WaitProbe.foundNow(text);
+        return true;
+      }
 
       // por content-desc (por si el bot lo pone en description)
-      if (androidDriver(actor)
-          .findElementByAndroidUIAutomator("new UiSelector().descriptionContains(\"" + safe + "\")")
-          .isDisplayed()) return true;
+      WaitProbe.searchStart();
+      boolean porDesc =
+          androidDriver(actor)
+              .findElementByAndroidUIAutomator(
+                  "new UiSelector().descriptionContains(\"" + safe + "\")")
+              .isDisplayed();
+      WaitProbe.searchEnd(1);
+      if (porDesc) {
+        WaitProbe.outcome("FOUND_DESC");
+        WaitProbe.foundNow(text);
+        return true;
+      }
 
+      WaitProbe.outcome("NOT_FOUND");
       return false;
     } catch (NoSuchElementException e) {
+      WaitProbe.outcome("NOT_FOUND");
       return false;
+    } finally {
+      WaitProbe.end();
     }
   }
 

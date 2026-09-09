@@ -3,6 +3,7 @@ package interactions.wait;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Question;
 import questions.TextoQueContengaX;
+import utils.diag.WaitProbe;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,25 +24,37 @@ public class WaitForTextContainsWithTimeout implements Question<Boolean> {
 
     @Override
     public Boolean answeredBy(Actor actor) {
+        WaitProbe.begin("WaitForTextContainsWithTimeout", "answeredBy", timeoutSeconds, textos);
+        try {
 
-        long endTime = System.currentTimeMillis() + (timeoutSeconds * 1000L);
+            long endTime = System.currentTimeMillis() + (timeoutSeconds * 1000L);
 
-        while (System.currentTimeMillis() < endTime) {
+            while (System.currentTimeMillis() < endTime) {
+                WaitProbe.iter();
 
-            for (String texto : textos) {
+                for (String texto : textos) {
 
-                if (TextoQueContengaX.verificarTexto(texto).answeredBy(actor)) {
-                    return true;
+                    if (TextoQueContengaX.verificarTexto(texto).answeredBy(actor)) {
+                        WaitProbe.foundNow(texto);
+                        WaitProbe.outcome("FOUND");
+                        return true;
+                    }
+                }
+
+                try {
+                    WaitProbe.sleepStart();
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                } finally {
+                    WaitProbe.sleepEnd();
                 }
             }
 
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-            }
+            WaitProbe.outcome("TIMEOUT");
+            return false;
+        } finally {
+            WaitProbe.end();
         }
-
-        return false;
     }
 }

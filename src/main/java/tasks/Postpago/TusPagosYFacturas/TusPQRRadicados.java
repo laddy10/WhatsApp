@@ -36,7 +36,7 @@ public class TusPQRRadicados implements Task {
         // Enviar selección
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2),
-                WaitForTextContains.withTextContains(CONSULTAR_QUEJAS_RECLAMOS),
+                WaitForTextContains.withAnyTextContains(CONSULTAR_QUEJAS_RECLAMOS),
                 ValidarTextoQueContengaX.elTextoContiene(CONSULTAR_QUEJAS_RECLAMOS));
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Abrir URL para consultar quejas y reclamos");

@@ -7,12 +7,13 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import org.openqa.selenium.WebElement;
+import utils.diag.WaitProbe;
 
 public class WaitForTextContains implements Interaction {
 
   private final List<String> partialTexts;
   private final int timeout;
-  private static final int DEFAULT_TIMEOUT = 50;
+  private static final int DEFAULT_TIMEOUT = 58;
 
   public WaitForTextContains(List<String> partialTexts, int timeout) {
     this.partialTexts = partialTexts;
@@ -21,38 +22,53 @@ public class WaitForTextContains implements Interaction {
 
   @Override
   public <T extends Actor> void performAs(T actor) {
-    long startTime = System.currentTimeMillis();
-    boolean found = false;
+    WaitProbe.begin("WaitForTextContains", "performAs", timeout, partialTexts);
+    try {
+      long startTime = System.currentTimeMillis();
+      boolean found = false;
 
-    while ((System.currentTimeMillis() - startTime) < timeout * 1000 && !found) {
-      try {
-        for (String partialText : partialTexts) {
-          String uiAutomatorQuery =
-              String.format("new UiSelector().textContains(\"%s\")", partialText);
-          List<WebElement> elements =
-              BrowseTheWeb.as(actor)
-                  .getDriver()
-                  .findElements(MobileBy.AndroidUIAutomator(uiAutomatorQuery));
+      while ((System.currentTimeMillis() - startTime) < timeout * 1000 && !found) {
+        WaitProbe.iter();
+        try {
+          for (String partialText : partialTexts) {
+            String uiAutomatorQuery =
+                String.format("new UiSelector().textContains(\"%s\")", partialText);
+            WaitProbe.searchStart();
+            List<WebElement> elements =
+                BrowseTheWeb.as(actor)
+                    .getDriver()
+                    .findElements(MobileBy.AndroidUIAutomator(uiAutomatorQuery));
+            WaitProbe.searchEnd(elements.size());
 
-          if (!elements.isEmpty()) {
-            found = true;
-            break;
+            if (!elements.isEmpty()) {
+              found = true;
+              WaitProbe.foundNow(partialText);
+              break;
+            }
           }
-        }
 
-        if (!found) {
-          Thread.sleep(500);
+          if (!found) {
+            WaitProbe.sleepStart();
+            try {
+              Thread.sleep(500);
+            } finally {
+              WaitProbe.sleepEnd();
+            }
+          }
+        } catch (Exception ignored) {
+          // Continúa intentando
         }
-      } catch (Exception ignored) {
-        // Continúa intentando
       }
-    }
 
-    if (!found) {
-      throw new RuntimeException(
-          String.format(
-              "No se encontró ningún texto que contenga alguno de estos valores: %s en el tiempo dado (%d segundos)",
-              partialTexts, timeout));
+      if (!found) {
+        WaitProbe.outcome("TIMEOUT");
+        throw new RuntimeException(
+            String.format(
+                "No se encontró ningún texto que contenga alguno de estos valores: %s en el tiempo dado (%d segundos)",
+                partialTexts, timeout));
+      }
+    } finally {
+      WaitProbe.end();
     }
   }
 
