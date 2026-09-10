@@ -50,9 +50,9 @@ public class ValidarDireccionamientoProgramarPagosHogar extends AndroidObject im
                 ValidarTextoQueContengaX.elTextoContiene(TIPO_DOCUMENTO),
                 ValidarTextoQueContengaX.elTextoContiene(NUMERO_DOCUMENTO),
                 ValidarTextoQueContengaX.elTextoContiene(FECHA_EXPEDICION),
-                ValidarTextoQueContengaX.elTextoContiene(PRIMER_APELLIDO),
-                ScrollGradual.bajar(0.25),
+                ScrollGradual.bajar(0.30),
                 WaitFor.aTime(9000),
+                ValidarTextoQueContengaX.elTextoContiene(PRIMER_APELLIDO),
                 ValidarTextoQueContengaX.elTextoContiene(CONTINUAR_BUTTON),
                 Atras.irAtras(),
                 SalirConversacion.salir()
