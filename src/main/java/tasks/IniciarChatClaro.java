@@ -17,7 +17,6 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
-import questions.TextoQueContengaX;
 import utils.CapturaDePantallaMovil;
 import utils.ClasificarRespuestaBot;
 import utils.EstadoAtencionHumana;
@@ -26,76 +25,165 @@ import utils.TestDataProvider;
 public class IniciarChatClaro implements Task {
 
     private final User user = TestDataProvider.getRealUser();
+
     private static final int MAX_REINTENTOS = 2;
+
     private static final int TIMEOUT_RESPUESTA_SALUDO =
             Integer.getInteger("whatsapp.saludo.timeout.seconds", 40);
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+
         boolean chatIniciadoCorrectamente = false;
         boolean saludoYaEnviado = false;
         int intentos = 0;
 
+        /*
+         * 1. PRIORIDAD ASESOR
+         *
+         * Si al iniciar la ejecución ya está visible un mensaje
+         * indicando escalamiento o atención por asesor,
+         * NO se debe enviar un nuevo Hola.
+         */
+        if (asesorVisible(actor)) {
 
-        // 1. Primero revisar y limpiar cualquier chat pendiente
+            ReportHooks.registrarPaso(
+                    "Se detecto una conversacion en espera o atencion de asesor humano"
+            );
+
+            actor.attemptsTo(
+                    ManejarConversacionConAsesor.ejecutar()
+            );
+        }
+
+        /*
+         * 2. LIMPIAR CONVERSACIONES RESIDUALES
+         *
+         * Si no quedó manejándose con asesor, revisar estados
+         * conocidos de una ejecución anterior:
+         *
+         * - Política de tratamiento
+         * - Selección de líneas
+         * - Menú principal
+         * - Pagar factura
+         * - No entendí
+         *
+         * Esta Task se encarga de cerrar y vaciar el chat.
+         */
         actor.attemptsTo(
                 ValidarYLimpiarChatPendiente.ejecutar()
         );
 
-        // Si hay una marca persistente de atención humana, recuperar inmediatamente
-        // el flujo sin enviar un nuevo saludo "Hola".
+        /*
+         * 3. RECUPERAR ASESOR ENTRE EJECUCIONES
+         *
+         * Si una ejecución anterior quedó realmente EN_COLA,
+         * ASESOR_ACTIVO o CIERRE_PENDIENTE, continuar desde allí
+         * sin enviar un nuevo saludo.
+         */
         if (EstadoAtencionHumana.requiereRecuperacion()) {
-            ReportHooks.registrarPaso("Recuperando conversacion con asesor en estado: " + EstadoAtencionHumana.leerEstado());
-            actor.attemptsTo(ManejarConversacionConAsesor.ejecutar());
+
+            ReportHooks.registrarPaso(
+                    "Recuperando conversacion con asesor en estado: "
+                            + EstadoAtencionHumana.leerEstado()
+            );
+
+            actor.attemptsTo(
+                    ManejarConversacionConAsesor.ejecutar()
+            );
         }
 
-        if (asesorVisible(actor) && !flujoNormalVisible(actor)) {
-            EstadoAtencionHumana.marcarEnCola();
-            actor.attemptsTo(ManejarConversacionConAsesor.ejecutar());
-        }
+        /*
+         * 4. FLUJO NORMAL
+         */
         while (!chatIniciadoCorrectamente && intentos < MAX_REINTENTOS) {
+
             intentos++;
 
             try {
-                // Enviar un solo saludo y esperar una respuesta real, no el "Hola" propio.
+
+                /*
+                 * Enviar un solo saludo y esperar una respuesta real,
+                 * no solamente el Hola enviado por nosotros.
+                 */
                 if (!saludoYaEnviado) {
+
                     actor.attemptsTo(
-                            Enter.theValue(user.getSaludo()).into(TXT_ENVIAR_MENSAJE),
+                            Enter.theValue(user.getSaludo())
+                                    .into(TXT_ENVIAR_MENSAJE),
                             Click.on(BTN_ENVIAR)
                     );
+
                     saludoYaEnviado = true;
 
-                    boolean respuestaRecibida = WaitForTextContainsWithTimeout.esperar(
-                            TIMEOUT_RESPUESTA_SALUDO, obtenerTextosParaWait()
-                    ).answeredBy(actor);
+                    boolean respuestaRecibida =
+                            WaitForTextContainsWithTimeout.esperar(
+                                    TIMEOUT_RESPUESTA_SALUDO,
+                                    obtenerTextosParaWait()
+                            ).answeredBy(actor);
 
+                    /*
+                     * Si no hubo respuesta dentro del tiempo,
+                     * conservar el comportamiento actual.
+                     */
                     if (!respuestaRecibida) {
+
                         EstadoAtencionHumana.marcarEnCola();
+
                         ReportHooks.registrarPaso(
-                                "Sin respuesta al saludo; posible espera en cola de asesor");
+                                "Sin respuesta al saludo; posible espera en cola de asesor"
+                        );
+
                         CapturaDePantallaMovil.tomarCapturaPantalla(
-                                "Posible cola de asesor detectada por silencio");
-                        actor.attemptsTo(ManejarConversacionConAsesor.ejecutar());
+                                "Posible cola de asesor detectada por silencio"
+                        );
+
+                        actor.attemptsTo(
+                                ManejarConversacionConAsesor.ejecutar()
+                        );
+
                         saludoYaEnviado = false;
                         continue;
                     }
                 }
-                // 2️⃣ Clasificar respuesta del bot
-                EstadoConversacion estado = ClasificarRespuestaBot.obtenerEstado(actor);
+
+                /*
+                 * Clasificar la respuesta que realmente dejó el bot.
+                 */
+                EstadoConversacion estado =
+                        ClasificarRespuestaBot.obtenerEstado(actor);
 
                 switch (estado) {
 
                     case PANTALLA_INICIAL:
-                        actor.attemptsTo(SalirYReiniciarChat.ejecutar());
+
+                        actor.attemptsTo(
+                                SalirYReiniciarChat.ejecutar()
+                        );
+
                         continue;
 
                     case ERROR:
-                        actor.attemptsTo(ValidarTextoErrorYLimpiarChat.validarYLimpiar());
+
+                        actor.attemptsTo(
+                                ValidarTextoErrorYLimpiarChat.validarYLimpiar()
+                        );
+
                         continue;
 
                     case ESPERANDO_ASESOR:
+
+                        /*
+                         * Si el Hola provocó el mensaje:
+                         * "Voy a comunicarte con uno de nuestros asesores",
+                         * desde aquí se deja de enviar saludos.
+                         */
                         EstadoAtencionHumana.marcarEnCola();
-                        actor.attemptsTo(ManejarConversacionConAsesor.ejecutar());
+
+                        actor.attemptsTo(
+                                ManejarConversacionConAsesor.ejecutar()
+                        );
+
                         saludoYaEnviado = false;
                         continue;
 
@@ -103,15 +191,27 @@ public class IniciarChatClaro implements Task {
                         break;
                 }
 
-                // 3️⃣ Flujo normal
+                /*
+                 * Flujo normal existente.
+                 * No se modifica.
+                 */
                 actor.attemptsTo(
                         WaitForTextContains.withAnyTextContains(
-                                SALUDO, SALUDO_PARA_AYUDARTE, LINEAS_POSTPAGO, LINEAS_PREPAGO),
+                                SALUDO,
+                                SALUDO_PARA_AYUDARTE,
+                                LINEAS_POSTPAGO,
+                                LINEAS_PREPAGO
+                        ),
                         ScrollInicio.scrollUnaVista()
                 );
 
-                CapturaDePantallaMovil.tomarCapturaPantalla("Chat iniciado correctamente");
-                ReportHooks.registrarPaso("Chat iniciado correctamente");
+                CapturaDePantallaMovil.tomarCapturaPantalla(
+                        "Chat iniciado correctamente"
+                );
+
+                ReportHooks.registrarPaso(
+                        "Chat iniciado correctamente"
+                );
 
                 actor.attemptsTo(
                         WaitFor.aTime(5000),
@@ -123,33 +223,43 @@ public class IniciarChatClaro implements Task {
                 chatIniciadoCorrectamente = true;
 
             } catch (Exception e) {
+
                 if (e instanceof IllegalStateException) {
                     throw (IllegalStateException) e;
                 }
+
                 if (intentos == MAX_REINTENTOS) {
+
                     throw new RuntimeException(
                             "No se pudo iniciar el chat correctamente después de "
-                                    + MAX_REINTENTOS + " intentos", e);
+                                    + MAX_REINTENTOS
+                                    + " intentos",
+                            e
+                    );
                 }
 
-                actor.attemptsTo(WaitFor.aTime(2000));
+                actor.attemptsTo(
+                        WaitFor.aTime(2000)
+                );
             }
         }
     }
 
+    /*
+     * Se usa únicamente para saber si la pantalla actual
+     * muestra un estado de asesor.
+     *
+     * ClasificarRespuestaBot ya da prioridad a ESPERANDO_ASESOR
+     * sobre menú principal, error y flujo normal.
+     */
     private boolean asesorVisible(Actor actor) {
-        return ClasificarRespuestaBot.obtenerEstado(actor) == EstadoConversacion.ESPERANDO_ASESOR;
+
+        return ClasificarRespuestaBot.obtenerEstado(actor)
+                == EstadoConversacion.ESPERANDO_ASESOR;
     }
-    private boolean flujoNormalVisible(Actor actor) {
-        return TextoQueContengaX.verificarTexto(SALUDO).answeredBy(actor)
-                || TextoQueContengaX.verificarTexto(SALUDO_PARA_AYUDARTE).answeredBy(actor)
-                || TextoQueContengaX.verificarTexto(LINEAS_POSTPAGO).answeredBy(actor)
-                || TextoQueContengaX.verificarTexto(LINEAS_PREPAGO).answeredBy(actor)
-                || TextoQueContengaX.verificarTexto(CUENTA).answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("asistente virtual").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("Escribe el número de la opción").answeredBy(actor);
-    }
+
     public static String[] obtenerTextosParaWait() {
+
         return new String[]{
                 SALUDO,
                 SALUDO_PARA_AYUDARTE,
@@ -180,6 +290,7 @@ public class IniciarChatClaro implements Task {
     }
 
     public static Performable iniciarChatClaro() {
+
         return instrumented(IniciarChatClaro.class);
     }
 }

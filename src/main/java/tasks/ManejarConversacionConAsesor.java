@@ -133,7 +133,13 @@ public class ManejarConversacionConAsesor implements Task {
                     "Caso cerrado",
                     "Ha sido un placer ayudarte hoy",
                     "por elegirnos",
-                    "encuesta"
+                    "encuesta",
+                    "Agradecemos tu preferencia",
+                    "agradecemos tu preferencia",
+                    "maravilloso día",
+                    "maravilloso dia",
+                    "disposición las 24 horas",
+                    "disposicion las 24 horas"
                 ).answeredBy(actor);
             }
 
@@ -164,7 +170,7 @@ public class ManejarConversacionConAsesor implements Task {
                 || TextoQueContengaX.verificarTexto("asesor de Claro").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Es un gusto atenderte").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("es un gusto atenderte").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("en que te puedo colaborar").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("colaborar").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("como te encuentras").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Buen dia").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Buen día").answeredBy(actor)
@@ -181,11 +187,17 @@ public class ManejarConversacionConAsesor implements Task {
                 || TextoQueContengaX.verificarTexto("Caso cerrado").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Ha sido un placer ayudarte hoy").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("por elegirnos").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("encuesta").answeredBy(actor);
+                || TextoQueContengaX.verificarTexto("encuesta").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Agradecemos tu preferencia").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("agradecemos tu preferencia").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("maravilloso día").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("maravilloso dia").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("disposición las 24 horas").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("disposicion las 24 horas").answeredBy(actor);
     }
 
     private boolean mensajeFinalizacionYaEnviado(Actor actor) {
-        return TextoQueContengaX.verificarTexto("Finalizar interacci").answeredBy(actor);
+        return TextoQueContengaX.verificarTexto("finalizar interacci").answeredBy(actor);
     }
 
     private <T extends Actor> void liberarCasoCerrado(T actor, String mensajeReporte) {

@@ -88,7 +88,7 @@ public class ValidarTratamientoDatos implements Task {
             }
 
             actor.attemptsTo(
-                    WaitForResponse.withAnyText(40, VER_MENU_PREPAGO, MENU_PRINCIPAL));
+                    WaitForResponse.withAnyText(58, VER_MENU_PREPAGO, MENU_PRINCIPAL));
         }
     }
 

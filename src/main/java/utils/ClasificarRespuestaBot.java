@@ -27,7 +27,7 @@ public class ClasificarRespuestaBot {
                 || TextoQueContengaX.verificarTexto("asesor de Claro").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Gracias por comunicarte").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("como te encuentras").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("en que te puedo colaborar").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("colaborar").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Es un gusto atenderte").answeredBy(actor)) {
 
             return EstadoConversacion.ESPERANDO_ASESOR;

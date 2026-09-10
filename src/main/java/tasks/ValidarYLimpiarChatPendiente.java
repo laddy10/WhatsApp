@@ -26,15 +26,25 @@ public class ValidarYLimpiarChatPendiente implements Task {
     private static final String TEXTO_TRATAMIENTO_DATOS =
             POLITICA_TRATAMIENTO;
 
-    private static final String LINEA_RECUPERACION = "1";
+    private static final String TEXTO_MENU_PRINCIPAL =
+            "Menú principal";
+
+    private static final String TEXTO_PAGAR_FACTURA =
+            "Pagar factura";
+
+    private static final String TEXTO_NO_ENTENDI =
+            "No entendí";
+
+    private static final String LINEA_RECUPERACION =
+            "1";
 
     @Override
     public <T extends Actor> void performAs(T actor) {
 
         /*
          * CASO 1:
-         * La ejecución anterior quedó directamente
-         * en la autorización de tratamiento de datos.
+         * La conversación anterior quedó directamente
+         * en tratamiento de datos.
          */
         if (hayTratamientoDatosPendiente(actor)) {
 
@@ -47,14 +57,32 @@ public class ValidarYLimpiarChatPendiente implements Task {
             );
 
             rechazarTratamientoYCerrar(actor);
-
             return;
         }
 
         /*
          * CASO 2:
-         * La ejecución anterior quedó esperando
-         * que se seleccione una línea.
+         * La conversación ya está en un estado
+         * donde Cierrecaso funciona.
+         */
+        if (hayEstadoQuePermiteCierre(actor)) {
+
+            ReportHooks.registrarPaso(
+                    "Se detecto una conversacion anterior en un estado que permite cierre"
+            );
+
+            CapturaDePantallaMovil.tomarCapturaPantalla(
+                    "Conversacion pendiente lista para cierre"
+            );
+
+            cerrarYVaciarChat(actor);
+            return;
+        }
+
+        /*
+         * CASO 3:
+         * La conversación anterior quedó esperando
+         * selección de cuenta o línea.
          */
         if (haySeleccionLineaPendiente(actor)) {
 
@@ -67,55 +95,74 @@ public class ValidarYLimpiarChatPendiente implements Task {
             );
 
             /*
-             * Seleccionamos una línea válida únicamente
-             * para avanzar hasta tratamiento de datos.
+             * Seleccionamos una línea válida para sacar
+             * la conversación del estado de selección.
              */
             actor.attemptsTo(
                     Enter.theValue(LINEA_RECUPERACION)
                             .into(TXT_ENVIAR_MENSAJE),
-
                     Click.on(BTN_ENVIAR)
             );
 
             /*
-             * Esperamos que Claro avance hasta
-             * la autorización de tratamiento de datos.
+             * El bot no siempre responde igual.
+             *
+             * Puede mostrar:
+             * - tratamiento de datos
+             * - menú principal
+             * - pagar factura
+             * - no entendí
              */
             actor.attemptsTo(
                     WaitForTextContains.withAnyTextContains(
-                            TEXTO_TRATAMIENTO_DATOS
+                            TEXTO_TRATAMIENTO_DATOS,
+                            TEXTO_MENU_PRINCIPAL,
+                            TEXTO_PAGAR_FACTURA,
+                            TEXTO_NO_ENTENDI
                     )
             );
 
             /*
-             * Confirmamos que realmente llegamos
-             * a tratamiento de datos antes de continuar.
+             * Si llegó a tratamiento de datos,
+             * primero rechazamos la autorización.
              */
-            if (!hayTratamientoDatosPendiente(actor)) {
+            if (hayTratamientoDatosPendiente(actor)) {
 
-                throw new IllegalStateException(
-                        "Se selecciono una linea, pero no aparecio la autorizacion de tratamiento de datos"
+                ReportHooks.registrarPaso(
+                        "Despues de seleccionar la linea se detecto tratamiento de datos"
                 );
+
+                rechazarTratamientoYCerrar(actor);
+                return;
             }
 
-            ReportHooks.registrarPaso(
-                    "Se alcanzo tratamiento de datos despues de seleccionar la linea"
+            /*
+             * Si llegó a cualquiera de los estados
+             * que permiten cierre, cerramos directamente.
+             */
+            if (hayEstadoQuePermiteCierre(actor)) {
+
+                ReportHooks.registrarPaso(
+                        "Despues de seleccionar la linea se detecto un estado que permite cierre"
+                );
+
+                cerrarYVaciarChat(actor);
+                return;
+            }
+
+            throw new IllegalStateException(
+                    "Despues de seleccionar la linea no se detecto un estado conocido para limpiar la conversacion"
             );
-
-            rechazarTratamientoYCerrar(actor);
-
-            return;
         }
 
         /*
          * No se encontró ningún estado pendiente conocido.
-         * La Task termina y IniciarChatClaro continúa normalmente.
+         * La tarea termina y el flujo normal continúa.
          */
     }
 
     /**
-     * Detecta si quedó pendiente la autorización
-     * de tratamiento de datos.
+     * Detecta si quedó pendiente el tratamiento de datos.
      */
     public static boolean hayTratamientoDatosPendiente(Actor actor) {
 
@@ -125,8 +172,8 @@ public class ValidarYLimpiarChatPendiente implements Task {
     }
 
     /**
-     * Detecta si la conversación anterior quedó
-     * esperando la selección de una línea.
+     * Detecta si la conversación quedó esperando
+     * selección de cuenta o línea.
      */
     private boolean haySeleccionLineaPendiente(Actor actor) {
 
@@ -144,8 +191,27 @@ public class ValidarYLimpiarChatPendiente implements Task {
     }
 
     /**
-     * Rechaza tratamiento de datos, cierra
-     * la conversación anterior y vacía el chat.
+     * Detecta estados conocidos donde el bot
+     * ya permite enviar Cierrecaso.
+     */
+    private boolean hayEstadoQuePermiteCierre(Actor actor) {
+
+        return TextoQueContengaX
+                .verificarTexto(TEXTO_MENU_PRINCIPAL)
+                .answeredBy(actor)
+
+                || TextoQueContengaX
+                .verificarTexto(TEXTO_PAGAR_FACTURA)
+                .answeredBy(actor)
+
+                || TextoQueContengaX
+                .verificarTexto(TEXTO_NO_ENTENDI)
+                .answeredBy(actor);
+    }
+
+    /**
+     * Rechaza el tratamiento de datos
+     * y después cierra y vacía el chat.
      */
     private <T extends Actor> void rechazarTratamientoYCerrar(T actor) {
 
@@ -155,12 +221,6 @@ public class ValidarYLimpiarChatPendiente implements Task {
         List<WebElementFacade> btnNoAutorizo =
                 BTN_NO_AUTORIZO.resolveAllFor(actor);
 
-        /*
-         * Hay dos versiones conocidas del botón:
-         *
-         * No
-         * No autorizo
-         */
         if (!btnNo.isEmpty()) {
 
             actor.attemptsTo(
@@ -184,19 +244,23 @@ public class ValidarYLimpiarChatPendiente implements Task {
                 "Se rechazo la autorizacion de tratamiento de datos"
         );
 
-        /*
-         * Esperamos que Claro procese la respuesta
-         * antes de enviar Cierrecaso.
-         */
         actor.attemptsTo(
-                WaitFor.aTime(4000),
-                SalirConversacion.salir()
+                WaitFor.aTime(4000)
         );
 
-        /*
-         * Una vez cerrado el caso, vaciamos
-         * físicamente el chat.
-         */
+        cerrarYVaciarChat(actor);
+    }
+
+    /**
+     * Envía Cierrecaso y luego vacía el chat.
+     */
+    private <T extends Actor> void cerrarYVaciarChat(T actor) {
+
+        actor.attemptsTo(
+                SalirConversacion.salir(),
+                WaitFor.aTime(1500)
+        );
+
         actor.attemptsTo(
                 Click.on(BTN_MAS_OPCIONES),
                 ClickTextoQueContengaX.elTextoContiene(MAS),
