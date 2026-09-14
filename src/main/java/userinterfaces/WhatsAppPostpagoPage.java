@@ -312,5 +312,7 @@ public class WhatsAppPostpagoPage {
                   .located(By.xpath(
                           "//android.widget.TextView[@resource-id='com.whatsapp:id/button_content' and @text='No autorizo']"
                   ));
-
+  public static final Target BTN_GUARDAR_TARJETA_SI =
+          Target.the("Opción Sí guardar tarjeta")
+                  .located(By.xpath("//android.view.View[@text=\"Si\"]"));
 }

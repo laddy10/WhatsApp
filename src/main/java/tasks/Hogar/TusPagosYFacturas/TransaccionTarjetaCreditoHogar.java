@@ -31,9 +31,13 @@ public class TransaccionTarjetaCreditoHogar extends AndroidObject implements Tas
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+
         Boolean alDia = actor.recall("alDia");
+
         if (alDia != null && alDia) {
-            System.out.println("La cuenta está al día, omitiendo transacción con tarjeta de crédito.");
+            System.out.println(
+                    "La cuenta está al día, omitiendo transacción con tarjeta de crédito."
+            );
             return;
         }
 
@@ -45,116 +49,354 @@ public class TransaccionTarjetaCreditoHogar extends AndroidObject implements Tas
                 WaitForResponse.withText(CONTINUAR_BUTTON)
         );
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Tarjeta de Crédito y continuar Hogar");
-        ReportHooks.registrarPaso("Seleccionar Tarjeta de Crédito y continuar Hogar");
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Seleccionar Tarjeta de Crédito y continuar Hogar"
+        );
 
+        ReportHooks.registrarPaso(
+                "Seleccionar Tarjeta de Crédito y continuar Hogar"
+        );
+
+        // Continuar al formulario de tarjeta
         actor.attemptsTo(
                 ScrollHastaTexto.conTexto(SERVICIOS_PORTAL_PAGOS),
                 ClickTextoQueContengaX.elTextoContiene(CONTINUAR_BUTTON)
         );
 
-        // Esperar a que cargue el formulario
+        // Esperar cualquiera de las dos vistas posibles
+        // Esperar unos segundos por la vista actual
         actor.attemptsTo(
-                WaitForTextContains.withTextContains("Agregar tarjeta", 30),
+                WaitFor.aTime(10000)
+        );
+
+        boolean vistaActual =
+                textoContiene(actor, AGREGAR_TARJETA);
+
+        if (vistaActual) {
+
+            ReportHooks.registrarPaso(
+                    "Se detectó formulario actual de tarjeta de crédito"
+            );
+
+            ejecutarFormularioActual(actor);
+
+        } else {
+
+            // La nueva vista necesita desplazamiento para mostrar el formulario
+            actor.attemptsTo(
+                    ScrollGradual.bajar(0.30),
+                    WaitForTextContains.withAnyTextContains(
+                            30,
+                            "Nombre y apellido",
+                            "Tipo de documento"
+                    )
+            );
+
+            boolean vistaNueva =
+                    textoContiene(actor, "Nombre y apellido");
+
+            if (vistaNueva) {
+
+                ReportHooks.registrarPaso(
+                        "Se detectó nuevo formulario de tarjeta de crédito"
+                );
+
+                ejecutarFormularioNuevo(actor);
+
+            } else {
+
+                throw new RuntimeException(
+                        "No fue posible identificar ninguna de las dos vistas del formulario de tarjeta de crédito."
+                );
+            }
+        }
+
+    }
+
+    /**
+     * Vista que ya existía:
+     * "Agregar tarjeta"
+     */
+    private <T extends Actor> void ejecutarFormularioActual(T actor) {
+
+        actor.attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene("Agregar tarjeta")
         );
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Formulario de tarjeta de crédito cargado Hogar");
-        ReportHooks.registrarPaso("Formulario de tarjeta de crédito cargado Hogar");
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Formulario actual de tarjeta de crédito cargado Hogar"
+        );
 
+        ReportHooks.registrarPaso(
+                "Formulario actual de tarjeta de crédito cargado Hogar"
+        );
 
-        // Llenar datos ficticios de la tarjeta
+        // Número de tarjeta
         actor.attemptsTo(
                 WaitFor.aTime(2000),
                 Click.on(TXT_NUMERO_TARJETA)
         );
 
-        // Digitar el número de tarjeta
-        digitarSoloNumeros(actor, NUMERO_TARJETA_FICTICIO);
+        digitarSoloNumeros(
+                actor,
+                NUMERO_TARJETA_FICTICIO
+        );
 
-
-        // Llenar datos ficticios de la tarjeta
+        // Nombre, tipo y número de documento
         actor.attemptsTo(
                 WaitFor.aTime(1000),
-                Enter.theValue(NOMBRE_FICTICIO).into(TXT_NOMBRE_APELLIDO),
+
+                Enter.theValue(NOMBRE_FICTICIO)
+                        .into(TXT_NOMBRE_APELLIDO),
+
                 WaitFor.aTime(1000),
+
                 Click.on(SELECT_TIPO_DOCUMENTO),
+
                 WaitFor.aTime(1000),
-                ClickTextoQueContengaX.elTextoContiene("C.C. (Cédula de Ciudadanía)"),
+
+                ClickTextoQueContengaX.elTextoContiene(
+                        "C.C. (Cédula de Ciudadanía)"
+                ),
+
                 WaitFor.aTime(1000),
+
                 Click.on(TXT_NUMERO_DOCUMENTO)
         );
 
-        // Digitar la cédula
-        digitarSoloNumeros(actor, NUMERO_CEDULA_FICTICIO);
+        digitarSoloNumeros(
+                actor,
+                NUMERO_CEDULA_FICTICIO
+        );
 
+        // Fecha expiración
         actor.attemptsTo(
                 WaitFor.aTime(1000),
-
-                // Dar foco al campo de fecha
                 Click.on(TXT_FECHA_EXPIRACION)
         );
 
-        // Digitar la fecha de expiración
-        digitarSoloNumeros(actor, "12/28");
+        digitarSoloNumeros(
+                actor,
+                "12/28"
+        );
 
+        // CVC
         actor.attemptsTo(
                 WaitFor.aTime(1000),
-
-                // Dar foco al campo CVC
                 Click.on(TXT_CVC)
         );
 
-        // Digitar el CVC
-        digitarSoloNumeros(actor, CVC_FICTICIO);
+        digitarSoloNumeros(
+                actor,
+                CVC_FICTICIO
+        );
 
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Datos básicos de tarjeta ingresados Hogar"
+        );
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Datos básicos de tarjeta ingresados Hogar");
-        ReportHooks.registrarPaso("Datos básicos de tarjeta ingresados Hogar");
+        ReportHooks.registrarPaso(
+                "Datos básicos de tarjeta ingresados Hogar"
+        );
 
-        // Continuar con datos adicionales
+        // Datos adicionales
         actor.attemptsTo(
                 WaitFor.aTime(2000),
+
                 ScrollGradual.bajar(0.25),
-                Enter.theValue(CORREO_FICTICIO).into(TXT_CORREO_ELECTRONICO),
+
+                Enter.theValue(CORREO_FICTICIO)
+                        .into(TXT_CORREO_ELECTRONICO),
+
                 WaitFor.aTime(1000),
-                Enter.theValue(CELULAR_FICTICIO).into(TXT_NUMERO_CELULAR),
+
+                Enter.theValue(CELULAR_FICTICIO)
+                        .into(TXT_NUMERO_CELULAR),
+
                 WaitFor.aTime(1000)
         );
 
-        // Modificar número de cuotas (Aumentar a 2 o 3, luego volver a 1)
+        // Cuotas: aumentar y regresar a 1
         actor.attemptsTo(
                 Click.on(BTN_AUMENTAR_CUOTAS),
                 WaitFor.aTime(1000),
+
                 Click.on(BTN_AUMENTAR_CUOTAS),
                 WaitFor.aTime(1000),
+
                 Click.on(BTN_DISMINUIR_CUOTAS),
                 WaitFor.aTime(1000),
+
                 Click.on(BTN_DISMINUIR_CUOTAS),
                 WaitFor.aTime(1000)
         );
 
-        // Interactuar con checkbox guardar tarjeta
+        // Guardar tarjeta
         actor.attemptsTo(
                 Click.on(CHK_GUARDAR_TARJETA_HOGAR),
                 WaitFor.aTime(1000)
         );
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Datos adicionales completados y cuotas validadas");
-        ReportHooks.registrarPaso("Datos adicionales completados y cuotas validadas");
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Datos adicionales completados y cuotas validadas"
+        );
 
-        // Validar botón Pagar habilitado (simplemente validar su existencia)
+        ReportHooks.registrarPaso(
+                "Datos adicionales completados y cuotas validadas"
+        );
+
+        // Botón final vista actual
         actor.attemptsTo(
                 ValidarTexto.validarTexto("Pagar")
         );
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Botón Pagar validado Hogar");
-        ReportHooks.registrarPaso("Botón Pagar validado Hogar");
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Botón Pagar validado Hogar"
+        );
 
+        ReportHooks.registrarPaso(
+                "Botón Pagar validado Hogar"
+        );
+    }
+
+    /**
+     * Nueva vista:
+     * inicia directamente con "Número de la tarjeta"
+     */
+    private <T extends Actor> void ejecutarFormularioNuevo(T actor) {
+
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Nuevo formulario de tarjeta de crédito cargado Hogar"
+        );
+
+        ReportHooks.registrarPaso(
+                "Nuevo formulario de tarjeta de crédito cargado Hogar"
+        );
+
+        // Número de tarjeta
         actor.attemptsTo(
-                Atras.irAtras(),
-                Atras.irAtras(),
-                SalirConversacion.salir()
+                Click.on(TXT_NUMERO_TARJETA)
+        );
+
+        digitarSoloNumeros(
+                actor,
+                NUMERO_TARJETA_FICTICIO
+        );
+
+        // Nombre y apellido
+        actor.attemptsTo(
+                WaitFor.aTime(1000),
+                Enter.theValue(NOMBRE_FICTICIO)
+                        .into(TXT_NOMBRE_APELLIDO),
+
+                WaitFor.aTime(1000),
+                ScrollGradual.bajar(0.30),
+
+                // Tipo documento
+                Click.on(SELECT_TIPO_DOCUMENTO),
+
+                WaitFor.aTime(1000),
+
+                ClickTextoQueContengaX.elTextoContiene(
+                        "C.C. (Cédula de Ciudadanía)"
+                ),
+
+                WaitFor.aTime(1000),
+
+
+                // Número documento
+                Click.on(TXT_NUMERO_DOCUMENTO)
+        );
+
+        digitarSoloNumeros(
+                actor,
+                NUMERO_CEDULA_FICTICIO
+        );
+
+        // Mes de expiración
+        actor.attemptsTo(
+                WaitFor.aTime(1000),
+                Click.on(SELECT_MES_EXPIRACION),
+                WaitFor.aTime(1000),
+                ClickTextoQueContengaX.elTextoContiene("10")
+        );
+
+        // Año de expiración
+        actor.attemptsTo(
+                WaitFor.aTime(1000),
+                Click.on(SELECT_ANIO_EXPIRACION),
+                WaitFor.aTime(1000),
+                ClickTextoQueContengaX.elTextoContiene("2028")
+        );
+
+        // CVC / CVV
+        actor.attemptsTo(
+                WaitFor.aTime(1000),
+                Click.on(TXT_CVC)
+        );
+
+        digitarSoloNumeros(
+                actor,
+                CVC_FICTICIO
+        );
+
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Datos básicos nuevo formulario tarjeta Hogar"
+        );
+
+        // Bajar hacia datos adicionales
+        actor.attemptsTo(
+                WaitFor.aTime(1000),
+                ScrollGradual.bajar(0.30),
+
+                Enter.theValue(CORREO_FICTICIO)
+                        .into(TXT_CORREO_ELECTRONICO),
+
+                WaitFor.aTime(1000),
+
+                Enter.theValue(CELULAR_FICTICIO)
+                        .into(TXT_NUMERO_CELULAR),
+
+                WaitFor.aTime(1000)
+        );
+
+        // Número de cuotas
+        actor.attemptsTo(
+                // ScrollGradual.bajar(0.30),
+                Click.on(SELECT_NUMERO_CUOTAS),
+
+                WaitFor.aTime(1000),
+
+                ClickTextoQueContengaX.elTextoContiene("4"),
+
+                WaitFor.aTime(1000)
+        );
+
+        // Guardar esta tarjeta -> Sí
+        actor.attemptsTo(
+                Click.on(BTN_GUARDAR_TARJETA_SI),
+                WaitFor.aTime(1000)
+        );
+
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Datos adicionales nuevo formulario completados Hogar"
+        );
+
+        ReportHooks.registrarPaso(
+                "Datos adicionales nuevo formulario completados Hogar"
+        );
+
+        // En la nueva vista el botón final es Confirmar
+        actor.attemptsTo(
+                ValidarTextoQueContengaX.elTextoContiene("Confirmar")
+        );
+
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Botón Confirmar validado Hogar"
+        );
+
+        ReportHooks.registrarPaso(
+                "Botón Confirmar validado Hogar"
         );
     }
 
@@ -162,8 +404,11 @@ public class TransaccionTarjetaCreditoHogar extends AndroidObject implements Tas
             T actor,
             String valor
     ) {
+
         for (char caracter : valor.toCharArray()) {
+
             if (Character.isDigit(caracter)) {
+
                 DigitarNumeros(
                         actor,
                         String.valueOf(caracter)
@@ -173,6 +418,8 @@ public class TransaccionTarjetaCreditoHogar extends AndroidObject implements Tas
     }
 
     public static Performable transaccionTarjetaCreditoHogar() {
-        return instrumented(TransaccionTarjetaCreditoHogar.class);
+        return instrumented(
+                TransaccionTarjetaCreditoHogar.class
+        );
     }
 }

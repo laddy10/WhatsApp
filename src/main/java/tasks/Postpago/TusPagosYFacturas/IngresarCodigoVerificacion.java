@@ -11,6 +11,7 @@ import hooks.ReportHooks;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
 import interactions.scroll.ScrollInicio;
+import interactions.wait.WaitFor;
 import interactions.wait.WaitForTextContains;
 
 import java.util.ArrayList;
@@ -59,7 +60,8 @@ public class IngresarCodigoVerificacion extends AndroidObject implements Task {
             actor.attemptsTo(
                     Enter.theValue(codigoVerificacion.toString()).into(TXT_ENVIAR_MENSAJE),
                     Click.on(BTN_ENVIAR),
-                    WaitForTextContains.withAnyTextContains(IDENTIDAD_CONFIRMADA, PAGA_TU_FACTURA_AQUI));
+                    WaitForTextContains.withAnyTextContains(IDENTIDAD_CONFIRMADA, PAGA_TU_FACTURA_AQUI),
+                    WaitFor.aTime(6000));
 
         } catch (Exception e) {
             System.out.println("Error al ingresar el código de verificación: " + e.getMessage());

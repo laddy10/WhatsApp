@@ -85,24 +85,34 @@ public class LealtadClaroVideoHogar implements Task {
 
         try {
 
-            actor.attemptsTo(
-                    WaitForResponse.withAnyText(30, EXPLORAR)
+            // Primero confirmar que bit.ly realmente redireccionó a Claro Video
+            UtilidadesAndroid.esperarRedireccionamientoWeb(
+                    actor,
+                    "clarovideo.com",
+                    30
             );
 
         } catch (Exception e) {
 
             ReportHooks.registrarPaso(
-                    "Claro Video no cargó en el primer intento. Se reintenta la URL."
+                    "No se confirmó redireccionamiento de bit.ly a Claro Video. "
+                            + "Se realiza un segundo intento."
             );
 
+            // Reintentar la URL acortada una sola vez
             UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_VIDEO);
 
-            actor.attemptsTo(
-                    WaitForResponse.withAnyText(30, EXPLORAR)
+            UtilidadesAndroid.esperarRedireccionamientoWeb(
+                    actor,
+                    "clarovideo.com",
+                    30
             );
         }
 
+// Una vez confirmado que estamos realmente en clarovideo.com,
+// esperar el contenido de la página
         actor.attemptsTo(
+                WaitForResponse.withAnyText(30, EXPLORAR),
                 ValidarTextoQueContengaX.elTextoContiene(PREMIUM)
         );
 

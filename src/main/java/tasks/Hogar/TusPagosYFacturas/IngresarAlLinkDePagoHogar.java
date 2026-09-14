@@ -4,9 +4,11 @@ import hooks.ReportHooks;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
+import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
+import tasks.SalirConversacion;
 import utils.AndroidObject;
 import utils.CapturaDePantallaMovil;
 import utils.UtilidadesAndroid;
@@ -21,6 +23,9 @@ public class IngresarAlLinkDePagoHogar extends AndroidObject implements Task {
         Boolean alDia = actor.recall("alDia");
         if (alDia != null && alDia) {
             System.out.println("La cuenta está al día, omitiendo ingreso al link de pago.");
+            actor.attemptsTo(
+                    SalirConversacion.salir()
+            );
             return;
         }
 
@@ -67,7 +72,10 @@ public class IngresarAlLinkDePagoHogar extends AndroidObject implements Task {
 
         // Esperar a que cargue la página de pagos
         actor.attemptsTo(
-                WaitForResponse.withAnyText(PAGO_FACTURAS_HOGAR_MULTIPLAY)
+                WaitForTextContains.withTextContains(
+                        PAGO_FACTURAS_HOGAR_MULTIPLAY,
+                        30
+                )
         );
 
         // Validar que estamos en la página correcta

@@ -105,7 +105,6 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Validar informacion de la factura
     And Ingresar al link de pago hogar
     And Realizar transaccion de pago con tarjeta de credito hogar
-    And Vaciar chat
 
 
   @EXUS_HOG_WSP_09

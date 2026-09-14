@@ -108,7 +108,9 @@ public class ConstantesPost {
     public static final String TARJETAS_NACIONALES = "Solo se permite el pago con tarjetas de credito nacionales";
     public static final String PAGAR = "Pagar";
     public static final String GUARDAR_DATOS_TARJETA = "Guardar los datos de mi tarjeta";
-
+    public static final String NUMERO_TARJETA_2 = "Número de la Tarjeta";
+    public static final String AGREGAR_TARJETA = "Agregar tarjeta";
+    public static final String MEDIOS_DE_PAGO = "Medios de pago";
 
     public static final String NOMBRE_APELLIDO = "Nombre y apellido";
     public static final String TIPO_DOCUMENTO = "Tipo de documento";
@@ -425,6 +427,7 @@ public class ConstantesPost {
     public static final String MENSAJE_CONFIRMACION_DAVIPLATA = "Daviplata ha enviado un mensaje de texto a tu móvil";
     public static final String COBERTURA_MEDICA = "Coberturas Médicas";
     public static final String HOGAR_EXPRESS = "Hogar Express";
+    public static final String VALOR_A_PAGAR_CERO = "Valor a pagar: $0";
 
 
 }
