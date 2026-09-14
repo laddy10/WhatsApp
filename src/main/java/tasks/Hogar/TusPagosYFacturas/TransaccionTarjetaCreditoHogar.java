@@ -55,7 +55,7 @@ public class TransaccionTarjetaCreditoHogar extends AndroidObject implements Tas
 
         // Esperar a que cargue el formulario
         actor.attemptsTo(
-                WaitFor.aTime(5000),
+                WaitForTextContains.withTextContains("Agregar tarjeta", 30),
                 ValidarTextoQueContengaX.elTextoContiene("Agregar tarjeta")
         );
 

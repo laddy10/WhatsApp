@@ -83,12 +83,29 @@ public class LealtadClaroVideoHogar implements Task {
         // 5. Abrir la URL de Claro Video (puede ser cambiante - bit.ly)
         UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_VIDEO);
 
+        try {
+
+            actor.attemptsTo(
+                    WaitForResponse.withAnyText(30, EXPLORAR)
+            );
+
+        } catch (Exception e) {
+
+            ReportHooks.registrarPaso(
+                    "Claro Video no cargó en el primer intento. Se reintenta la URL."
+            );
+
+            UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_VIDEO);
+
+            actor.attemptsTo(
+                    WaitForResponse.withAnyText(30, EXPLORAR)
+            );
+        }
+
         actor.attemptsTo(
-                WaitFor.aTime(20000),
-                WaitForResponse.withAnyText(EXPLORAR),
                 ValidarTextoQueContengaX.elTextoContiene(PREMIUM)
-               // ValidarTextoQueContengaX.elTextoContiene(CLARO_VIDEO_RECOMIENDA)
         );
+
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar redirección a Claro Video");
         ReportHooks.registrarPaso("Validar redirección a Claro Video");

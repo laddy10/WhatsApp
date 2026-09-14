@@ -15,6 +15,7 @@ import interactions.wait.WaitForResponse;
 
 import java.util.List;
 
+import interactions.wait.WaitForTextContains;
 import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -44,7 +45,7 @@ public class ValidarTratamientoDatos implements Task {
             UtilidadesAndroid.abrirLinkEnNavegador(URL_TRATAMIENTO_INFORMACION_DESTINO);
 
             actor.attemptsTo(
-                    WaitForResponse.withAnyText(
+                    WaitForTextContains.withTextContains(
                             TITULO_TRATAMIENTO_INFORMACION));
 
             actor.attemptsTo(
