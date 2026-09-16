@@ -47,7 +47,7 @@ public class TransaccionPSEPost extends AndroidObject implements Task {
 
         // Esperar a que cargue el formulario PSE
         actor.attemptsTo(
-                WaitForTextContains.withAnyTextContains(PAGA_TU_FACTURA_POSTPAGO),
+                WaitForTextContains.withAnyTextContains(PORTAL_PAGOS_Y_RECARGAS),
                 ValidarTextoQueContengaX.elTextoContiene(PORTAL_PAGOS_Y_RECARGAS)
 
         );

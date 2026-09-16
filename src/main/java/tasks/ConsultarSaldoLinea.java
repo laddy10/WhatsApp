@@ -9,6 +9,8 @@ import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
+import interactions.scroll.ScrollGradual;
+import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 import java.util.List;
 import net.serenitybdd.core.pages.WebElementFacade;
@@ -31,7 +33,7 @@ public class ConsultarSaldoLinea implements Task {
 
     actor.attemptsTo(
         ClickElementByText.clickElementByText(ENVIAR),
-        WaitForResponse.withAnyText(SIN_SALDO_DISPONIBLE, RECARGA_ACTIVA));
+        WaitForResponse.withAnyText(SIN_SALDO_DISPONIBLE, RECARGA_ACTIVA, MENU_ANTERIOR));
 
     List<WebElementFacade> lblsinsaldo = LBL_SIN_SALDO.resolveAllFor(actor);
     if (!lblsinsaldo.isEmpty()) {
@@ -42,8 +44,11 @@ public class ConsultarSaldoLinea implements Task {
           ValidarTexto.validarTexto(MENU_ANTERIOR));
     } else {
       actor.attemptsTo(
-          ValidarTextoQueContengaX.elTextoContiene(RECARGA_ACTIVA),
-          ValidarTextoQueContengaX.elTextoContiene(SALDO_VENCE));
+              ScrollGradual.subir(0.25),
+              WaitFor.aTime(1000),
+              ValidarTextoQueContengaX.elTextoContiene(RECARGA_ACTIVA),
+              ValidarTextoQueContengaX.elTextoContiene(SALDO_VENCE)
+      );
     }
 
     CapturaDePantallaMovil.tomarCapturaPantalla("Se valida el saldo de la linea");

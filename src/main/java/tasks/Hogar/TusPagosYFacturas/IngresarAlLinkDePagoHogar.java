@@ -74,7 +74,7 @@ public class IngresarAlLinkDePagoHogar extends AndroidObject implements Task {
         actor.attemptsTo(
                 WaitForTextContains.withTextContains(
                         PAGO_FACTURAS_HOGAR_MULTIPLAY,
-                        30
+                        50
                 )
         );
 

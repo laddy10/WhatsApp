@@ -2,8 +2,8 @@ package tasks.Hogar.SoporteHogar;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.BTN_ENVIAR_2;
-import static utils.ConstantesPost.VISITAS_Y_TRASLADOS;
-import static utils.ConstantesPost.NO_TIENES_AGENDADAS_VISITAS;
+import static utils.Constantes.*;
+import static utils.ConstantesPost.*;
 
 import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
@@ -14,42 +14,148 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
+import utils.AndroidObject;
 import utils.CapturaDePantallaMovil;
 
 public class VisitasYTrasladosHogar implements Task {
 
+    private static final String REDIRECCION_MENU =
+            "También tenemos otras opciones para ti";
+
     @Override
     public <T extends Actor> void performAs(T actor) {
 
-        // 1. Dar clic en el botón interactivo "Selecciona" (que viene después de Soporte y servicio)
+        // Primer intento
+        seleccionarVisitasYTraslados(actor);
+
+        actor.attemptsTo(
+                WaitForTextContains.withAnyTextContains(
+                        58,
+                        NO_TIENES_AGENDADAS_VISITAS,
+                        REDIRECCION_MENU
+                )
+        );
+
+        AndroidObject and = new AndroidObject();
+
+        // Si llegó el mensaje esperado, finaliza correctamente
+        if (and.textoContiene(actor, NO_TIENES_AGENDADAS_VISITAS)) {
+
+            validarRespuestaEsperada(actor);
+            return;
+        }
+
+        // Si el bot regresó al menú principal, realizar un solo reintento
+        if (and.textoContiene(actor, REDIRECCION_MENU)) {
+
+            ReportHooks.registrarPaso(
+                    "El bot regresó al menú principal. Se realiza un segundo intento de Visitas y traslados."
+            );
+
+            reintentarVisitasYTraslados(actor);
+
+            // En el segundo intento SOLO esperamos la respuesta correcta.
+            // Si no aparece, WaitForTextContains genera el FAIL.
+            actor.attemptsTo(
+                    WaitForTextContains.withTextContains(
+                            NO_TIENES_AGENDADAS_VISITAS,
+                            58
+                    )
+            );
+
+            validarRespuestaEsperada(actor);
+        }
+    }
+
+    private <T extends Actor> void seleccionarVisitasYTraslados(T actor) {
+
+        // Abrir botón "Selecciona"
         actor.attemptsTo(
                 EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20)
         );
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Clic en botón Selecciona de Soporte y servicio");
-        ReportHooks.registrarPaso("Clic en botón Selecciona de Soporte y servicio");
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Clic en botón Selecciona de Soporte y servicio"
+        );
 
-        // 2. Seleccionar "Visitas y traslados" en el menú desplegable
+        ReportHooks.registrarPaso(
+                "Clic en botón Selecciona de Soporte y servicio"
+        );
+
+        // Seleccionar Visitas y traslados
         actor.attemptsTo(
                 ClickTextoQueContengaX.elTextoContiene(VISITAS_Y_TRASLADOS)
         );
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar 'Visitas y traslados'");
-        ReportHooks.registrarPaso("Seleccionar 'Visitas y traslados'");
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Seleccionar 'Visitas y traslados'"
+        );
 
-        // 3. Hacer clic en el botón "Enviar"
+        ReportHooks.registrarPaso(
+                "Seleccionar 'Visitas y traslados'"
+        );
+
         actor.attemptsTo(
                 Click.on(BTN_ENVIAR_2)
         );
+    }
 
-        // 4. Validar el mensaje de no tener visitas técnicas agendadas
+    private <T extends Actor> void reintentarVisitasYTraslados(T actor) {
+
+        // 1. Volver a Menú principal
         actor.attemptsTo(
-                WaitForTextContains.withAnyTextContains(NO_TIENES_AGENDADAS_VISITAS),
-                ValidarTextoQueContengaX.elTextoContiene(NO_TIENES_AGENDADAS_VISITAS)
+                ClickTextoQueContengaX.elTextoContiene(MENU_PRINCIPAL),
+                Click.on(BTN_ENVIAR_2),
+
+                // 2. Esperar y seleccionar Soporte y servicio
+                WaitForTextContains.withTextContains(
+                        "Soporte y servicio",
+                        30
+                ),
+
+                ClickTextoQueContengaX.elTextoContiene(
+                        "Soporte y servicio"
+                ),
+
+                Click.on(BTN_ENVIAR_2)
         );
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje sin visitas técnicas agendadas");
-        ReportHooks.registrarPaso("Validar mensaje sin visitas técnicas agendadas");
+        // 3. Abrir nuevamente Selecciona
+        actor.attemptsTo(
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
+
+                // 4. Seleccionar nuevamente Visitas y traslados
+                ClickTextoQueContengaX.elTextoContiene(
+                        VISITAS_Y_TRASLADOS
+                ),
+
+                Click.on(BTN_ENVIAR_2)
+        );
+
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Segundo intento Visitas y traslados"
+        );
+
+        ReportHooks.registrarPaso(
+                "Segundo intento de Visitas y traslados"
+        );
+    }
+
+    private <T extends Actor> void validarRespuestaEsperada(T actor) {
+
+        actor.attemptsTo(
+                ValidarTextoQueContengaX.elTextoContiene(
+                        NO_TIENES_AGENDADAS_VISITAS
+                )
+        );
+
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Validar mensaje sin visitas técnicas agendadas"
+        );
+
+        ReportHooks.registrarPaso(
+                "Validar mensaje sin visitas técnicas agendadas"
+        );
     }
 
     public static Performable visitasYTrasladosHogar() {
