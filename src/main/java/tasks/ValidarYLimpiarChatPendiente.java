@@ -38,8 +38,39 @@ public class ValidarYLimpiarChatPendiente implements Task {
     private static final String LINEA_RECUPERACION =
             "1";
 
+    private static final String TEXTO_CIERRE_CONVERSACION_1 =
+            "Fue un gusto ayudarte";
+
+    private static final String TEXTO_CIERRE_CONVERSACION_2 =
+            "Una vez vuelvas a chatear, iniciaremos una nueva conversación";
+
+    private static final String TEXTO_CIERRE_CONVERSACION_3 =
+            "Han pasado 40 minutos y nuestro chat finalizó";
+
     @Override
     public <T extends Actor> void performAs(T actor) {
+
+        /*
+         * CASO 0:
+         * El mensaje más reciente del bot indica que la
+         * conversación anterior ya fue finalizada por el
+         * propio bot. No hay nada que cerrar: solo se
+         * debe vaciar el chat y dejar que el saludo normal
+         * continúe.
+         */
+        if (conversacionYaFinalizada(actor)) {
+
+            ReportHooks.registrarPaso(
+                    "Se detecto que la conversacion anterior ya fue finalizada por el bot"
+            );
+
+            CapturaDePantallaMovil.tomarCapturaPantalla(
+                    "Conversacion anterior ya finalizada detectada"
+            );
+
+            vaciarChat(actor);
+            return;
+        }
 
         /*
          * CASO 1:
@@ -93,6 +124,22 @@ public class ValidarYLimpiarChatPendiente implements Task {
             CapturaDePantallaMovil.tomarCapturaPantalla(
                     "Seleccion de linea pendiente detectada"
             );
+
+            /*
+             * Revalidar justo antes de enviar "1": el menú
+             * detectado puede ser historial viejo si, mientras
+             * tanto, ya apareció un mensaje más reciente del bot
+             * indicando que la conversación finalizó.
+             */
+            if (conversacionYaFinalizada(actor)) {
+
+                ReportHooks.registrarPaso(
+                        "Se detecto que la conversacion ya fue finalizada antes de enviar la linea de recuperacion"
+                );
+
+                vaciarChat(actor);
+                return;
+            }
 
             /*
              * Seleccionamos una línea válida para sacar
@@ -159,6 +206,38 @@ public class ValidarYLimpiarChatPendiente implements Task {
          * No se encontró ningún estado pendiente conocido.
          * La tarea termina y el flujo normal continúa.
          */
+    }
+
+    /**
+     * Detecta, a partir del mensaje más reciente del bot,
+     * si la conversación anterior ya fue finalizada por el
+     * propio bot. No revisa todo el historial: solo el
+     * último mensaje renderizado, para evitar falsos
+     * positivos por mensajes antiguos.
+     */
+    private boolean conversacionYaFinalizada(Actor actor) {
+
+        WebElementFacade ultimoMensaje = ultimoMensajeBot(actor);
+
+        if (ultimoMensaje == null) {
+            return false;
+        }
+
+        String texto = ultimoMensaje.getText();
+
+        return texto.contains(TEXTO_CIERRE_CONVERSACION_1)
+                || texto.contains(TEXTO_CIERRE_CONVERSACION_2)
+                || texto.contains(TEXTO_CIERRE_CONVERSACION_3);
+    }
+
+    /**
+     * Resuelve el mensaje más reciente renderizado en el chat.
+     */
+    private static WebElementFacade ultimoMensajeBot(Actor actor) {
+
+        List<WebElementFacade> mensajes = LBL_MENSAJES.resolveAllFor(actor);
+
+        return mensajes.isEmpty() ? null : mensajes.get(mensajes.size() - 1);
     }
 
     /**
@@ -260,6 +339,14 @@ public class ValidarYLimpiarChatPendiente implements Task {
                 SalirConversacion.salir(),
                 WaitFor.aTime(1500)
         );
+
+        vaciarChat(actor);
+    }
+
+    /**
+     * Vacía el chat desde el menú de opciones.
+     */
+    private <T extends Actor> void vaciarChat(T actor) {
 
         actor.attemptsTo(
                 Click.on(BTN_MAS_OPCIONES),

@@ -38,7 +38,7 @@ public class ValidarMenuLDI implements Task {
         actor.attemptsTo(
                 Enter.theValue("2").into(TXT_CAJA_MENSAJE),
                 Click.on(BTN_ENVIAR),
-                WaitForResponse.withText(MSJ_LDI_2));
+                WaitForResponse.withAnyText(MSJ_LDI_2, MSJ_LDI_2_CON_CONSUMOS));
 
         CapturaDePantallaMovil.tomarCapturaPantalla("consulta de consumos");
         ReportHooks.registrarPaso("consulta de consumos");

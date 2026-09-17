@@ -136,6 +136,8 @@ public class Constantes {
     public static final String MSJ_LDI_1 = "Comunícate las 24 horas marcando 00444 ";
     public static final String MSJ_LDI_2 =
             "No cuentas con consumos de llamadas de Larga distancia Internacional.";
+    public static final String MSJ_LDI_2_CON_CONSUMOS =
+            "Esta es la información que tenemos de tus consumos";
     public static final String MSJ_LDI_3 =
             " Las mejores tarifas para conectarte con tus seres queridos";
     public static final String MSJ_LDI_COMPRA = "Paq. LDI USA,CAN,PR,MEX";
