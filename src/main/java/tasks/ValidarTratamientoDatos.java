@@ -52,7 +52,7 @@ public class ValidarTratamientoDatos implements Task {
             );
 
             actor.attemptsTo(
-                    ValidarTextoQueContengaX.elTextoContiene(TITULO_TRATAMIENTO_INFORMACION),
+                    ValidarTextoQueContengaX.elTextoContiene(TITULO_TRATAMIENTO_INFORMACION_M),
                     ValidarTextoQueContengaX.elTextoContiene(URL_TRATAMIENTO_INFORMACION_PATH));
 
             CapturaDePantallaMovil.tomarCapturaPantalla("Redirección URL Circular Superintendencia");

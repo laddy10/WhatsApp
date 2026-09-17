@@ -292,40 +292,54 @@ public class ValidarYLimpiarChatPendiente implements Task {
      * Rechaza el tratamiento de datos
      * y después cierra y vacía el chat.
      */
+    private static final String TEXTO_RECHAZO_CONFIRMADO =
+            "Has elegido la opción NO";
+
+    private static final String TEXTO_NO_CONTINUAR_CANAL =
+            "no podremos continuar la conversación por este canal";
+
     private <T extends Actor> void rechazarTratamientoYCerrar(T actor) {
 
-        List<WebElementFacade> btnNo =
-                BTN_NO.resolveAllFor(actor);
-
-        List<WebElementFacade> btnNoAutorizo =
-                BTN_NO_AUTORIZO.resolveAllFor(actor);
+        List<WebElementFacade> btnNo = BTN_NO.resolveAllFor(actor);
+        List<WebElementFacade> btnNoAutorizo = BTN_NO_AUTORIZO.resolveAllFor(actor);
 
         if (!btnNo.isEmpty()) {
-
-            actor.attemptsTo(
-                    Click.on(BTN_NO)
-            );
-
+            actor.attemptsTo(Click.on(BTN_NO));
         } else if (!btnNoAutorizo.isEmpty()) {
-
-            actor.attemptsTo(
-                    Click.on(BTN_NO_AUTORIZO)
-            );
-
+            actor.attemptsTo(Click.on(BTN_NO_AUTORIZO));
         } else {
-
             throw new IllegalStateException(
                     "Se detecto tratamiento de datos, pero no se encontro la opcion No ni No autorizo"
             );
         }
 
-        ReportHooks.registrarPaso(
-                "Se rechazo la autorizacion de tratamiento de datos"
+        ReportHooks.registrarPaso("Se rechazo la autorizacion de tratamiento de datos");
+
+        // Esperar la respuesta REAL del bot al rechazo antes de intentar el cierre.
+        // Al elegir "No" el bot confirma con "Has elegido la opción NO..." y deja el
+        // chat en Menú principal / Pagar factura, estado que sí procesa Cierrecaso.
+        actor.attemptsTo(
+                WaitForTextContains.withAnyTextContains(
+                        30,
+                        TEXTO_RECHAZO_CONFIRMADO,
+                        TEXTO_NO_CONTINUAR_CANAL,
+                        TEXTO_MENU_PRINCIPAL,
+                        TEXTO_PAGAR_FACTURA
+                )
         );
 
-        actor.attemptsTo(
-                WaitFor.aTime(4000)
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Respuesta del bot tras rechazar tratamiento de datos"
         );
+        ReportHooks.registrarPaso(
+                "El bot confirmo el rechazo; el chat quedo en estado que permite cierre"
+        );
+
+        // Salvaguarda: si en algún caso el bot cerrara solo en vez de ir al menú.
+        if (conversacionYaFinalizada(actor)) {
+            vaciarChat(actor);
+            return;
+        }
 
         cerrarYVaciarChat(actor);
     }

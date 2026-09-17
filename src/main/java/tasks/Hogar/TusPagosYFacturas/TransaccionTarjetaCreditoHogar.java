@@ -65,12 +65,14 @@ public class TransaccionTarjetaCreditoHogar extends AndroidObject implements Tas
 
         // Esperar cualquiera de las dos vistas posibles
         // Esperar unos segundos por la vista actual
+        // Esperar a que cargue el formulario
         actor.attemptsTo(
                 WaitFor.aTime(10000)
         );
 
+// Vista actual: tiene un único campo MM/AA
         boolean vistaActual =
-                textoContiene(actor, AGREGAR_TARJETA);
+                TXT_FECHA_EXPIRACION.resolveFor(actor).isVisible();
 
         if (vistaActual) {
 
@@ -82,18 +84,10 @@ public class TransaccionTarjetaCreditoHogar extends AndroidObject implements Tas
 
         } else {
 
-            // La nueva vista necesita desplazamiento para mostrar el formulario
-            actor.attemptsTo(
-                    ScrollGradual.bajar(0.30),
-                    WaitForTextContains.withAnyTextContains(
-                            30,
-                            "Nombre y apellido",
-                            "Tipo de documento"
-                    )
-            );
-
+            // Vista nueva: tiene mes y año separados
             boolean vistaNueva =
-                    textoContiene(actor, "Nombre y apellido");
+                    SELECT_MES_EXPIRACION.resolveFor(actor).isVisible()
+                            && SELECT_ANIO_EXPIRACION.resolveFor(actor).isVisible();
 
             if (vistaNueva) {
 

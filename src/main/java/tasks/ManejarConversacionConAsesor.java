@@ -27,9 +27,9 @@ public class ManejarConversacionConAsesor implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        
+
         EstadoAsesor estadoActual = EstadoAtencionHumana.leerEstado();
-        
+
         if (estadoActual == EstadoAsesor.SIN_CONVERSACION_PENDIENTE) {
             EstadoAtencionHumana.marcarEnCola();
             estadoActual = EstadoAsesor.EN_COLA;
@@ -50,30 +50,28 @@ public class ManejarConversacionConAsesor implements Task {
         if (estadoActual == EstadoAsesor.EN_COLA) {
             ReportHooks.registrarPaso("Caso en cola; esperando asignacion y saludo del asesor");
             int tiempoRestante = calcularTiempoRestante(tiempoInicio);
-            
+
             boolean asesorAsignado = asesorActivoVisible(actor);
             if (!asesorAsignado && tiempoRestante > 0) {
-                 asesorAsignado = WaitForTextContainsWithTimeout.esperar(
-                    tiempoRestante,
-                    "Mi nombre es",
-                    "mi nombre es",
-                    "me encargare de tu solicitud",
-                    "me encargaré de tu solicitud",
-                    "Asesor de Claro",
-                    "asesor de Claro",
-                    "Es un gusto atenderte",
-                    "es un gusto atenderte",
-                    "como te encuentras",
-                    "como te encuentras el dia de hoy",
-                    "en que te puedo colaborar",
-                    "Buen dia",
-                    "Buen día",
-                    "Buenos dias",
-                    "Buenos días",
-                    "Buenas tardes",
-                    "Buenas noches",
-                    "Nombre completo",
-                    "nombre completo"
+                asesorAsignado = WaitForTextContainsWithTimeout.esperar(
+                        tiempoRestante,
+                        "Mi nombre es",
+                        "mi nombre es",
+                        "me encargare de tu solicitud",
+                        "me encargaré de tu solicitud",
+                        "Asesor de Claro",
+                        "asesor de Claro",
+                        "como te encuentras",
+                        "como te encuentras el dia de hoy",
+                        "en que te puedo colaborar",
+                        "Buen dia",
+                        "Buen día",
+                        "Buenos dias",
+                        "Buenos días",
+                        "Buenas tardes",
+                        "Buenas noches",
+                        "Nombre completo",
+                        "nombre completo"
                 ).answeredBy(actor);
             }
 
@@ -108,7 +106,7 @@ public class ManejarConversacionConAsesor implements Task {
             } else {
                 ReportHooks.registrarPaso("La solicitud de finalizar interaccion ya estaba enviada");
             }
-            
+
             EstadoAtencionHumana.marcarCierrePendiente();
             estadoActual = EstadoAsesor.CIERRE_PENDIENTE;
         }
@@ -117,29 +115,29 @@ public class ManejarConversacionConAsesor implements Task {
         if (estadoActual == EstadoAsesor.CIERRE_PENDIENTE) {
             ReportHooks.registrarPaso("Esperando cierre real por parte del asesor");
             int tiempoRestante = calcularTiempoRestante(tiempoInicio);
-            
+
             boolean cierreDetectado = cierreAsesorVisible(actor);
             if (!cierreDetectado && tiempoRestante > 0) {
-                 cierreDetectado = WaitForTextContainsWithTimeout.esperar(
-                    tiempoRestante,
-                    "finalizó",
-                    "finalizo",
-                    "Nuestro chat con agente finalizo",
-                    "Nuestro chat con agente finalizó",
-                    "Fue un gusto ayudarte",
-                    "La conversacion ha finalizado",
-                    "La conversación ha finalizado",
-                    "chat con agente ha finalizado",
-                    "Caso cerrado",
-                    "Ha sido un placer ayudarte hoy",
-                    "por elegirnos",
-                    "encuesta",
-                    "Agradecemos tu preferencia",
-                    "agradecemos tu preferencia",
-                    "maravilloso día",
-                    "maravilloso dia",
-                    "disposición las 24 horas",
-                    "disposicion las 24 horas"
+                cierreDetectado = WaitForTextContainsWithTimeout.esperar(
+                        tiempoRestante,
+                        "finalizó",
+                        "finalizo",
+                        "Nuestro chat con agente finalizo",
+                        "Nuestro chat con agente finalizó",
+                        "Fue un gusto ayudarte",
+                        "La conversacion ha finalizado",
+                        "La conversación ha finalizado",
+                        "chat con agente ha finalizado",
+                        "Caso cerrado",
+                        "Ha sido un placer ayudarte hoy",
+                        "por elegirnos",
+                        "encuesta",
+                        "Agradecemos tu preferencia",
+                        "agradecemos tu preferencia",
+                        "maravilloso día",
+                        "maravilloso dia",
+                        "disposición las 24 horas",
+                        "disposicion las 24 horas"
                 ).answeredBy(actor);
             }
 
@@ -154,7 +152,7 @@ public class ManejarConversacionConAsesor implements Task {
 
         liberarCasoCerrado(actor, "Conversacion finalizada por el asesor");
     }
-    
+
     private int calcularTiempoRestante(long tiempoInicio) {
         long transcurrido = (System.currentTimeMillis() - tiempoInicio) / 1000;
         int restante = TIMEOUT_ESPERA_MAXIMO - (int) transcurrido;
@@ -168,8 +166,6 @@ public class ManejarConversacionConAsesor implements Task {
                 || TextoQueContengaX.verificarTexto("me encargaré de tu solicitud").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Asesor de Claro").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("asesor de Claro").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("Es un gusto atenderte").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("es un gusto atenderte").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("colaborar").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("como te encuentras").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Buen dia").answeredBy(actor)

@@ -218,4 +218,7 @@ public class Constantes {
     public static final String PAQUETES_Y_RECARGAS = "Paquetes y recargas para tu línea";
     public static final String INGRESA_NUMERO_CLARO = "Ingresa tu número";
     public static final String SALDO_DISPONIBLE_NO_ALCANZA = "Tu saldo disponible no alcanza";
+    public static final String TITULO_TRATAMIENTO_INFORMACION_M =
+            "POLÍTICA DE TRATAMIENTO DE LA INFORMACIÓN";
+
 }

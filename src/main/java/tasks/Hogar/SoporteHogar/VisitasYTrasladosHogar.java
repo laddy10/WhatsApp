@@ -2,6 +2,7 @@ package tasks.Hogar.SoporteHogar;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.BTN_ENVIAR_2;
+import static userinterfaces.WhatsAppPage.LBL_MENSAJES;
 import static utils.Constantes.*;
 import static utils.ConstantesPost.*;
 
@@ -10,11 +11,12 @@ import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitForTextContains;
+import java.util.List;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
-import utils.AndroidObject;
 import utils.CapturaDePantallaMovil;
 
 public class VisitasYTrasladosHogar implements Task {
@@ -36,17 +38,18 @@ public class VisitasYTrasladosHogar implements Task {
                 )
         );
 
-        AndroidObject and = new AndroidObject();
+        // Decisión basada en el mensaje más reciente del bot,
+        // no en cualquier mensaje del historial.
 
         // Si llegó el mensaje esperado, finaliza correctamente
-        if (and.textoContiene(actor, NO_TIENES_AGENDADAS_VISITAS)) {
+        if (ultimoMensajeContiene(actor, NO_TIENES_AGENDADAS_VISITAS)) {
 
             validarRespuestaEsperada(actor);
             return;
         }
 
         // Si el bot regresó al menú principal, realizar un solo reintento
-        if (and.textoContiene(actor, REDIRECCION_MENU)) {
+        if (ultimoMensajeContiene(actor, REDIRECCION_MENU)) {
 
             ReportHooks.registrarPaso(
                     "El bot regresó al menú principal. Se realiza un segundo intento de Visitas y traslados."
@@ -65,6 +68,21 @@ public class VisitasYTrasladosHogar implements Task {
 
             validarRespuestaEsperada(actor);
         }
+    }
+
+    /**
+     * Verifica el texto contra el mensaje más reciente
+     * renderizado en el chat, no contra todo el historial.
+     */
+    private boolean ultimoMensajeContiene(Actor actor, String texto) {
+
+        List<WebElementFacade> mensajes = LBL_MENSAJES.resolveAllFor(actor);
+
+        if (mensajes.isEmpty()) {
+            return false;
+        }
+
+        return mensajes.get(mensajes.size() - 1).getText().contains(texto);
     }
 
     private <T extends Actor> void seleccionarVisitasYTraslados(T actor) {
