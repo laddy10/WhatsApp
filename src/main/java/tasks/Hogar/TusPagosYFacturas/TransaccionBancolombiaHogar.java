@@ -43,7 +43,10 @@ public class TransaccionBancolombiaHogar extends AndroidObject implements Task {
         actor.attemptsTo(
                 ScrollGradual.bajar(0.20),
                 ClickTextoQueContengaX.elTextoContiene(CONTINUAR_BUTTON),
-                WaitForTextContains.withAnyTextContains(BANCOLOMBIA_BIENVENIDA),
+                WaitForTextContains.withAnyTextContains(
+                        140,
+                        BANCOLOMBIA_BIENVENIDA
+                ),
                 WaitFor.aTime(5000)
         );
 
