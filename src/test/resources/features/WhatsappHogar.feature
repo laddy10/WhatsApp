@@ -443,7 +443,7 @@ Feature: Validar los flujos de WhatsApp para líneas Hogar
     And Seleccionar menu principal hogar
     And Ingresar al menu todo sobre tu plan postpago
     And Seleccionar Tu lealtad merece mas claro video hogar
-    And Vaciar chat
+
 
 
   @EXUS_HOG_WSP_31

@@ -428,6 +428,7 @@ public class ConstantesPost {
     public static final String COBERTURA_MEDICA = "Coberturas Médicas";
     public static final String HOGAR_EXPRESS = "Hogar Express";
     public static final String VALOR_A_PAGAR_CERO = "Valor a pagar: $0";
+    public static final String CONTINUAR_AL_DESTINO_2= "Continuar al destino";
 
 
 }

@@ -14,7 +14,7 @@ import utils.CapturaDePantallaMovil;
 import utils.UtilidadesAndroid;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static utils.Constantes.PAGO_FACTURAS_HOGAR_MULTIPLAY;
+import static utils.Constantes.*;
 
 public class IngresarAlLinkDePagoHogar extends AndroidObject implements Task {
 
@@ -72,9 +72,10 @@ public class IngresarAlLinkDePagoHogar extends AndroidObject implements Task {
 
         // Esperar a que cargue la página de pagos
         actor.attemptsTo(
-                WaitForTextContains.withTextContains(
-                        PAGO_FACTURAS_HOGAR_MULTIPLAY,
-                        50
+                WaitForTextContains.withAnyTextContains(
+                        30,
+                        PAGO_TOTAL_PORTAL_PAGOS,
+                        SELECCIONA_MEDIO_PAGO_PORTAL
                 )
         );
 

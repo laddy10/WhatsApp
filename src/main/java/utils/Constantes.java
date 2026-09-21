@@ -220,5 +220,7 @@ public class Constantes {
     public static final String SALDO_DISPONIBLE_NO_ALCANZA = "Tu saldo disponible no alcanza";
     public static final String TITULO_TRATAMIENTO_INFORMACION_M =
             "POLÍTICA DE TRATAMIENTO DE LA INFORMACIÓN";
+    public static final String PAGO_TOTAL_PORTAL_PAGOS = "Pago total";
+    public static final String SELECCIONA_MEDIO_PAGO_PORTAL = "Selecciona el medio de pago";
 
 }

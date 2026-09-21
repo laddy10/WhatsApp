@@ -83,9 +83,11 @@ public class LealtadClaroVideoHogar implements Task {
         // 5. Abrir la URL de Claro Video (puede ser cambiante - bit.ly)
         UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_VIDEO);
 
+        // Si Bitly muestra vista previa, continuar manualmente al destino
+        manejarVistaPreviaBitly(actor);
+
         try {
 
-            // Primero confirmar que bit.ly realmente redireccionó a Claro Video
             UtilidadesAndroid.esperarRedireccionamientoWeb(
                     actor,
                     "clarovideo.com",
@@ -95,12 +97,15 @@ public class LealtadClaroVideoHogar implements Task {
         } catch (Exception e) {
 
             ReportHooks.registrarPaso(
-                    "No se confirmó redireccionamiento de bit.ly a Claro Video. "
+                    "No se confirmó redireccionamiento a Claro Video. "
                             + "Se realiza un segundo intento."
             );
 
-            // Reintentar la URL acortada una sola vez
+            // Segundo y último intento
             UtilidadesAndroid.abrirLinkEnNavegador(URL_CLARO_VIDEO);
+
+            // Bitly también podría mostrar la vista previa nuevamente
+            manejarVistaPreviaBitly(actor);
 
             UtilidadesAndroid.esperarRedireccionamientoWeb(
                     actor,
@@ -109,23 +114,51 @@ public class LealtadClaroVideoHogar implements Task {
             );
         }
 
-// Una vez confirmado que estamos realmente en clarovideo.com,
-// esperar el contenido de la página
+        // Una vez confirmado que estamos realmente en clarovideo.com,
+        // esperar el contenido de la página
         actor.attemptsTo(
-                WaitForResponse.withAnyText(90, PREMIUM),
-                ValidarTextoQueContengaX.elTextoContiene(PREMIUM)
+                WaitForTextContains.withTextContains(
+                        PREMIUM,
+                        90
+                )
         );
 
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar redirección a Claro Video");
         ReportHooks.registrarPaso("Validar redirección a Claro Video");
 
-        // 6. Volver a WhatsApp y salir
-        actor.attemptsTo(
-                Atras.irAtras(),
-                WaitFor.aTime(2000),
-                SalirConversacion.salir()
-        );
+
+    }
+
+
+    private <T extends Actor> void manejarVistaPreviaBitly(T actor) {
+
+        try {
+
+            actor.attemptsTo(
+                    WaitForTextContains.withTextContains(
+                            CONTINUAR_AL_DESTINO_2,
+                            5
+                    )
+            );
+
+            actor.attemptsTo(
+                    ClickTextoQueContengaX.elTextoContiene(
+                            CONTINUAR_AL_DESTINO_2
+                    )
+            );
+
+            ReportHooks.registrarPaso(
+                    "Se detectó vista previa de Bitly y se seleccionó 'Continuar al destino'"
+            );
+
+        } catch (Exception e) {
+
+            // Bitly redireccionó directamente; no requiere acción.
+            System.out.println(
+                    "No se presentó vista previa de Bitly. Se continúa con el redireccionamiento."
+            );
+        }
     }
 
     public static Performable lealtadClaroVideoHogar() {

@@ -67,7 +67,7 @@ public class TransaccionTarjetaCreditoHogar extends AndroidObject implements Tas
         // Esperar unos segundos por la vista actual
         // Esperar a que cargue el formulario
         actor.attemptsTo(
-                WaitFor.aTime(10000)
+                WaitFor.aTime(80000)
         );
 
 // Vista actual: tiene un único campo MM/AA

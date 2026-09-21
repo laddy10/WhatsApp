@@ -25,4 +25,10 @@ public class WhatsAppHogarPage {
     public static final Target LBL_SI =
             Target.the("Texto Si").
                     located(By.xpath("//android.widget.FrameLayout[@content-desc=\"Si\"]"));
+
+    public static final Target CAMPO_TIPO_DOCUMENTO_PROGRAMAR_PAGOS =
+            Target.the("Tipo de documento Programar Pagos")
+                    .located(By.xpath(
+                            "//android.view.View[@resource-id=\"TIPO_DOCUMENTO\"]"
+                    ));
 }

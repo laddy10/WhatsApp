@@ -1,6 +1,8 @@
 package tasks.Hogar.TusPagosYFacturas;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static net.serenitybdd.screenplay.matchers.WebElementStateMatchers.isVisible;
+import static userinterfaces.WhatsAppHogarPage.CAMPO_TIPO_DOCUMENTO_PROGRAMAR_PAGOS;
 import static utils.ConstantesPost.*;
 
 import hooks.ReportHooks;
@@ -13,6 +15,7 @@ import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.waits.WaitUntil;
 import tasks.SalirConversacion;
 import utils.AndroidObject;
 import utils.CapturaDePantallaMovil;
@@ -42,13 +45,14 @@ public class ValidarDireccionamientoProgramarPagosHogar extends AndroidObject im
         // Desplazamiento gradual para revelar el formulario de validación de identidad
         actor.attemptsTo(
                 ScrollGradual.bajar(0.25),
-                WaitForTextContains.withTextContains(TIPO_DOCUMENTO, 20)
-
+                WaitUntil.the(
+                        CAMPO_TIPO_DOCUMENTO_PROGRAMAR_PAGOS,
+                        isVisible()
+                ).forNoMoreThan(20).seconds()
         );
 
         // Validar la presencia de los campos clave del formulario
         actor.attemptsTo(
-                ValidarTextoQueContengaX.elTextoContiene(TIPO_DOCUMENTO),
                 ValidarTextoQueContengaX.elTextoContiene(NUMERO_DOCUMENTO),
                 ValidarTextoQueContengaX.elTextoContiene(FECHA_EXPEDICION),
                 ScrollGradual.bajar(0.30),
