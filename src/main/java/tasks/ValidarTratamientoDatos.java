@@ -46,7 +46,7 @@ public class ValidarTratamientoDatos implements Task {
 
             actor.attemptsTo(
                     WaitForTextContains.withTextContains(
-                            POLITICA_TRATAMIENTO,
+                            TITULO_TRATAMIENTO_INFORMACION_M,
                             20
                     )
             );
