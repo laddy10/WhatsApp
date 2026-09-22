@@ -5,7 +5,9 @@ import static net.serenitybdd.screenplay.Tasks.instrumented;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
+
 import java.time.Duration;
+
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
 import utils.AndroidObject;
@@ -35,9 +37,13 @@ public class ScrollGradual extends AndroidObject implements Interaction {
                 startY = (int) (height * 0.65);
                 endY = (int) (height * (0.65 - porcentaje));
             } else {
-                // Swipe de arriba hacia abajo (desplaza la vista hacia arriba)
-                startY = (int) (height * 0.35);
-                endY = (int) (height * (0.35 + porcentaje));
+                // Swipe hacia abajo para mostrar contenido anterior
+                startY = (int) (height * 0.45);
+
+                endY = Math.min(
+                        (int) (height * 0.85),
+                        (int) (height * (0.45 + porcentaje))
+                );
             }
 
             new TouchAction(androidDriver(actor))

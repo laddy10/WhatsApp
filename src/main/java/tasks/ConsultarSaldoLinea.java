@@ -44,7 +44,7 @@ public class ConsultarSaldoLinea implements Task {
           ValidarTexto.validarTexto(MENU_ANTERIOR));
     } else {
       actor.attemptsTo(
-              ScrollGradual.subir(0.25),
+              ScrollGradual.subir(0.30),
               WaitFor.aTime(1000),
               ValidarTextoQueContengaX.elTextoContiene(RECARGA_ACTIVA),
               ValidarTextoQueContengaX.elTextoContiene(SALDO_VENCE)
