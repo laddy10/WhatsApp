@@ -76,6 +76,7 @@ public class TransaccionBancolombiaHogar extends AndroidObject implements Task {
 
         // Validar que se redireccionó a la pantalla de Clave Principal
         actor.attemptsTo(
+                WaitForTextContains.withAnyTextContains(CLAVE_PRINCIPAL),
                 ValidarTextoQueContengaX.elTextoContiene(CLAVE_PRINCIPAL)
         );
 
