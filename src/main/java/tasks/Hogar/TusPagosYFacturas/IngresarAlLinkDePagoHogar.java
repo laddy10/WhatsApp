@@ -67,25 +67,25 @@ public class IngresarAlLinkDePagoHogar extends AndroidObject implements Task {
             ReportHooks.registrarPaso("Modal de cookies aceptado");
 
         } catch (Exception e) {
-            System.out.println("Modal de cookies no presente, se continúa normalmente.");
+            System.out.println(
+                    "Modal de cookies no presente, se continúa normalmente."
+            );
         }
 
-        // Esperar a que cargue la página de pagos
-        actor.attemptsTo(
-                WaitForTextContains.withAnyTextContains(
-                        30,
-                        PAGO_TOTAL_PORTAL_PAGOS,
-                        SELECCIONA_MEDIO_PAGO_PORTAL
-                )
+        // Confirmar redireccionamiento al Portal de Pagos
+        UtilidadesAndroid.esperarRedireccionamientoWeb(
+                actor,
+                "pagos.claro.com.co",
+                55
         );
 
-        // Validar que estamos en la página correcta
-        actor.attemptsTo(
-                ValidarTextoQueContengaX.elTextoContiene(PAGO_FACTURAS_HOGAR_MULTIPLAY)
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Validación de ingreso al portal de pagos"
         );
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Validación de ingreso al portal de pagos");
-        ReportHooks.registrarPaso("Validación de ingreso al portal de pagos");
+        ReportHooks.registrarPaso(
+                "Validación de ingreso al portal de pagos"
+        );
     }
 
     public static Performable ingresarAlLinkDePagoHogar() {

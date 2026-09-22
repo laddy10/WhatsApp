@@ -14,6 +14,7 @@ public class CerrarPantallasSistema implements Task {
 
         try {
 
+            // Popup USB
             boolean dialogoUsbVisible =
                     AndroidObject.androidDriver(actor)
                             .findElementsByAndroidUIAutomator(
@@ -36,10 +37,31 @@ public class CerrarPantallasSistema implements Task {
                 Thread.sleep(1000);
             }
 
+            // Popup SIM Claro
+            boolean popupSimClaroVisible =
+                    AndroidObject.androidDriver(actor)
+                            .findElementsByAndroidUIAutomator(
+                                    "new UiSelector().textContains(\"SIM Claro\")"
+                            )
+                            .size() > 0;
+
+            if (popupSimClaroVisible) {
+
+                ReportHooks.registrarPaso(
+                        "Se detectó popup 'SIM Claro'. Se procede a cancelarlo."
+                );
+
+                AndroidObject.androidDriver(actor)
+                        .findElementByAndroidUIAutomator(
+                                "new UiSelector().textMatches(\"(?i)cancelar\")"
+                        )
+                        .click();
+
+                Thread.sleep(1000);
+            }
+
         } catch (Exception e) {
 
-            // Si no existe ninguna ventana interpuesta,
-            // la ejecución continúa normalmente.
             System.out.println(
                     "No se detectaron ventanas del sistema pendientes."
             );
