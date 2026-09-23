@@ -37,6 +37,7 @@ public class SeleccionarLineaHogar implements Task {
         // este flujo siempre manda la opción 1, así que la dirección se lee del propio
         // menú: informar la cuenta real, no una suposición.
         ContextoST.registrarCuenta(leerCuentaDelMenu(actor));
+        ContextoST.registrarSegmento("hogar");
 
         actor.attemptsTo(
                 Enter.theValue("1").into(TXT_CAJA_MENSAJE),

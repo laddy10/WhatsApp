@@ -33,6 +33,7 @@ import tasks.Postpago.TusPagosYFacturas.*;
 import tasks.Postpago.ValidarMenuPrincipalPost;
 import tasks.SalirConversacion;
 import tasks.SeleccionarNumero;
+import utils.ContextoST;
 import utils.CapturaDePantallaMovil;
 import utils.TestDataProvider;
 
@@ -49,6 +50,9 @@ public class WhatsappPostpagoDefinitions {
     }
     @And("^Seleccionar linea de de pago Post 30$")
     public void seleccionarLineaPost30() {
+        // Contrato st-context: estos pasos eligen la linea sin pasar por
+        // SeleccionarLineaPostpago, asi que declaran el segmento por su cuenta.
+        ContextoST.registrarSegmento("pospago");
         theActorInTheSpotlight().attemptsTo(
                 SeleccionarNumero.porUltimos4(user.getNumeroWhatsAppPost30()),
                 WaitForResponse.withAnyText(VER_Y_PAGAR_FACTURA, SI_AUTORIZO, AUTORIZACION_TRATAMIENTO)
@@ -58,6 +62,9 @@ public class WhatsappPostpagoDefinitions {
 
     @And("^Seleccionar linea de de pago Post 31$")
     public void seleccionarLineaPost31() {
+        // Contrato st-context: estos pasos eligen la linea sin pasar por
+        // SeleccionarLineaPostpago, asi que declaran el segmento por su cuenta.
+        ContextoST.registrarSegmento("pospago");
         theActorInTheSpotlight().attemptsTo(
                 SeleccionarNumero.porUltimos4(user.getNumeroWhatsAppPost31()),
                 WaitForResponse.withAnyText(VER_Y_PAGAR_FACTURA, SI_AUTORIZO, AUTORIZACION_TRATAMIENTO)
@@ -67,6 +74,9 @@ public class WhatsappPostpagoDefinitions {
 
     @And("^Seleccionar linea de de pago Post 32$")
     public void seleccionarLineaPost32() {
+        // Contrato st-context: estos pasos eligen la linea sin pasar por
+        // SeleccionarLineaPostpago, asi que declaran el segmento por su cuenta.
+        ContextoST.registrarSegmento("pospago");
         theActorInTheSpotlight().attemptsTo(
                 SeleccionarNumero.porUltimos4(user.getNumeroWhatsAppPost32()),
                 WaitForResponse.withAnyText(VER_Y_PAGAR_FACTURA, SI_AUTORIZO, AUTORIZACION_TRATAMIENTO)
@@ -76,6 +86,9 @@ public class WhatsappPostpagoDefinitions {
 
     @And("^Seleccionar linea de de pago Post 33$")
     public void seleccionarLineaPost33() {
+        // Contrato st-context: estos pasos eligen la linea sin pasar por
+        // SeleccionarLineaPostpago, asi que declaran el segmento por su cuenta.
+        ContextoST.registrarSegmento("pospago");
         theActorInTheSpotlight().attemptsTo(
                 SeleccionarNumero.porUltimos4(user.getNumeroWhatsAppPost33()),
                 WaitForResponse.withAnyText(VER_Y_PAGAR_FACTURA, SI_AUTORIZO, AUTORIZACION_TRATAMIENTO)
