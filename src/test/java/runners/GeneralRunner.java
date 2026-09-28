@@ -14,7 +14,6 @@ import utils.DataToFeature;
         snippets = SnippetType.CAMELCASE,
         tags = "@Whatsapp_02"
 
-
 )
 
 
