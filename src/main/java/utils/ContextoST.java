@@ -45,12 +45,16 @@ public class ContextoST {
   /** Cuenta elegida cuando el flujo NO va por numero de linea (Hogar: una direccion). */
   private static String cuenta = null;
 
+  /** Segmento del escenario en curso: prepago / pospago / hogar. Ver registrarSegmento. */
+  private static String segmento = null;
+
   private ContextoST() {}
 
   /** Arranque de escenario: olvidar las lineas del anterior (los estaticos sobreviven la corrida). */
   public static synchronized void reiniciar() {
     SELECCIONES.clear();
     cuenta = null;
+    segmento = null;
   }
 
   /**
@@ -59,6 +63,25 @@ public class ContextoST {
    */
   public static synchronized void registrarCuenta(String descripcion) {
     cuenta = descripcion;
+  }
+
+  /**
+   * Que SEGMENTO esta probando este escenario: "prepago", "pospago", "hogar".
+   *
+   * <p>Lo declara el PROYECTO porque es el unico que lo sabe: un mismo proyecto cubre los tres
+   * (real-user.json tiene numeroPre, numeroPost y numeroHogar) y el segmento depende de cual de
+   * ellos pidio el escenario, no del proyecto ni del modulo. Deducirlo desde afuera —por el
+   * nombre del tag, por ejemplo— seria adivinar, y se romperia en silencio en cuanto alguien
+   * renombre un tag.
+   *
+   * <p>Se llama desde la tarea que elige la linea, que es donde consta el dato. Si el escenario
+   * falla ANTES de llegar ahi, queda el valor por defecto del proyecto (-Dst.segmento) o vacio.
+   *
+   * <p>Va a Smart Tester como {@code {{segmentoPrueba}}} y de ahi al campo "segmento" del API de
+   * registro de fallos de Claro.
+   */
+  public static synchronized void registrarSegmento(String valor) {
+    segmento = valor;
   }
 
   /**
@@ -145,6 +168,7 @@ public class ContextoST {
       datos.put("linea", lineaResumen());
       datos.put("lineaCuenta", lineaCuentaWhatsApp());
       datos.put("cuenta", cuenta);
+      datos.put("segmento", segmentoResuelto());
       datos.put("selecciones", new ArrayList<>(SELECCIONES));
       datos.put("resultado", scenario != null && scenario.isFailed() ? "FAILED" : "PASSED");
       datos.put("registradoEn", LocalDateTime.now().toString());
@@ -153,11 +177,28 @@ public class ContextoST {
 
       System.out.println(
           "[ContextoST] Escenario registrado | linea=" + datos.get("linea")
-              + (cuenta == null ? "" : " | cuenta=" + cuenta));
+              + (cuenta == null ? "" : " | cuenta=" + cuenta)
+              + " | segmento=" + datos.get("segmento"));
 
     } catch (Exception e) {
       System.err.println("[ContextoST] No se pudo registrar el contexto del escenario: " + e);
     }
+  }
+
+  /**
+   * El segmento del escenario, o el valor por defecto del proyecto si el escenario no alcanzo a
+   * declararlo.
+   *
+   * <p>El respaldo {@code -Dst.segmento} lo inyecta el orquestador desde projects.json. Sirve para
+   * los proyectos donde el segmento es UNO SOLO y no depende del escenario (WhatsApp E&N es todo
+   * "E&N", y ahi los flujos ni siquiera eligen linea en un menu).
+   */
+  private static synchronized String segmentoResuelto() {
+    if (segmento != null && !segmento.trim().isEmpty()) {
+      return segmento.trim();
+    }
+    String porDefecto = System.getProperty("st.segmento", "");
+    return porDefecto == null ? "" : porDefecto.trim();
   }
 
   /**

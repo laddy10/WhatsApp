@@ -9,6 +9,7 @@ import models.User;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
+import utils.ContextoST;
 import utils.TestDataProvider;
 
 public class SeleccionarLineaConsulta implements Task {
@@ -17,6 +18,8 @@ public class SeleccionarLineaConsulta implements Task {
 
   @Override
   public <T extends Actor> void performAs(T actor) {
+    // Contrato st-context: este flujo consulta la linea PREPAGO (numeroPre).
+    ContextoST.registrarSegmento("prepago");
     actor.attemptsTo(
         SeleccionarNumero.porUltimos4(user.getNumeroPre()),
         WaitForResponse.withAnyTextFailingOn(

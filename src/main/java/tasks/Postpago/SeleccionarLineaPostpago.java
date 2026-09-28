@@ -11,6 +11,7 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import tasks.SeleccionarNumero;
+import utils.ContextoST;
 import utils.TestDataProvider;
 
 public class SeleccionarLineaPostpago implements Task {
@@ -19,6 +20,8 @@ public class SeleccionarLineaPostpago implements Task {
 
   @Override
   public <T extends Actor> void performAs(T actor) {
+    // Contrato st-context: este flujo consulta la linea POSPAGO (numeroPost).
+    ContextoST.registrarSegmento("pospago");
     actor.attemptsTo(
         SeleccionarNumero.porUltimos4(user.getNumeroPost()),
         WaitForResponse.withAnyText(VER_Y_PAGAR_FACTURA, SI_AUTORIZO, AUTORIZACION_TRATAMIENTO));
