@@ -26,7 +26,7 @@ public class ValidarTextoErrorYLimpiarChat implements Task {
 
         boolean chatFinalizadoPorInactividad =
                 TextoQueContengaX
-                        .verificarTexto("Han pasado 40 minutos y nuestro chat finalizó")
+                        .verificarTexto("Fue un gusto ayudarte")
                         .answeredBy(actor);
 
         if (chatFinalizadoPorInactividad) {
