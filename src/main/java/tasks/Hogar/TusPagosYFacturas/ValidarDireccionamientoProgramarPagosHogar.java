@@ -58,6 +58,7 @@ public class ValidarDireccionamientoProgramarPagosHogar extends AndroidObject im
                 ScrollGradual.bajar(0.30),
                 WaitForTextContains.withTextContains(PRIMER_APELLIDO, 20),
                 ValidarTextoQueContengaX.elTextoContiene(PRIMER_APELLIDO),
+                ScrollGradual.bajar(0.30),
                 ValidarTextoQueContengaX.elTextoContiene(CONTINUAR_BUTTON),
                 Atras.irAtras(),
                 SalirConversacion.salir()
