@@ -207,37 +207,20 @@ public class ValidarYLimpiarChatPendiente implements Task {
          * La tarea termina y el flujo normal continúa.
          */
     }
-
-    /**
-     * Detecta, a partir del mensaje más reciente del bot,
-     * si la conversación anterior ya fue finalizada por el
-     * propio bot. No revisa todo el historial: solo el
-     * último mensaje renderizado, para evitar falsos
-     * positivos por mensajes antiguos.
-     */
+    
     private boolean conversacionYaFinalizada(Actor actor) {
 
-        WebElementFacade ultimoMensaje = ultimoMensajeBot(actor);
+        return TextoQueContengaX
+                .verificarTexto(TEXTO_CIERRE_CONVERSACION_1)
+                .answeredBy(actor)
 
-        if (ultimoMensaje == null) {
-            return false;
-        }
+                || TextoQueContengaX
+                .verificarTexto(TEXTO_CIERRE_CONVERSACION_2)
+                .answeredBy(actor)
 
-        String texto = ultimoMensaje.getText();
-
-        return texto.contains(TEXTO_CIERRE_CONVERSACION_1)
-                || texto.contains(TEXTO_CIERRE_CONVERSACION_2)
-                || texto.contains(TEXTO_CIERRE_CONVERSACION_3);
-    }
-
-    /**
-     * Resuelve el mensaje más reciente renderizado en el chat.
-     */
-    private static WebElementFacade ultimoMensajeBot(Actor actor) {
-
-        List<WebElementFacade> mensajes = LBL_MENSAJES.resolveAllFor(actor);
-
-        return mensajes.isEmpty() ? null : mensajes.get(mensajes.size() - 1);
+                || TextoQueContengaX
+                .verificarTexto(TEXTO_CIERRE_CONVERSACION_3)
+                .answeredBy(actor);
     }
 
     /**
