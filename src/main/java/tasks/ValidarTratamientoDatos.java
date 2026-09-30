@@ -42,7 +42,7 @@ public class ValidarTratamientoDatos implements Task {
                     ValidarTextoQueContengaX.elTextoContiene(URL_TRATAMIENTO_INFORMACION),
                     ValidarTextoQueContengaX.elTextoContiene(URL_PORTAL_CLARO));
 
-            UtilidadesAndroid.abrirLinkEnNavegador(URL_TRATAMIENTO_INFORMACION);
+          /*     UtilidadesAndroid.abrirLinkEnNavegador(URL_TRATAMIENTO_INFORMACION);
 
             actor.attemptsTo(
                     WaitFor.aTime(9000),
@@ -74,6 +74,8 @@ public class ValidarTratamientoDatos implements Task {
             ReportHooks.registrarPaso("Redirección URL Autogestión Claro WhatsApp");
 
             actor.attemptsTo(Atras.irAtras());
+            */
+
 
             List<WebElementFacade> btnsi = BTN_SI2.resolveAllFor(actor);
             List<WebElementFacade> btnsiautorizo = BTN_SI_AUTORIZO.resolveAllFor(actor);
@@ -90,6 +92,7 @@ public class ValidarTratamientoDatos implements Task {
 
             actor.attemptsTo(
                     WaitForResponse.withAnyText(58, VER_MENU_PREPAGO, MENU_PRINCIPAL));
+
         }
     }
 
