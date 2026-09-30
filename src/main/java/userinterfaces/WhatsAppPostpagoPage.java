@@ -315,4 +315,12 @@ public class WhatsAppPostpagoPage {
   public static final Target BTN_GUARDAR_TARJETA_SI =
           Target.the("Opción Sí guardar tarjeta")
                   .located(By.xpath("//android.view.View[@text=\"Si\"]"));
+
+  public static final Target LINK_POLITICA_TRATAMIENTO =
+          Target.the("Link política tratamiento")
+                  .located(
+                          By.xpath(
+                                  "//android.view.View[@content-desc='http://bit.ly/3DtS9az']"
+                          )
+                  );
 }

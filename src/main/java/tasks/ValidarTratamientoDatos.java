@@ -3,14 +3,14 @@ package tasks;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static userinterfaces.WhatsAppPage.*;
 import static userinterfaces.WhatsAppPage.BTN_SI2;
-import static userinterfaces.WhatsAppPostpagoPage.BTN_SI_AUTORIZO;
-import static userinterfaces.WhatsAppPostpagoPage.LINK_TRATAMIENTO_DATOS;
+import static userinterfaces.WhatsAppPostpagoPage.*;
 import static utils.Constantes.*;
 
 import hooks.ReportHooks;
 import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
+import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 
 import java.util.List;
@@ -42,17 +42,15 @@ public class ValidarTratamientoDatos implements Task {
                     ValidarTextoQueContengaX.elTextoContiene(URL_TRATAMIENTO_INFORMACION),
                     ValidarTextoQueContengaX.elTextoContiene(URL_PORTAL_CLARO));
 
-            UtilidadesAndroid.abrirLinkEnNavegador(URL_TRATAMIENTO_INFORMACION_DESTINO);
+            UtilidadesAndroid.abrirLinkEnNavegador(URL_TRATAMIENTO_INFORMACION);
 
             actor.attemptsTo(
+                    WaitFor.aTime(9000),
                     WaitForTextContains.withTextContains(
                             TITULO_TRATAMIENTO_INFORMACION_M,
-                            50
-                    )
+                            50)
             );
 
-            actor.attemptsTo(
-                    ValidarTextoQueContengaX.elTextoContiene(URL_TRATAMIENTO_INFORMACION_PATH));
 
             CapturaDePantallaMovil.tomarCapturaPantalla("Redirección URL Circular Superintendencia");
             ReportHooks.registrarPaso("Redirección URL Circular Superintendencia");

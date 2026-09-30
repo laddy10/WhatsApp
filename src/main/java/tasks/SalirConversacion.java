@@ -90,7 +90,7 @@ public class SalirConversacion implements Task {
                 actor.attemptsTo(
                         WaitForTextContains.withTextContains(
                                 CASO_CERRADO,
-                                timeout
+                                58
                         )
                 );
 
