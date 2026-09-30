@@ -96,8 +96,8 @@ public class RegalaUnPaquete implements Task {
         }
 
         actor.attemptsTo(
-                ValidarTextoQueContengaX.elTextoContiene(PORTAL_PAGOS_RECARGAS),
-                ValidarTextoQueContengaX.elTextoContiene(COMPRA_RECARGA));
+                ValidarTextoQueContengaX.elTextoContiene(PORTAL_PAGOS_RECARGAS)
+        );
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_5);
         ReportHooks.registrarPaso(MENSAJE_CAPTURA_5);

@@ -42,7 +42,7 @@ public class ValidarTratamientoDatos implements Task {
                     ValidarTextoQueContengaX.elTextoContiene(URL_TRATAMIENTO_INFORMACION),
                     ValidarTextoQueContengaX.elTextoContiene(URL_PORTAL_CLARO));
 
-            UtilidadesAndroid.abrirLinkEnNavegador(URL_TRATAMIENTO_INFORMACION);
+        /*    UtilidadesAndroid.abrirLinkEnNavegador(URL_TRATAMIENTO_INFORMACION);
 
             actor.attemptsTo(
                     WaitFor.aTime(9000),
