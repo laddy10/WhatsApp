@@ -124,7 +124,6 @@ public class PaqTodoIncluido implements Task {
 
         actor.attemptsTo(
                 Atras.irAtras(),
-                SalirConversacion.salir(),
                 SalirConversacion.salir()
         );
 

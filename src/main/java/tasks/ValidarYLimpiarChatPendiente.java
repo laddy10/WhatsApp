@@ -119,6 +119,28 @@ public class ValidarYLimpiarChatPendiente implements Task {
 
         /*
          * ============================================================
+         * TRATAMIENTO YA RESPONDIDO EN EJECUCIÓN ANTERIOR
+         * ============================================================
+         */
+
+        if (hayTratamientoDatosPendiente(actor)
+                && hayRespuestaTratamientoEnviada(actor)) {
+
+            ReportHooks.registrarPaso(
+                    "Se detecto que el tratamiento de datos ya fue respondido "
+                            + "en una ejecucion anterior"
+            );
+
+            CapturaDePantallaMovil.tomarCapturaPantalla(
+                    "Tratamiento ya respondido - se limpiara el chat"
+            );
+
+            vaciarChat(actor);
+            return;
+        }
+
+        /*
+         * ============================================================
          * CASO 1
          * TRATAMIENTO DE DATOS PENDIENTE
          * ============================================================
@@ -554,5 +576,17 @@ public class ValidarYLimpiarChatPendiente implements Task {
         return instrumented(
                 ValidarYLimpiarChatPendiente.class
         );
+    }
+
+    private boolean hayRespuestaTratamientoEnviada(Actor actor) {
+
+        List<WebElementFacade> mensajeSiAutorizo =
+                MENSAJE_ENVIADO_SI_AUTORIZO.resolveAllFor(actor);
+
+        List<WebElementFacade> mensajeNoAutorizo =
+                MENSAJE_ENVIADO_NO_AUTORIZO.resolveAllFor(actor);
+
+        return !mensajeSiAutorizo.isEmpty()
+                || !mensajeNoAutorizo.isEmpty();
     }
 }

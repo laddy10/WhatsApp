@@ -5,7 +5,6 @@ import static userinterfaces.WhatsAppPage.*;
 
 import hooks.ReportHooks;
 import interactions.wait.WaitFor;
-import interactions.wait.WaitForTextContains;
 
 import java.util.List;
 
@@ -22,27 +21,19 @@ import utils.CapturaDePantallaMovil;
 public class SalirConversacion implements Task {
 
     private static final String COMANDO_CIERRE = "Cierrecaso";
-    private static final String CASO_CERRADO = "Caso cerrado";
 
-    /*
-     * Respuesta observada cuando Claro no reconoce
-     * Cierrecaso como comando de cierre.
-     */
+    private static final String CASO_CERRADO =
+            "Caso cerrado";
+
     private static final String RESPUESTA_NO_ENTENDI =
             "No entendí tu mensaje";
 
-    /*
-     * Cierres naturales que también pueden aparecer.
-     */
     private static final String CIERRE_NATURAL_1 =
             "Fue un gusto ayudarte";
 
     private static final String CIERRE_NATURAL_2 =
             "nuestro chat finalizó";
 
-    /*
-     * Último recurso disponible en algunos menús.
-     */
     private static final Target BTN_FINALIZAR_CHAT =
             Target.the("Botón Finalizar chat")
                     .located(
@@ -51,24 +42,18 @@ public class SalirConversacion implements Task {
                             )
                     );
 
-    /*
-     * Dos intentos reales de Cierrecaso.
-     */
     private static final int MAX_INTENTOS = 2;
 
     private static final int TIMEOUT_PRIMER_INTENTO = 8;
     private static final int TIMEOUT_SEGUNDO_INTENTO = 15;
+
+    private static final long POLL_MILLIS = 500;
 
     @Override
     public <T extends Actor> void performAs(T actor) {
 
         boolean salidaExitosa = false;
 
-        /*
-         * ==========================================================
-         * INTENTOS CON CIERRECASO
-         * ==========================================================
-         */
         for (int intento = 1;
              intento <= MAX_INTENTOS;
              intento++) {
@@ -82,6 +67,9 @@ public class SalirConversacion implements Task {
                             + MAX_INTENTOS
             );
 
+            /*
+             * Enviar Cierrecaso.
+             */
             actor.attemptsTo(
                     Enter.theValue(COMANDO_CIERRE)
                             .into(TXT_ENVIAR_MENSAJE),
@@ -93,52 +81,19 @@ public class SalirConversacion implements Task {
                             ? TIMEOUT_PRIMER_INTENTO
                             : TIMEOUT_SEGUNDO_INTENTO;
 
-            try {
-
-                /*
-                 * Esperamos únicamente respuestas que realmente
-                 * nos ayudan a decidir:
-                 *
-                 * - Caso cerrado:
-                 *      éxito.
-                 *
-                 * - No entendí:
-                 *      el bot respondió, pero NO cerró.
-                 *      Se debe reintentar.
-                 *
-                 * No usamos "Menú principal" aquí porque puede
-                 * existir desde antes en pantalla y provocar
-                 * falsos positivos.
-                 */
-                actor.attemptsTo(
-                        WaitForTextContains.withAnyTextContains(
-                                timeout,
-                                CASO_CERRADO,
-                                RESPUESTA_NO_ENTENDI,
-                                CIERRE_NATURAL_1,
-                                CIERRE_NATURAL_2
-                        )
-                );
-
-            } catch (RuntimeException e) {
-
-                /*
-                 * Si no apareció ninguna respuesta reconocida,
-                 * NO fallamos.
-                 *
-                 * Si todavía queda otro intento,
-                 * volvemos a enviar Cierrecaso.
-                 */
-                CapturaDePantallaMovil.tomarCapturaPantalla(
-                        "Sin confirmación de cierre - intento "
-                                + intento
-                );
-            }
-
             /*
-             * Primero comprobar cierre real.
+             * Espera controlada.
+             *
+             * IMPORTANTE:
+             * no lanza excepción si se cumple el timeout.
              */
-            if (esCierreDetectado(actor)) {
+            EstadoCierre estado =
+                    esperarRespuestaCierre(
+                            actor,
+                            timeout
+                    );
+
+            if (estado == EstadoCierre.CERRADO) {
 
                 CapturaDePantallaMovil.tomarCapturaPantalla(
                         "Conversación cerrada correctamente"
@@ -152,17 +107,15 @@ public class SalirConversacion implements Task {
                 break;
             }
 
-            /*
-             * También aceptamos un cierre natural del bot.
-             */
-            if (esCierreNaturalDetectado(actor)) {
+            if (estado == EstadoCierre.CIERRE_NATURAL) {
 
                 CapturaDePantallaMovil.tomarCapturaPantalla(
                         "Conversación finalizada por el bot"
                 );
 
                 ReportHooks.registrarPaso(
-                        "✓ Se detectó finalización natural de la conversación"
+                        "✓ Se detectó finalización natural "
+                                + "de la conversación"
                 );
 
                 salidaExitosa = true;
@@ -170,19 +123,45 @@ public class SalirConversacion implements Task {
             }
 
             /*
-             * Si llegamos aquí:
+             * No entendió Cierrecaso.
              *
-             * - apareció "No entendí"
-             * - apareció otra respuesta
-             * - o simplemente no apareció Caso cerrado
-             *
-             * y todavía queda otro intento.
+             * Ya sabemos que NO cerró, por lo que no
+             * tenemos que seguir esperando.
+             */
+            if (estado == EstadoCierre.NO_ENTENDIO) {
+
+                ReportHooks.registrarPaso(
+                        "Claro respondió 'No entendí tu mensaje'. "
+                                + "La conversación continúa abierta."
+                );
+            }
+
+            /*
+             * No hubo ninguna respuesta de cierre reconocida.
+             */
+            if (estado == EstadoCierre.SIN_CONFIRMACION) {
+
+                ReportHooks.registrarPaso(
+                        "No se recibió confirmación de cierre "
+                                + "durante "
+                                + timeout
+                                + " segundos."
+                );
+
+                CapturaDePantallaMovil.tomarCapturaPantalla(
+                        "Sin confirmación de cierre - intento "
+                                + intento
+                );
+            }
+
+            /*
+             * Si todavía queda un intento,
+             * volvemos a enviar Cierrecaso.
              */
             if (intento < MAX_INTENTOS) {
 
                 ReportHooks.registrarPaso(
-                        "Claro respondió pero no confirmó el cierre. "
-                                + "Se enviará nuevamente '"
+                        "Se realizará un nuevo intento enviando '"
                                 + COMANDO_CIERRE
                                 + "'."
                 );
@@ -194,12 +173,9 @@ public class SalirConversacion implements Task {
         }
 
         /*
-         * ==========================================================
+         * =========================================================
          * FALLBACK: FINALIZAR CHAT
-         * ==========================================================
-         *
-         * Si después de los dos Cierrecaso seguimos sin cierre,
-         * intentamos usar el botón que ofrece el propio bot.
+         * =========================================================
          */
         if (!salidaExitosa) {
 
@@ -210,7 +186,7 @@ public class SalirConversacion implements Task {
 
                 ReportHooks.registrarPaso(
                         "No se confirmó cierre con 'Cierrecaso'. "
-                                + "Se intentará finalizar mediante "
+                                + "Se intentará utilizar "
                                 + "'Finalizar chat'."
                 );
 
@@ -225,10 +201,6 @@ public class SalirConversacion implements Task {
                             WaitFor.aTime(2000)
                     );
 
-                    /*
-                     * Después de pulsar Finalizar chat,
-                     * verificamos nuevamente si hubo cierre.
-                     */
                     if (esCierreDetectado(actor)
                             || esCierreNaturalDetectado(actor)) {
 
@@ -251,17 +223,7 @@ public class SalirConversacion implements Task {
         }
 
         /*
-         * ==========================================================
-         * NO GENERAR FALSA ALERTA
-         * ==========================================================
-         *
-         * El flujo funcional ya terminó.
-         *
-         * Si Claro no confirmó el cierre después de todos
-         * los mecanismos, registramos evidencia pero
-         * NO tumbamos el escenario.
-         *
-         * El siguiente paso podrá ejecutar Vaciar chat.
+         * No convertir la limpieza en falso FAIL.
          */
         if (!salidaExitosa) {
 
@@ -275,25 +237,88 @@ public class SalirConversacion implements Task {
                             + MAX_INTENTOS
                             + " intentos de '"
                             + COMANDO_CIERRE
-                            + "'. "
-                            + "Se continuará con la limpieza del chat."
+                            + "'. Se continuará con la limpieza."
             );
         }
     }
 
     /*
-     * Caso cerrado:
-     * confirmación ideal.
+     * Espera SIN EXCEPCIONES.
+     *
+     * Esta es la parte importante del cambio.
      */
+    private EstadoCierre esperarRespuestaCierre(
+            Actor actor,
+            int timeoutSegundos) {
+
+        long limite =
+                System.currentTimeMillis()
+                        + timeoutSegundos * 1000L;
+
+        while (System.currentTimeMillis() < limite) {
+
+            if (esCierreDetectado(actor)) {
+                return EstadoCierre.CERRADO;
+            }
+
+            if (esCierreNaturalDetectado(actor)) {
+                return EstadoCierre.CIERRE_NATURAL;
+            }
+
+            if (textoVisible(
+                    actor,
+                    RESPUESTA_NO_ENTENDI
+            )) {
+                return EstadoCierre.NO_ENTENDIO;
+            }
+
+            try {
+
+                Thread.sleep(POLL_MILLIS);
+
+            } catch (InterruptedException e) {
+
+                Thread.currentThread().interrupt();
+                break;
+            }
+        }
+
+        return EstadoCierre.SIN_CONFIRMACION;
+    }
+
     private boolean esCierreDetectado(Actor actor) {
 
+        return textoVisible(
+                actor,
+                CASO_CERRADO
+        );
+    }
+
+    private boolean esCierreNaturalDetectado(
+            Actor actor) {
+
+        return textoVisible(
+                actor,
+                CIERRE_NATURAL_1
+        )
+                || textoVisible(
+                actor,
+                CIERRE_NATURAL_2
+        );
+    }
+
+    private boolean textoVisible(
+            Actor actor,
+            String texto) {
+
         try {
 
-            AndroidObject android = new AndroidObject();
+            AndroidObject android =
+                    new AndroidObject();
 
             return android.textoContiene(
                     actor,
-                    CASO_CERRADO
+                    texto
             );
 
         } catch (Exception e) {
@@ -302,29 +327,12 @@ public class SalirConversacion implements Task {
         }
     }
 
-    /*
-     * También reconocer cierres naturales ya observados
-     * en el bot.
-     */
-    private boolean esCierreNaturalDetectado(Actor actor) {
+    private enum EstadoCierre {
 
-        try {
-
-            AndroidObject android = new AndroidObject();
-
-            return android.textoContiene(
-                    actor,
-                    CIERRE_NATURAL_1
-            )
-                    || android.textoContiene(
-                    actor,
-                    CIERRE_NATURAL_2
-            );
-
-        } catch (Exception e) {
-
-            return false;
-        }
+        CERRADO,
+        CIERRE_NATURAL,
+        NO_ENTENDIO,
+        SIN_CONFIRMACION
     }
 
     public static SalirConversacion salir() {

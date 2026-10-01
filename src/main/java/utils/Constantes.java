@@ -59,7 +59,7 @@ public class Constantes {
     public static final String RECARGA_ACTIVA = "Actualmente tienes activa una recarga";
     public static final String COMPRA_DE_PAQUETES = "Compra de paquetes";
     public static final String COMPRA_RECARGA = "Compra de RecargaS";
-    public static final String CONOCE_MEJORA_TU_PLAN = "Conoce/mejora tu plan";
+    public static final String CONOCE_MEJORA_TU_PLAN = "Conoce tu plan";
     public static final String NOMBRE_DEL_PLAN = "Nombre del plan:";
     public static final String PASATE_A_POSTPAGO = "Pásate a postpago";
     public static final String URL_CLARO = "claro.com.co";

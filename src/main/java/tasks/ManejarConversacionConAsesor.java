@@ -71,7 +71,11 @@ public class ManejarConversacionConAsesor implements Task {
                         "Buenas tardes",
                         "Buenas noches",
                         "Nombre completo",
-                        "nombre completo"
+                        "nombre completo",
+                        "asesora de Claro",
+                        "¿Cómo te encuentras",
+                        "Cómo te encuentras",
+                        "buen día"
                 ).answeredBy(actor);
             }
 
@@ -173,7 +177,11 @@ public class ManejarConversacionConAsesor implements Task {
                 || TextoQueContengaX.verificarTexto("Buenos dias").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Buenos días").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("Buenas tardes").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("Buenas noches").answeredBy(actor);
+                || TextoQueContengaX.verificarTexto("Buenas noches").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("asesora de Claro").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("¿Cómo te encuentras").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Cómo te encuentras").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("buen día").answeredBy(actor);
     }
 
     private boolean cierreAsesorVisible(Actor actor) {

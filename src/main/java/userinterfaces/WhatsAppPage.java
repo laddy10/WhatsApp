@@ -262,9 +262,27 @@ public class WhatsAppPage extends PageObject {
                     .located(MobileBy.xpath("//*[@text='Comprar paq. prepago']"));
 
     public class AppConstants {
-        public static final String WHATSAPP_PACKAGE = "com.whatsapp"; }
+        public static final String WHATSAPP_PACKAGE = "com.whatsapp";
+    }
 
-  public static final Target BTN_NO =
-          Target.the("Boton No")
-                  .located(By.xpath("//android.widget.FrameLayout[@content-desc='No']"));
+    public static final Target BTN_NO =
+            Target.the("Boton No")
+                    .located(By.xpath("//android.widget.FrameLayout[@content-desc='No']"));
+
+    public static final Target MENSAJE_ENVIADO_SI_AUTORIZO =
+            Target.the("Mensaje enviado Si autorizo")
+                    .located(By.xpath(
+                            "//android.widget.TextView[" +
+                                    "@resource-id='com.whatsapp:id/message_text' " +
+                                    "and @text='Si, autorizo']"
+                    ));
+
+    public static final Target MENSAJE_ENVIADO_NO_AUTORIZO =
+            Target.the("Mensaje enviado No autorizo")
+                    .located(By.xpath(
+                            "//android.widget.TextView[" +
+                                    "@resource-id='com.whatsapp:id/message_text' " +
+                                    "and @text='No autorizo']"
+                    ));
+
 }
