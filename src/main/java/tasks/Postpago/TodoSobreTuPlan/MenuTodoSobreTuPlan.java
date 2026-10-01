@@ -8,6 +8,7 @@ import hooks.ReportHooks;
 import interactions.Click.ClickElementByText;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.wait.WaitForResponse;
+import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -30,7 +31,7 @@ public class MenuTodoSobreTuPlan implements Task {
 
     actor.attemptsTo(
         ClickTextoQueContengaX.elTextoContiene(SELECCIONA),
-        WaitForResponse.withText(CONOCE_MEJORA_TU_PLAN));
+        WaitForTextContains.withAnyTextContains(CONOCE_MEJORA_TU_PLAN,CONOCE_MEJORA_TU_PLAN_2));
   }
 
   public static Performable menuTodoSobreTuPlan() {

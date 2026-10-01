@@ -45,7 +45,7 @@ public class TResuelveOpcionesHogar implements Task {
     }
 
     private <T extends Actor> void abrirMenuTResuelve(T actor) {
-        actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(CONOCE_MEJORA_TU_PLAN));
+        actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(CONOCE_MEJORA_TU_PLAN_2));
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar 'Conoce/mejora tu plan'");
         ReportHooks.registrarPaso("Seleccionar 'Conoce/mejora tu plan'");

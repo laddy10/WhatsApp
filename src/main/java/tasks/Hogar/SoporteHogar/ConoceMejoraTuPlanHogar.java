@@ -26,7 +26,7 @@ public class ConoceMejoraTuPlanHogar implements Task {
 
         // 1. Seleccionar la opción de Conoce/mejora tu plan en la lista desplegable actual
         actor.attemptsTo(
-                ClickTextoQueContengaX.elTextoContiene(CONOCE_MEJORA_TU_PLAN)
+                ClickTextoQueContengaX.elTextoContiene(CONOCE_MEJORA_TU_PLAN_2)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar 'Conoce/mejora tu plan'");
