@@ -71,7 +71,7 @@ public class TransaccionBancolombiaHogar extends AndroidObject implements Task {
         // Hacer clic en Continuar en el portal de Bancolombia
         actor.attemptsTo(
                 Click.on(BTN_CONTINUAR_BANCOLOMBIA),
-                interactions.wait.WaitFor.aTime(5000)
+                interactions.wait.WaitFor.aTime(9000)
         );
 
         // Validar que se redireccionó a la pantalla de Clave Principal
