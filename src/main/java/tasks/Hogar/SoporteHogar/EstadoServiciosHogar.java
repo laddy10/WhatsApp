@@ -10,6 +10,7 @@ import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.wait.EsperarYClickSeleccionaEnUltimoMensaje;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForTextContains;
+import interactions.wait.WaitForTextContainsWithTimeout;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -26,6 +27,12 @@ public class EstadoServiciosHogar implements Task {
 
     private static final String ESPERA_ASESOR =
             "En un momento estará contigo";
+
+    private static final String REVISION_FINALIZADA =
+            "Gracias por tu espera";
+
+    private static final String OPCIONES_SERVICIO =
+            "en cuál de estos servicios necesitas ayuda";
 
     @Override
     public <T extends Actor> void performAs(T actor) {
@@ -136,17 +143,29 @@ public class EstadoServiciosHogar implements Task {
                 "Validar mensaje de revisión de 3 minutos en proceso"
         );
 
+
         // 6. Esperar a que se complete la revisión
+        boolean revisionTerminada =
+                WaitForTextContainsWithTimeout.esperar(
+                        240,
+                        REVISION_FINALIZADA,
+                        OPCIONES_SERVICIO
+                ).answeredBy(actor);
+
+        if (!revisionTerminada) {
+
+
+            throw new IllegalStateException(
+                    "No finalizo la revision de servicios dentro del tiempo esperado"
+            );
+        }
+
         actor.attemptsTo(
-                WaitFor.aTime(199000),
-                WaitForTextContains.withAnyTextContains(
-                        GRACIAS_POR_LA_ESPERA
+                ValidarTextoQueContengaX.elTextoContiene(
+                        REVISION_FINALIZADA
                 ),
                 ValidarTextoQueContengaX.elTextoContiene(
-                        GRACIAS_POR_LA_ESPERA
-                ),
-                ValidarTextoQueContengaX.elTextoContiene(
-                        SERVICIOS_DE_AYUDA
+                        OPCIONES_SERVICIO
                 )
         );
 

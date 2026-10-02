@@ -20,7 +20,7 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     When Validar Version de la App
     And Buscar el chat de Claro Colombia
     And Iniciar el chat con Claro Colombia
-    And Seleccionar linea de consulta postpago
+    And Seleccionar linea de de pago Post 30
     And Validar politica de tratamientos de datos
     And Seleccionar menu principal Post
     And Ingresar al menu todo sobre tu plan postpago
