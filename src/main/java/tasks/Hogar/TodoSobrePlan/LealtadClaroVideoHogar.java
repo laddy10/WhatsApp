@@ -16,6 +16,7 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
+import questions.TextoQueContengaX;
 import tasks.SalirConversacion;
 import utils.AndroidObject;
 import utils.CapturaDePantallaMovil;
@@ -23,12 +24,6 @@ import utils.UtilidadesAndroid;
 
 public class LealtadClaroVideoHogar implements Task {
 
-    /*
-     * Popup controlado de Claro Video.
-     *
-     * Se utilizan fragmentos estables para no depender
-     * del mensaje completo.
-     */
     private static final String ERROR_CLARO_VIDEO =
             "no podemos realizar la acción solicitada";
 
@@ -182,19 +177,14 @@ public class LealtadClaroVideoHogar implements Task {
         );
 
 
-        /*
-         * 7. Primera revisión del popup.
-         *
-         * Puede aparecer directamente al abrir Claro Video.
-         */
         boolean popupControlado =
                 manejarPopupClaroVideo(actor);
 
+        boolean pantallaNegra = false;
+        boolean direccionamientoConfirmado = false;
 
-        /*
-         * Si NO apareció el popup,
-         * verificamos la posible vista previa de Bitly.
-         */
+
+        // 7. Revisar Bitly si todavía no apareció popup
         if (!popupControlado) {
 
             manejarVistaPreviaBitly(actor);
@@ -203,22 +193,12 @@ public class LealtadClaroVideoHogar implements Task {
                     WaitFor.aTime(5000)
             );
 
-
-            /*
-             * El popup también puede aparecer después
-             * de pasar por Bitly.
-             */
             popupControlado =
                     manejarPopupClaroVideo(actor);
         }
 
 
-        /*
-         * 8. Si ya apareció el popup y se pulsó SALIR,
-         * el direccionamiento se considera válido.
-         *
-         * No buscamos PREMIUM.
-         */
+        // 8. Si ya apareció popup, se acepta el direccionamiento
         if (popupControlado) {
 
             ReportHooks.registrarPaso(
@@ -228,13 +208,8 @@ public class LealtadClaroVideoHogar implements Task {
 
         } else {
 
-            /*
-             * 9. Revisar pantalla negra.
-             *
-             * Si Chrome está activo pero no presenta contenido,
-             * el direccionamiento también es válido.
-             */
-            boolean pantallaNegra =
+            // 9. Revisar pantalla negra
+            pantallaNegra =
                     UtilidadesAndroid.chromeActivoSinContenido(
                             actor
                     );
@@ -260,16 +235,8 @@ public class LealtadClaroVideoHogar implements Task {
             } else {
 
                 /*
-                 * 10. Flujo normal.
-                 *
-                 * Conservamos la validación que ya funciona:
-                 *
-                 * clarovideo.com
-                 * +
-                 * PREMIUM
+                 * 10. Primer intento de validar clarovideo.com
                  */
-                boolean direccionamientoConfirmado = false;
-
                 try {
 
                     UtilidadesAndroid.esperarRedireccionamientoWeb(
@@ -280,13 +247,13 @@ public class LealtadClaroVideoHogar implements Task {
 
                     direccionamientoConfirmado = true;
 
-                } catch (Exception e) {
+                } catch (RuntimeException e) {
 
                     /*
-                     * Durante los 30 segundos pudo haber
-                     * aparecido alguno de los estados válidos.
+                     * IMPORTANTE:
+                     * Después de esperar la URL revisamos nuevamente
+                     * si durante esos 30 segundos apareció el popup.
                      */
-
                     popupControlado =
                             manejarPopupClaroVideo(actor);
 
@@ -297,164 +264,207 @@ public class LealtadClaroVideoHogar implements Task {
                                         + "controlado de Claro Video."
                         );
 
-                    } else if (
-                            UtilidadesAndroid.chromeActivoSinContenido(
-                                    actor
-                            )
-                    ) {
+                    } else {
 
-                        String actividadNegra =
-                                UtilidadesAndroid.obtenerActividadActual(
+                        pantallaNegra =
+                                UtilidadesAndroid.chromeActivoSinContenido(
                                         actor
                                 );
 
-                        CapturaDePantallaMovil.tomarCapturaPantalla(
-                                "Claro Video abierto con pantalla negra"
-                        );
+                        if (pantallaNegra) {
 
-                        ReportHooks.registrarPaso(
-                                "Durante la espera Chrome quedó activo "
-                                        + "sin contenido visible. "
-                                        + "Se acepta como direccionamiento válido. "
-                                        + "Actividad: "
-                                        + actividadNegra
-                        );
+                            String actividadNegra =
+                                    UtilidadesAndroid.obtenerActividadActual(
+                                            actor
+                                    );
 
-                        pantallaNegra = true;
+                            CapturaDePantallaMovil.tomarCapturaPantalla(
+                                    "Claro Video abierto con pantalla negra"
+                            );
 
-                    } else {
+                            ReportHooks.registrarPaso(
+                                    "Durante la espera Chrome quedó activo "
+                                            + "sin contenido visible. "
+                                            + "Se acepta como direccionamiento válido. "
+                                            + "Actividad: "
+                                            + actividadNegra
+                            );
 
-                        /*
-                         * 11. Segundo y último intento.
-                         */
-                        ReportHooks.registrarPaso(
-                                "No se confirmó redireccionamiento a Claro Video. "
-                                        + "Se realiza un segundo intento."
-                        );
+                        } else {
 
-                        UtilidadesAndroid.abrirLinkEnNavegador(
-                                URL_CLARO_VIDEO
-                        );
+                            /*
+                             * 11. Segundo y último intento
+                             */
+                            ReportHooks.registrarPaso(
+                                    "No se confirmó redireccionamiento a Claro Video. "
+                                            + "Se realiza un segundo intento."
+                            );
 
-                        actor.attemptsTo(
-                                WaitFor.aTime(5000)
-                        );
-
-
-                        // Revisar primero popup
-                        popupControlado =
-                                manejarPopupClaroVideo(actor);
-
-
-                        // Si no hay popup, revisar Bitly
-                        if (!popupControlado) {
-
-                            manejarVistaPreviaBitly(actor);
+                            UtilidadesAndroid.abrirLinkEnNavegador(
+                                    URL_CLARO_VIDEO
+                            );
 
                             actor.attemptsTo(
                                     WaitFor.aTime(5000)
                             );
 
-                            // Popup después de Bitly
+
+                            // Revisar popup
                             popupControlado =
                                     manejarPopupClaroVideo(actor);
-                        }
 
 
-                        if (!popupControlado) {
+                            // Revisar Bitly si todavía no hay popup
+                            if (!popupControlado) {
 
-                            /*
-                             * Segundo intento también puede
-                             * terminar en pantalla negra.
-                             */
-                            pantallaNegra =
-                                    UtilidadesAndroid.chromeActivoSinContenido(
-                                            actor
-                                    );
+                                manejarVistaPreviaBitly(actor);
 
-                            if (pantallaNegra) {
+                                actor.attemptsTo(
+                                        WaitFor.aTime(5000)
+                                );
 
-                                String actividadNegraSegundoIntento =
-                                        UtilidadesAndroid.obtenerActividadActual(
+                                popupControlado =
+                                        manejarPopupClaroVideo(actor);
+                            }
+
+
+                            if (!popupControlado) {
+
+                                pantallaNegra =
+                                        UtilidadesAndroid.chromeActivoSinContenido(
                                                 actor
                                         );
 
-                                CapturaDePantallaMovil.tomarCapturaPantalla(
-                                        "Claro Video abierto con pantalla negra segundo intento"
-                                );
+                                if (pantallaNegra) {
 
-                                ReportHooks.registrarPaso(
-                                        "Segundo intento: Chrome quedó activo "
-                                                + "sin contenido visible. "
-                                                + "Se acepta como direccionamiento válido. "
-                                                + "Actividad: "
-                                                + actividadNegraSegundoIntento
-                                );
+                                    String actividadNegraSegundoIntento =
+                                            UtilidadesAndroid.obtenerActividadActual(
+                                                    actor
+                                            );
 
-                            } else {
+                                    CapturaDePantallaMovil.tomarCapturaPantalla(
+                                            "Claro Video abierto con pantalla negra segundo intento"
+                                    );
 
-                                /*
-                                 * Si no fue:
-                                 *
-                                 * - popup,
-                                 * - Bitly pendiente,
-                                 * - pantalla negra,
-                                 *
-                                 * entonces exigimos el comportamiento
-                                 * normal de Claro Video.
-                                 */
-                                UtilidadesAndroid.esperarRedireccionamientoWeb(
-                                        actor,
-                                        "clarovideo.com",
-                                        30
-                                );
+                                    ReportHooks.registrarPaso(
+                                            "Segundo intento: Chrome quedó activo "
+                                                    + "sin contenido visible. "
+                                                    + "Se acepta como direccionamiento válido. "
+                                                    + "Actividad: "
+                                                    + actividadNegraSegundoIntento
+                                    );
 
-                                direccionamientoConfirmado = true;
+                                } else {
+
+                                    /*
+                                     * AQUÍ ESTABA EL PROBLEMA.
+                                     *
+                                     * Antes esta última espera podía lanzar
+                                     * RuntimeException directamente sin volver
+                                     * a revisar el popup.
+                                     */
+                                    try {
+
+                                        UtilidadesAndroid.esperarRedireccionamientoWeb(
+                                                actor,
+                                                "clarovideo.com",
+                                                30
+                                        );
+
+                                        direccionamientoConfirmado = true;
+
+                                    } catch (RuntimeException segundoError) {
+
+                                        /*
+                                         * El popup pudo aparecer mientras
+                                         * esperábamos esos últimos 30 segundos.
+                                         */
+                                        popupControlado =
+                                                manejarPopupClaroVideo(actor);
+
+                                        if (popupControlado) {
+
+                                            ReportHooks.registrarPaso(
+                                                    "En el segundo intento apareció "
+                                                            + "el popup controlado de Claro Video."
+                                            );
+
+                                        } else {
+
+                                            pantallaNegra =
+                                                    UtilidadesAndroid.chromeActivoSinContenido(
+                                                            actor
+                                                    );
+
+                                            if (pantallaNegra) {
+
+                                                String actividadFinal =
+                                                        UtilidadesAndroid.obtenerActividadActual(
+                                                                actor
+                                                        );
+
+                                                CapturaDePantallaMovil.tomarCapturaPantalla(
+                                                        "Claro Video abierto con pantalla negra segundo intento"
+                                                );
+
+                                                ReportHooks.registrarPaso(
+                                                        "En el segundo intento Chrome quedó "
+                                                                + "sin contenido visible. "
+                                                                + "Se acepta como direccionamiento válido. "
+                                                                + "Actividad: "
+                                                                + actividadFinal
+                                                );
+
+                                            } else {
+
+                                                /*
+                                                 * Ya revisamos todo:
+                                                 *
+                                                 * - URL
+                                                 * - popup
+                                                 * - pantalla negra
+                                                 *
+                                                 * Ahora sí es un fallo real.
+                                                 */
+                                                throw segundoError;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
-                }
-
-
-                /*
-                 * 12. PREMIUM se valida SOLAMENTE
-                 * cuando tenemos la navegación normal.
-                 *
-                 * No se busca PREMIUM en:
-                 *
-                 * - popup
-                 * - pantalla negra
-                 */
-                if (direccionamientoConfirmado
-                        && !popupControlado
-                        && !pantallaNegra) {
-
-                    actor.attemptsTo(
-                            WaitFor.aTime(9000),
-
-                            WaitForTextContains.withTextContains(
-                                    PREMIUM,
-                                    90
-                            )
-                    );
-
-                    CapturaDePantallaMovil.tomarCapturaPantalla(
-                            "Validar redirección a Claro Video"
-                    );
-
-                    ReportHooks.registrarPaso(
-                            "Validar redirección a Claro Video"
-                    );
                 }
             }
         }
 
 
+        // 12. Validar PREMIUM solo si navegó normalmente
+        if (direccionamientoConfirmado
+                && !popupControlado
+                && !pantallaNegra) {
+
+            actor.attemptsTo(
+                    WaitFor.aTime(9000),
+
+                    WaitForTextContains.withTextContains(
+                            PREMIUM,
+                            90
+                    )
+            );
+
+            CapturaDePantallaMovil.tomarCapturaPantalla(
+                    "Validar redirección a Claro Video"
+            );
+
+            ReportHooks.registrarPaso(
+                    "Validar redirección a Claro Video"
+            );
+        }
+
+
         /*
-         * 13. Volver a WhatsApp y cerrar conversación.
-         *
-         * Se conserva el comportamiento original
-         * de esta tarea.
+         * 13. Regresar a WhatsApp y cerrar conversación
          */
         actor.attemptsTo(
                 Atras.irAtras(),
@@ -465,11 +475,7 @@ public class LealtadClaroVideoHogar implements Task {
 
 
     /**
-     * Vista previa de Bitly.
-     * <p>
-     * No utilizamos WaitForTextContains porque si ST
-     * no expone el texto, Serenity puede registrar
-     * falsamente el step como fallido.
+     * Manejo no bloqueante de Bitly.
      */
     private <T extends Actor> void manejarVistaPreviaBitly(
             T actor) {
@@ -524,27 +530,25 @@ public class LealtadClaroVideoHogar implements Task {
 
 
     /**
-     * Manejo del popup conocido de Claro Video:
-     * <p>
-     * "En este momento no podemos realizar
-     * la acción solicitada..."
-     * <p>
-     * Si aparece:
-     * - tomamos evidencia
-     * - pulsamos SALIR
-     * - el flujo se considera controlado
+     * Detecta el popup conocido de Claro Video.
      */
     private <T extends Actor> boolean manejarPopupClaroVideo(
             T actor) {
 
-        AndroidObject androidObject =
-                new AndroidObject();
-
+        /*
+         * Usamos la misma lectura que está funcionando
+         * actualmente en Postpago.
+         *
+         * LBL_MENSAJES realmente resuelve todos los
+         * android.widget.TextView visibles, por lo que
+         * también permite leer este popup externo.
+         */
         boolean popupVisible =
-                androidObject.textoContiene(
-                        actor,
-                        ERROR_CLARO_VIDEO
-                );
+                TextoQueContengaX
+                        .verificarTexto(
+                                ERROR_CLARO_VIDEO
+                        )
+                        .answeredBy(actor);
 
         if (!popupVisible) {
             return false;
@@ -574,11 +578,6 @@ public class LealtadClaroVideoHogar implements Task {
 
         } catch (Exception e) {
 
-            /*
-             * El mensaje ya fue detectado.
-             * Si SALIR desaparece mientras se intenta pulsar,
-             * no convertimos el direccionamiento en falso fallo.
-             */
             ReportHooks.registrarPaso(
                     "Se detectó el popup de Claro Video, "
                             + "pero el botón SALIR dejó de estar disponible."

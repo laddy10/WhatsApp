@@ -15,6 +15,7 @@ import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
+import questions.TextoQueContengaX;
 import utils.AndroidObject;
 import utils.CapturaDePantallaMovil;
 
@@ -71,15 +72,41 @@ public class TransaccionBancolombiaHogar extends AndroidObject implements Task {
         // Hacer clic en Continuar en el portal de Bancolombia
         actor.attemptsTo(
                 Click.on(BTN_CONTINUAR_BANCOLOMBIA),
-                interactions.wait.WaitFor.aTime(9000)
+                WaitFor.aTime(5000)
         );
 
-        // Validar que se redireccionó a la pantalla de Clave Principal
+        boolean clavePrincipalVisible =
+                TextoQueContengaX
+                        .verificarTexto(CLAVE_PRINCIPAL)
+                        .answeredBy(actor);
+
+        if (!clavePrincipalVisible) {
+
+            boolean sigueEnBienvenida =
+                    TextoQueContengaX
+                            .verificarTexto(BANCOLOMBIA_BIENVENIDA)
+                            .answeredBy(actor);
+
+            if (sigueEnBienvenida) {
+
+                ReportHooks.registrarPaso(
+                        "Bancolombia permaneció en la pantalla de bienvenida. "
+                                + "Se reintenta una vez el botón Continuar."
+                );
+
+                actor.attemptsTo(
+                        Click.on(BTN_CONTINUAR_BANCOLOMBIA),
+                        WaitFor.aTime(5000)
+                );
+            }
+        }
+
+        // Se conserva la validación funcional existente
         actor.attemptsTo(
-                WaitForTextContains.withAnyTextContains(CLAVE_PRINCIPAL),
-                ValidarTextoQueContengaX.elTextoContiene(CLAVE_PRINCIPAL)
+                ValidarTextoQueContengaX.elTextoContiene(
+                        CLAVE_PRINCIPAL
+                )
         );
-
         CapturaDePantallaMovil.tomarCapturaPantalla("Pantalla de Clave Principal Bancolombia validada");
         ReportHooks.registrarPaso("Pantalla de Clave Principal Bancolombia validada");
     }
