@@ -117,7 +117,7 @@ public class LealtadClaroVideoHogar implements Task {
         // Una vez confirmado que estamos realmente en clarovideo.com,
         // esperar el contenido de la página
         actor.attemptsTo(
-                WaitFor.aTime(90000),
+                WaitFor.aTime(9000),
                 WaitForTextContains.withTextContains(
                         PREMIUM,
                         90

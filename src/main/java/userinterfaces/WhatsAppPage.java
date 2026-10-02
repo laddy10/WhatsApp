@@ -251,7 +251,10 @@ public class WhatsAppPage extends PageObject {
 
     public static final Target LBL_CONOCE_OPCIONES =
             Target.the("Mensaje Conoce las opciones")
-                    .locatedBy("//*[contains(@text,'Conoce las opciones')]");
+                    .locatedBy(
+                            "//*[contains(@text,'Conoce las opciones') " +
+                                    "or contains(@text,'Conoce todas las opciones')]"
+                    );
 
     public static final Target TXT_BIENVENIDA_WHATSAPP =
             Target.the("Texto Te damos la bienvenida a WhatsApp")

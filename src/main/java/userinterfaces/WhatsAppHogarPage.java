@@ -31,4 +31,10 @@ public class WhatsAppHogarPage {
                     .located(By.xpath(
                             "//android.view.View[@resource-id=\"TIPO_DOCUMENTO\"]"
                     ));
+
+    public static final Target CHECK_PAGO_FACTURAS =
+            Target.the("Tipo de documento Programar Pagos")
+                    .located(By.xpath(
+                            "//android.view.View[@resource-id=\"select\"]"
+                    ));
 }

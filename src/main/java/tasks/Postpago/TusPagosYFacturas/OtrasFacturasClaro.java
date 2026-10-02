@@ -1,6 +1,7 @@
 package tasks.Postpago.TusPagosYFacturas;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static userinterfaces.WhatsAppHogarPage.CHECK_PAGO_FACTURAS;
 import static userinterfaces.WhatsAppPage.*;
 import static userinterfaces.WhatsAppPostpagoPage.LBL_PORTAL_PAGOS_RECARGAS;
 import static userinterfaces.WhatsAppPostpagoPage.LBL_PRIVACIDAD;
@@ -69,7 +70,7 @@ public class OtrasFacturasClaro implements Task {
 
         // Paso 4: Desplegar "Selecciona la opción de tu interés" y seleccionar "Pago de Facturas"
         actor.attemptsTo(
-                ClickTextoQueContengaX.elTextoContiene(PAGO_DE_FACTURAS),
+                Click.on(CHECK_PAGO_FACTURAS),
                 ClickTextoQueContengaX.elTextoContiene(PAGO_DE_FACTURAS));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA_4);
