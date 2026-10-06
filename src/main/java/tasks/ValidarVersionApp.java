@@ -8,7 +8,7 @@ import hooks.ReportHooks;
 import interactions.Click.ClickTextoQueContengaX;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
-import interactions.scroll.ScrollHastaTexto;
+import interactions.scroll.ScrollGradual;
 import interactions.wait.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
@@ -20,6 +20,7 @@ import utils.CapturaDePantallaMovil;
 public class ValidarVersionApp implements Task {
 
     private static final String TU = "Tú";
+    private static final int MAX_SCROLLS_AYUDA = 6;
 
     @Override
     public <T extends Actor> void performAs(T actor) {
@@ -50,13 +51,7 @@ public class ValidarVersionApp implements Task {
              *
              * Tú
              * ↓
-             * Scroll hasta Meta
-             * ↓
-             * Ayuda
-             *
-             * IMPORTANTE:
-             * En esta vista NO existe un paso adicional por Ajustes.
-             * La pestaña Tú ya corresponde a la pantalla de configuración.
+             * Luego se aplica el scroll común hasta Ayuda.
              */
             ReportHooks.registrarPaso(
                     "Se detectó nueva navegación de WhatsApp mediante la pestaña Tú"
@@ -77,12 +72,9 @@ public class ValidarVersionApp implements Task {
              *
              * Tres puntos
              * ↓
-             * Scroll hasta Ajustes
-             * ↓
              * Ajustes
-             *
-             * IMPORTANTE:
-             * Se conserva el scroll original para localizar Ajustes.
+             * ↓
+             * Luego se aplica el mismo scroll común hasta Ayuda.
              */
             ReportHooks.registrarPaso(
                     "Se detectó navegación tradicional de WhatsApp"
@@ -90,6 +82,7 @@ public class ValidarVersionApp implements Task {
 
             actor.attemptsTo(
                     Click.on(BTN_MENU_ITEM),
+
                     ClickTextoQueContengaX.elTextoContiene(
                             AJUSTES
                     )
@@ -101,24 +94,19 @@ public class ValidarVersionApp implements Task {
         }
 
 
+
+            actor.attemptsTo(
+                    ScrollGradual.bajar(0.60)
+            );
+
+
+
         /*
          * ============================================================
-         * 2. FLUJO COMÚN PARA AMBAS VISTAS
+         * 3. INGRESAR A AYUDA → INFO APP
          * ============================================================
-         *
-         * Vista nueva:
-         * Tú → scroll hasta Meta
-         *
-         * Vista anterior:
-         * Ajustes → scroll hasta Meta
-         *
-         * Desde ahí ambas continúan igual.
          */
         actor.attemptsTo(
-                ScrollHastaTexto.conTexto(
-                        "Meta"
-                ),
-
                 ClickTextoQueContengaX.elTextoContiene(
                         AYUDA
                 ),
@@ -135,7 +123,7 @@ public class ValidarVersionApp implements Task {
 
         /*
          * ============================================================
-         * 3. EVIDENCIA
+         * 4. EVIDENCIA
          * ============================================================
          */
         CapturaDePantallaMovil.tomarCapturaPantalla(
@@ -149,7 +137,7 @@ public class ValidarVersionApp implements Task {
 
         /*
          * ============================================================
-         * 4. VALIDAR INFORMACIÓN DE LA APLICACIÓN
+         * 5. VALIDACIONES EXISTENTES
          * ============================================================
          */
         actor.attemptsTo(
@@ -169,10 +157,8 @@ public class ValidarVersionApp implements Task {
 
         /*
          * ============================================================
-         * 5. REGRESAR
+         * 6. REGRESAR A LA PANTALLA PRINCIPAL
          * ============================================================
-         *
-         * Se conserva el comportamiento existente.
          */
         actor.attemptsTo(
                 Atras.irAtras(),
