@@ -96,7 +96,7 @@ public class ValidarVersionApp implements Task {
 
 
             actor.attemptsTo(
-                    ScrollGradual.bajar(0.60)
+                    ScrollGradual.bajar(0.70)
             );
 
 
