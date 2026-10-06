@@ -25,119 +25,108 @@ public class ValidarVersionApp implements Task {
     public <T extends Actor> void performAs(T actor) {
 
         /*
-         * 1. Intentar primero la navegación tradicional:
+         * ============================================================
+         * 1. IDENTIFICAR LA VISTA DE WHATSAPP
+         * ============================================================
          *
-         * Tres puntos → Ajustes
+         * VISTA NUEVA:
+         * aparece la pestaña "Tú" en la barra inferior.
+         *
+         * VISTA ANTERIOR:
+         * no aparece "Tú" y se debe ingresar por los tres puntos.
          */
-        actor.attemptsTo(
-                Click.on(BTN_MENU_ITEM)
-        );
-
-        boolean ajustesVisible =
+        boolean vistaNuevaConTu =
                 TextoQueContengaX
-                        .verificarTexto(AJUSTES)
+                        .verificarTexto(TU)
                         .answeredBy(actor);
 
-        if (ajustesVisible) {
+
+        if (vistaNuevaConTu) {
 
             /*
-             * VISTA ANTERIOR
-             *
-             * Tres puntos → Ajustes
-             */
-            ReportHooks.registrarPaso(
-                    "Se detectó navegación tradicional de WhatsApp por menú Ajustes"
-            );
-
-            actor.attemptsTo(
-                    ClickTextoQueContengaX.elTextoContiene(
-                            AJUSTES
-                    )
-            );
-
-        } else {
-
-            /*
+             * ========================================================
              * VISTA NUEVA
+             * ========================================================
              *
-             * En el menú de tres puntos ya no aparece Ajustes.
-             * Cerramos el menú y buscamos la pestaña Tú.
+             * Tú
+             * ↓
+             * Scroll hasta Meta
+             * ↓
+             * Ayuda
+             *
+             * IMPORTANTE:
+             * En esta vista NO existe un paso adicional por Ajustes.
+             * La pestaña Tú ya corresponde a la pantalla de configuración.
              */
-            actor.attemptsTo(
-                    Atras.irAtras()
-            );
-
-            boolean tabTuVisible =
-                    TextoQueContengaX
-                            .verificarTexto(TU)
-                            .answeredBy(actor);
-
-            if (!tabTuVisible) {
-
-                throw new RuntimeException(
-                        "No se encontró la opción 'Ajustes' "
-                                + "en el menú ni la pestaña 'Tú' "
-                                + "en la pantalla principal de WhatsApp."
-                );
-            }
-
             ReportHooks.registrarPaso(
                     "Se detectó nueva navegación de WhatsApp mediante la pestaña Tú"
             );
 
-
-            /*
-             * Entrar a la pestaña Tú
-             */
             actor.attemptsTo(
                     ClickTextoQueContengaX.elTextoContiene(
                             TU
                     )
             );
 
+        } else {
 
             /*
-             * Dentro de Tú esperamos encontrar Ajustes.
+             * ========================================================
+             * VISTA ANTERIOR
+             * ========================================================
+             *
+             * Tres puntos
+             * ↓
+             * Scroll hasta Ajustes
+             * ↓
+             * Ajustes
+             *
+             * IMPORTANTE:
+             * Se conserva el scroll original para localizar Ajustes.
              */
-            boolean ajustesEnTu =
-                    TextoQueContengaX
-                            .verificarTexto(AJUSTES)
-                            .answeredBy(actor);
-
-            if (!ajustesEnTu) {
-
-                throw new RuntimeException(
-                        "Se ingresó correctamente a la pestaña 'Tú', "
-                                + "pero no se encontró la opción 'Ajustes'."
-                );
-            }
-
             ReportHooks.registrarPaso(
-                    "Se encontró la opción Ajustes dentro de la pestaña Tú"
+                    "Se detectó navegación tradicional de WhatsApp"
             );
 
             actor.attemptsTo(
+                    Click.on(BTN_MENU_ITEM),
                     ClickTextoQueContengaX.elTextoContiene(
                             AJUSTES
                     )
+            );
+
+            ReportHooks.registrarPaso(
+                    "Se ingresó a Ajustes desde el menú tradicional de WhatsApp"
             );
         }
 
 
         /*
-         * 2. Desde este punto ambas vistas ya están
-         * dentro de Ajustes.
+         * ============================================================
+         * 2. FLUJO COMÚN PARA AMBAS VISTAS
+         * ============================================================
          *
-         * Continuamos con el flujo existente.
+         * Vista nueva:
+         * Tú → scroll hasta Meta
+         *
+         * Vista anterior:
+         * Ajustes → scroll hasta Meta
+         *
+         * Desde ahí ambas continúan igual.
          */
         actor.attemptsTo(
-                ScrollHastaTexto.conTexto("Meta"),
+                ScrollHastaTexto.conTexto(
+                        "Meta"
+                ),
+
                 ClickTextoQueContengaX.elTextoContiene(
                         AYUDA
                 ),
+
                 ClickTextoQueContengaX.elTextoContiene(
                         INFO_APP
                 ),
+
                 WaitForResponse.withText(
                         WHATSAPP
                 )
@@ -145,7 +134,9 @@ public class ValidarVersionApp implements Task {
 
 
         /*
-         * 3. Evidencia
+         * ============================================================
+         * 3. EVIDENCIA
+         * ============================================================
          */
         CapturaDePantallaMovil.tomarCapturaPantalla(
                 "Validar Version de la App"
@@ -157,15 +148,19 @@ public class ValidarVersionApp implements Task {
 
 
         /*
-         * 4. Validaciones existentes
+         * ============================================================
+         * 4. VALIDAR INFORMACIÓN DE LA APLICACIÓN
+         * ============================================================
          */
         actor.attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene(
                         WHATSAPP
                 ),
+
                 ValidarTextoQueContengaX.elTextoContiene(
                         VERSION
                 ),
+
                 ValidarTextoQueContengaX.elTextoContiene(
                         LICENCIAS
                 )
@@ -173,10 +168,11 @@ public class ValidarVersionApp implements Task {
 
 
         /*
-         * 5. Regresar a la pantalla principal.
+         * ============================================================
+         * 5. REGRESAR
+         * ============================================================
          *
-         * Se conserva el comportamiento actual
-         * de la tarea.
+         * Se conserva el comportamiento existente.
          */
         actor.attemptsTo(
                 Atras.irAtras(),
