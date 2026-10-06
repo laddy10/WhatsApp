@@ -128,23 +128,46 @@ public class IniciarChatClaro implements Task {
                      */
                     if (!respuestaRecibida) {
 
-                        EstadoAtencionHumana.marcarEnCola();
-
                         ReportHooks.registrarPaso(
-                                "Sin respuesta al saludo; posible espera en cola de asesor"
+                                "El bot no respondió al primer saludo. "
+                                        + "Se realizará un segundo intento."
                         );
 
                         CapturaDePantallaMovil.tomarCapturaPantalla(
-                                "Posible cola de asesor detectada por silencio"
+                                "Bot sin respuesta al primer saludo"
                         );
 
                         actor.attemptsTo(
-                                ManejarConversacionConAsesor.ejecutar()
+                                WaitFor.aTime(3000),
+                                Enter.theValue(user.getSaludo())
+                                        .into(TXT_ENVIAR_MENSAJE),
+                                Click.on(BTN_ENVIAR)
                         );
 
-                        saludoYaEnviado = false;
-                        continue;
+                        respuestaRecibida =
+                                WaitForTextContainsWithTimeout.esperar(
+                                        TIMEOUT_RESPUESTA_SALUDO,
+                                        obtenerTextosParaWait()
+                                ).answeredBy(actor);
+
+                        if (!respuestaRecibida) {
+
+                            CapturaDePantallaMovil.tomarCapturaPantalla(
+                                    "Bot sin respuesta despues de dos saludos"
+                            );
+
+                            ReportHooks.registrarPaso(
+                                    "El bot no respondió después de dos intentos. "
+                                            + "No se marca como asesor porque no existe "
+                                            + "evidencia de escalamiento."
+                            );
+
+                            throw new IllegalStateException(
+                                    "El bot no respondió después de dos intentos de saludo."
+                            );
+                        }
                     }
+
                 }
 
                 /*

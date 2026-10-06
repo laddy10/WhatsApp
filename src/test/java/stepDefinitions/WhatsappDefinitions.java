@@ -165,11 +165,42 @@ public class WhatsappDefinitions {
         theActorInTheSpotlight().attemptsTo(SeleccionarValorRecargas.seleccionarValorRecargas());
     }
 
-    @Then("^Validar direccionamiento al medio de pago$")
-    public void validarDireccionamientoMedioPago() {
-        theActorInTheSpotlight().attemptsTo(DireccionamientoMediosPago.direccionamientoMediosPago());
-        ReportHooks.registrarPaso("seleccionar_medio_pago");
-        ReportHooks.registrarPaso("validar_redireccion_link_pago");
+    @Then("^Validar direccionamiento medio de pago Nequi$")
+    public void validarDireccionamientoMedioPagoNequi() {
+
+        theActorInTheSpotlight().attemptsTo(
+                DireccionamientoMediosPago.nequi()
+        );
+
+        ReportHooks.registrarPaso(
+                "Validar direccionamiento medio de pago Nequi"
+        );
+    }
+
+
+    @Then("^Validar direccionamiento medio de pago Tarjeta$")
+    public void validarDireccionamientoMedioPagoTarjeta() {
+
+        theActorInTheSpotlight().attemptsTo(
+                DireccionamientoMediosPago.tarjeta()
+        );
+
+        ReportHooks.registrarPaso(
+                "Validar direccionamiento medio de pago Tarjeta"
+        );
+    }
+
+
+    @Then("^Validar direccionamiento medio de pago PSE$")
+    public void validarDireccionamientoMedioPagoPSE() {
+
+        theActorInTheSpotlight().attemptsTo(
+                DireccionamientoMediosPago.pse()
+        );
+
+        ReportHooks.registrarPaso(
+                "Validar direccionamiento medio de pago PSE"
+        );
     }
 
     @And("^Vaciar chat$")

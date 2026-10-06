@@ -107,8 +107,8 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_10
-  Scenario: Haz tus recargas
+  @Whatsapp_10_Nequi
+  Scenario: Haz tus recargas - Medio de pago Nequi
     Given Ingresar a WhatsAPP
     When Validar Version de la App
     And Buscar el chat de Claro Colombia
@@ -118,7 +118,37 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Seleccionar menu principal
     And Ingresar a haz tus recargas
     And Seleccionar el valor de la recarga
-    Then Validar direccionamiento al medio de pago
+    Then Validar direccionamiento medio de pago Nequi
+    And Vaciar chat
+
+
+  @Whatsapp_10_Tarjeta
+  Scenario: Haz tus recargas - Medio de pago Tarjeta Debito o Credito
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+    And Ingresar a haz tus recargas
+    And Seleccionar el valor de la recarga
+    Then Validar direccionamiento medio de pago Tarjeta
+    And Vaciar chat
+
+
+  @Whatsapp_10_PSE
+  Scenario: Haz tus recargas - Medio de pago PSE
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+    And Ingresar a haz tus recargas
+    And Seleccionar el valor de la recarga
+    Then Validar direccionamiento medio de pago PSE
     And Vaciar chat
 
 
