@@ -28,7 +28,13 @@ public class ClasificarRespuestaBot {
                 || TextoQueContengaX.verificarTexto("Gracias por comunicarte").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("como te encuentras").answeredBy(actor)
                 || TextoQueContengaX.verificarTexto("colaborar").answeredBy(actor)
-                || TextoQueContengaX.verificarTexto("Es un gusto atenderte").answeredBy(actor)) {
+                || TextoQueContengaX.verificarTexto("Es un gusto atenderte").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Nombre completo").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("nombre completo").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Número de documento").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("número de documento").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("Para brindarte una mejor atención").answeredBy(actor)
+                || TextoQueContengaX.verificarTexto("compárteme por favor").answeredBy(actor)) {
 
             return EstadoConversacion.ESPERANDO_ASESOR;
         }

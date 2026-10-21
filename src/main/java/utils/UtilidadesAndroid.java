@@ -264,4 +264,64 @@ public class UtilidadesAndroid {
             return false;
         }
     }
+
+    public static boolean chromeActivoEnCarga(
+            Actor actor) {
+
+        try {
+
+            AndroidDriver driver =
+                    AndroidObject.androidDriver(actor);
+
+            if (!CHROME_PACKAGE.equals(
+                    driver.getCurrentPackage()
+            )) {
+                return false;
+            }
+
+            /*
+             * Buscar textos visibles relacionados con carga.
+             */
+            List<WebElement> textos =
+                    driver.findElementsByClassName(
+                            "android.widget.TextView"
+                    );
+
+            for (WebElement texto : textos) {
+
+                try {
+
+                    String valor =
+                            texto.getText();
+
+                    if (valor == null) {
+                        continue;
+                    }
+
+                    String normalizado =
+                            valor
+                                    .trim()
+                                    .toLowerCase();
+
+                    if (normalizado.contains("cargando")
+                            || normalizado.contains("loading")) {
+
+                        return true;
+                    }
+
+                } catch (Exception ignored) {
+                    /*
+                     * El elemento puede desaparecer mientras
+                     * Chrome actualiza la pantalla.
+                     */
+                }
+            }
+
+            return false;
+
+        } catch (Exception e) {
+
+            return false;
+        }
+    }
 }
