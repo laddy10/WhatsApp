@@ -19,6 +19,23 @@ public class FallasEnTuSeñalTV implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+
+        Boolean diagnosticoYaResuelto =
+                actor.recall(
+                        EstadoServiciosHogar.ESTADO_SERVICIOS_RESUELTO
+                );
+
+        if (Boolean.TRUE.equals(diagnosticoYaResuelto)) {
+
+            ReportHooks.registrarPaso(
+                    "No se selecciona TV porque Estado de servicios "
+                            + "ya detectó y solucionó la falla."
+            );
+
+            return;
+        }
+
+
         actor.attemptsTo(
                 ClickTextoQueContengaX.elTextoContiene(TELEVISION)
         );

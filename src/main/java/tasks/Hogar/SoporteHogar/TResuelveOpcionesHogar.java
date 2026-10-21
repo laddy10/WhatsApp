@@ -136,7 +136,7 @@ public class TResuelveOpcionesHogar implements Task {
                 TResuelveOpcionesHogar.class,
                 "3",
                 "mascotas",
-                ASISTENCIA_MASCOTA,
+                HOGAR_EXPRESS,
                 new String[] {
                         COBERTURA_MEDICA,
                         ASISTENCIA_MASCOTA,

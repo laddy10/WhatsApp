@@ -21,6 +21,21 @@ public class ImagenRecomendaciones implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
 
+        Boolean diagnosticoYaResuelto =
+                actor.recall(
+                        EstadoServiciosHogar.ESTADO_SERVICIOS_RESUELTO
+                );
+
+        if (Boolean.TRUE.equals(diagnosticoYaResuelto)) {
+
+            ReportHooks.registrarPaso(
+                    "No se valida imagen de recomendaciones porque "
+                            + "Estado de servicios ya solucionó la falla."
+            );
+
+            return;
+        }
+
         actor.attemptsTo(
                 Click.on(IMG_RECOMENDACIONES)
         );

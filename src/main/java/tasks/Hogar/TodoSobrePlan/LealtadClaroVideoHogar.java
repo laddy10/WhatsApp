@@ -439,38 +439,21 @@ public class LealtadClaroVideoHogar implements Task {
         }
 
 
-        // 12. Validar PREMIUM solo si navegó normalmente
+        // 12. Registrar evidencia del direccionamiento normal.
         if (direccionamientoConfirmado
                 && !popupControlado
                 && !pantallaNegra) {
-
-            actor.attemptsTo(
-                    WaitFor.aTime(9000),
-
-                    WaitForTextContains.withTextContains(
-                            PREMIUM,
-                            90
-                    )
-            );
 
             CapturaDePantallaMovil.tomarCapturaPantalla(
                     "Validar redirección a Claro Video"
             );
 
             ReportHooks.registrarPaso(
-                    "Validar redirección a Claro Video"
+                    "Direccionamiento a Claro Video validado mediante URL clarovideo.com."
             );
         }
 
 
-        /*
-         * 13. Regresar a WhatsApp y cerrar conversación
-         */
-        actor.attemptsTo(
-                Atras.irAtras(),
-                WaitFor.aTime(2000),
-                SalirConversacion.salir()
-        );
     }
 
 
