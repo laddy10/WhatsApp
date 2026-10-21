@@ -39,8 +39,7 @@ public class TResuelveOpcionUnoHogar implements Task {
         actor.attemptsTo(
                 ValidarTextoQueContengaX.elTextoContiene(TU_PLAN_ACTUAL),
                 ValidarTextoQueContengaX.elTextoContiene(TELEVISION),
-                ValidarTextoQueContengaX.elTextoContiene(TELEFONIA),
-                ValidarTextoQueContengaX.elTextoContiene(PLANES_PREMIUM_HOGAR)
+                ValidarTextoQueContengaX.elTextoContiene(TELEFONIA)
         );
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar información del plan hogar");

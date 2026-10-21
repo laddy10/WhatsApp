@@ -10,6 +10,7 @@ import hooks.ReportHooks;
 import interactions.Validaciones.ValidarTexto;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
+import interactions.scroll.ScrollGradual;
 import interactions.wait.WaitFor;
 import interactions.wait.WaitForResponse;
 
@@ -80,14 +81,67 @@ public class ValidarTratamientoDatos implements Task {
             List<WebElementFacade> btnsi = BTN_SI2.resolveAllFor(actor);
             List<WebElementFacade> btnsiautorizo = BTN_SI_AUTORIZO.resolveAllFor(actor);
 
+            int intentosScroll = 0;
+
+            while (btnsi.isEmpty()
+                    && btnsiautorizo.isEmpty()
+                    && intentosScroll < 3) {
+
+                ReportHooks.registrarPaso(
+                        "Los botones de autorización no están visibles. "
+                                + "Se realiza scroll para completar la política de tratamiento."
+                );
+
+                actor.attemptsTo(
+                        ScrollGradual.bajar(0.25),
+                        WaitFor.aTime(700)
+                );
+
+                btnsi = BTN_SI2.resolveAllFor(actor);
+                btnsiautorizo = BTN_SI_AUTORIZO.resolveAllFor(actor);
+
+                intentosScroll++;
+            }
+
             if (!btnsi.isEmpty()) {
-                actor.attemptsTo(Click.on(BTN_SI2));
+
+                actor.attemptsTo(
+                        Click.on(BTN_SI2)
+                );
 
             } else if (!btnsiautorizo.isEmpty()) {
-                actor.attemptsTo(Click.on(BTN_SI_AUTORIZO));
+
+                actor.attemptsTo(
+                        Click.on(BTN_SI_AUTORIZO)
+                );
 
             } else {
-                actor.attemptsTo(Click.on(BTN_SI));
+
+                /*
+                 * Conservamos BTN_SI como tercera variante,
+                 * pero solo después de haber intentado hacer scroll.
+                 */
+                List<WebElementFacade> btnSiAlternativo =
+                        BTN_SI.resolveAllFor(actor);
+
+                if (!btnSiAlternativo.isEmpty()) {
+
+                    actor.attemptsTo(
+                            Click.on(BTN_SI)
+                    );
+
+                } else {
+
+                    CapturaDePantallaMovil.tomarCapturaPantalla(
+                            "No se encontraron botones de autorizacion de tratamiento"
+                    );
+
+                    throw new IllegalStateException(
+                            "Se detectó la política de tratamiento de datos, "
+                                    + "pero no se encontró ningún botón de autorización "
+                                    + "después de realizar scroll."
+                    );
+                }
             }
 
             actor.attemptsTo(
