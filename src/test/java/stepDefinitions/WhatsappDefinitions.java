@@ -359,4 +359,9 @@ public class WhatsappDefinitions {
     public void validarConsultarOtraCuenta() {
         theActorInTheSpotlight().attemptsTo(ConsultarOtraCuenta.consultarOtraCuenta());
     }
+
+    @Then("^Validar mensaje (?:del )?c[oó]digo de seguridad$")
+    public void validarMensajeCodigoSeguridad() {
+        theActorInTheSpotlight().attemptsTo(ValidarCodigoSeguridadRoaming.validarCodigoSeguridadRoaming());
+    }
 }

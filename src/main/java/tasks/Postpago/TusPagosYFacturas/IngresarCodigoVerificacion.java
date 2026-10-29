@@ -6,6 +6,7 @@ import static userinterfaces.WhatsAppPage.TXT_ENVIAR_MENSAJE;
 import static userinterfaces.WhatsAppPostpagoPage.*;
 import static utils.Constantes.IDENTIDAD_CONFIRMADA;
 import static utils.ConstantesPost.PAGA_TU_FACTURA_AQUI;
+import static utils.ConstantesPost.ROAMING_NO_ESTA_ACTIVO;
 
 import hooks.ReportHooks;
 import interactions.Validaciones.ValidarTextoQueContengaX;
@@ -60,8 +61,12 @@ public class IngresarCodigoVerificacion extends AndroidObject implements Task {
             actor.attemptsTo(
                     Enter.theValue(codigoVerificacion.toString()).into(TXT_ENVIAR_MENSAJE),
                     Click.on(BTN_ENVIAR),
-                    WaitForTextContains.withAnyTextContains(IDENTIDAD_CONFIRMADA, PAGA_TU_FACTURA_AQUI),
-                    WaitFor.aTime(6000));
+                    WaitForTextContains.withAnyTextContains(
+                            IDENTIDAD_CONFIRMADA,
+                            PAGA_TU_FACTURA_AQUI,
+                            ROAMING_NO_ESTA_ACTIVO,
+                            "servicio de Roaming"),
+                    WaitFor.aTime(4000));
 
         } catch (Exception e) {
             System.out.println("Error al ingresar el código de verificación: " + e.getMessage());

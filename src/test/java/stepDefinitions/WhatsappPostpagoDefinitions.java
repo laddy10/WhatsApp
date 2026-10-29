@@ -3,6 +3,8 @@ package stepDefinitions;
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 import static tasks.CompraTusPaquetes.Constants_Paquetes.COMPRAR_ROAMING;
+import static tasks.CompraTusPaquetes.Constants_Paquetes.PQ_1;
+import static tasks.CompraTusPaquetes.Constants_Paquetes.PQ_3;
 import static userinterfaces.WhatsAppPage.*;
 import static userinterfaces.WhatsAppPostpagoPage.BTN_MENU_PRINCIPAL;
 import static utils.Constantes.*;
@@ -23,7 +25,10 @@ import models.User;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import questions.ValidarElemento;
+import tasks.OtrasOpciones.ActivarRoamingVigenciaDefinida;
 import tasks.OtrasOpciones.AdministarRoaming;
+import tasks.OtrasOpciones.ComprarPaqueteRoaming;
+import tasks.OtrasOpciones.ComprarPaqueteRoamingDatosYVoz;
 import tasks.OtrasOpciones.ComprarRoaming;
 import tasks.OtrasOpciones.PaquetesYRecargasPost;
 import tasks.Postpago.SeleccionarLineaPostpago;
@@ -439,7 +444,7 @@ public class WhatsappPostpagoDefinitions {
         theActorInTheSpotlight().attemptsTo(RealizarProcesoRegistro.realizarProcesoRegistro());
     }
 
-    @And("^Seleccionar Roaming internacional$")
+    @And("^Seleccionar Roaming [iI]nternacional$")
     public void roamingInternacional() {
         final String MENSAJE_CAPTURA = "Seleccionar menu Roaming Internacional";
 
@@ -460,7 +465,37 @@ public class WhatsappPostpagoDefinitions {
         theActorInTheSpotlight().attemptsTo(ComprarRoaming.comprarRoaming());
     }
 
-    @And("^Seleccionar opción Administrar Roaming$")
+    @Then("^(?:Ingresar a la opcion )?Comprar paquete roaming [dD]atos y voz(?: 1GB y 15 Minutos diarios)?$")
+    public void comprarPaqueteRoamingDatosYVoz() {
+        theActorInTheSpotlight().attemptsTo(ComprarPaqueteRoaming.para(ESPAÑA, PQ_1));
+    }
+
+    @Then("^Comprar paquete roaming [dD]atos(?: -)? Japon$")
+    public void comprarPaqueteRoamingJapon() {
+        theActorInTheSpotlight().attemptsTo(ComprarPaqueteRoaming.para(JAPON, PQ_3));
+    }
+
+    @Then("^Comprar paquete roaming (?:pasaporte |Pass )[aA]m[eé]rica(?: -)? Brasil$")
+    public void comprarPaqueteRoamingBrasil() {
+        theActorInTheSpotlight().attemptsTo(ComprarPaqueteRoaming.para(BRASIL, PAQ_DATOS_Y_MINUTOS, PASS_AMERICA_DIARIO));
+    }
+
+    @Then("^Comprar paquete roaming [dD]atos (?:pasaporte |Pass )[aA]m[eé]rica(?: -)? Estados Unidos$")
+    public void comprarPaqueteRoamingEstadosUnidos() {
+        theActorInTheSpotlight().attemptsTo(ComprarPaqueteRoaming.para(ESTADOS_UNIDOS, PAQUETES_DE_DATOS, PASAPORTE_AMERICA_7_DIAS));
+    }
+
+    @Then("^(?:Ingresar a la opcion )?Comprar paquete roaming [dD]atos(?: y voz)?(?: para el pa[ií]s)? \"([^\"]*)\" con el paquete \"([^\"]*)\"$")
+    public void comprarPaqueteRoamingPaisPaquete(String pais, String paquete) {
+        theActorInTheSpotlight().attemptsTo(ComprarPaqueteRoaming.para(pais, paquete));
+    }
+
+    @Then("^(?:Ingresar a la opcion )?Comprar paquete roaming(?: para el pa[ií]s)? \"([^\"]*)\" categor[ií]a \"([^\"]*)\" con el paquete \"([^\"]*)\"$")
+    public void comprarPaqueteRoamingPaisCategoriaPaquete(String pais, String categoria, String paquete) {
+        theActorInTheSpotlight().attemptsTo(ComprarPaqueteRoaming.para(pais, categoria, paquete));
+    }
+
+    @And("^(?:Seleccionar opci[oó]n|Clic en) Administrar Roaming$")
     public void administrarRoaming() {
         final String MENSAJE_CAPTURA = "Dar clic Administrar Roaming";
         CapturaDePantallaMovil.tomarCapturaPantalla(MENSAJE_CAPTURA);
@@ -475,6 +510,11 @@ public class WhatsappPostpagoDefinitions {
     @Then("Validar el estado actual del servicio Roaming internacional")
     public void estadoRomaing() {
         theActorInTheSpotlight().attemptsTo(AdministarRoaming.administarRoaming());
+    }
+
+    @Then("^Activar roaming con vigencia definida$")
+    public void activarRoamingConVigenciaDefinida() {
+        theActorInTheSpotlight().attemptsTo(ActivarRoamingVigenciaDefinida.activarRoamingVigenciaDefinida());
     }
 
     @Then("Validar direccionamiento de Paquetes y recargas")
