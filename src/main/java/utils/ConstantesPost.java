@@ -320,13 +320,30 @@ public class ConstantesPost {
     public static final String ESCRIBE_NOMBRE_PAIS =
             "Escribe el nombre del país que planeas visitar.";
     public static final String ESPAÑA = "España";
+    public static final String JAPON = "Japon";
+    public static final String BRASIL = "Brasil";
+    public static final String ESTADOS_UNIDOS = "Estados Unidos";
+    public static final String PASAPORTE_AMERICA_7_DIAS = "Pasaporte América 7 días";
+    public static final String PASAPORTE_AMERICA_DIARIO = "Pasaporte América diario";
+    public static final String PASS_AMERICA_15_DIAS = "Pass América 15 días";
     public static final String PAIS_ELEGIDO = "El país que elegiste es:";
     public static final String ADMINISTRAR_ROAMING = "Administrar Roaming";
     public static final String ESTADO_ROAMING = "Tu servicio de Roaming está";
+    public static final String ROAMING_NO_ESTA_ACTIVO = "Actualmente tu servicio de Roaming no está activo";
     public static final String FECHA_DESACTIVACION = "Fecha desactivación";
+    public static final String ESCRIBE_FECHA_DESACTIVAR =
+            "Escribe la fecha en la que quieres desactivar el servicio de Roaming internacional";
+    public static final String ELEGIR_Y_ACEPTAR = "Elegir y aceptar";
+    public static final String SI_COMPRAR_PAQUETE = "Sí, comprar paquete";
+    public static final String ROAMING_ACTIVO = "Tu servicio de Roaming esta activo";
+    public static final String LISTO_SELECCIONASTE = "¡Listo! Seleccionaste el paquete";
+    public static final String PAQ_DATOS_Y_MINUTOS = "Paq. datos y minutos";
+    public static final String PASS_AMERICA_DIARIO = "Pass América diario";
+    public static final String ELIGE_TU_PAQUETE = "Elige tu paquete";
     public static final String PAQUETES_RECARGAS = "Paquetes y recargas";
     public static final String SELECCIONAR_TIPO_PAQUETE = "Selecciona el tipo de Paquete";
     public static final String PAQUETES_DATOS = "Paquetes de Datos";
+    public static final String PAQUETES_DE_DATOS = "Paquetes de datos";
     public static final String SELECCIONAR = "Seleccionar";
     public static final String MIENTRAS_APP_ESTA_EN_USO = "MIENTRAS LA APP ESTÁ EN USO";
     public static final String ACEPTAR_2 = "Aceptar";

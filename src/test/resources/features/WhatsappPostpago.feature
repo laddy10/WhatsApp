@@ -537,3 +537,87 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Ingresar al link de pago Postpago
     And Realizar transaccion de pago con tarjeta de credito Post
     And Vaciar chat
+
+
+  @Whatsapp_Post_34
+  Scenario: Otras opciones - Roaming Internacional - Administar Roaming-Activar roaming con vigencia definida
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Seleccionar otras opciones
+    And Clic boton selecciona
+    And Seleccionar Roaming internacional
+    And Clic en Administrar Roaming
+    And Ingresar el codigo que llega en el mensaje de texto
+    Then Activar roaming con vigencia definida
+    And Vaciar chat
+
+
+  @Whatsapp_Post_37
+  Scenario: Otras opciones - Roaming Internacional - Comprar paquete Datos y voz pasaporte america - Brasil
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Seleccionar otras opciones
+    And Clic boton selecciona
+    And Seleccionar Roaming internacional
+    Then Comprar paquete roaming pasaporte america - Brasil
+    And Vaciar chat
+
+
+  @Whatsapp_Post_38
+  Scenario: Otras opciones - Roaming Internacional - Comprar paquete roaming Datos - Japon
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Seleccionar otras opciones
+    And Clic boton selecciona
+    And Seleccionar Roaming internacional
+    Then Comprar paquete roaming Datos - Japon
+    And Vaciar chat
+
+
+  @Whatsapp_Post_39
+  Scenario: Otras opciones - Roaming Internacional - Comprar paquete roaming Datos y voz
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Seleccionar otras opciones
+    And Clic boton selecciona
+    And Seleccionar Roaming internacional
+    Then Comprar paquete roaming Datos y voz
+    And Vaciar chat
+
+
+  @Whatsapp_Post_40
+  Scenario: Otras opciones - Roaming Internacional - Comprar paquete Datos pasaporte america - Estados Unidos
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Seleccionar otras opciones
+    And Clic boton selecciona
+    And Seleccionar Roaming internacional
+    Then Comprar paquete roaming Datos pasaporte america - Estados Unidos
+    And Vaciar chat
+
+
