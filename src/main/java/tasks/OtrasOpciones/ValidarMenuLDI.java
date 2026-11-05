@@ -68,7 +68,7 @@ public class ValidarMenuLDI implements Task {
         ReportHooks.registrarPaso("compra paquetes LDI usa");
 
         actor.attemptsTo(
-                ClickElementByText.clickElementByText(ENVIAR), WaitForResponse.withText(ELIGE_COMPRA));
+                Click.on(BTN_ENVIAR_2), WaitForResponse.withText(ELIGE_COMPRA));
 
         CapturaDePantallaMovil.tomarCapturaPantalla("elige compra");
         ReportHooks.registrarPaso("elige compra");

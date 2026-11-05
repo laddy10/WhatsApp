@@ -1,6 +1,7 @@
 package tasks.OtrasOpciones;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static userinterfaces.WhatsAppPage.BTN_ENVIAR_2;
 import static utils.Constantes.*;
 
 import hooks.ReportHooks;
@@ -10,6 +11,7 @@ import interactions.wait.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.actions.Click;
 import utils.CapturaDePantallaMovil;
 
 public class OtrasOpciones implements Task {
@@ -22,7 +24,7 @@ public class OtrasOpciones implements Task {
     ReportHooks.registrarPaso("Seleccionar menú otras opciones");
 
     actor.attemptsTo(
-        ClickElementByText.clickElementByText(ENVIAR), WaitForResponse.withText(SELECCIONA));
+            Click.on(BTN_ENVIAR_2), WaitForResponse.withText(SELECCIONA));
     CapturaDePantallaMovil.tomarCapturaPantalla("Validacion mensaje boton selecciona");
     ReportHooks.registrarPaso("Validacion mensaje boton selecciona");
 

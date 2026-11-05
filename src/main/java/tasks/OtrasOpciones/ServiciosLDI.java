@@ -1,6 +1,7 @@
 package tasks.OtrasOpciones;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static userinterfaces.WhatsAppPage.BTN_ENVIAR_2;
 import static utils.Constantes.*;
 
 import hooks.ReportHooks;
@@ -11,6 +12,7 @@ import interactions.wait.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.actions.Click;
 import utils.CapturaDePantallaMovil;
 
 public class ServiciosLDI implements Task {
@@ -24,7 +26,7 @@ public class ServiciosLDI implements Task {
     ReportHooks.registrarPaso("tus servicios LDI");
 
     actor.attemptsTo(
-        ClickElementByText.clickElementByText(ENVIAR), WaitForResponse.withText(MENSAJE_LDI));
+            Click.on(BTN_ENVIAR_2), WaitForResponse.withText(MENSAJE_LDI));
     CapturaDePantallaMovil.tomarCapturaPantalla("Validacion opciones");
     ReportHooks.registrarPaso("Validacion opciones");
   }
