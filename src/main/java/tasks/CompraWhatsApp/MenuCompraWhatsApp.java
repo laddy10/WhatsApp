@@ -1,20 +1,15 @@
 package tasks.CompraWhatsApp;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static userinterfaces.WhatsAppPage.BTN_ENVIAR;
-import static userinterfaces.WhatsAppPage.TXT_ENVIAR_MENSAJE;
 import static utils.Constantes.*;
 
 import hooks.ReportHooks;
 import interactions.Validaciones.ValidarTextoQueContengaX;
 import interactions.comunes.Atras;
-import interactions.wait.WaitForResponse;
 import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.Enter;
 import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 
