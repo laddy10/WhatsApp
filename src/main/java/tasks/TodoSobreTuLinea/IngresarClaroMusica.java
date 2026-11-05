@@ -41,7 +41,7 @@ public class IngresarClaroMusica implements Task {
         ReportHooks.registrarPaso("Seleccionar Claro Música");
 
         actor.attemptsTo(
-                ClickElementByText.clickElementByText(ENVIAR),
+                Click.on(BTN_ENVIAR_2),
                 WaitForResponse.withText(URL_CLARO_MUSICA));
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje con URL de claro musica");
