@@ -19,6 +19,7 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.actions.Click;
 import tasks.SalirConversacion;
 import utils.AndroidObject;
 import utils.CapturaDePantallaMovil;
@@ -53,9 +54,7 @@ public class ConsultarSaldoLinea implements Task {
          * visibles en la parte inferior de la respuesta.
          */
         actor.attemptsTo(
-                ClickElementByText.clickElementByText(
-                        ENVIAR
-                ),
+                Click.on(BTN_ENVIAR_2),
 
                 WaitForResponse.withAnyText(
                         SIN_SALDO_DISPONIBLE,

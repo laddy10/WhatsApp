@@ -34,7 +34,7 @@ public class ConsultarConsumos implements Task {
         ReportHooks.registrarPaso("Seleccionar opcion 'Consulta tus consumos'");
 
         actor.attemptsTo(
-                ClickElementByText.clickElementByText(ENVIAR),
+                Click.on(BTN_ENVIAR_2),
                 WaitForResponse.withAnyText(SIN_SALDO_DISPONIBLE, RECARGA_ACTIVA, PAQUETE_VENCE, "Datos consumidos"));
 
         List<WebElementFacade> lblsinsaldo = LBL_SIN_SALDO.resolveAllFor(actor);

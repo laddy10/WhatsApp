@@ -1,8 +1,7 @@
 package tasks.TodoSobreTuLinea;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static userinterfaces.WhatsAppPage.BTN_ENVIAR;
-import static userinterfaces.WhatsAppPage.TXT_ENVIAR_MENSAJE;
+import static userinterfaces.WhatsAppPage.*;
 import static utils.Constantes.*;
 
 import hooks.ReportHooks;
@@ -22,37 +21,37 @@ import utils.CapturaDePantallaMovil;
 
 public class ConsultaOtraLinea implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
-    actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(CONSULTA_OTRA_LINEA));
+    @Override
+    public <T extends Actor> void performAs(T actor) {
+        actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(CONSULTA_OTRA_LINEA));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar opcion 'Consulta otra línea'");
-    ReportHooks.registrarPaso("Seleccionar opcion 'Consulta otra línea'");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar opcion 'Consulta otra línea'");
+        ReportHooks.registrarPaso("Seleccionar opcion 'Consulta otra línea'");
 
-    actor.attemptsTo(
-        ClickElementByText.clickElementByText(ENVIAR),
-        WaitForTextContains.withAnyTextContains(
-            LINEAS_PREPAGO, CUENTA_PROPIA, CONSULTA_FORMA_RAPIDA),
-        ClickTextoQueContengaX.elTextoContiene(CUENTA_PROPIA),
-        WaitForTextContains.withAnyTextContains(LINEAS_POSTPAGO, LINEAS_PREPAGO));
+        actor.attemptsTo(
+                Click.on(BTN_ENVIAR_2),
+                WaitForTextContains.withAnyTextContains(
+                        LINEAS_PREPAGO, CUENTA_PROPIA, CONSULTA_FORMA_RAPIDA),
+                ClickTextoQueContengaX.elTextoContiene(CUENTA_PROPIA),
+                WaitForTextContains.withAnyTextContains(LINEAS_POSTPAGO, LINEAS_PREPAGO));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Cuenta propia");
-    ReportHooks.registrarPaso("Seleccionar Cuenta propia");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar Cuenta propia");
+        ReportHooks.registrarPaso("Seleccionar Cuenta propia");
 
-    actor.attemptsTo(
-        Scroll.scrollUnaVista(),
-        ValidarTextoQueContengaX.elTextoContiene(MAS_SERVICIOS_CLARO),
-        ValidarTextoQueContengaX.elTextoContiene(LINEAS_POSTPAGO),
-        ValidarTextoQueContengaX.elTextoContiene(LINEAS_PREPAGO));
+        actor.attemptsTo(
+                Scroll.scrollUnaVista(),
+                ValidarTextoQueContengaX.elTextoContiene(MAS_SERVICIOS_CLARO),
+                ValidarTextoQueContengaX.elTextoContiene(LINEAS_POSTPAGO),
+                ValidarTextoQueContengaX.elTextoContiene(LINEAS_PREPAGO));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Se valida redireccionamiento consulta otra linea");
-    ReportHooks.registrarPaso("Se valida redireccionamiento consulta otra linea");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Se valida redireccionamiento consulta otra linea");
+        ReportHooks.registrarPaso("Se valida redireccionamiento consulta otra linea");
 
-    actor.attemptsTo(
-            SalirConversacion.salir());
-  }
+        actor.attemptsTo(
+                SalirConversacion.salir());
+    }
 
-  public static Performable consultaOtraLinea() {
-    return instrumented(ConsultaOtraLinea.class);
-  }
+    public static Performable consultaOtraLinea() {
+        return instrumented(ConsultaOtraLinea.class);
+    }
 }

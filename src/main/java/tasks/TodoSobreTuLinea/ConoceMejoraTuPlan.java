@@ -16,6 +16,7 @@ import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.actions.Click;
 import tasks.SalirConversacion;
 import utils.CapturaDePantallaMovil;
 
@@ -29,7 +30,7 @@ public class ConoceMejoraTuPlan implements Task {
         ReportHooks.registrarPaso("Seleccionar opcion 'Conoce/mejora tu plan'");
 
         actor.attemptsTo(
-                ClickElementByText.clickElementByText(ENVIAR),
+                Click.on(BTN_ENVIAR_2),
                 WaitForResponse.withAnyText(NOMBRE_DEL_PLAN, MEJORA_TU_PLAN));
 
         List<WebElementFacade> lblnombreplan = LBL_NOMBRE_PLAN.resolveAllFor(actor);
