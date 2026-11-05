@@ -282,7 +282,8 @@ public class WhatsappDefinitions {
 
         theActorInTheSpotlight()
                 .attemptsTo(
-                        ClickElementByText.clickElementByText(ENVIAR), WaitForResponse.withText(SELECCIONA));
+                        Click.on(BTN_ENVIAR_2),
+                        WaitForResponse.withText(SELECCIONA));
     }
 
     @And("^Validar los paquetes todo incluido disponibles$")
