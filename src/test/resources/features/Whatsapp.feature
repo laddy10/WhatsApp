@@ -107,7 +107,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_10_Nequi
+
   Scenario: Haz tus recargas - Medio de pago Nequi
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -122,7 +122,7 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Vaciar chat
 
 
-  @Whatsapp_10_Tarjeta
+
   Scenario: Haz tus recargas - Medio de pago Tarjeta Debito o Credito
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -137,7 +137,7 @@ Feature: Validar los flujos de WhatsApp en prepago
     And Vaciar chat
 
 
-  @Whatsapp_10_PSE
+
   Scenario: Haz tus recargas - Medio de pago PSE
     Given Ingresar a WhatsAPP
     When Validar Version de la App
@@ -353,7 +353,7 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
 
-  @Whatsapp_26
+
   Scenario: Haz tus recargas - Validar menu de recargas
     Given Ingresar a WhatsAPP
     When Validar Version de la App
