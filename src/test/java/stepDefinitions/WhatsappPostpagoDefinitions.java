@@ -456,7 +456,7 @@ public class WhatsappPostpagoDefinitions {
 
         theActorInTheSpotlight()
                 .attemptsTo(
-                        ClickElementByText.clickElementByText(ENVIAR),
+                        Click.on(BTN_ENVIAR_2),
                         WaitForTextContains.withTextContains(COMPRAR_ROAMING));
     }
 

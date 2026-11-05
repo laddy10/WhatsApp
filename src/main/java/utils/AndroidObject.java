@@ -149,9 +149,17 @@ public class AndroidObject {
   // CLICK
   public void ClickByText(Actor actor, String text) {
     actor.attemptsTo(WaitFor.aTime(1000));
-    androidDriver(actor)
-        .findElementByAndroidUIAutomator("new UiSelector().text(\"" + text + "\")")
-        .click();
+    try {
+      androidDriver(actor)
+          .findElementByAndroidUIAutomator("new UiSelector().text(\"" + text + "\")")
+          .click();
+    } catch (NoSuchElementException e) {
+      String escaped = text.replace("\\", "\\\\").replace("\"", "\\\"");
+      androidDriver(actor)
+          .findElementByAndroidUIAutomator(
+              "new UiSelector().textMatches(\"(?i)^\\\\Q" + escaped + "\\\\E$\")")
+          .click();
+    }
   }
 
   public void ClickElTextoContiene(Actor actor, String text) {

@@ -2,10 +2,7 @@ package tasks.OtrasOpciones;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static tasks.CompraTusPaquetes.Constants_Paquetes.COMPRAR_ROAMING;
-import static userinterfaces.WhatsAppPage.BTN_ENVIAR;
-import static userinterfaces.WhatsAppPage.TXT_ENVIAR_MENSAJE;
-import static utils.Constantes.ENVIAR;
-import static utils.Constantes.SELECCIONA;
+import static userinterfaces.WhatsAppPage.*;
 import static utils.ConstantesPost.*;
 
 import hooks.ReportHooks;
@@ -73,7 +70,7 @@ public class ComprarPaqueteRoaming implements Task {
             ReportHooks.registrarPaso("Seleccionar categoria: " + categoria);
 
             actor.attemptsTo(
-                    ClickElementByText.clickElementByText(ENVIAR),
+                    Click.on(BTN_ENVIAR_2),
                     WaitForTextContains.withTextContains(ELIGE_TU_PAQUETE),
                     ValidarTextoQueContengaX.elTextoContiene(ELIGE_TU_PAQUETE));
 
@@ -91,7 +88,7 @@ public class ComprarPaqueteRoaming implements Task {
         ReportHooks.registrarPaso("Seleccionar paquete " + paquete);
 
         actor.attemptsTo(
-                ClickElementByText.clickElementByText(ENVIAR),
+                Click.on(BTN_ENVIAR_2),
                 WaitForTextContains.withAnyTextContains("Paquete " + paquete, paquete),
                 ValidarTextoQueContengaX.elTextoContiene(paquete));
 
