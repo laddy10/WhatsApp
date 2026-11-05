@@ -1,6 +1,7 @@
 package tasks.TodoSobreTuLinea;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static userinterfaces.WhatsAppPage.BTN_ENVIAR_2;
 import static utils.Constantes.*;
 
 import hooks.ReportHooks;
@@ -10,6 +11,7 @@ import interactions.wait.WaitForResponse;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.actions.Click;
 import utils.CapturaDePantallaMovil;
 
 public class MenuTodoSobreTuLinea implements Task {
@@ -23,7 +25,7 @@ public class MenuTodoSobreTuLinea implements Task {
     ReportHooks.registrarPaso("Seleccionar opcion todo sobre tu linea");
 
     actor.attemptsTo(
-        ClickElementByText.clickElementByText(ENVIAR), WaitForResponse.withText(SELECCIONA));
+            Click.on(BTN_ENVIAR_2), WaitForResponse.withText(SELECCIONA));
 
     CapturaDePantallaMovil.tomarCapturaPantalla("Validar mensaje que contenga el botón Selecciona");
     ReportHooks.registrarPaso("Validar mensaje que contenga el botón Selecciona");

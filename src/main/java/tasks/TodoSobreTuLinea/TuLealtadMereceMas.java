@@ -1,6 +1,7 @@
 package tasks.TodoSobreTuLinea;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static userinterfaces.WhatsAppPage.BTN_ENVIAR_2;
 import static utils.Constantes.*;
 
 import hooks.ReportHooks;
@@ -13,35 +14,36 @@ import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.actions.Click;
 import utils.CapturaDePantallaMovil;
 
 public class TuLealtadMereceMas implements Task {
 
-  @Override
-  public <T extends Actor> void performAs(T actor) {
+    @Override
+    public <T extends Actor> void performAs(T actor) {
 
-    actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(TU_LEALTAD_MERECE_MAS));
+        actor.attemptsTo(ClickTextoQueContengaX.elTextoContiene(TU_LEALTAD_MERECE_MAS));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar opcion Tu lealtad merece mas");
-    ReportHooks.registrarPaso("Seleccionar opcion Tu lealtad merece mas");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Seleccionar opcion Tu lealtad merece mas");
+        ReportHooks.registrarPaso("Seleccionar opcion Tu lealtad merece mas");
 
-    actor.attemptsTo(
-        ClickElementByText.clickElementByText(ENVIAR),
-        WaitFor.aTime(9000),
-        WaitForTextContains.withAnyTextContains(TEXTO_GRACIAS_POR_PREFERIRNOS));
+        actor.attemptsTo(
+                Click.on(BTN_ENVIAR_2),
+                WaitFor.aTime(9000),
+                WaitForTextContains.withAnyTextContains(TEXTO_GRACIAS_POR_PREFERIRNOS));
 
-    CapturaDePantallaMovil.tomarCapturaPantalla(
-        "Validar botón Selecciona de tu lealtad merece más");
-    ReportHooks.registrarPaso("Validar botón Selecciona de tu lealtad merece más");
+        CapturaDePantallaMovil.tomarCapturaPantalla(
+                "Validar botón Selecciona de tu lealtad merece más");
+        ReportHooks.registrarPaso("Validar botón Selecciona de tu lealtad merece más");
 
-    actor.attemptsTo(
-        EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
-        //   Click.on(BTN_SELECCIONA_TU_LEALTAD_2),
-        ValidarTextoQueContengaX.elTextoContiene(CLARO_MUSICA),
-        ValidarTextoQueContengaX.elTextoContiene(CLARO_DRIVE));
-  }
+        actor.attemptsTo(
+                EsperarYClickSeleccionaEnUltimoMensaje.conTimeout(20),
+                //   Click.on(BTN_SELECCIONA_TU_LEALTAD_2),
+                ValidarTextoQueContengaX.elTextoContiene(CLARO_MUSICA),
+                ValidarTextoQueContengaX.elTextoContiene(CLARO_DRIVE));
+    }
 
-  public static Performable tuLealtadMereceMas() {
-    return instrumented(TuLealtadMereceMas.class);
-  }
+    public static Performable tuLealtadMereceMas() {
+        return instrumented(TuLealtadMereceMas.class);
+    }
 }
