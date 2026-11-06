@@ -639,14 +639,58 @@ public class ValidarClaroVideo implements Task {
      * que la automatización quede dentro del chat
      * de Claro Colombia antes de ejecutar Cierrecaso.
      */
-    private <T extends Actor> void regresarAlChatClaro(
-            T actor) {
+    private <T extends Actor> void regresarAlChatClaro(T actor) {
 
+        // Intentar regresar normalmente desde Chrome
         actor.attemptsTo(
                 Atras.irAtras(),
                 WaitFor.aTime(1500)
         );
 
+        // Revisar qué aplicación quedó activa
+        String paqueteActual = "";
+
+        try {
+            paqueteActual =
+                    AndroidObject
+                            .androidDriver(actor)
+                            .getCurrentPackage();
+
+        } catch (Exception ignored) {
+            paqueteActual = "";
+        }
+
+        // Si seguimos en Chrome, regresar directamente a WhatsApp
+        if (!"com.whatsapp".equals(paqueteActual)) {
+
+            ReportHooks.registrarPaso(
+                    "Después de regresar desde Claro Video "
+                            + "la aplicación activa sigue siendo "
+                            + paqueteActual
+                            + ". Se reactiva WhatsApp."
+            );
+
+            try {
+
+                AndroidObject
+                        .androidDriver(actor)
+                        .activateApp("com.whatsapp");
+
+                actor.attemptsTo(
+                        WaitFor.aTime(2000)
+                );
+
+            } catch (Exception e) {
+
+                throw new IllegalStateException(
+                        "No fue posible regresar a WhatsApp "
+                                + "después de validar Claro Video.",
+                        e
+                );
+            }
+        }
+
+        // Revisar si ya estamos dentro del chat de Claro
         boolean dentroDelChat = false;
 
         try {
@@ -657,26 +701,26 @@ public class ValidarClaroVideo implements Task {
                             .isVisible();
 
         } catch (Exception ignored) {
-
             dentroDelChat = false;
         }
 
-
+        // Si estamos en la lista de chats, abrir Claro Colombia
         if (!dentroDelChat) {
 
             ReportHooks.registrarPaso(
-                    "La automatización regresó a la lista de chats. "
-                            + "Se abre nuevamente Claro Colombia "
-                            + "antes de cerrar la conversación."
+                    "WhatsApp está activo, pero no estamos dentro "
+                            + "del chat de Claro Colombia. "
+                            + "Se abre nuevamente la conversación."
             );
 
             actor.attemptsTo(
+                    WaitFor.aTime(1000),
                     Click.on(CHAT_CLARO),
                     WaitFor.aTime(1500)
             );
         }
 
-
+        // Confirmar que realmente estamos dentro del chat
         try {
 
             if (!TXT_ENVIAR_MENSAJE
@@ -684,8 +728,7 @@ public class ValidarClaroVideo implements Task {
                     .isVisible()) {
 
                 throw new IllegalStateException(
-                        "No se confirmó ingreso al chat de Claro Colombia "
-                                + "antes de ejecutar el cierre."
+                        "No se confirmó ingreso al chat de Claro Colombia."
                 );
             }
 
