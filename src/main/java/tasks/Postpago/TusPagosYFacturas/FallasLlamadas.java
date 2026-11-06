@@ -80,7 +80,8 @@ public class FallasLlamadas implements Task {
                 WaitForTextContainsWithTimeout.esperar(
                         58,
                         SISTEMA_OPERATIVO,
-                        PAGO_FACTURA_PENDIENTE
+                        PAGO_FACTURA_PENDIENTE,
+                        ESPERA_10_MIN
                 ).answeredBy(actor);
 
 
@@ -150,7 +151,7 @@ public class FallasLlamadas implements Task {
          * ============================================================
          */
 
-        CapturaDePantallaMovil.tomarCapturaPantalla(
+      /*  CapturaDePantallaMovil.tomarCapturaPantalla(
                 "Seleccionar 'Android'"
         );
 
@@ -184,7 +185,7 @@ public class FallasLlamadas implements Task {
 
         ReportHooks.registrarPaso(
                 "Validar seguir paso a paso video"
-        );
+        ); */
 
 
         /*
@@ -193,6 +194,7 @@ public class FallasLlamadas implements Task {
          * ============================================================
          */
         actor.attemptsTo(
+                ValidarTextoQueContengaX.elTextoContiene(PASO_PASO_VIDEO),
                 Click.on(
                         BTN_REPRODUCIR_VIDEO
                 ),

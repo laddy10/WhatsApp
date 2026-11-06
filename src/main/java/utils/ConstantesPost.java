@@ -363,6 +363,9 @@ public class ConstantesPost {
     public static final String MUNDO_CLARO = "Mundo Claro";
     public static final String SISTEMA_OPERATIVO = "sistema operativo";
     public static final String ANDROID = "Android";
+    public static final String ESPERA_10_MIN = "Regresaremos en 10 minutos";
+    public static final String PASO_PASO_VIDEO = "Sigue el paso a paso de este video";
+
 
 
     //HOGAR
