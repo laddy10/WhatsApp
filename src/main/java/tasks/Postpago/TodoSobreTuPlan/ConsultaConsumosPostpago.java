@@ -31,7 +31,7 @@ public class ConsultaConsumosPostpago implements Task {
         ReportHooks.registrarPaso("Seleccionar opción Consulta tus consumos postpago");
 
         actor.attemptsTo(
-                ClickElementByText.clickElementByText(ENVIAR),
+                Click.on(BTN_ENVIAR_2),
                 WaitForTextContains.withTextContains(NOMBRE_DE_PLAN));
 
         CapturaDePantallaMovil.tomarCapturaPantalla(
