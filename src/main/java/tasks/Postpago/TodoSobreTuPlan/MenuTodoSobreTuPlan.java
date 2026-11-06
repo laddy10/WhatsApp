@@ -1,6 +1,7 @@
 package tasks.Postpago.TodoSobreTuPlan;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static userinterfaces.WhatsAppPage.BTN_ENVIAR_2;
 import static utils.Constantes.*;
 import static utils.ConstantesPost.*;
 
@@ -12,6 +13,7 @@ import interactions.wait.WaitForTextContains;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
+import net.serenitybdd.screenplay.actions.Click;
 import utils.CapturaDePantallaMovil;
 
 public class MenuTodoSobreTuPlan implements Task {
@@ -24,7 +26,7 @@ public class MenuTodoSobreTuPlan implements Task {
     ReportHooks.registrarPaso("Seleccionar el menú Todo sobre tu plan");
 
     actor.attemptsTo(
-        ClickElementByText.clickElementByText(ENVIAR), WaitForResponse.withText(SELECCIONA));
+            Click.on(BTN_ENVIAR_2), WaitForResponse.withText(SELECCIONA));
 
     CapturaDePantallaMovil.tomarCapturaPantalla("Dar clic boton Selecciona");
     ReportHooks.registrarPaso("Dar clic boton Selecciona");
