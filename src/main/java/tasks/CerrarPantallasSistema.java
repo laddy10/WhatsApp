@@ -12,9 +12,8 @@ public class CerrarPantallasSistema implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
 
+        // Popup USB
         try {
-
-            // Popup USB
             boolean dialogoUsbVisible =
                     AndroidObject.androidDriver(actor)
                             .findElementsByAndroidUIAutomator(
@@ -37,7 +36,12 @@ public class CerrarPantallasSistema implements Task {
                 Thread.sleep(1000);
             }
 
-            // Popup SIM Claro
+        } catch (Exception e) {
+            System.out.println("No se pudo cerrar popup USB: " + e.getMessage());
+        }
+
+        // Popup SIM Claro
+        try {
             boolean popupSimClaroVisible =
                     AndroidObject.androidDriver(actor)
                             .findElementsByAndroidUIAutomator(
@@ -61,9 +65,36 @@ public class CerrarPantallasSistema implements Task {
             }
 
         } catch (Exception e) {
+            System.out.println("No se pudo cerrar popup SIM Claro: " + e.getMessage());
+        }
 
+        // Popup actualización del sistema
+        try {
+            boolean actualizacionVisible =
+                    AndroidObject.androidDriver(actor)
+                            .findElementsByAndroidUIAutomator(
+                                    "new UiSelector().textContains(\"Actualización del sistema\")"
+                            )
+                            .size() > 0;
+
+            if (actualizacionVisible) {
+
+                ReportHooks.registrarPaso(
+                        "Se detectó ventana 'Actualización del sistema'. Se selecciona 'Recordarme más tarde'."
+                );
+
+                AndroidObject.androidDriver(actor)
+                        .findElementByAndroidUIAutomator(
+                                "new UiSelector().text(\"Recordarme más tarde\")"
+                        )
+                        .click();
+
+                Thread.sleep(1000);
+            }
+
+        } catch (Exception e) {
             System.out.println(
-                    "No se detectaron ventanas del sistema pendientes."
+                    "No se pudo cerrar actualización del sistema: " + e.getMessage()
             );
         }
     }
