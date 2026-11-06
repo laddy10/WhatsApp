@@ -15,7 +15,7 @@ public class ConstantesPost {
     public static final String OTRAS_OPCIONES_POST = "\uD83D\uDC49 Otras opciones";
     public static final String HAZLO_REAL = "Hazlo real";
     public static final String PLAN_INCLUYE =
-            "Tu plan incluye Datos ilimitados, Llamadas ilimitadas Nal y a USA, Canada, Mexico y Pto Rico, SMS ilimitados";
+            "Tu plan incluye Datos ilimitados, Llamadas ilimit Nal y a USA, Canada, Mex y Pto Rico, SMS ilimitados";
     public static final String INSTAGRAM = "Instagram";
     public static final String FACEBOOK = "Facebook";
     public static final String TWITTER = "Twitter";

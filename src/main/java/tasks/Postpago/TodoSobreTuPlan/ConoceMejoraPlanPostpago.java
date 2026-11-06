@@ -31,7 +31,7 @@ public class ConoceMejoraPlanPostpago implements Task {
         ReportHooks.registrarPaso("Seleccionar opción Conoce/mejora tu plan postpago");
 
         actor.attemptsTo(
-                ClickElementByText.clickElementByText(ENVIAR),
+                Click.on(BTN_ENVIAR_2),
                 WaitForTextContains.withTextContains(NOMBRE_DE_PLAN));
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validar información del plan postpago");

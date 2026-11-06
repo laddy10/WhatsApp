@@ -192,6 +192,8 @@ public class IniciarChatClaro implements Task {
                                 ValidarTextoErrorYLimpiarChat.validarYLimpiar()
                         );
 
+                        saludoYaEnviado = false;
+
                         continue;
 
                     case ESPERANDO_ASESOR:

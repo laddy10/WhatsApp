@@ -1,8 +1,7 @@
 package tasks.OtrasOpciones;
 
 import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static userinterfaces.WhatsAppPage.BTN_ENVIAR;
-import static userinterfaces.WhatsAppPage.TXT_ENVIAR_MENSAJE;
+import static userinterfaces.WhatsAppPage.*;
 import static utils.Constantes.*;
 
 import hooks.ReportHooks;
@@ -30,7 +29,7 @@ public class RenuevaTuSIM implements Task {
         ReportHooks.registrarPaso("renueva tu sim");
 
         actor.attemptsTo(
-                ClickElementByText.clickElementByText(ENVIAR),
+                Click.on(BTN_ENVIAR_2),
                 WaitForResponse.withAnyText(MENSAJE_ACTUALIZA_SIM));
         CapturaDePantallaMovil.tomarCapturaPantalla("Validacion mensaje boton actualizar");
         ReportHooks.registrarPaso("Validacion mensaje boton actualizar");
