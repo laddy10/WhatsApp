@@ -534,51 +534,110 @@ public class ValidarClaroVideo implements Task {
     private <T extends Actor> void manejarVistaPreviaBitly(
             T actor) {
 
-        AndroidObject androidObject =
-                new AndroidObject();
-
         actor.attemptsTo(
                 WaitFor.aTime(3000)
         );
 
-        boolean continuarVisible =
-                androidObject.textoContiene(
-                        actor,
-                        CONTINUAR_AL_DESTINO_2
+        try {
+            java.util.List<org.openqa.selenium.WebElement> botones =
+                    AndroidObject
+                            .androidDriver(actor)
+                            .findElementsByAndroidUIAutomator(
+                                    "new UiSelector().textContains(\""
+                                            + CONTINUAR_AL_DESTINO_2
+                                            + "\")"
+                            );
+
+
+            if (botones == null || botones.isEmpty()) {
+
+                ReportHooks.registrarPaso(
+                        "No se detectó el botón 'Continuar al destino'. "
+                                + "La redirección pudo haberse realizado "
+                                + "automáticamente."
                 );
 
-        if (!continuarVisible) {
+                return;
+            }
+
+
+            /*
+             * Intentamos hacer clic utilizando una referencia
+             * recién obtenida.
+             */
+            try {
+
+                botones.get(0).click();
+
+                ReportHooks.registrarPaso(
+                        "Se detectó la vista previa de Bitly "
+                                + "y se seleccionó 'Continuar al destino'."
+                );
+
+            } catch (org.openqa.selenium.StaleElementReferenceException e) {
+
+                /*
+                 * El botón desapareció justo antes del clic.
+                 *
+                 * Esto significa que la página cambió/redirigió.
+                 * Se considera comportamiento válido.
+                 */
+                ReportHooks.registrarPaso(
+                        "El botón 'Continuar al destino' desapareció "
+                                + "durante la redirección de Bitly. "
+                                + "Se continúa sin marcar fallo."
+                );
+            }
+
+
+        } catch (org.openqa.selenium.StaleElementReferenceException e) {
+
+            /*
+             * También puede desaparecer mientras Appium
+             * está realizando la búsqueda.
+             */
+            ReportHooks.registrarPaso(
+                    "La vista previa de Bitly cambió durante "
+                            + "la búsqueda de 'Continuar al destino'. "
+                            + "Se continúa con la redirección."
+            );
+
+
+        } catch (org.openqa.selenium.NoSuchElementException e) {
 
             ReportHooks.registrarPaso(
-                    "No se detectó el botón 'Continuar al destino'. "
-                            + "Se permitirá que Bitly realice "
-                            + "la redirección automática."
+                    "El botón 'Continuar al destino' ya no está disponible. "
+                            + "Se continúa esperando el destino."
             );
 
-            return;
-        }
-
-        try {
-
-            actor.attemptsTo(
-                    ClickTextoQueContengaX.elTextoContiene(
-                            CONTINUAR_AL_DESTINO_2
-                    )
-            );
-
-            ReportHooks.registrarPaso(
-                    "Se detectó vista previa de Bitly y "
-                            + "se seleccionó 'Continuar al destino'."
-            );
 
         } catch (Exception e) {
 
-            ReportHooks.registrarPaso(
-                    "El botón 'Continuar al destino' "
-                            + "dejó de estar disponible. "
-                            + "Se continúa esperando la "
-                            + "redirección automática de Bitly."
-            );
+            /*
+             * Salvaguarda:
+             *
+             * Si ya estamos en Chrome y la navegación está avanzando,
+             * no hacemos fallar el escenario por el botón de Bitly.
+             */
+            boolean chromeActivo =
+                    UtilidadesAndroid.estaChromeActivo(actor);
+
+            if (chromeActivo) {
+
+                ReportHooks.registrarPaso(
+                        "No fue posible interactuar con 'Continuar al destino', "
+                                + "pero Chrome ya está activo. "
+                                + "Se continúa validando Claro Video."
+                );
+
+                return;
+            }
+
+            /*
+             * Si ni siquiera estamos en Chrome, ahí sí
+             * dejamos subir el error porque sería otro problema.
+             */
+            throw e;
         }
     }
 
