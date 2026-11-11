@@ -115,12 +115,37 @@ public class ValidarClaroVideo implements Task {
 
             manejarVistaPreviaBitly(actor);
 
-            actor.attemptsTo(
-                    WaitFor.aTime(5000)
-            );
+            try {
 
-            popupControlado =
-                    manejarPopupClaroVideo(actor);
+                UtilidadesAndroid.esperarRedireccionamientoWeb(
+                        actor,
+                        "clarovideo.com",
+                        50
+                );
+
+                direccionamientoConfirmado = true;
+
+                ReportHooks.registrarPaso(
+                        "Se confirmó que Bitly redireccionó correctamente "
+                                + "a clarovideo.com."
+                );
+
+            } catch (RuntimeException e) {
+
+
+                popupControlado =
+                        manejarPopupClaroVideo(actor);
+
+                if (!popupControlado) {
+
+
+                    throw new IllegalStateException(
+                            "Bitly fue abierto, pero no se confirmó "
+                                    + "el redireccionamiento a clarovideo.com.",
+                            e
+                    );
+                }
+            }
         }
 
 
