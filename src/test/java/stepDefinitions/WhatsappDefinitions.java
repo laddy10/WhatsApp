@@ -85,6 +85,12 @@ public class WhatsappDefinitions {
         ReportHooks.setLinea(user.getNumeroPre());
     }
 
+    @And("^Seleccionar linea de consulta (?:roaming|- numeroRoaming)$")
+    public void seleccionarLineaConsultaRoaming() {
+        theActorInTheSpotlight().attemptsTo(SeleccionarLineaRoaming.seleccionarLineaRoaming());
+        ReportHooks.setLinea(user.getNumeroRoaming());
+    }
+
     @And("^Validar politica de tratamientos de datos$")
     public void validarPoliticaTratamiendoDatos() {
         theActorInTheSpotlight().attemptsTo(ValidarTratamientoDatos.validarTratamientoDatos());
@@ -364,5 +370,30 @@ public class WhatsappDefinitions {
     @Then("^Validar mensaje (?:del )?c[oó]digo de seguridad$")
     public void validarMensajeCodigoSeguridad() {
         theActorInTheSpotlight().attemptsTo(ValidarCodigoSeguridadRoaming.validarCodigoSeguridadRoaming());
+    }
+
+    @Then("^(?:Desactivar [rR]oaming y validar la desactivaci[oó]n|Desactivar roaming)$")
+    public void desactivarRoaming() {
+        theActorInTheSpotlight().attemptsTo(DesactivarRoaming.desactivarRoaming());
+    }
+
+    @Then("^(?:Activar ahora y validar la activaci[oó]n|Activar roaming ahora)$")
+    public void activarRoamingAhora() {
+        theActorInTheSpotlight().attemptsTo(ActivarRoamingAhora.activarRoamingAhora());
+    }
+
+    @And("^(?:Programar fecha de desactivaci[oó]n con vigencia definida|Vigencia definida)$")
+    public void programarFechaDesactivacion() {
+        theActorInTheSpotlight().attemptsTo(ProgramarFechaDesactivacionRoaming.conFechaManana());
+    }
+
+    @Then("^(?:Activar [rR]oaming con vigencia indefinida|Vigencia indefinida)$")
+    public void activarRoamingVigenciaIndefinida() {
+        theActorInTheSpotlight().attemptsTo(ActivarRoamingVigenciaIndefinida.activarRoamingVigenciaIndefinida());
+    }
+
+    @Then("^(?:Modificar la vigencia de roaming|Modificar la vigencia)$")
+    public void modificarVigenciaRoaming() {
+        theActorInTheSpotlight().attemptsTo(ModificarVigenciaRoaming.conDosDiasDespues());
     }
 }

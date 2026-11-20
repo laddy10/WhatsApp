@@ -11,6 +11,8 @@ public class User {
   private String numeroWhatsAppPost31;
   private String numeroWhatsAppPost32;
   private String numeroWhatsAppPost33;
+  private String numeroRoaming;
+  private String numeroRoamingPost;
 
   public User() {}
 
@@ -42,4 +44,7 @@ public class User {
 
   public String getNumeroWhatsAppPost33() { return numeroWhatsAppPost33; }
 
+  public String getNumeroRoaming() { return numeroRoaming; }
+
+  public String getNumeroRoamingPost() { return numeroRoamingPost; }
 }

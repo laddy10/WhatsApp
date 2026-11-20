@@ -32,6 +32,7 @@ import tasks.OtrasOpciones.ComprarPaqueteRoamingDatosYVoz;
 import tasks.OtrasOpciones.ComprarRoaming;
 import tasks.OtrasOpciones.PaquetesYRecargasPost;
 import tasks.Postpago.SeleccionarLineaPostpago;
+import tasks.Postpago.SeleccionarLineaRoamingPostpago;
 import tasks.Postpago.TodoSobreTuPlan.*;
 import tasks.Postpago.TratamientoDatosPostpago;
 import tasks.Postpago.TusPagosYFacturas.*;
@@ -53,6 +54,12 @@ public class WhatsappPostpagoDefinitions {
         theActorInTheSpotlight().attemptsTo(SeleccionarLineaPostpago.seleccionarLineaPostpago());
         ReportHooks.setLinea(user.getNumeroPost());
     }
+
+    @And("^Seleccionar linea de consulta postpago - numeroRoamingPost$")
+    public void seleccionarLineaConsultaPostpagoRoaming() {
+        theActorInTheSpotlight().attemptsTo(SeleccionarLineaRoamingPostpago.seleccionarLineaRoamingPostpago());
+        ReportHooks.setLinea(user.getNumeroRoamingPost());
+    }
     @And("^Seleccionar linea de de pago Post 30$")
     public void seleccionarLineaPost30() {
         // Contrato st-context: estos pasos eligen la linea sin pasar por
@@ -72,7 +79,7 @@ public class WhatsappPostpagoDefinitions {
         ContextoST.registrarSegmento("pospago");
         theActorInTheSpotlight().attemptsTo(
                 SeleccionarNumero.porUltimos4(user.getNumeroWhatsAppPost31()),
-                WaitForResponse.withAnyText(VER_Y_PAGAR_FACTURA, SI_AUTORIZO, AUTORIZACION_TRATAMIENTO)
+                WaitForResponse.withAnyText(VER_Y_PAGAR_FACTURA, SI_AUTORIZO, AUTORIZACION_TRATAMIENTO,MENU_PRINCIPAL)
         );
         ReportHooks.setLinea(user.getNumeroWhatsAppPost31());
     }

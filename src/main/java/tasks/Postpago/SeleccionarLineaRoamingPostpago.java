@@ -1,0 +1,34 @@
+package tasks.Postpago;
+
+import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static utils.Constantes.AUTORIZACION_TRATAMIENTO;
+import static utils.Constantes.MENU_PRINCIPAL;
+import static utils.ConstantesPost.SI_AUTORIZO;
+import static utils.ConstantesPost.VER_Y_PAGAR_FACTURA;
+
+import interactions.wait.WaitForResponse;
+import models.User;
+import net.serenitybdd.screenplay.Actor;
+import net.serenitybdd.screenplay.Performable;
+import net.serenitybdd.screenplay.Task;
+import tasks.SeleccionarNumero;
+import utils.ContextoST;
+import utils.TestDataProvider;
+
+public class SeleccionarLineaRoamingPostpago implements Task {
+
+  private final User user = TestDataProvider.getRealUser();
+
+  @Override
+  public <T extends Actor> void performAs(T actor) {
+    // Contrato st-context: este flujo consulta la linea ROAMING POSTPAGO (numeroRoamingPost).
+    ContextoST.registrarSegmento("pospago");
+    actor.attemptsTo(
+        SeleccionarNumero.porUltimos4(user.getNumeroRoamingPost()),
+        WaitForResponse.withAnyText(VER_Y_PAGAR_FACTURA, SI_AUTORIZO, AUTORIZACION_TRATAMIENTO, MENU_PRINCIPAL));
+  }
+
+  public static Performable seleccionarLineaRoamingPostpago() {
+    return instrumented(SeleccionarLineaRoamingPostpago.class);
+  }
+}

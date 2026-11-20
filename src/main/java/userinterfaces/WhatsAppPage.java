@@ -288,4 +288,24 @@ public class WhatsAppPage extends PageObject {
                                     "and @text='No autorizo']"
                     ));
 
+    public static final Target BTN_FECHA_DESACTIVACION_ROAMING =
+            Target.the("Botón Fecha desactivación")
+                    .located(By.xpath("//*[@resource-id='com.whatsapp:id/button_content' and contains(@text, 'Fecha desactivación')] | //*[@text='Fecha desactivación']"));
+
+    public static final Target BTN_VIGENCIA_INDEFINIDA_ROAMING =
+            Target.the("Botón Vigencia indefinida")
+                    .located(By.xpath("//*[@resource-id='com.whatsapp:id/button_content' and contains(@text, 'Vigencia indefinida')] | //*[@text='Vigencia indefinida']"));
+
+    public static final Target BTN_DESACTIVAR_ROAMING_OPCION =
+            Target.the("Botón Desactivar roaming")
+                    .located(By.xpath("//*[@resource-id='com.whatsapp:id/button_content' and contains(@text, 'Desactivar roaming')] | //*[@text='Desactivar roaming']"));
+
+    public static final Target BTN_FINALIZAR_CHAT_ROAMING =
+            Target.the("Botón Finalizar chat")
+                    .located(By.xpath("//*[@resource-id='com.whatsapp:id/button_content' and contains(@text, 'Finalizar chat')] | //*[@text='Finalizar chat']"));
+
+    public static final Target BTN_ACTIVAR_AHORA_ROAMING =
+            Target.the("Botón Activar ahora")
+                    .located(By.xpath("//*[@resource-id='com.whatsapp:id/button_content' and contains(@text, 'Activar ahora')] | //*[@text='Activar ahora']"));
+
 }

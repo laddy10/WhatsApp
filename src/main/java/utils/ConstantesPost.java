@@ -335,7 +335,7 @@ public class ConstantesPost {
             "Escribe la fecha en la que quieres desactivar el servicio de Roaming internacional";
     public static final String ELEGIR_Y_ACEPTAR = "Elegir y aceptar";
     public static final String SI_COMPRAR_PAQUETE = "Sí, comprar paquete";
-    public static final String ROAMING_ACTIVO = "Tu servicio de Roaming esta activo";
+    public static final String ROAMING_ACTIVO = "Tu servicio de Roaming está activo";
     public static final String LISTO_SELECCIONASTE = "¡Listo! Seleccionaste el paquete";
     public static final String PAQ_DATOS_Y_MINUTOS = "Paq. datos y minutos";
     public static final String PASS_AMERICA_DIARIO = "Pass América diario";
@@ -359,6 +359,16 @@ public class ConstantesPost {
     public static final String PAGO_FACTURA_PENDIENTE =
             "Es posible que tu servicio presente intermitencia o lentitud";
     public static final String TIPO_SOLICITUD = "Tipo solicitud";
+    public static final String BTN_DESACTIVAR_ROAMING = "Desactivar roaming";
+    public static final String PREGUNTA_DESACTIVAR_ROAMING = "desactivar tu Roaming internacional";
+    public static final String BTN_SI_CONFIRMAR = "Si";
+    public static final String ROAMING_DESACTIVADO_EXITO = "desactivado con éxito";
+    public static final String BTN_ACTIVAR_AHORA = "Activar ahora";
+    public static final String ROAMING_QUEDO_ACTIVO = "quedó activo";
+    public static final String ROAMING_ESTARA_ACTIVO = "Tu servicio roaming estará activo";
+    public static final String BTN_VIGENCIA_INDEFINIDA = "Vigencia indefinida";
+    public static final String ROAMING_FORMA_INDEFINIDA = "de forma indefinida";
+    public static final String MENSAJE_DESPEDIDA_BOT = "¡Me encanta poder ayudarte!";
 
     public static final String MUNDO_CLARO = "Mundo Claro";
     public static final String SISTEMA_OPERATIVO = "sistema operativo";

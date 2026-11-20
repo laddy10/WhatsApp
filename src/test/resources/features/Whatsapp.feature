@@ -425,67 +425,69 @@ Feature: Validar los flujos de WhatsApp en prepago
 
 
   @Whatsapp_31
-  Scenario: Otras opciones - Roaming Internacional - Administar Roaming
-    Given Ingresar a WhatsAPP
-    When Validar Version de la App
-    And Buscar el chat de Claro Colombia
-    And Iniciar el chat con Claro Colombia
-    And Seleccionar linea de consulta
-    And Validar politica de tratamientos de datos
-    And Seleccionar menu principal
-    And Ingreso a otras opciones
-    And Seleccionar Roaming internacional
-    And Seleccionar opción Administrar Roaming
-    Then Validar mensaje del codigo de seguridad
-    And Vaciar chat
-
-
-  @Whatsapp_32
   Scenario: Otras opciones - Roaming Internacional - Administar Roaming - Activar con vigencia definida
     Given Ingresar a WhatsAPP
     When Validar Version de la App
     And Buscar el chat de Claro Colombia
     And Iniciar el chat con Claro Colombia
-    And Seleccionar linea de consulta
+    And Seleccionar linea de consulta - numeroRoaming
     And Validar politica de tratamientos de datos
     And Seleccionar menu principal
     And Ingreso a otras opciones
     And Seleccionar Roaming internacional
     And Seleccionar opción Administrar Roaming
-    Then Validar mensaje del codigo de seguridad
+    And Ingresar el codigo que llega en el mensaje de texto
+    And Activar ahora y validar la activacion
+    Then Programar fecha de desactivacion con vigencia definida
     And Vaciar chat
 
 
-
-  @Whatsapp_33
+  @Whatsapp_32
   Scenario: Otras opciones - Roaming Internacional - Administar Roaming - Activar con vigencia indefinida
     Given Ingresar a WhatsAPP
     When Validar Version de la App
     And Buscar el chat de Claro Colombia
     And Iniciar el chat con Claro Colombia
-    And Seleccionar linea de consulta
+    And Seleccionar linea de consulta - numeroRoaming
     And Validar politica de tratamientos de datos
     And Seleccionar menu principal
     And Ingreso a otras opciones
     And Seleccionar Roaming internacional
     And Seleccionar opción Administrar Roaming
-    Then Validar mensaje del codigo de seguridad
+    And Ingresar el codigo que llega en el mensaje de texto
+    Then Activar roaming con vigencia indefinida
     And Vaciar chat
 
 
-  @Whatsapp_34
+  @Whatsapp_33
   Scenario: Otras opciones - Roaming Internacional - Administar Roaming - Modificar vigencia
     Given Ingresar a WhatsAPP
     When Validar Version de la App
     And Buscar el chat de Claro Colombia
     And Iniciar el chat con Claro Colombia
-    And Seleccionar linea de consulta
+    And Seleccionar linea de consulta - numeroRoaming
     And Validar politica de tratamientos de datos
     And Seleccionar menu principal
     And Ingreso a otras opciones
     And Seleccionar Roaming internacional
     And Seleccionar opción Administrar Roaming
-    Then Validar mensaje del codigo de seguridad
+    And Ingresar el codigo que llega en el mensaje de texto
+    Then Modificar la vigencia de roaming
     And Vaciar chat
 
 
+  @Whatsapp_34
+  Scenario: Otras opciones - Roaming Internacional - Administar Roaming - Desactivar
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta - numeroRoaming
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal
+    And Ingreso a otras opciones
+    And Seleccionar Roaming internacional
+    And Seleccionar opción Administrar Roaming
+    And Ingresar el codigo que llega en el mensaje de texto
+    Then Desactivar roaming y validar la desactivacion
+    And Vaciar chat

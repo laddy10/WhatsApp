@@ -111,7 +111,14 @@ public class ComprarPaqueteRoaming implements Task {
                 ClickTextoQueContengaX.elTextoContiene(accionConfirmacion));
 
         actor.attemptsTo(
-                WaitForTextContains.withAnyTextContains(ROAMING_ACTIVO, LISTO_SELECCIONASTE, "¡Listo! Seleccionaste", "Seleccionaste el paquete"),
+                WaitForTextContains.withAnyTextContains(
+                        ROAMING_ACTIVO,
+                        "Tu servicio de Roaming esta activo",
+                        "Roaming está activo",
+                        "Roaming esta activo",
+                        LISTO_SELECCIONASTE,
+                        "¡Listo! Seleccionaste",
+                        "Seleccionaste el paquete"),
                 ValidarTextoQueContengaX.elTextoContiene(paquete));
 
         CapturaDePantallaMovil.tomarCapturaPantalla("Validacion confirmacion paquete roaming");
