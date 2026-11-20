@@ -47,6 +47,13 @@ public class UtilidadesAndroid {
                 "am"
         );
 
+        // Se abre como Custom Tab de Chrome (la ventana que usan las apps para
+        // mostrar un enlace) y no como pestaña normal. Desde Chrome 158 una
+        // pestaña normal deja de entregarle el contenido de la página a
+        // UiAutomator: la pantalla muestra el texto, pero las búsquedas por
+        // textContains no lo encuentran. Las Custom Tabs siguen entregándolo.
+        // Basta con que el intent traiga el extra SESSION; el valor no importa.
+        // Si el navegador por defecto no es Chrome, el extra se ignora.
         intentArgs.put(
                 "args",
                 List.of(
@@ -54,7 +61,10 @@ public class UtilidadesAndroid {
                         "-a",
                         "android.intent.action.VIEW",
                         "-d",
-                        url
+                        url,
+                        "--es",
+                        "android.support.customtabs.extra.SESSION",
+                        "st"
                 )
         );
 
