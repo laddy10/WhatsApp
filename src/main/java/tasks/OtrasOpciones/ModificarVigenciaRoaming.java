@@ -47,21 +47,23 @@ public class ModificarVigenciaRoaming implements Task {
         CapturaDePantallaMovil.tomarCapturaPantalla("Primer clic en Fecha desactivación");
         ReportHooks.registrarPaso("Primer clic en Fecha desactivación");
 
-        // 2. Esperar respuesta del bot con opciones de desactivación
+        // 2. Esperar respuesta del bot: o bien solicita fecha directamente ("DD/MM/AAAA"), o bien muestra submenú ("Vigencia indefinida")
         actor.attemptsTo(
-                WaitForTextContains.withAnyTextContains("Fecha desactivación", "Vigencia indefinida", "fecha de desactivación"),
+                WaitForTextContains.withAnyTextContains("DD/MM/AAAA", "Escribe la fecha", "Vigencia indefinida", "fecha de desactivación"),
                 WaitFor.aTime(1500));
 
-        // 3. Clic nuevamente en "Fecha desactivación" (segundo clic sobre el último botón recibido)
-        List<WebElementFacade> botonesSegundoClic = BTN_FECHA_DESACTIVACION_ROAMING.resolveAllFor(actor);
-        if (!botonesSegundoClic.isEmpty()) {
-            botonesSegundoClic.get(botonesSegundoClic.size() - 1).click();
-        } else {
-            actor.attemptsTo(ClickElementByText.clickElementByText(FECHA_DESACTIVACION));
-        }
+        // 3. Si mostró submenú con "Vigencia indefinida" (caso prepago), hacer el segundo clic en "Fecha desactivación"
+        if (android.textoContiene(actor, "Vigencia indefinida") && !android.textoContiene(actor, "DD/MM/AAAA")) {
+            List<WebElementFacade> botonesSegundoClic = BTN_FECHA_DESACTIVACION_ROAMING.resolveAllFor(actor);
+            if (!botonesSegundoClic.isEmpty()) {
+                botonesSegundoClic.get(botonesSegundoClic.size() - 1).click();
+            } else {
+                actor.attemptsTo(ClickElementByText.clickElementByText(FECHA_DESACTIVACION));
+            }
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Segundo clic en Fecha desactivación");
-        ReportHooks.registrarPaso("Segundo clic en Fecha desactivación");
+            CapturaDePantallaMovil.tomarCapturaPantalla("Segundo clic en Fecha desactivación");
+            ReportHooks.registrarPaso("Segundo clic en Fecha desactivación");
+        }
 
         // 4. Esperar solicitud de fecha
         actor.attemptsTo(
@@ -70,6 +72,7 @@ public class ModificarVigenciaRoaming implements Task {
 
         // 5. Calcular fecha de 2 días siguientes (Día actual + 2)
         String fecha2Dias = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        String fecha2Dias_YMD = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         String fechaManana = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String fechaHoy = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 
@@ -82,10 +85,15 @@ public class ModificarVigenciaRoaming implements Task {
 
         // 6. Validar respuesta del bot en cuanto a las fechas de inicio y fin
         actor.attemptsTo(
-                WaitForTextContains.withAnyTextContains(ROAMING_ESTARA_ACTIVO, "estará activo desde el", "estara activo desde el"),
+                WaitForTextContains.withAnyTextContains("¡Felicidades!", "Felicidades", ROAMING_ESTARA_ACTIVO, "estará activo desde el", "estara activo desde el"),
                 ValidarTextoQueContengaX.elTextoContiene("estará activo desde el"),
-                ValidarTextoQueContengaX.elTextoContiene("hasta el"),
-                ValidarTextoQueContengaX.elTextoContiene(fecha2Dias));
+                ValidarTextoQueContengaX.elTextoContiene("hasta el"));
+
+        if (android.textoContiene(actor, fecha2Dias_YMD)) {
+            actor.attemptsTo(ValidarTextoQueContengaX.elTextoContiene(fecha2Dias_YMD));
+        } else if (android.textoContiene(actor, fecha2Dias)) {
+            actor.attemptsTo(ValidarTextoQueContengaX.elTextoContiene(fecha2Dias));
+        }
 
         if (android.textoContiene(actor, fechaManana)) {
             actor.attemptsTo(ValidarTextoQueContengaX.elTextoContiene(fechaManana));

@@ -372,7 +372,7 @@ public class WhatsappDefinitions {
         theActorInTheSpotlight().attemptsTo(ValidarCodigoSeguridadRoaming.validarCodigoSeguridadRoaming());
     }
 
-    @Then("^(?:Desactivar [rR]oaming y validar la desactivaci[oó]n|Desactivar roaming)$")
+    @Then("^(?:Desactivar [rR]oaming y validar la desactivaci[oó]n|Desactivar [rR]oaming)$")
     public void desactivarRoaming() {
         theActorInTheSpotlight().attemptsTo(DesactivarRoaming.desactivarRoaming());
     }
@@ -392,7 +392,7 @@ public class WhatsappDefinitions {
         theActorInTheSpotlight().attemptsTo(ActivarRoamingVigenciaIndefinida.activarRoamingVigenciaIndefinida());
     }
 
-    @Then("^(?:Modificar la vigencia de roaming|Modificar la vigencia)$")
+    @Then("^(?:Modificar (?:la )?vigencia(?: de roaming)?|Modificar la vigencia)$")
     public void modificarVigenciaRoaming() {
         theActorInTheSpotlight().attemptsTo(ModificarVigenciaRoaming.conDosDiasDespues());
     }

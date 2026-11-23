@@ -40,13 +40,20 @@ public class ActivarRoamingVigenciaDefinida implements Task {
     public <T extends Actor> void performAs(T actor) {
         AndroidObject android = new AndroidObject();
 
-        // 1. Validar mensaje de que el Roaming no está activo
+        // 1. Esperar menú de Roaming (activo indefinidamente, activo con fecha, o no activo)
         actor.attemptsTo(
-                WaitForTextContains.withAnyTextContains(ROAMING_NO_ESTA_ACTIVO, "no está activo", "no esta activo"),
-                ValidarTextoQueContengaX.elTextoContiene(ROAMING_NO_ESTA_ACTIVO));
+                WaitForTextContains.withAnyTextContains(
+                        "Fecha desactivación",
+                        "fecha de desactivación",
+                        "programar la fecha",
+                        "servicio de Roaming",
+                        ROAMING_NO_ESTA_ACTIVO,
+                        "no está activo",
+                        "activo indefinidamente",
+                        "activo hasta el"));
 
-        CapturaDePantallaMovil.tomarCapturaPantalla("Validacion mensaje Roaming no está activo");
-        ReportHooks.registrarPaso("Validacion mensaje Roaming no está activo");
+        CapturaDePantallaMovil.tomarCapturaPantalla("Menú de estado Roaming recibido");
+        ReportHooks.registrarPaso("Menú de estado Roaming recibido");
 
         // 2. Clic en botón Fecha desactivación (usando Target para evitar texto del bot)
         List<WebElementFacade> botonesFecha = BTN_FECHA_DESACTIVACION_ROAMING.resolveAllFor(actor);
@@ -59,7 +66,25 @@ public class ActivarRoamingVigenciaDefinida implements Task {
         CapturaDePantallaMovil.tomarCapturaPantalla("Dar clic Fecha desactivación");
         ReportHooks.registrarPaso("Dar clic Fecha desactivación");
 
-        // 3. Esperar solicitud de fecha
+        // 3. Esperar respuesta del bot: o bien solicita fecha directamente ("DD/MM/AAAA"), o bien muestra submenú ("Vigencia indefinida")
+        actor.attemptsTo(
+                WaitForTextContains.withAnyTextContains("DD/MM/AAAA", "Escribe la fecha", "Vigencia indefinida", "fecha de desactivación"),
+                WaitFor.aTime(1500));
+
+        // Si mostró submenú con "Vigencia indefinida" (caso prepago o menú extendido), hacer el segundo clic en "Fecha desactivación"
+        if (android.textoContiene(actor, "Vigencia indefinida") && !android.textoContiene(actor, "DD/MM/AAAA")) {
+            List<WebElementFacade> botonesSegundoClic = BTN_FECHA_DESACTIVACION_ROAMING.resolveAllFor(actor);
+            if (!botonesSegundoClic.isEmpty()) {
+                botonesSegundoClic.get(botonesSegundoClic.size() - 1).click();
+            } else {
+                actor.attemptsTo(ClickElementByText.clickElementByText(FECHA_DESACTIVACION));
+            }
+
+            CapturaDePantallaMovil.tomarCapturaPantalla("Segundo clic en Fecha desactivación");
+            ReportHooks.registrarPaso("Segundo clic en Fecha desactivación");
+        }
+
+        // 4. Esperar solicitud de fecha
         actor.attemptsTo(
                 WaitForTextContains.withAnyTextContains(ESCRIBE_FECHA_DESACTIVAR, "DD/MM/AAAA", "Escribe la fecha", "desactivar el servicio"),
                 ValidarTextoQueContengaX.elTextoContiene("DD/MM/AAAA"));

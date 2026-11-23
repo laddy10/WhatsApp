@@ -542,6 +542,42 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Vaciar chat
 
 
+  @Whatsapp_Post_35
+  Scenario: Otras opciones - Roaming Internacional - Administar Roaming-Activar roaming con vigencia indefinida
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago - numeroRoamingPost
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Seleccionar otras opciones
+    And Clic boton selecciona
+    And Seleccionar Roaming internacional
+    And Clic en Administrar Roaming
+    And Ingresar el codigo que llega en el mensaje de texto
+    Then Activar roaming con vigencia indefinida
+    And Vaciar chat
+
+
+  @Whatsapp_Post_36
+  Scenario: Otras opciones - Roaming Internacional - Administar Roaming-Modificar vigencia roaming
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago - numeroRoamingPost
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Seleccionar otras opciones
+    And Clic boton selecciona
+    And Seleccionar Roaming internacional
+    And Clic en Administrar Roaming
+    And Ingresar el codigo que llega en el mensaje de texto
+    Then Modificar la vigencia de roaming
+    And Vaciar chat
+
+
   @Whatsapp_Post_37
   Scenario: Otras opciones - Roaming Internacional - Comprar paquete Datos y voz pasaporte america - Brasil
     Given Ingresar a WhatsAPP
@@ -604,5 +640,24 @@ Feature: Validar los flujos de WhatsApp para líneas Postpago
     And Seleccionar Roaming internacional
     Then Comprar paquete roaming Datos pasaporte america - Estados Unidos
     And Vaciar chat
+
+
+  @Whatsapp_Post_41
+  Scenario: Otras opciones - Roaming Internacional - Administar Roaming-Desactivar Roaming
+    Given Ingresar a WhatsAPP
+    When Validar Version de la App
+    And Buscar el chat de Claro Colombia
+    And Iniciar el chat con Claro Colombia
+    And Seleccionar linea de consulta postpago - numeroRoamingPost
+    And Validar politica de tratamientos de datos
+    And Seleccionar menu principal Post
+    And Seleccionar otras opciones
+    And Clic boton selecciona
+    And Seleccionar Roaming internacional
+    And Clic en Administrar Roaming
+    And Ingresar el codigo que llega en el mensaje de texto
+    Then Desactivar roaming
+    And Vaciar chat
+
 
 

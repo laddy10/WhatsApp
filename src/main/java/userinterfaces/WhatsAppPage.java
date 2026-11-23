@@ -308,4 +308,8 @@ public class WhatsAppPage extends PageObject {
             Target.the("Botón Activar ahora")
                     .located(By.xpath("//*[@resource-id='com.whatsapp:id/button_content' and contains(@text, 'Activar ahora')] | //*[@text='Activar ahora']"));
 
+    public static final Target BTN_SI_CONFIRMAR_ROAMING =
+            Target.the("Botón Sí de confirmación Roaming")
+                    .located(By.xpath("//*[@resource-id='com.whatsapp:id/button_content' and (@text='Sí' or @text='Si')] | //android.widget.TextView[@text='Sí' or @text='Si']"));
+
 }

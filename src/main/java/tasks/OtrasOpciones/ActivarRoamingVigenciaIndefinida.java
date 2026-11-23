@@ -14,6 +14,8 @@ import interactions.scroll.ScrollHastaTexto;
 import interactions.wait.WaitForTextContains;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
@@ -32,8 +34,9 @@ public class ActivarRoamingVigenciaIndefinida implements Task {
                 WaitForTextContains.withAnyTextContains("Fecha desactivación", "fecha de desactivación"),
                 ScrollHastaTexto.conTexto(FECHA_DESACTIVACION));
 
-        if (!BTN_FECHA_DESACTIVACION_ROAMING.resolveAllFor(actor).isEmpty()) {
-            actor.attemptsTo(Click.on(BTN_FECHA_DESACTIVACION_ROAMING));
+        List<WebElementFacade> botonesFecha = BTN_FECHA_DESACTIVACION_ROAMING.resolveAllFor(actor);
+        if (!botonesFecha.isEmpty()) {
+            botonesFecha.get(botonesFecha.size() - 1).click();
         } else {
             actor.attemptsTo(ClickElementByText.clickElementByText(FECHA_DESACTIVACION));
         }
@@ -50,8 +53,9 @@ public class ActivarRoamingVigenciaIndefinida implements Task {
         actor.attemptsTo(
                 ScrollHastaTexto.conTexto(BTN_VIGENCIA_INDEFINIDA));
 
-        if (!BTN_VIGENCIA_INDEFINIDA_ROAMING.resolveAllFor(actor).isEmpty()) {
-            actor.attemptsTo(Click.on(BTN_VIGENCIA_INDEFINIDA_ROAMING));
+        List<WebElementFacade> botonesVigencia = BTN_VIGENCIA_INDEFINIDA_ROAMING.resolveAllFor(actor);
+        if (!botonesVigencia.isEmpty()) {
+            botonesVigencia.get(botonesVigencia.size() - 1).click();
         } else {
             actor.attemptsTo(ClickElementByText.clickElementByText(BTN_VIGENCIA_INDEFINIDA));
         }
